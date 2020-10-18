@@ -1,0 +1,721 @@
+.ig
+vim:syntax=off
+
+Macros for typesetting _Unix Text Processing_.
+Based on the macros from Chapter 17 and Appendix F
+of that book.
+
+Adapted by Jon Snader as part of a project to make this classic
+book available again.
+
+Version of 16 November 2002
+..
+.RT
+.nr nH 0                \" don't number [ABCD]-heads
+.nr gE 0                \" don't add chapter number to [ABCD]-heads
+.nr chapter_page 0      \" avoid diag. if there's no .Se call
+.ds chapter_name
+\#
+\# Redefine LP so that it can take an argument to surpress spacing
+\#
+.de par*start*nospace
+.ds@auto-end
+.nr \\n[.ev]:pli \\$1
+.nr \\n[.ev]:pri \\$2
+.par@reset
+.ne 1v+\\n(.Vu
+..
+.de LP			\"Non indented paragraph.  Don't skip space if \\$1 == 0
+.ie '\\$1'0' .par*start*nospace 0 0
+.el .par*start 0 0
+.nr \\n[.ev]:ai \\n[\\n[.ev]:PI]
+..
+\#
+\# Nh - set behavior of numbered headings
+\#  $1:
+\#      0 - no numbering
+\#      1 - number all headings
+\#      2 - number A-head only
+\#
+\#  $2 (if present):
+\#      0 - don't add section numbers to headers
+\#      1 - prefix headers with section number
+\#
+.de Nh
+. nr nH \\$1
+. if !'\\$2'' .nr gE \\$2
+..
+\#
+\#  Square centered vertically
+\#
+.ds square \v'-.25v'\s6\(sq\s0\v'.25v'
+\#
+\# Special A-head for UTP
+\#
+.de utp_Ah
+.sp 26p
+.RT
+.ne 6
+.ps 14
+.vs 16
+.lg 0
+.ce
+\fB\*[square]  \\$1  \*[square]\fP
+.LP 0
+.lg
+.sp 18p
+.ns
+.if \\n[Ref] .tm Ah:	\\n(PN	\\$1
+..
+\#
+\#  The [ABCD]-head macros
+\#
+.de standard_Ah			\" A-head. $1: title
+.sp 26p
+.RT
+.ne 6
+.ps 14
+.vs 16
+.lg 0
+.tr aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ
+\fB\c
+.if \\n[nH] \{.         \"if producing numbered headings
+.	ie \\n[gE] .sec# 2  \" if Se (chapter) macro is
+.						\" numbered, then this is on the second level
+.	el .sec# 1          \" otherwise it's on the first level
+.\}
+\&\\$1\fP
+.LP 0                   \" reset paragraph, but not font size, etc.
+.tr aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz
+.lg
+.sp 18p
+.ns
+..
+.als Ah standard_Ah
+\#
+.de Bh                  \" B-head. $1: title
+.sp 23p
+.RT
+.ne 6
+.ps 14
+.vs 16
+.lg 0
+\fB\c
+.if '\\n[nH]'1' \{.     \"if producing numbered headings
+.	ie \\n[gE] .sec# 3  \" if Se (chapter) macro is
+.						\" numbered, then this is on the third level
+.	el .sec# 2          \" otherwise it's on the second level
+.\}
+\&\\$1\fP
+.LP 0                   \" reset paragraph, but not font size, etc.
+.lg
+.sp 15.5p
+.ns
+..
+\#
+.de Ch                  \" C-head. $1: title
+.sp 18p
+.RT
+.ne 6
+.ps 12
+.vs 14
+.lg 0
+\fB\c
+.if '\\n[nH]'1' \{.     \"if producing numbered headings
+.	ie \\n[gE] .sec# 4  \" if Se (chapter) macro is
+.						\" numbered, then this is on the fourth level
+.	el .sec# 3          \" otherwise it's on the third level
+.\}
+\&\\$1\fP
+.LP 0                   \" reset paragraph, but not font size, etc.
+.lg
+.sp 12p
+.ns
+..
+\#
+.de Dh                  \" D-head. $1: title
+.sp 18p
+.RT
+.ne 6
+.ps 10
+.vs 12
+.lg 0
+\fB\c
+.if '\\n[nH]'1' \{.     \"if producing numbered headings
+.	ie \\n[gE] .sec# 5  \" if Se (chapter) macro is
+.						\" numbered, then this is on the fifth level
+.	el .sec# 4          \" otherwise it's on the fourth level
+.\}
+\&\\$1.\fP
+.lg
+..
+\#
+\# The Section macro
+\#
+\#  This is for Chapters and Appendices
+\#
+.de Se                  \" Section. $1: number, $2: name
+.                       \" $3: type (Chapter, Appendix, ...)
+.						\" $4: non-null => don't map to uppercase
+.if e \{\
+\&
+.bp
+.\}
+.ds chapter_name \\$2
+.ie !'\\$1'' \{.		\" If we have a section number
+.	ds chapter_head \\$1
+.	nr is_alpha 0
+.	if '\\$1'A' .set_section 1
+.	if '\\$1'B' .set_section 2
+.	if '\\$1'C' .set_section 3
+.	if '\\$1'D' .set_section 4
+.	if '\\$1'E' .set_section 5
+.	if '\\$1'F' .set_section 6
+.	if '\\$1'G' .set_section 7
+.	if '\\$1'H' .set_section 8
+.	if '\\$1'I' .set_section 9
+.	if '\\$1'J' .set_section 10
+.	if '\\$1'K' .set_section 11
+.	if '\\$1'L' .set_section 12
+.	if '\\$1'M' .set_section 13
+.	if '\\$1'N' .set_section 14
+.	if '\\$1'O' .set_section 15
+.	if '\\$1'P' .set_section 16
+.	if '\\$1'Q' .set_section 17
+.	if '\\$1'R' .set_section 18
+.	if '\\$1'S' .set_section 19
+.	if '\\$1'T' .set_section 20
+.	if '\\$1'U' .set_section 21
+.	if '\\$1'V' .set_section 22
+.	if '\\$1'W' .set_section 23
+.	if '\\$1'X' .set_section 24
+.	if '\\$1'Y' .set_section 25
+.	if '\\$1'Z' .set_section 26
+.	if !\\n[is_alpha] \{\
+.		nr section \\$1
+.		nr intH1 \\$1
+.	\}
+.\}
+.el \{.                 \" Illegal Chapter Appendix number
+.	nr section 0
+.                       \" Might be Preface, etc. so no error diag.
+.\}
+.nr chapter_page2 1		\" Next page starts a chapter, so no header
+.if \\n[%]>1 .bp
+.nr PN \\n[%]
+.ie '\\$3'NONE' .af PN i
+.el .af PN 1
+.nr chapter_page 1      \" This page starts a chapter, number at bottom
+.if !\\n[gE] .nr intH1 0
+.nr intH2 0              \" rescind lower level numbering
+.nr intH3 0
+.nr intH4 0
+.nr intH5 0
+.nr fig_num 0            \" Reset figure number
+.nr table_num 0          \" Reset table number
+.format_section "\\$1" "\\$2" \\$3 \\$4
+.ie '\\$1'' \{\
+.ie '\\$2'' .if \\n[Ref] .tm	Se:	\\n(PN		\\$3
+.el .if \\n[Ref] .tm Se:	\\n(PN	\\$1	\\$2
+.\}
+.el .if \\n[Ref] .tm Se:	\\n(PN	\\$1	\\$2
+..
+\#
+\# Set section number for alphabet chapters (appendices)
+\#
+.de set_section
+.nr intH1 \\$1
+.af intH1 A
+.nr section \\$1
+.nr is_alpha 1
+..
+\#
+\# Draw a horizontal line
+\#
+.de horizontal_line
+.br
+\l'\\n[.l]u-\\n[.i]u\&\\$1'
+.br
+..
+.als Hl horizontal_line
+\#
+\#  Standard Section Formating Routine
+\#
+.de format_standard_section
+.RT
+.in 0
+.lg 0
+.if '\\$4'' .tr aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ
+.sp
+.na
+.\" Set section type--default is Chapter
+.ie !'\\$3'' \{\
+.	ie '\\$3'NONE' .ds chapter_type
+.	el .ds chapter_type \\$3
+.\}
+.el .ds chapter_type Chapter
+.\" If there is a section number, output Type and section number
+.if !'\\$1'' \s14\fB\\*[chapter_type] \\$1\fP\s0
+.\" If there is no section number, but there is a type, then ouput it
+.if '\\$1'' .if !'\\$3'' \s14\fB\\*[chapter_type]\fP\s0
+.sp 5p
+.\" Print the section title if there is one
+\#.if !'\\$2'' \s14\fB\\$2\fP\s0
+.if !'\\$2'' \{\
+.ps 14
+.B
+\&\\$2
+.R
+.ps \\n[PS]                  \" Reset to PS in case of inline \s
+.\}
+.sp 6p
+.ad b                        \" Adjust both margins
+.horizontal_line             \" Draw horizontal line
+.if '\\$4'' .tr aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz
+.sp 3
+.ns
+..
+.als format_section format_standard_section
+\#
+\# numbered header Macros
+\# Special version of NH to generate just the string
+\# Used internally.
+\#
+.de sec#
+.nr NS \\$1                \" Current level
+.if !\\n[.$] .nr NS 1      \" Default is level 1
+.if !\\n[NS] .nr NS 1      \" In case it's NULL or negative
+.nr intH\\n[NS] +1         \" Increment count on current level
+.\" Rescind lower levels
+.if !\\n[NS]-4 .nr intH5 0
+.if !\\n[NS]-3 .nr intH4 0
+.if !\\n[NS]-2 .nr intH3 0
+.if !\\n[NS]-1 .nr intH2 0
+.\" Build up the string
+.if !\\$1 .if \\n[.$] .nr intH1 1
+.ds SN \\n[intH1]
+.ie \\n[NS]-1 .as SN .\\n[intH2]
+.el .as SN .               \" either x.y or x.
+.if \\n[NS]-2 .as SN .\\n[intH3]
+.if \\n[NS]-3 .as SN .\\n[intH4]
+.if \\n[NS]-4 .as SN .\\n[intH5]
+'ti \\n[.i]u
+\\*[SN]                    \" print answer
+..
+\#
+\# Figure start and end macros
+\#
+.de Fs                      \" start figure $1: reserved space $2: float figure
+.RT
+.ie 'F'\\$2' \{.            \" if figure can float
+.	nr floating_keep 1
+.	KF
+.\}
+.el .nr floating_keep 0
+.if !'\\$1'' \{.            \" if space specified
+.	ne \\$1
+.	fl
+.	rs
+.	sp \\$1
+.\}
+..
+.de Fe                      \" end figure $1: title
+.sp
+.nr fig_num +1				\" increment figure counter
+.ie \\n[section] .ds figure \\*[chapter_head].\\n[fig_num]
+.el .ds figure \\n[fig_num]
+.ce
+\f[BI]Figure \\*[figure] \\$1\fP
+.sp
+.if \\n[floating_keep] .KE
+..
+\#
+\# Table start and end macros
+\#
+.de Ts                       \" table start $1: title
+.nr table_num +1             \" increment table number
+.ie \\n[section] .ds table \\*[chapter_head].\\n[table_num]
+.el .ds table \\n[table_num]
+.sp
+.ce
+\f[BI]Table \\*[table] \\$1\fP
+.LP
+..
+.de Te
+.RT
+.sp
+..
+\#
+\# Numbered lists
+\#
+.nr l0 0 1
+.de Ls
+.\" list start $1: A - ALPHA
+.\"                a - alpha
+.\"                B - bullet
+.\"                N - numberic
+.\"                R - ROMAN NUMERALS
+.\"                r - roman numerals
+.\"            $2: indent
+.\"            $3: alternate bullet character
+.br
+.if !'\\$1'A' .if !'\\$1'a' .if !'\\$1'B' .if !'\\$1'N' \
+.	if   !'\\$1'R' .if !'\\$1'r' .if !'\\$1'' \
+.	tm Ls: Need A, a, B, N, R, or r as type
+.nr l\\n+[l0] 0 1
+.ie '\\$1'' \{.                      \" set defaults 
+.	if '\\n[l0]'1' .af l\\n[l0] 1    \"numberic at 1st level
+.	if '\\n[l0]'2' .af l\\n[l0] a    \"alpha at 2nd level
+.	if '\\n[l0]'3' .af l\\n[l0] i    \"roman at 3rd level
+.	if '\\n[l0]'4' .ds l\\n[l0] \(bu \"bullet at 4th level
+.	if '\\n[l0]'5' .ds l\\n[l0] \-   \"dash at 5th level
+.	if \\n[l0]-5 .ds l\\n[l0] \(bu   \"bullet above 5th level
+.	if \\n[l0]-3 .nr l\\n[l0] 0-1    \"mark bullet and dash as non-incrementing
+.\}
+.el \{\
+.	if '\\$1'A' .af l\\n[l0] A
+.	if '\\$1'a' .af l\\n[l0] a
+.	if '\\$1'B' \{\
+.		ie '\\$3'' .ds l\\n[l0] \(bu
+.		el .ds l\\n[l0] \\$3
+.		nr l\\n[l0] 0-1             \"mark as non-incrementing
+.	\}
+.	if '\\$1'R' .af l\\n[l0] I
+.	if '\\$1'r' .af l\\n[l0] i
+.\}
+.ie !'\\$2'' .nr i\\n[l0] \\$2      \"set list indent
+.el .nr i\\n[l0] 5                  \"default indent 
+.RS
+..
+.de Li                       \" List start $1 == 0: no blank line preceding
+.br
+.if '\\$1'0' .ns
+.ie '\\n[l\\n[l0]]'-1' .intIP "\\*[l\\n[l0]]" "\\n[i\\n[l0]]"
+.el \{\
+.	nr l\\n[l0] +1
+.	intIP "\\n[l\\n[l0]]." "\\n[i\\n[l0]]"
+.\}
+..
+.de Le                       \" List end $1 == 0: no blank line after
+.br
+.rr l\\n[l0]                 \" remove number registers
+.rr i\\n[l0]
+.rm l\\n[l0]                 \" and string register, if any
+.nr l0 -1                    \" back one level of nesting
+.RE
+.ie !\\n[l0] \{\
+.	ie '\\$1'0' .LP 0
+.	el .LP
+.\}
+.el .if !'\\$1'0' .sp \\n[PD]u
+..
+\#
+\# intIP - internal version of IP that centers tag
+\#
+.de intIP
+.sp \\n[PD]u
+.in \\n[\\n[.ev]:il]u*\\n[PI]u-\\n[PI]u+\\$2n
+.nr indent1 \\$2n/2u+\w'\\$1' \" amount to move left
+\#.nr indent2 \\$2n+\w'\\$1'  \" amount to move back
+\#.ta \\n[indent2]u
+.ta \\n[indent1]u
+.ti -\\n[indent1]u
+\\$1\t\c
+..
+\#
+\# Printout and listing macros
+\#
+.ev printout                 \" set up the listing environment
+.ns
+.ps 9
+.vs 10
+.ft C
+.nf
+.ev
+.de Ps                       \" printout start $1: indent
+.br
+.ev printout
+.sp \\n[PD]u
+.ie !'\\$1'' .in +\\$1n
+.el .in +5n
+..
+.de Pe                       \" printout end $1: non-null => no following space
+.br
+.if '\\$1'' .sp \\n[PD]u
+.in
+.ev
+..
+\#
+\# X[1-4]:  Side by side virtual display screens
+\# Contributed by Heinz-Jürgen Oertel
+\#
+.\" Macro definition
+.\" window width
+.\" Should be calculated, so that the width is 25 equal spaced chars
+.nr my_wid \w'\f(CW12345678901234567890123456\fP'
+.de X1
+.sp
+.mk x_box
+.nf
+.\" left and right page offset
+.po +(u;\\n[.ll]/40)
+.ll \n[my_wid]u
+.in +1n
+.CW
+..
+.de X2
+.mk here
+.in -1n
+.draw_screen \n[my_wid]u \\n[here]u-\\n[x_box]u+\\n[.v]u
+.po +(u;\n[my_wid])
+.\" line length of the centered text
+.ll (u;(\\n[LL]u)-(2*\n[my_wid]u)-(\\n[LL]/20u))
+.sp |\\n[x_box]u
+.ce 10
+.R
+..
+.de X3
+.ce 0
+.sp |\\n[x_box]u
+.po +(u;(\\n[LL]u)-(2*\n[my_wid]u)-(\\n[LL]/20u))
+.ll \n[my_wid]u
+.nf
+.in +1n
+.CW
+..
+.de X4
+.in -1n
+.draw_screen \n[my_wid]u \\n[here]u-\\n[x_box]u+\\n[.v]u
+.R
+.fi
+.po \\n(POu
+.ll \\n(LLu
+..
+\#
+\# Helvetica font change macros
+\#
+.de H                        \" Helvetica
+.ie !\\n[.$] .ft H
+.el \&\\$3\fH\\$1\fP\\$2
+..
+.de HB                       \" Helvetica Bold
+.ie !\\n[.$] .ft HB
+.el \&\\$3\f[HB]\\$1\fP\\$2
+..
+.de HI                       \" Helvetica Italic
+.ie !\\n[.$] .ft HI
+.el \&\\$3\f[HI]\\$1\fP\\$2
+..
+\#
+\#  Screen Boxes
+\#
+.de draw_screen              \" Draw box with rounded corners, $1: wid $2: ht
+.nr radius (((\\$1)<?(\\$2))/4u)<?.25i
+\v'-\\n[radius]u'\D'a \\n[radius]u 0 0 \\n[radius]u'\c
+\D'l (\\$1)-(2u*\\n[radius]u) 0'\c
+\D'a 0 -\\n[radius]u \\n[radius]u 0'\D'l 0 -(\\$2)+(2u*\\n[radius]u)'\c
+\D'a -\\n[radius]u 0 0 -\\n[radius]u'\D'l -(\\$1)+(2u*\\n[radius]u) 0'\c
+\D'a 0 \\n[radius]u -\\n[radius]u 0'\D'l 0 (\\$2)-(2u*\\n[radius]u)'
+..
+.de SS
+.nr li_save \\n[\\n[.ev]:li]
+.nr ri_save \\n[\\n[.ev]:ri]
+.nr \\n[.ev]:li +3n
+.nr \\n[.ev]:ri +3n
+.br
+.sp \\n[SS_prefix]u
+.ie \\n[.$] \{\
+.	nr width \\$1
+.	nr height \\$2
+.	mk screen_start
+.\}
+.el .nr width 0
+.di screen_div
+.sp .5v
+.in +3n                      \" Leave extra room for the rounded corners
+.ll -3n
+.lt -3n
+\&
+..
+.de SE
+.br
+.di
+.ne \\n[dn]u
+.ev nf
+.screen_div
+.ev
+.in -3n
+.ll +3n
+.lt +3n
+.nr \\n[.ev]:li \\n[li_save]
+.nr \\n[.ev]:ri \\n[ri_save]
+.ie !\\n[width] \{\
+.	mk screen_end
+\#.	draw_screen \\n[dl]u+3n \\n[dn]u+\\n[.v]u
+.	draw_screen \\n[.l]u \\n[dn]u+\\n[.v]u
+.\}
+.el \{\
+.	sp |\\n[screen_start]u+\\n[height]u-\\n[.v]u
+.	mk screen_end
+.	draw_screen \\n[width]u \\n[height]u
+.\}
+.sp |\\n[screen_end]u+1
+..
+\#
+\# Notes macros
+\#
+.nr note_counter 0
+.nr rnotes 0
+.ev notes
+.par*env-init
+.ll \n[LL]u
+.lt \n[LL]u
+.ps \n[PS]
+.vs \n[VS]
+.ev
+.de Rn                       \" Reviewer note, $1: note
+.sp
+\fBNote to reviewers:\fP \\$1
+.sp
+.ev notes
+.da rev_notes
+.sp 0.2v
+.in 0
+.ie \\n[do-page] \(sq Page \\n[PN] (\\*[page-utp]): \\$1
+.el \(sq Page \\n(PN: \\$1
+.br
+.da
+.nr rnotes 1
+.ev
+..
+.de Pn                       \" Personal note, $1: note
+.ev notes
+.if \\n[note_counter]<1 .nr note_counter 0 1
+.da pers_notes
+.br
+.IP \\n+[note_counter]. 5n
+\\$1
+.ie \\n[do-page] \ (Page \\n[PN]/\\*[page-utp])
+.el \ (Page \\n(PN)
+.br
+.da
+.ev
+..
+\#
+\# End Macro
+\#
+\# Output diverted material
+\#
+.de EM
+.br
+.if \\n[rnotes]=1 \{\
+\&\c
+'	bp
+.	ce
+\fBNotes to Reviewers\fP
+.	sp 2
+.	ev notes
+.	nf
+.	rev_notes
+.	ev
+.\}
+.if \\n[note_counter]>0 \{\
+.	br
+\&\c
+'	bp
+.	ce
+\fBPersonal Notes\fP
+.	sp 2
+.	ev notes
+.	nf
+.	pers_notes
+.	ev
+.\}
+..
+\#
+\# UTP top and bottom page processing
+\#
+.de utp_top
+.ev header_footer
+.nr PN \\n[%]
+.if !\\n[chapter_page2] \{.   \" if this page doesn't start a chapter
+.	ie o .tl ''\\*[chapter_name]'\\n[PN]'
+.	el .tl '\\n[PN]'\*[square]  Unix Text Processing  \*[square]''
+.\}
+.ev
+..
+.de utp_bottom
+.ev header_footer
+.if \\n[chapter_page] \{\
+.	tl ''\\n[PN]''
+.	nr chapter_page 0
+.	nr chapter_page2 0
+.\}
+.ev
+..
+\#.de page
+\#.mk page-vpos
+\#.nr page-hpos \\n[.k]
+\#.po \\n[PO]u-4n
+\#.br
+\#\\$1
+\#.br
+\#.po \\n[PO]u
+\#.sp |\\n[page-vpos]u
+\#\h'|\\n[page-hpos]u'
+\#..
+.de do-page                   \" Enable the .page macro
+.nr do-page 1
+..
+.de page                      \" Capture the original UTP page numbers
+.ds page-utp \\$1
+.if \\n[do-page] \{\
+.	mk page-pos
+.	ev page-env
+'	di page-num
+'	nf
+\\$1
+.	ev
+.	di
+.	mk page-trap
+.	nr page-trap +.1v
+.	wh \\n[page-trap]u page-put
+.\}
+..
+.de page-put                  \" Place the UTP page number in the left margin
+.mk page-end
+.wh \\n[page-trap]u
+'sp |\\n[page-pos]u
+.ev page-env
+'po \\n[PO]u-5n
+'fi
+.page-num
+.br
+.ev
+'po \\n[PO]u
+'sp |\\n[page-end]u
+..
+\#
+\# Set defaults for UTP
+\#
+.de utp
+.ps 10
+.vs 12
+.nr PS 10
+.nr VS 12
+.nr SS_prefix 1v
+.nr do-page 0
+.Nh 0 0
+.als Ah utp_Ah
+.als chapter Se
+.als PT utp_top
+.als BT utp_bottom
+.ev header_footer
+.ll \\n[LL]u
+.lt \\n[LL]u
+.ps \\n[PS]
+.vs \\n[VS]
+.ev
+..
+.em EM
+

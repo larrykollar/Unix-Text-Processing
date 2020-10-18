@@ -1,0 +1,31 @@
+.ig
+Index formatting macros, lifted from CSTR #128
+with slight changes to fit the UTP manual
+..
+.so utp.mac
+.\" Precedes each index term
+.de XX
+.br
+.ti -.2i
+.ne 2
+..
+.de ZZ
+.br
+..
+.\" Header between letters
+.de YY
+.sp 1.5
+.ne 3
+.ce
+- \\$1 -
+.sp .5
+..
+.Se "" "Index" NONE
+.af PN 1
+.nr PS 8
+.nr VS 9
+.\" Just do one column for nroff...
+.if t .2C
+.na
+.in .2i
+.hy 0
