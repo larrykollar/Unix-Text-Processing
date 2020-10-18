@@ -1,11 +1,9 @@
 # Unix Text Processing
 
-<div style="text-align:right">
-<i>UTP is one of the best books on Unix from a user's perspective.</i><br/>
--- Jack Redman
-</div>
+*UTP is one of the best books on Unix from a user's perspective.*  
+– Jack Redman
 
-<img alt="Original book cover" href="unixtextprocess_s.gif" align="right"/>Originally published in 1987,
+<img alt="Original book cover" src="unixtextprocess_s.gif" align="right"/>Originally published in 1987,
 Unix Text Processing (UTP) (written by Dale Dougherty and Tim O'Reilly)
 provides one of the few comprehensive looks at all the tools
 involved in a typical *troff*-based writing workflow.
