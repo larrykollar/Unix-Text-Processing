@@ -45,7 +45,7 @@ The UTP Revival Release is
 distributed according to the terms of the
 Creative Commons Attribution License.
 A copy of the license is available at
-[http://creativecommons.org/licenses/by/1.0](/http://creativecommons.org/licenses/by/1.0).
+[http://creativecommons.org/licenses/by/1.0](http://creativecommons.org/licenses/by/1.0).
 
 **Note**: The transcription project predated Plan 9 and its derivatives.
 Thus, the recreated source and macros were written for *groff*,
