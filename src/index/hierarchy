@@ -1,4 +1,5 @@
 #!/bin/sh
+# vim:set ft=awk: -*- awk -*-
 
 # input:
 #	key (tab) string (tab) page numbers

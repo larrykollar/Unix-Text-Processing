@@ -1,3 +1,6 @@
+#!/bin/sh
+# vim:set ft=awk: -*- awk -*-
+
 awk ' # format
 #   Input:  sort key (tab) string (tab) numlist
 #   Output: troff format, commands interpreted

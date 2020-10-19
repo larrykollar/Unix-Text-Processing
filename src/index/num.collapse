@@ -1,3 +1,6 @@
+#!/bin/sh
+# vim:set ft=awk: -*- awk -*-
+
 awk ' # num.collapse
 #   Input:  lines of form: string (tab) num1 [(space) num2]
 #   Output: lines of form: string (tab) fancy.num.list

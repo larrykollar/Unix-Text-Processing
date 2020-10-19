@@ -1,3 +1,6 @@
+#!/bin/sh
+# vim:set ft=awk: -*- awk -*-
+
 awk ' # reroman
 #   Output: string (tab) arab1            [(space) arab2]
 #   Input:  string (tab) arab1 or roman1  [(space) arab2 or roman2]

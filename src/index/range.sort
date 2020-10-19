@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # range.sort
 #   Input/Output: string (tab) ["b"|"e"|"a"] (tab) number
 #   Sort by $1 (string), $3 (number), then $2 ("b"|"e"|"a")

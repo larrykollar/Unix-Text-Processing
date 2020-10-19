@@ -1,3 +1,6 @@
+#!/bin/sh
+# vim:set ft=awk: -*- awk -*-
+
 awk ' # range.prep
 #   Input:  ["%begin"|"%end"|""] string (tab) number
 #   Output: string (tab) ["b"|"e"|"a"]  (tab) number
