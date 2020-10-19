@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # final.sort
 #   Input/Output: sort key (tab) string (tab) numlist
 #   Sort by $1 (string)

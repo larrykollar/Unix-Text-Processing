@@ -1,4 +1,5 @@
 #!/bin/sh
+# vim:set ft=awk: -*- awk -*-
 
 awk ' # see.prep
 #   Input:  string "\t"  	     string
