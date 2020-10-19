@@ -1,0 +1,5 @@
+# Fix language classification on GitHub
+*.mac      linguist-language=Roff
+*.macro    linguist-language=Roff
+*.t        linguist-language=Roff
+index.head linguist-language=Roff
