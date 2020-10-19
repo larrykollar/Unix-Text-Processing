@@ -160,7 +160,8 @@ a graphics terminal, you may want to specify another
 device name using the
 .CW -T
 option.
-For a list of available devices, see Appendix B.
+For a list of available devices, see
+.pdfhref L -D AppendixB -P . -- Appendix B
 The
 .CW mm
 command also has a

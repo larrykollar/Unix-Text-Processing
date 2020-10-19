@@ -511,7 +511,9 @@ numbering style in headings, hyphenation, spacing between
 footnotes, as well as counters for automatic numbering of
 figures, examples, equations, tables, and
 section headings.
-(See Appendix B for a complete listing).
+(See
+.pdfhref L -D AppendixB Appendix B
+for a complete listing).
 However, the registers used in
 .CW ms
 should give you a sufficient idea of the kinds of values

@@ -753,9 +753,12 @@ pi r sup 2
 Note that special names don't exist for all uppercase Greek letters,
 such as ALPHA or ETA, because they are identical to the equivalent
 English letters.
-See Table 9-1 for a list of Greek letters.
+See
+.pdfhref L -D Tab9.1 -- Table 9-1
+for a list of Greek letters.
 .ix Greek characters
 .KS
+.pdfhref M -N Tab9.1 -E
 .Ts " Names for Greek Letters"
 .TS
 center,box;

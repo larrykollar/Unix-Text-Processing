@@ -3712,7 +3712,9 @@ I bet I could do that with
 *The preceding sections have not covered all
 .CW sed
 commands.
-See Appendix A for a complete list of
+See
+.pdfhref L -D AppendixA -- Appendix A
+for a complete list of
 .CW sed
 commands.
 .FE

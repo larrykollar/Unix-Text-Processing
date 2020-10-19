@@ -494,7 +494,8 @@ T}
 T{
 delim (\f[I]xy\fP)
 T}	T{
-Set \f[I]x\fP and \f[I]y\fP as \f[CW]eqn\fP delimiters. See Chapter 9
+Set \f[I]x\fP and \f[I]y\fP as \f[CW]eqn\fP delimiters. See
+.pdfhref L -D Chapter9 -- Chapter 9
 for information on the equation preprocessor
 \f[CW]eqn\fP.
 T}

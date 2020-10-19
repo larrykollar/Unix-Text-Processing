@@ -55,6 +55,7 @@ Version of 16 November 2002
 .de utp_Ah
 .sp 26p
 .RT
+.pdfbookmark 2 \\$1
 .ne 6
 .ps 14
 .vs 16
@@ -65,7 +66,7 @@ Version of 16 November 2002
 .lg
 .sp 18p
 .ns
-.if \\n[Ref] .tm Ah:	\\n(PN	\\$1
+.if \\n[Ref] .tm Ah:	\\*[PDFBOOKMARK.NAME]	\\n(PN	\\$1
 ..
 \#
 \#  The [ABCD]-head macros
@@ -95,6 +96,7 @@ Version of 16 November 2002
 \#
 .de Bh                  \" B-head. $1: title
 .sp 23p
+.pdfbookmark 3 \\$1
 .RT
 .ne 6
 .ps 14
@@ -163,6 +165,7 @@ Version of 16 November 2002
 .\}
 .ds chapter_name \\$2
 .ie !'\\$1'' \{.		\" If we have a section number
+.       utpbookmark -T "\\$3\\$1" 1 "\\$1. \\$2"
 .	ds chapter_head \\$1
 .	nr is_alpha 0
 .	if '\\$1'A' .set_section 1
@@ -198,6 +201,7 @@ Version of 16 November 2002
 .\}
 .el \{.                 \" Illegal Chapter Appendix number
 .	nr section 0
+.       utpbookmark -T \\$2 1 \\$2
 .                       \" Might be Preface, etc. so no error diag.
 .\}
 .nr chapter_page2 1		\" Next page starts a chapter, so no header
@@ -215,10 +219,10 @@ Version of 16 November 2002
 .nr table_num 0          \" Reset table number
 .format_section "\\$1" "\\$2" \\$3 \\$4
 .ie '\\$1'' \{\
-.ie '\\$2'' .if \\n[Ref] .tm	Se:	\\n(PN		\\$3
-.el .if \\n[Ref] .tm Se:	\\n(PN	\\$1	\\$2
+.ie '\\$2'' .if \\n[Ref] .tm	Se:	\\*[PDFBOOKMARK.NAME]	\\n(PN		\\$3
+.el .if \\n[Ref] .tm Se:	\\*[PDFBOOKMARK.NAME]	\\n(PN	\\$1	\\$2
 .\}
-.el .if \\n[Ref] .tm Se:	\\n(PN	\\$1	\\$2
+.el .if \\n[Ref] .tm Se:	\\*[PDFBOOKMARK.NAME]	\\n(PN	\\$1	\\$2
 ..
 \#
 \# Set section number for alphabet chapters (appendices)
@@ -363,7 +367,7 @@ Version of 16 November 2002
 .	if   !'\\$1'R' .if !'\\$1'r' .if !'\\$1'' \
 .	tm Ls: Need A, a, B, N, R, or r as type
 .nr l\\n+[l0] 0 1
-.ie '\\$1'' \{.                      \" set defaults 
+.ie '\\$1'' \{.                      \" set defaults
 .	if '\\n[l0]'1' .af l\\n[l0] 1    \"numberic at 1st level
 .	if '\\n[l0]'2' .af l\\n[l0] a    \"alpha at 2nd level
 .	if '\\n[l0]'3' .af l\\n[l0] i    \"roman at 3rd level
@@ -384,7 +388,7 @@ Version of 16 November 2002
 .	if '\\$1'r' .af l\\n[l0] i
 .\}
 .ie !'\\$2'' .nr i\\n[l0] \\$2      \"set list indent
-.el .nr i\\n[l0] 5                  \"default indent 
+.el .nr i\\n[l0] 5                  \"default indent
 .RS
 ..
 .de Li                       \" List start $1 == 0: no blank line preceding
@@ -695,6 +699,16 @@ Version of 16 November 2002
 'po \\n[PO]u
 'sp |\\n[page-end]u
 ..
+.de ix
+.ie '\\n(.z'' \{\
+.   if !'\\$1'%end' \{\
+.      ds ixbk ix:bm\\n+[ixno]
+.      pdfhref M -N \\*[ixbk]
+.   \}
+.   if \\n[Ref] .tm ix: \\$*	\\n%	\\*[ixbk]
+.\}
+.el \\!.ix \\$*
+..
 \#
 \# Set defaults for UTP
 \#
@@ -717,5 +731,12 @@ Version of 16 November 2002
 .vs \\n[VS]
 .ev
 ..
+.de utpbookmark
+.ie '\\*[.T]'ps' \{\
+.    pdfhref M -N \\$2 -- \\$4
+.    if !dpdf:href.map .tm gropdf-info:href \\$2 \\$4
+.    pdfbookmark \\$3 \\$4
+.\}
+.el .pdfbookmark \\$*
+..
 .em EM
-
