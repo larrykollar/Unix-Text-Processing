@@ -1,0 +1,14 @@
+.DS_Store
+Thumbs.db
+Desktop.ini
+._*
+.\#*
+\#*\#
+*~
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+*.pdf
+*.ps
+*.tmp
