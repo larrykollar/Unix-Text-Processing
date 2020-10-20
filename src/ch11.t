@@ -3690,7 +3690,6 @@ Of course, you have to supply the correct key.
 .page 336
 .Ah "Cleaning Up and Backing Up"
 .ix	%begin backing~up files
-.ix	%begin files, backing~up
 .LP
 In this section, we show some procedures for backing up active
 files to some other medium such as tape or floppy disk.
@@ -3944,7 +3943,6 @@ it prompts you first to approve the command for each file.
 .ix	%end [cpio] command, using~with [find] %key cpio command, using with [find]
 .ix	%end [find] command, using~with [cpio] %key find command, using with [cpio]
 .ix	%end backing~up files
-.ix	%end files, backing~up
 .Ah "Compressing Files"
 You can conserve the amount of disk space that text files take
 up by storing some of your files in a compressed form.

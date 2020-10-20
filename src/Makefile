@@ -7,6 +7,7 @@
 # Set the next two lines for the paths for groff and awk on your system
 #
 GROFF = /usr/bin/groff
+GROPDF_EMBED = # -P-e
 AWK = /usr/bin/awk
 VIEW = gv
 
@@ -15,42 +16,35 @@ ch06.t ch07.t ch08.t ch09.t ch10.t ch11.t ch12.t ch13.t ch14.t \
 ch15.t ch16.t ch17.t ch18.t appa.t appb.t appc.t appd.t appe.t \
 appf.t appg.t
 
-utp_book.ps: toc.t utp_ix.t
-	$(GROFF) -step -ms -rRef=0 utp_book.t >$@.tmp
+utp_book.pdf: toc.t utp_ix.t
+	$(GROFF) -Tpdf $(GROPDF_EMBED) -P-pletter -step -ms -z -rpdf:bm.nr=1 -rRef=0 -dPDF.EXPORT=1 utp_book.t 2>&1 | grep '^.ds' | $(GROFF) -Tpdf -P-pletter $(GROPDF_EMBED) -step -ms -rRef=0 - utp_book.t >$@.tmp
 	mv $@.tmp $@
 
 clean::
-	rm -f utp_book.ps utp_book.ps.tmp
+	rm -f utp_book.pdf
 
 toc.t: $(CHAPTERS)
-	$(GROFF) -step -ms -rRef=1 ix.macro utp_book.t >/dev/null 2>utp.aux.tmp
-	mv utp.aux.tmp utp.aux
-	$(AWK) -f toc.awk utp.aux >$@.tmp
+	$(GROFF) -Tpdf $(GROPDF_EMBED) -P-pletter -z -step -rpdf:bm.nr=1 -ms -rRef=1 -wall utp_book.t >/dev/null 2>utp.aux.tmp; \
+	mv utp.aux.tmp utp.aux; \
+	$(AWK) -f toc.awk utp.aux >$@.tmp; \
 	mv $@.tmp $@
 
 clean::
 	rm -f utp.aux.tmp utp.aux toc.t toc.t.tmp
 
 utp_ix.t: $(CHAPTERS)
-	cd index && ./make.index ../utp.aux >../$@.tmp
+	./mkindex.pl utp.aux > $@.tmp
 	mv $@.tmp $@
-
+	
 clean::
 	rm -f utp_ix.t utp_ix.t.tmp
-
 #########################################################################
 # helpers to maintain single chapters
 # make ch03
 #########################################################################
 
-.SUFFIXES: .t .html .pdf
+.SUFFIXES: .t .html
 
 % : %.t
 	groff -step -ms -rRef=0 $< > x.ps 2>ix.raw
-	$(VIEW) x.ps
-
-%.pdf : %.t
-	groff -step -ms -rRef=0 $< > x.ps
-	ps2pdf x.ps
-	mv x.pdf $@
 	$(VIEW) x.ps

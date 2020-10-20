@@ -8,6 +8,14 @@
 *	Still a couple of minor warnings under groff 1.18
 **************************************************************
 ..
+.nr ixno 0 1
+.ds PDFHREF.COLOUR 0.0 0.3 0.9
+.ds PDFHREF.TEXT.COLOUR pdf:href.colour
+.defcolor pdf:href.colour rgb \*[PDFHREF.COLOUR]
+.nr PDFOUTLINE.FOLDLEVEL 1
+.pdfinfo /Title Unix Text Processing
+.pdfinfo /Author Dale Dougherty and Tim O'Reilly
+.pdfview /PageMode /UseOutlines
 .nr chapter_page2 1
 .so front.t
 .nr chapter_page2 1
@@ -95,3 +103,4 @@
 .bp
 .nr chapter_page2 1
 .so utp_ix.t
+.pdfsync

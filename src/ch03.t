@@ -1,8 +1,8 @@
 
 .ig
 	ch03.t
-	Typed by: Heinz-Jürgen Oertel
-	Marked up by: Heinz-Jürgen Oertel
+	Typed by: Heinz-Jï¿½rgen Oertel
+	Marked up by: Heinz-Jï¿½rgen Oertel
 	Proofed on: 3 Oct 2002
 ..
 .so utp.mac
@@ -2848,7 +2848,9 @@ For example, the display might look like this:
 .Ps
 number  window=20  wrapmargin=10
 .Pe
-See Appendix A for a description of what these options mean.
+See
+.pdfhref L -D AppendixA -- Appendix A
+for a description of what these options mean.
 .ix [.exrc] file %key exrc file
 .Bh "The \f(CB.exrc\fP File
 .LP 0

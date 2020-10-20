@@ -1989,7 +1989,7 @@ use an
 .CW troff
 feature called
 .I environments
-(see Chapter 14),
+.pdfhref L -D Chapter14 -P "(see " -A ), -- Chapter 14
 so that parameters like line length or font that are set
 inside a footnote are saved independently of the body text.
 So, for example, if you issued the requests:

@@ -1791,7 +1791,9 @@ Units for
 depend on the resolution of the output device.
 For example, units for a 300 dot-per-inch (dpi) laser printer will be
 1/300 of an inch in either a vertical or a horizontal direction.
-See Appendix D for more information on
+See
+.pdfhref L -D AppendixD -- Appendix D
+for more information on
 .CW ditroff
 device units.
 .PP
@@ -3371,7 +3373,9 @@ up to ten fonts are automatically mounted, with the special font in
 position 10.
 Which fonts are mounted, and in which positions, depends on the output
 device.
-See Appendix D for details.
+See
+.pdfhref L -D AppendixD -- Appendix D
+for details.
 The font that is mounted in position 1 will be used for the body type of
 the text\c
 \(em\c
@@ -3653,7 +3657,9 @@ Which font is mounted in which position is controlled by the file
 .CW DESC\.out
 in the device subdirectory of
 .CW /usr/lib/font .
-See Appendix D for details.
+See
+.pdfhref L -D AppendixD Appendix D
+for details.
 .ix %end fonts, changing
 .ix %end [troff] formatter, fonts %key troff formatter, fonts
 .Bh "Special Characters"

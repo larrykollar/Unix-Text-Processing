@@ -3576,6 +3576,7 @@ the same step value and indent, as if no intervening lines had been present. Aft
 this line, we'll turn numbering off entirely.
 .sp .5v
 .nm
+.rr ln
 .ll \n(.lu+\n(pNu
 .ti +.3i
 When using \f[C].nm\fP  in fill mode, you have to watch for

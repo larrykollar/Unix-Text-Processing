@@ -1962,7 +1962,9 @@ The rest of these functions manipulate strings.
 (You have already seen how the
 .CW length
 function works).
-See Appendix A for the syntax of these functions.
+See
+.pdfhref L -D AppendixA -- Appendix A
+for the syntax of these functions.
 .PP
 Going back to our report generator, we need to split each field
 into subvalues.

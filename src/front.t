@@ -6,8 +6,9 @@
 .so utp.mac
 .utp
 .page iii
-.ps 200
+\Z@\D't 8p'@
 .Hl
+\D't 0'
 .sp .6i
 .DS R
 .ps 52
