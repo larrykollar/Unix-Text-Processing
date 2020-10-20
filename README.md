@@ -41,6 +41,13 @@ Whether you want to use GNU Troff,
 or Plan 9 or one of its derivatives (Heirloom Troff and Neatroff),
 UTP is still an excellent guide to the nuts and bolts of print publishing.
 
+The current (main) branch is UTP 1.1,
+which provides a clickable index, TOC, and cross-references within the PDF
+(thanks to Deri James).
+You will need *groff* 1.22 or newer to format it,
+as it uses the -Tpdf driver.
+If you have an older *groff*, switch to the 1.0 branch.
+
 The UTP Revival Release is
 distributed according to the terms of the
 Creative Commons Attribution License.
