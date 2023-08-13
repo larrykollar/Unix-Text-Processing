@@ -665,9 +665,9 @@ oldstuff/
 notes
 reports/
 $ \f[CB]mv notes oldstuff\fP     \f[I]Move\fP notes \f[I]to\fP oldstuff \f[I]directory\fP
-$ \f[CB]ls\fP                    \f[I]List contents of current directory\fP
+$ \f[CB]ls -F\fP                 \f[I]List contents of current directory\fP
 meeting
-oldstuff
+oldstuff/
 reports/
 $ \f[CB]mv meeting meet.306\fP   \f[I]Rename\fP meeting
 $ \f[CB]ls oldstuff\fP           \f[I]List contents of\fP oldstuff \f[I]subdirectory\fP
