@@ -206,7 +206,7 @@ instead of
 .CW nroff ,
 use the
 .CW mmt
-129	[mmt] command %key mmt command
+.ix [mmt] command %key mmt command
 command (another shell script) or invoke
 .CW troff
 directly, using the
