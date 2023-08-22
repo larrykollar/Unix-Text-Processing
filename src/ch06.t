@@ -4275,7 +4275,7 @@ Fs###Vertical spacing between footnotes.
 Hb###T{
 Level of heading for which break occurs before output
 of body text.
-Default is 2 lines.
+Default is 2.
 T}
 .sp 4p
 Hc###T{
