@@ -4423,7 +4423,7 @@ start of your document:
 \&.nr Hs 3
 \&.nr Hb 4
 \&.nr Hi 2
-\&.ds HF 3 3 3 3 2 2 2
+\&.ds HF 3 3 3 3 3 2 2
 \&.ds HP 16 14 12 10 10 10 10
 .Pe
 .LP
