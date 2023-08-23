@@ -4287,7 +4287,7 @@ Hi###T{
 Indent type after heading.
 Default is 1 (paragraph indent).
 Legal values are:
-0=left justified (default);
+0=left justified;
 1=indented;
 2=indented except after
 .CW \&.H ,
