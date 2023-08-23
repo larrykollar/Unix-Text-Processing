@@ -206,7 +206,7 @@ instead of
 .CW nroff ,
 use the
 .CW mmt
-129	[mmt] command %key mmt command
+.ix [mmt] command %key mmt command
 command (another shell script) or invoke
 .CW troff
 directly, using the
@@ -4275,7 +4275,7 @@ Fs###Vertical spacing between footnotes.
 Hb###T{
 Level of heading for which break occurs before output
 of body text.
-Default is 2 lines.
+Default is 2.
 T}
 .sp 4p
 Hc###T{
@@ -4287,7 +4287,7 @@ Hi###T{
 Indent type after heading.
 Default is 1 (paragraph indent).
 Legal values are:
-0=left justified (default);
+0=left justified;
 1=indented;
 2=indented except after
 .CW \&.H ,
@@ -4423,7 +4423,7 @@ start of your document:
 \&.nr Hs 3
 \&.nr Hb 4
 \&.nr Hi 2
-\&.ds HF 3 3 3 3 2 2 2
+\&.ds HF 3 3 3 3 3 2 2
 \&.ds HP 16 14 12 10 10 10 10
 .Pe
 .LP
