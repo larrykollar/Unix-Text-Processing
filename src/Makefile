@@ -5,10 +5,11 @@
 #
 #
 # Set the next two lines for the paths for groff and awk on your system
+# (assuming your $PATH does not point to the right executables)
 #
-GROFF = /usr/bin/groff
+GROFF = groff
+AWK = awk
 GROPDF_EMBED = # -P-e
-AWK = /usr/bin/awk
 VIEW = gv
 
 CHAPTERS= front.t preface.t ch01.t ch02.t ch03.t ch04.t ch05.t \
