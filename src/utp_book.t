@@ -16,6 +16,7 @@
 .pdfinfo /Title Unix Text Processing
 .pdfinfo /Author Dale Dougherty and Tim O'Reilly
 .pdfview /PageMode /UseOutlines
+.if d @break-page .als bp @break-page
 .nr chapter_page2 1
 .so front.t
 .nr chapter_page2 1
