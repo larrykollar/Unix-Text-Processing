@@ -1,4 +1,3 @@
-
 .ig
 	Typed by: Michael Hobgood
 	Marked up by: Michael Hobgood

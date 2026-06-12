@@ -1,4 +1,3 @@
-
 .ig
 	ch03.t
 	Typed by: Heinz-Jürgen Oertel

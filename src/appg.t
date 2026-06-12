@@ -53,4 +53,3 @@ A concise but thorough description of the UNIX
 .CW make
 utility.
 (63 pp.)
-

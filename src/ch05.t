@@ -2258,4 +2258,3 @@ Many of these features are covered in Chapters 14 through 18,
 where, for example, we show macros for formatting numbered lists.
 .ix %end [ms] macros %key ms macros
 .\" end of chapter 5
-

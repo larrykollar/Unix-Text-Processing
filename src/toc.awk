@@ -14,16 +14,16 @@ BEGIN	{
 /^Se:/	{
 			if ( $4 == "Contents" )
 				next;
-			gsub(/\\f\(CW/, "\\f\(CB" );
-			gsub(/\\f\[CW\]/, "\\f\[CB\]" );
-			gsub(/\\fC/, "\\f\[CB\]" );
+			gsub(/\\f\(CW/, "\\f(CB" );
+			gsub(/\\f\[CW\]/, "\\f[CB]" );
+			gsub(/\\fC/, "\\f[CB]" );
 			print ".ps 12\n.sp";
 			print $3"\\h'|.25i'\\fB"$4"\\fR	"$2;
 			print ".ps 10\n.sp";
 		}
 /^Ah:/	{
-			gsub(/\\f\(CB/, "\\f\(CW" );
-			gsub(/\\f\[CB\]/, "\\f\[CW\]" );
+			gsub(/\\f\(CB/, "\\f(CW" );
+			gsub(/\\f\[CB\]/, "\\f[CW]" );
 			print "\\h'|.25i'"$3""$2;
 		}
 # default (skip index entries)

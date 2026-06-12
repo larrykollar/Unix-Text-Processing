@@ -15,14 +15,14 @@ ch06.t ch07.t ch08.t ch09.t ch10.t ch11.t ch12.t ch13.t ch14.t \
 ch15.t ch16.t ch17.t ch18.t appa.t appb.t appc.t appd.t appe.t \
 appf.t appg.t
 
-utp_book.ps: toc.t utp_ix.t
-	$(GROFF) -step -ms -rRef=0 utp_book.t >$@.tmp
+utp_book.ps: toc.t utp_ix.t utp.mac
+	$(GROFF) -b -step -ms -rRef=0 utp_book.t >$@.tmp
 	mv $@.tmp $@
 
 clean::
 	rm -f utp_book.ps utp_book.ps.tmp
 
-toc.t: $(CHAPTERS)
+toc.t: $(CHAPTERS) utp.mac
 	$(GROFF) -step -ms -rRef=1 ix.macro utp_book.t >/dev/null 2>utp.aux.tmp
 	mv utp.aux.tmp utp.aux
 	$(AWK) -f toc.awk utp.aux >$@.tmp

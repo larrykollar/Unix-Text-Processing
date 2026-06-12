@@ -2416,5 +2416,3 @@ l:n:l:l:n.
 .TE
 .poE
 .ix	%end [pic] preprocessor, summary~of command~characters %key pic preprocessor, summary of command~characters
-
-

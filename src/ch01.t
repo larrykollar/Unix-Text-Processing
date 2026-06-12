@@ -1048,4 +1048,3 @@ it can let you do just what a word processor does.
 In many more
 instances, it lets you use more of the computer to do things
 that a word processor either can't do or can't do very well.
-

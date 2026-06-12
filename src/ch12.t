@@ -3162,16 +3162,16 @@ selections a user would select to reach a given command.
 For example:
 .LP
 .in 5n
-.BX "\s-2M\s0"\c
+.BX \s-2M\s0
 ain menu
 .in +5n
-.BX "\s-2P\s0"\c
+.BX \s-2P\s0
 ortfolio commands
 .in +5n
-.BX "\s-2E\s0"\c
+.BX \s-2E\s0
 valuate portfolios
 .in +5n
-.BX "\s-2S\s0"\c
+.BX \s-2S\s0
 hock factors
 .in 0
 .PP
@@ -3211,6 +3211,12 @@ aside: The
 .CW \ec
 escape sequence brings text from the
 following line onto the current line.
+.\" XXX: Not _exactly_.  No forward scanning is performed.  When
+.\" filling, `\c` instructs the formatter to suppress the word space
+.\" that an input line break normally places on the output.  When not
+.\" filling, it suppresses the _line_ break and input line break
+.\" the formatter normally places on the output.
+.\" --GBR, 2024-10-08
 You would use this,
 for example, when you don't want the argument to a macro to
 be separated from the first word on the next line by the space
@@ -3219,7 +3225,18 @@ The fact that the
 .CW .BX
 macro already makes provision for this case,
 and allows you to supply continued text in a second optional
-argument, is somewhat irrelevant to this example.
+argument,
+.\" XXX: Eh?  What version of ms did this?  Just considering formatters
+.\" extant circa 1987 when UTP was written, V6 Unix didn't.  V7 Unix
+.\" didn't.  4.2BSD didn't.  4.3BSD didn't.  DWB 3.3 (which was later,
+.\" 1993 or so, but is all we have) didn't.
+.\" --GBR, 2024-10-08
+.\" https://minnie.tuhs.org/cgi-bin/utree.pl?file=V6/usr/lib/tmac.s
+.\" https://minnie.tuhs.org/cgi-bin/utree.pl?file=V7/usr/lib/tmac/tmac.s
+.\" https://minnie.tuhs.org/cgi-bin/utree.pl?file=4.2BSD/usr/lib/tmac/tmac.s
+.\" https://minnie.tuhs.org/cgi-bin/utree.pl?file=4.3BSD/usr/lib/tmac/tmac.s
+.\" https://github.com/n-t-roff/DWB3.3/blob/master/macros/ms/tmac.s.sr
+is somewhat irrelevant to this example.
 The files had
 been coded as shown here, the mistake had been made, and there
 were hundreds, perhaps thousands, of instances to correct).

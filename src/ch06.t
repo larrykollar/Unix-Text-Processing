@@ -4591,4 +4591,3 @@ In Chapter 14, you will learn about writing macro definitions,
 which should give
 you the information you need to write these supplementary
 \(lquser exit macros.\(rq
-

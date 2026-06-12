@@ -4236,5 +4236,3 @@ using
 Keeping a script of a procedure is also a good start for
 building a shell script that performs a routine task
 automatically.
-
-
