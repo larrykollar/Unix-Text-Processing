@@ -12,62 +12,71 @@
 .ix %begin [troff] formatter %key troff formatter
 The
 .CW vi
-editor lets you edit text, but formatting is best left to other utilities.
-A text file such as program source code might be formatted with a simple
-program like
+editor lets you edit text, but it is not much good at formatting.
+A text file such as program source code
+might be formatted with a simple program like
 .CW pr ,
-which inserts a header at the top of every page and handles pagination,
-but otherwise prints the document exactly as it appears in the file.
-But to prepare neatly formatted text, use the
+that inserts a header at the top of every page
+and handles pagination,
+but otherwise prints the document
+exactly as it appears in the file.
+But for any application
+requiring the preparation of neatly formatted text,
+use the
 .CW nroff
 (\(lqen-roff\(rq) or
 .CW troff
 (\(lqtee-roff\(rq)
 formatting programs.
 .PP
-These programs are used to process an input text file, usually coded or
+These programs process an input text file,
+usually coded or
 \(lqmarked up\(rq
 with formatting instructions.
 When you use a
 .I wysiwyg
-program like most word processors, you use commands to lay out the text
-on the screen as it will be laid out on the page.
-With a markup language like that used by
+program like most word processors,
+you use commands to lay out the text on the screen
+as it will be laid out on the page.
+With a markup language, like that used by
 .CW nroff
 and
 .CW troff ,
-you enter commands into the text that tell the formatting program what
-to do.
+you enter commands into the text
+that tell the formatting program what to do.
 .PP
 Our purpose in this chapter is twofold.
-We want to introduce the basic formatting codes that you will find
-useful.
-But at the same time, we want to present them in the context of what the
-formatter is doing and how it works.
+We want to introduce basic formatting codes
+that you will find useful.
+But at the same time,
+we want to present them
+in the context of what the formatter is doing and how it works.
 If you find this chapter rough-going\c
 \(em\c
-especially if this is your
-first exposure to
+especially if this is your first exposure to
 .CW nroff /
 .CW troff \c
 \(em
-skip ahead to either Chapter 5 or Chapter 6 and become familiar with
+skip ahead to either Chapter 5 or Chapter 6
+and become familiar with
 one of the macro packages,
 .CW ms
 or
 .CW mm ;
 then come back and resume this chapter.
-We assume that you are reading this book because you would like more
-than the basics, that you intend to master the complexities of
+We assume that you are reading this book
+because you would like more than the basics,
+that you intend to master the complexities of
 .CW nroff /
 .CW troff .
-As a result, this chapter is somewhat longer and more complex than it
-would be if the book were an introductory user's guide.
-.PP
+As a result, this chapter is somewhat longer and more complex
+than it would be if the book were an introductory user's guide.
+.
 .Bh "Conventions"
 .PP
-To distinguish input text and requests shown in examples from formatter
-output, we have adopted the convention of showing \(lqpage corners\(rq
+To distinguish input text and requests
+shown in examples from formatter output,
+we have adopted the convention of showing \(lqpage corners\(rq
 around output from
 .CW nroff
 or
@@ -83,34 +92,37 @@ Here is an example of nroff output.
 .sp
 .SE
 .sp .8v
-.LP
 .page 59
-Output from
+.LP
+We show output from
 .CW troff
-is shown in the same typeface as the text, but with the size of the type
-reduced by one point, unless the example calls for an explicit type size:
+in the same typeface as the text,
+but with the type size reduced by one point,
+unless the example calls for an explicit type size:
 .Ps
 \f[R]Here is an example of troff output.\fP
 .Pe
-In representing output, compromises sometimes had to be made.
+In representing output, we had to compromise sometimes.
 For example, when showing
 .CW nroff
-output, we have processed the example separately with
+output, we processed the example separately with
 .CW nroff ,
 and read the results back into the source file.
-However, from there, they have been typeset in a constant-width font by
+From there,
+we typeset them in a constant-width font by
 .CW troff .
-As a result, there might be slight differences from true
+Thus, there might be slight differences from true
 .CW nroff
 output, particularly in line length or page size.
-However, the context should always make clear just what is being
-demonstrated.
+However, the context should always make clear
+just what is being demonstrated.
+.
 .Ah "What the Formatter Does"
 .LP 0
-Take a moment to think about the things you do when you format a page on
-a
+Take a moment to think about the things you do
+when you format a page in a
 .I wysiwyg
-device such as a typewriter:
+program such as a word processor:
 .LP
 .RS
 .Ls B
@@ -118,12 +130,14 @@ device such as a typewriter:
 You set aside part of the page as the text area.
 This requires setting top, bottom, left, and right margins.
 .Li
-You adjust the lines that you type so they are all approximately the
-same length and fit into the designated text area.
+You adjust the lines that you type
+so they are all approximately the same length
+and fit into the designated text area.
 .Li
 You break the text into syntactic units such as paragraphs.
 .Li
-You switch to a new page when you reach the bottom of the text area.
+You switch to a new page
+when you reach the bottom of the text area.
 .Le
 .RE
 .LP
@@ -131,8 +145,9 @@ Left to themselves,
 .CW nroff
 or
 .CW troff
-will do only one of these tasks: they will adjust the length of the
-lines in the input file so that they come out even in the output file.
+does only one of these tasks:
+adjust the length of the lines in the input file
+so that they come out even in the output file.
 To do so, they make two assumptions:
 .ix [troff] formatter, basic assumptions %key troff formatter, basic assumptions
 .LP
@@ -141,26 +156,25 @@ To do so, they make two assumptions:
 .Li
 They assume that the line length is 6.5 inches.
 .Li
-They assume that a blank line in the input signals the start of a
-new paragraph.
-The last line of the preceding text is not adjusted, and a blank
-line is placed in the output.
+They assume that a blank line in the input
+signals the start of a new paragraph.
+In this case, they do not adjust the preceding text,
+and place a blank line in the output.
 .Le
 .RE
 .LP
 The process of filling and adjusting is intuitively obvious\c
 \(em\c
-we've all
-done much the same thing manually when using a typewriter or had it done
-for us by a
+we've all had much the same thing done for us by a
 .I wysiwyg
 word processor.
 However, especially when it comes to a typesetting program like
 .CW troff ,
-there are ramifications to the process of line adjustment that are not
-obvious.
-Having a clear idea of what is going on will be very useful later.
-For this reason, we'll examine the process in detail.
+there are ramifications to the process of line adjustment
+that are not obvious.
+Having a clear idea of what is going on will be useful later,
+so we'll examine the process in detail.
+.
 .Bh "Line Adjustment"
 .LP
 .page 60
@@ -169,13 +183,14 @@ There are three parts to line adjustment:
 .I justification ,
 and
 .I hyphenation .
-Filling is the process of making all lines of text approximately equal
-in length.
+Filling reformats words
+to make all lines of text
+approximately equal in length.
 .ix filling (definition~of)
-When working on a typewriter, you do this automatically, simply by
-typing a carriage return when the line is full.
-Most word-processing programs automatically insert a carriage return at
-the end of a line, and we have seen how to set up
+Most word-processing programs
+automatically insert a carriage return
+at the end of a line,
+and we have seen how to set up
 .CW vi
 to do so as well.
 .PP
@@ -183,41 +198,48 @@ However,
 .CW nroff
 and
 .CW troff
-ignore carriage returns in the input except in a special \(lqno fill\(rq
-mode.
+ignore carriage returns in the input
+except in a special \(lqno fill\(rq mode.
 .ix no-fill mode
-They reformat the input text, collecting all input lines into
-even-length output lines, stopping only when they reach a blank line or
-(as we shall see shortly) a formatting instruction that tells them to
-stop.
-Lines that begin with one or more blank spaces are not filled, but
-trailing blank spaces are trimmed.
-Extra blank spaces between words on the input line are preserved, and
-the formatter adds an extra blank space after each period, question
-mark, or exclamation point.
+They reformat the input text,
+collecting all input lines into even-length output lines,
+stopping only when they reach a blank line or
+(as we shall see shortly)
+a formatting instruction that tells them to stop.
+.\" XXX Is the following sentence true for groff? need to test this
+They do not fill lines
+that begin with one or more blank spaces,
+and trim trailing blank spaces.
+They preserve extra blank spaces between words on the input line,
+and add space after each period,
+question mark, or exclamation point.
 .PP
 .ix justification
 .ix justification, definition~of
-Justification is a closely related feature that should not be confused
-with filling.
+Justification is a closely related feature
+that should not be confused with filling.
 Filling simply tries to keep lines approximately the same length;
-justification adjusts the space between words so that the ends of the
-lines match exactly.
+justification adjusts the space between words
+so the ends of the lines match exactly.
 .PP
 By default,
 .CW nroff
 and
 .CW troff
 both fill and justify text.
-Justification implies filling, but it is possible to have filling
+Justification implies filling,
+but it is possible to have filling
 without justification.
 Let's look at some examples.
 First, we'll look at a paragraph entered in
 .CW vi .
 Here's a paragraph from the letter you entered in the last chapter,
-modified so that it offers to prepare not just a user's guide for the
-Alcuin illuminated lettering software, but a reference manual as well.
-In the course of making the changes, we've left a short line in the
+modified so that it offers to prepare
+not just a user's guide for the
+Alcuin illuminated lettering software,
+but a reference manual as well.
+In the course of making the changes,
+we've left a short line in the
 middle of the paragraph.
 .Ps
 In our conversation last Thursday, we discussed a
@@ -242,8 +264,8 @@ materials that you sent me.
 .sp .8v
 .LP
 The paragraph has been both filled and justified.
-If the formatter were told to fill, but not to justify, the paragraph
-would look like this:
+If the formatter were told to fill, but not to justify,
+the paragraph would look like this:
 .sp .7v
 .SS
 .Ps
@@ -260,16 +282,17 @@ you sent me.
 .page 61
 As you can see,
 .CW nroff
-justified the text in the first example by adding extra space between
-words.
+justified the text in the first example
+by adding extra space between words.
 .PP
 Most typewritten material is filled but not justified.
-In printer's terms, it is typed
+In printer's terms, it is called
 .I "ragged right" .
 Books, magazines, and other typeset materials, by contrast, are usually
 .I "right justified" .
-Occasionally, you will see printed material (such as ad copy) in which
-the right end of each line is justified, but the left end is ragged.
+Occasionally, you see printed material (such as ad copy)
+where the right end of each line is justified,
+but the left end is ragged.
 It is for this reason that we usually say that text is
 .I right
 or
@@ -277,10 +300,10 @@ or
 rather than simply
 .I "justified" .
 .PP
-When it is difficult to perform filling or justification or both because
-a long word falls at the end of a line, the formatter has another trick
-to fall back on (one we are all familiar with)\c
-\(em\c
+When it is difficult to perform filling or justification or both
+because a long word falls at the end of a line,
+the formatter has another trick
+to fall back on (one we are all familiar with):
 hyphenation.
 .ix hyphenation
 .PP
@@ -288,50 +311,57 @@ The
 .CW nroff
 and
 .CW troff
-programs perform filling, justification, and hyphenation in much the
-same way as a human typesetter used to set cold lead type.
-Human typesetters used to assemble a line of type by placing individual
-letters in a tray until each line was filled.
-There were several options for filling as the typesetter reached the end
-of the line:
+programs perform filling, justification, and hyphenation
+in much the same way as a human typesetter
+used to set cold lead type.
+Human typesetters used to assemble a line of type
+by placing individual letters in a tray
+until each line was filled.
+There were several options for filling
+as the typesetter reached the end of the line:
 .LP
 .RS
 .Ls B
 .Li
 The next word might fit exactly.
 .Li
-The next word might fit if the typesetter squeezed the words a
-little closer together.
+The next word might fit if the typesetter squeezed the words
+a little closer together.
 .Li
 The next word could be hyphenated, with part put on the current 1ine
 and part on the next line.
 .Le
 .RE
 .LP
-If, in addition to being filled, the text was to be justified, there was
-one additional issue: after the line was approximately the right length,
-space needed to be added between each word so that the line length came
-out even.
+If, in addition to being filled, the text was to be justified,
+there was one additional issue:
+after the line was approximately the right length,
+space needed to be added between each word
+so the line length came out even.
 .PP
-Just like the human typesetter they replace,
+Just like the human typesetter they replaced,
 .CW nroff
 and
 .CW troff
-assemble one line of text at a time, measuring the length of the line
-and making adjustments to the spacing to make the line come out even
+assemble one line of text at a time,
+measuring the length of the line
+and making adjustments to the spacing
+to make the line come out even
 (assuming that the line is to be justified).
 Input lines are collected into a temporary storage area, or
 .I buffer ,
 until enough text has been collected for a single output line.
-Then that line is output, and the next line collected.
+Then they output that line, and collect the next line.
 .PP
-It is in the process of justification that you see the first significant
-difference between the two programs.
+It is in the process of justification
+that you see the first significant difference
+between the two programs.
 The
 .CW nroff
-program was designed for use with typewriter-like printers;
+program was designed for screen display or typewriter-like printers;
 .CW troff
-was designed for use with phototypesetters.
+was designed for use with phototypesetters
+(and later, laser printers).
 .ix justification, [nroff]~vs.~[troff] %key justification, nroff vs.~[troff]
 .PP
 A typewriter-style printer has characters all of the same size\c
@@ -341,18 +371,21 @@ an
 takes up the same amount of space as an
 .I m .
 (Typical widths are 1/10 or 1/12 inch per character).
-And although some printers (such as daisywheel printers) allow you to
-change the style of type by changing the daisywheel or thimble, you can
-usually have only one typeface at a time.
+And although some printers
+(such as daisywheel printers)
+allowed you to change the style of type
+by changing the daisywheel or thimble,
+you can usually have only one typeface at a time.
 .PP
-A typesetter, by contrast, uses typefaces in which each letter takes up
+A typesetter, by contrast,
+uses typefaces in which each letter takes up
 an amount of space proportional to its outline.
 The space allotted for an
 .I i
-is quite definitely narrower than the space allotted for an
+is narrower than the space allotted for an
 .I m .
-The use of variable-width characters makes the job of filling and
-justification much more difficult for
+The use of variable-width characters makes the job
+of filling and justification much more difficult for
 .CW troff
 than for
 .CW nroff .
@@ -369,38 +402,39 @@ The
 .CW troff
 program also justifies by adding space between words, but because the
 variable-width fonts it uses are much more compact, it fits more on a
-line and generally does a much better job of justification.*
+line and generally does a much better job of justification.\**
 .FS
-*The very best typesetting programs have the capability to adjust the
+Typesetting programs can adjust the
 space between individual characters as well.
 This process is called
 .I kerning .
 .ix kerning
-SoftQuad Publishing Software in Toronto sells an enhanced version of
+.CW Groff ,
+and the updated
 .CW troff
-called
-.CW SQroff
-that does support kerning.
+formatters based on Plan9,
+support kerning.
 .FE
 .PP
 .ix [nroff] formatter, interword spacing %key nroff formatter, interword spacing
 There's another difference as well.
 Left to itself,
 .CW nroff
-will insert only full spaces between words\c
+inserts only full spaces between words\c
 \(em\c
-that is, it might put two
-spaces between one pair of words, and three between another, to fill the
-line.
+that is, it might put two spaces
+between one pair of words,
+and three between another, to fill the line.
 If you call
 .CW nroff
 with the
 .CW -e
-option, it will attempt to make all interword spaces the same size
-(using fractional spaces if possible).
+option, it attempts to make all interword spaces
+the same size
+(using fractional spaces) if possible.
 But even then,
 .CW nroff
-will only succeed if the output device allows fractional spacing.
+only succeeds if the output device allows fractional spacing.
 .ix [troff] formatter, interword spacing %key troff formatter, interword spacing
 The
 .CW troff
@@ -426,33 +460,40 @@ me.\fP
 .SE
 .sp .8v
 .PP
-To make matters still more difficult, typeset characters come in a
-variety of different designs, or
+To make matters still more difficult,
+typeset characters come in a variety of different designs, or
 .I fonts .
 .ix fonts
-A font is a set of alphabetic, numeric, and punctuation characters that
-share certain design elements.
+A font is a set of alphabetic, numeric, and punctuation characters
+that share certain design elements.
 Typically, fonts come in families of several related typefaces.
-For example, this book is typeset for the most part in the Times Roman
-family of typefaces.
-There are three separate fonts:
+For example, this book is typeset for the most part
+in the Times Roman family of typefaces.
+In
+.CW groff
+and modernized
+.CW troff ,
+there are four separate fonts:
 .Ps
 \f[R]roman\fP
 \f[B]bold\fP
 \f[I]italic\fP
+\f[BI]bold italic\fP
 .Pe
-Typesetting allows for the use of multiple fonts on the same page, as
-you can see from the mixture of fonts throughout this book.
-Sometimes the fonts are from the same family, as with the Times Roman,
-Times Bold, and Times Italic just shown.
-However, you can see other fonts, such as Helvetica, in the running
-headers on each page.
-Bold and italic fonts are generally used for emphasis; in computer books
-such as this, a constant-width typewriter font is used for examples and
+Typesetting allows for the use of multiple fonts on the same page,
+as you can see from the mixture of fonts throughout this book.
+Sometimes the fonts are from the same family,
+as with the Times Roman, Times Bold,
+Times Italic, and Times Bold-Italic just shown.
+However, you can see other fonts, such as Helvetica,
+in the running headers on each page.
+Bold and italic fonts are generally used for emphasis;
+computer books such as this
+use a constant-width typewriter font for examples and
 other \(lqcomputer voice\(rq statements.
 .PP
-Even within the same font family, the width of the same character varies
-from font to font.
+Even within the same font family,
+the width of the same character varies from font to font.
 For example, a bold
 \(lq\c
 .B m \c
@@ -460,17 +501,19 @@ For example, a bold
 is slightly wider than a Roman
 \(lqm.\(rq
 .PP
-To make things still more complicated, the same font comes in different
-sizes.
-If you look at this book, you will notice that the section headings
-within each chapter are slightly larger for emphasis.
+To make things still more complicated,
+the same font comes in different sizes.
+In this book,
+the section headings within each chapter
+are slightly larger for emphasis.
 Type sizes are measured in units called
 .I points .
 .ix point~size
-We'll talk more about this later, but to get a rough idea of what type
-sizes mean, simply look at the current page.
-The body type of the book is 10-point Times Roman; the next heading is
-12-point Times Bold.
+We'll talk more about this later,
+but to get a rough idea of what type sizes mean,
+look at the current page.
+The body type of the book is 10-point Times Roman;
+the next heading is 12-point Times Bold.
 The spacing between lines is generally proportional to the point size,
 instead of fixed, as it is with
 .CW nroff .
@@ -478,10 +521,27 @@ instead of fixed, as it is with
 .PP
 The
 .CW troff
-program gets information about the widths of the various characters in
-each font from tables stored on the system in the directory
-.CW /usr/lib/font .
-.ix [/usr/lib/font] %key /usr/lib/font
+program gets information about the widths of the various characters
+in each font
+from tables stored on the system in the
+.CW font
+directory.
+The location of this directory
+depends on which version of
+.CW troff
+you are using.
+.CW Groff
+uses either
+.CW /usr/share/groff/\c
+.I version /font
+or
+.CW /usr/local/share/groff\c
+.I version /font .
+.ix [/usr/share/troff/font] %key /usr/share/troff/font
+If you are using one of the Plan9 derivatives,
+look in
+.CW /usr/local/share/\c
+.I name /tont.
 These tables tell
 .CW troff
 how far to move over after it has output each character on the line.
@@ -489,9 +549,10 @@ how far to move over after it has output each character on the line.
 We'll talk more about
 .CW troff
 later.
-For the moment, you should be aware that the job of the formatting
-program is much more complicated when typesetting than it is when
-preparing text for typewriter-style printers.
+For the moment, understand that
+the job of the formatting program is much more complicated when typesetting
+than it is when preparing text for typewriter-style printers.
+.
 .Ah "Using \f[CB]nroff\fP"
 .LP
 As mentioned previously, left to themselves,
@@ -499,12 +560,14 @@ As mentioned previously, left to themselves,
 and
 .CW troff
 perform only rudimentary formatting.
-They will fill and justify the text, using a default line length of 6.5
-inches, but they leave no margins, other than the implicit right margin
-caused by the line length.
-To make this clearer, let's look at the sample letter from the last
-chapter (including the edit we made in this chapter) as it appears after
-formatting with
+They fill and justify the text,
+using a default line length of 6.5 inches,
+but they leave no margins,
+other than the implicit right margin caused by the line length.
+To make this clearer,
+let's look at the sample letter from the last chapter
+(including the edit we made in this chapter)
+as it appears after formatting with
 .CW nroff .
 .PP
 First, let's look at how to invoke the formatter.
@@ -515,156 +578,170 @@ program takes as an argument the name of a file to be formatted:
 .Ps
 $ \f[CB]nroff letter\fP
 .Pe
-Alternatively, it can take standard input, allowing you to preprocess
-the text with some other program before formatting it:
+Alternatively, it can use standard input,
+allowing you to preprocess the text with some other program
+before formatting it:
 .Ps
 $ \f[CB]tbl report | nroff\fP
 .Pe
 There are numerous options to
 .CW nroff .
-They are described at various points in this book (as appropriate to the
-topic) and summarized in Appendix B.
+They are described at various points in this book
+(as appropriate to the topic)
+and summarized in Appendix B.
 .ix [nroff] formatter, command~line options %key nroff formatter, command line options
 .PP
 One basic option is
 .CW -T ,
-which specifies the terminal (printer) type for which output should be
-prepared.
+which specifies the terminal (printer) type
+used to prepare output.
 Although
 .CW nroff
-output is fairly straightforward, some differences between printers can
-significantly affect the output.
-(For example, one printer may perform underlining by backspacing and
-printing an underscore under each underlined letter, and another may do
-it by suppressing a newline and printing the underscores in a second
-pass over the line).
-The default device is the Teletype Model 37 terminal\c
-\(em\c
-a fairly
-obsolete device.
+output is fairly straightforward,
+some differences between printers
+can affect the output.
+(For example, one printer may perform underlining
+by backspacing and printing an underscore under each underlined letter,
+and another may do it by suppressing a newline
+and printing the underscores in a second pass over the line).
+The default device is the Teletype Model 37 terminal,
+an obsolete device.
 Other devices are listed in Appendix B.
-If you don't recognize any of the printers or terminals, the safest type
-is probably
+If you don't recognize any of the printers or terminals,
+the safest type is probably
 .CW lp:
 .Ps
 $ \f[CB]nroff -Tlp\fP \f[BI]file\fP
 .Pe
-In examples in this book, we will leave off the
+.CW Groff
+supports
+.CW -T \fIascii\fR,
+.CW -T \fIlatin1\fR,
+and
+.CW -T \fIutf8\fR,
+for ASCII-based systems, and
+.CW -T \fIutf8\fR
+and
+.CW -T \fIcp1047\fR
+for EBCDIC-based systems.
+.PP
+In examples in this book, we omit the
 .CW -T
-option, but you may want to experiment, and use whichever type gives the
-best results with your equipment.
+option, but you may want to experiment,
+and use whichever type gives the best results with your equipment.
 .PP
 Like most UNIX programs,
 .CW nroff
 prints its results on standard output.
 So, assuming that the text is stored in a file called
 .CW letter ,
-all you need to do is type:
+type:
 .Ps
 $ \f[CB]nroff letter\fP
 .Pe
-A few moments later, you should see the results on the screen.
-Because the letter will scroll by quickly, you should pipe the output of
+You should see the results on the screen.
+Because the letter scrolls by quickly,
+you can either pipe the output of
 .CW nroff
 to a paging program such as
-.CW pg
-or
-.CW more :
+.CW less :
 .page 64
 .Ps
-$ \f[CB]nroff letter | pg\fP
+$ \f[CB]nroff letter | less\fP
 .Pe
-or out to a printer using
+or to a printer using
 .CW lp
 or
 .CW lpr :
 .Ps
 $ \f[CB]nroff letter | lp\fP
 .Pe
+.
 .Ah "Using \f[CB]troff\fP"
 .LP 0
 The chief advantage of
 .CW troff
 over
 .CW nroff
-is that it allows different types of character sets, or fonts, and so
-lets you take full advantage of the higher-quality printing available
+is that it allows different types of character sets, or fonts,
+so you can take full advantage of
+the higher-quality printing available
 with typesetters and laser printers.
-There are a number of requests, useful only in
+A number of requests are useful only in
 .CW troff ,
-for specifying fonts, type sizes, and the vertical spacing between
-lines.
-Before we describe the actual requests though, we need to look at a bit
-of history.
+for specifying fonts, type sizes,
+and the vertical spacing between lines.
+Before we describe the actual requests,
+we need to look at some history.
 .PP
 The
 .CW troff
-program was originally designed for a specific typesetter, the Wang
-C/A/T.
+program was originally designed for a specific typesetter,
+the Wang C/A/T.
 .ix C/A/T typesetter
-Later, it was modified to work with a wide range of output devices.
+Later, it was modified to work with
+a wide range of output devices).
 We'll discuss the original version of
-.CW troff
-(which is still in use at many sites) first, before discussing the newer
-versions.
-The C/A/T typesetter was designed in such a way that it could use only
-four fonts at one time.
+.CW troff ,
+before discussing the newer versions.
+The C/A/T typesetter was designed
+so it could use only four fonts at one time.
 .PP
-(Early phototypesetters worked by projecting light through a film
-containing the outline of the various characters.
-The film was often mounted on a wheel that rotated to position the
-desired character in front of the light source as it flashed, thus
+Early phototypesetters worked by projecting light
+through a film containing the outline of the various characters.
+The film was often mounted on a wheel
+that rotated to position the desired character
+in front of the light source as it flashed,
 photographing the character onto photographic paper or negative film.
-Lenses enlarged and reduced the characters to produce various type
-sizes.
-The C/A/T typesetter had a wheel divided into four quadrants, onto which
-one could mount four different typefaces).
+Lenses enlarged and reduced the characters
+to produce various type sizes.
+The C/A/T typesetter had a wheel divided into four quadrants,
+where the operator could mount four different typefaces.
 .PP
-Typically, the four fonts were the standard (roman), bold, and italic
-fonts of the same family, plus a \(lqspecial\(rq font that contained
-additional punctuation characters, Greek characters (for equations),
+Typically, the four fonts were the standard (roman),
+bold, and italic fonts of the same family,
+plus a \(lqspecial\(rq font that contained
+additional punctuation characters,
+Greek characters (for equations),
 bullets, rules, and other nonstandard characters.
 .ix fonts, four standard
 .ix fonts, special
 Figure 4-1 shows the characters available in these standard fonts.
+.
 .Bh "The Coming of \f[CB]ditroff\fP"
 .LP 0
 Later,
 .CW troff
-was modified to support other typesetters and, more importantly (at
-least from the perspective of many readers of this book), laser
-printers.
+was modified to support other typesetters and,
+more importantly, laser printers.
 The later version of
 .CW troff
 is often called
 .CW ditroff
 (for device-independent
 .CW troff ),
-but many UNIX systems have changed the name of the original
+but many UNIX systems at the time
+changed the name of the original
 .CW troff
 to
-.CW otroff
+.CW otroff ,
 and simply call
 .CW ditroff
 by the original name,
 .CW troff .
-.PP
-The
-.CW ditroff
-program has not been universally available because, when it was
-developed, it was \(lqunbundled\(rq from the basic UNIX distribution and
-made part of a separate product called
-.I "Documenter's Workbench"
-or
-.I DWB .
-.ix Documenter's~Workbench
-UNIX system manufacturers have the option not to include this package,
-although increasingly, they have been doing so.
-Versions of DWB are also available separately from third party vendors.
-.PP
-The newer version of
+All modern versions of
 .CW troff
-allows you to specify any number of different fonts.
+are device-independent, using
+.I postprocessors
+to provide the finalized output to the selected device.
+PostScript and PDF
+are the two most popular formats in use today, but modern
+.CW troff
+also supports native printer formats like the HP LaserJet.
+.PP
+The modern versions of
+.CW troff
+let you specify any number of different fonts.
 (You can mount fonts at up to ten imaginary \(lqpositions\(rq with
 .CW \.fp
 and can request additional fonts by name).
@@ -720,6 +797,7 @@ Special Mathematical Font
 .fi
 .in \n[UTPIN]u
 .Fe "The Four Standard Fonts"
+.
 .ix [troff] formatter, fonts %key troff formatter, fonts
 There may also be different font sizes available, and there are some
 additional commands for line drawing (\c
@@ -733,81 +811,73 @@ flexibility it offers to use different output devices.
 .ix [troff] formatter, versions~of %key troff formatter, versions of
 One way to find out which version of
 .CW troff
-you have on your system (unless you have a program explicitly called
-.CW ditroff )
-is to list the contents of the directory
-.CW /usr/lib/font :
-.ix [/usr/lib/font] %key /usr/lib/font
+you have on your system
+is to type the command
+.CW troff --version
 .page 66
 .KS
 .Ps
-$\f[CB]ls -F /usr/lib/font\fP
-devlj/
-devps/
-ftB
-ftI
-ftR
-ftS
+$\f[CB]troff --version\fP
+GNU troff (groff) version 1.19.2
 .Pe
 .KE
-If there are one or more subdirectories whose name begins with the
-letters
-.CW dev ,
-your system is using
-.CW ditroff .
-Our system supports both
-.CW ditroff
-and
-.CW otroff ,
-so we have both a device subdirectory (for
-.CW ditroff )
-and font files (for
-.CW otroff )
-directly in
-.CW /usr/lib/font .
+Plan9 versions might respond:
+.Ps
+Usage: troff [options] input
+
+Options:
+  -mx   	include macro x
+  -C    	enable compatibility mode
+  -Tdev 	set output device
+  -Fdir 	set font directory (/usr/local/share/troff/font)
+  -Mdir 	set macro directory (/usr/local/share/troff/tmac)
+.Pe
 .PP
 We'll talk more about font files later.
-For the moment, all you need to know is that they contain information
-about the widths of the characters in various fonts for a specific
-output device.
+For the moment, all you need to know is
+font files contain information
+about the widths of the characters in various fonts
+for a specific output device.
 .ix fonts
 .ix fonts, contents~of font~files
 .PP
-Contrary to what a novice might expect, font files do not contain
-outlines of the characters themselves.
-For a proper typesetter, character outlines reside in the typesetter
-itself.
+Contrary to what a novice might expect,
+font files do not contain outlines of the characters themselves.
+For a proper typesetter,
+character outlines reside in the typesetter itself.
 All
 .CW troff
-sends out to the typesetter are character codes and size and position
-information.
+sends are character codes and size and position information.
 .PP
-However,
+In modern times, you use
 .CW troff
-has increasingly come to be used with laser printers, many of which use
+with laser printers, many of which use
 .I "downloadable fonts" .
 .ix [troff] formatter, downloadable fonts %key troff formatter, downloadable fonts
 .ix fonts, downloadable
-An electronic image of each character is loaded from the computer into
-the printer's memory, typically at the start of each printing job.
-There may be additional \(lqfont files\(rq containing character outlines
-in this case, but these files are used by the software that controls the
-printer, and have nothing to do with
+An electronic image of each character is loaded from the computer
+into the printer's memory,
+typically at the start of each printing job.
+There may be additional \(lqfont files\(rq
+containing character outlines in this case,
+but these files are used by the software
+that controls the printer, and have nothing to do with
 .CW troff
 itself.
-In other cases, font images are stored in ROM (read-only memory) in the
-printer.
+In other cases, the printer stores font images in ROM (read-only memory).
 .PP
-If you are using a laser printer, it is important to remember that
+If you are using a laser printer, remember that
 .CW troff
 itself has nothing to do with the actual drawing of characters or images
 on the printed page.
-In a case like this,
+Instead,
 .CW troff
-simply formats the page, using tables describing the widths of the
-characters used by the printer, and generates instructions about page
-layout, spacing, and so on.
-The actual job of driving the printer is handled by another program,
+simply formats the page,
+using tables describing the widths of
+the characters used by the printer,
+and generates instructions about page layout, spacing, and so on.
+The actual job of driving the printer
+is handled by another program,
 generally referred to as a
 .I "printer driver"
 or
@@ -817,116 +887,115 @@ or
 .PP
 To use
 .CW troff
-with such a postprocessor, you will generally need to pipe the output of
+with a postprocessor, pipe the output of
 .CW troff
 to the postprocessor and from there to the print spooler:
 .Ps
 $ \f[CB]troff\fP \f[I]file\fP \f[CB]|\fP \f[I]postprocessor\fP \f[CB]| lp\fP
 .Pe
-If you are using the old version of
-.CW troff ,
-which expects to send its output directly to the C/A/T typesetter, you
-.ix C/A/T typesetter
-need to specify the
-.CW -t
-option, which tells
-.CW troff
-to use standard output.
-If you don't, you will get the message:
-.Ps
-Typesetter busy.
-.Pe
-(Of course, if by any chance you
-.I are
-connected to a C/A/T typesetter,
-you don't need this option.
-There are several other options listed in Appendix B that you may find
-useful).
 When you use
-.CW ditroff ,
-on the other hand, you will need to specify the
+.CW groff ,
+specify the
 .CW -T
 command-line option that tells it what device you are using.
 .ix [troff] formatter, invoking %key troff formatter, invoking
-The postprocessor will then translate the device-independent
+The postprocessor translates the device-independent
 .CW troff
-output into instructions for that particular type of laser printer or
-typesetter.
-For example, at our site, we use
-.CW troff
-with an Apple LaserWriter and Pipeline Associates'
-.page 67
+output into instructions
+for that particular type of laser printer or typesetter.
+For example,
+.CW -Tps
+(the default for
+.CW groff )
+calls the
 .CW devps
 .ix %begin [devps] postprocessor %key devps postprocessor
-postprocessor, which translates
+postprocessor, to translate
 .CW troff
-output for the LaserWriter.
-Our command line looks something like this:
+output into PostScript.
+A
+.CW groff
+command line looks something like this:
 .Ps
-$ \f[CB]ditroff -Tps\fP \f[I]files\fP \f[CB]| devps | lp\fP
+$ \f[CB]gtroff -Tps\fP \f[I]files\fP | \f[CB]lp\fP
 .Pe
-You can print the same file on different devices, simply by changing the
+You can print the same file on different devices
+by changing the
 .CW -T
-option and the postprocessor.
-For example, you can print drafts on a laser printer, then switch to a
-typesetter for final output without making extensive changes to your
-files.
-(To actually direct output to different printers, you will also have to
-specify a printer name as an option to the
+option.
+For example, you can print drafts on a laser printer,
+then switch to a typesetter for final output
+without making extensive changes to your files.
+(To actually direct output to different printers,
+you have to specify a printer name as an option to the
 .CW lp
 command.
 In our generic example, we simply use
 .CW lp
-without any options, assuming that the appropriate printer is connected
-as the
+without any options,
+assuming that the appropriate printer is connected as the
 .I default
 printer).
 .PP
-Like all things in life, this is not always as easy as it sounds.
+Like all things in life,
+this is not always as easy as it sounds.
 Because the fonts used by different output devices have different widths
-even when the nominal font names and sizes are the same, pagination and
-line breaks may be different when you switch from one device to another.
+even when the nominal font names and sizes are the same,
+pagination and line breaks may be different
+when you switch from one device to another.
 .PP
-The job of interfacing
-.CW ditroff
-to a wide variety of output devices is becoming easier because of the
-recent development of industry-wide
-.I "page description languages"
+Industry-wide
+.I "page description languages" ,
 .ix page~description languages
 .ix DDL
 .ix Interpress
 .ix PostScript
-like Adobe Systems' PostScript, Xerox's Interpress, and Imagen's DDL.
-These page description languages reside in the printer, not the host
-computer, and provide a device-independent way of describing placement
-of characters and graphics on the page.
+like Adobe Systems' PostScript, Xerox's Interpress, and Imagen's DDL,
+made the job of interfacing
+.CW ditroff
+to a wide variety of output devices much easier.
+These page description languages reside in the printer,
+not the host computer, and provide a device-independent way
+of describing placement of characters and graphics on the page.
+Portable Document Format (PDF)
+.ix PDF
+supports embedding fonts,
+so a PDF document looks the same on any computer
+or printer
+regardless of what fonts are installed.
 .PP
-Rather than using a separate postprocessor for each output device, you
-can now simply use a postprocessor to convert
+Rather than using a separate postprocessor for each output device,
+use a postprocessor to convert
 .CW troff
 output to the desired page description language.
-For example, you can use Adobe Systems' TranScript postprocessor (or an
-equivalent postprocessor like
-.CW devps
-from Pipeline Associates) to convert
+For example, you use
+.CW grops
+with
+.CW groff to convert
 .CW troff
-output to PostScript, and can then send the PostScript output to any one
-of a number of typesetters or laser printers.
+output to PostScript, or
+.CW dpost
+with a Plan9-based
+.CW troff ,
+and then send the PostScript output to any one
+of a number of typesetters or laser printers,
+or to Adobe Distiller or the Free
+.CW ghostscript
+to convert to PDF.
+.CW Groff
+has a
+.CW gropdf
+postprocessor that outputs directly to PDF.
 .PP
 From this point, whenever we say
 .CW troff ,
-we are generally referring to
-.CW ditroff .
-In addition, although we will continue to discuss
+we are generally referring to any modern version of
+.CW troff .
+In addition, although we continue to discuss
 .CW nroff
 as it differs from
 .CW troff ,
 our emphasis is on the more capable program.
-It is our opinion that the growing availability of laser printers will
-make
-.CW troff
-the program of choice for almost all users in the not too distant
-future.
 .PP
 However, you can submit a document coded for
 .CW troff
@@ -940,12 +1009,19 @@ And you can submit documents coded for
 .CW nroff
 to
 .CW troff ,
-though you will then be failing to use many of the characteristics that
-make
+though you miss out on
+many of the characteristics that make
 .CW troff
 desirable.
+You can also use
+.I conditionals
+so each program
+handles it correctly.
+You can also set different behavior
+depending on the selected postprocessor.
 .ix %end [devps] postprocessor %key devps postprocessor
 .ix %end [troff] formatter, postprocessors %key troff formatter, postprocessors
+.
 .Ah "The Markup Language"
 .LP
 The
@@ -958,7 +1034,7 @@ typically consist of one or two lowercase letters and stand on their own
 line, following a period or apostrophe in column one.
 .ix [troff] formatter, syntax~of requests %key troff formatter, syntax of requests
 Most requests are reasonably mnemonic.
-For example, the request to leave space is:
+For example, the request to create vertical space is:
 .Ps
 \&.sp
 .Pe
@@ -972,50 +1048,59 @@ Escape sequences usually begin with a backslash
 .CW \e ).
 For example, the escape sequence
 .CW \el
-will draw a horizontal line.
+draws a horizontal line.
 Especially in
 .CW troff ,
-escape sequences are used for line drawing or for printing various
-special characters that do not appear in the standard ASCII character
-set.
+you often use escape sequences for line drawing
+or for printing various special characters
+that do not appear in the standard ASCII character set.
 For instance, you enter
 .CW \e(bu
-to get \(bu, a bullet.
+to get \[bu], a bullet.
 .PP
 There are three classes of formatting instructions:
 .LP
 .RS
 .Ls B
 .Li
-Instructions that have an immediate one-time effect, such as a
-request to space down an inch before outputting the next line of
-text.
+Instructions that have an immediate one-time effect,
+such as arequest to space down an inch
+before outputting the next line of text.
 .Li
-Instructions that have a persistent effect, such as requests to set
-the line length or to enable or disable justification.
+Instructions that have a persistent effect,
+such as requests to set the line length
+or to enable or disable justification.
 .Li
 Instructions that are useful for writing
 .I macros .
 There is a \(lqprogramming language\(rq
-built into the formatter that allows you to build up complex
-requests from sequences of simpler ones.
-As part of this language there are requests for storing values into
-variables called
+built into the formatter
+that allows you to build up complex requests
+from sequences of simpler ones.
+As part of this language
+there are requests for storing values
+into variables called
 .I strings
 and
 .I "number registers" ,
 for testing conditions and acting on the result, and so on.
+You can use both strings and number registers
+in documents as well,
+to make them reusable across groups of related products.
 .Le
 .RE
 .PP
-For the most part, we will discuss the requests used to define macros,
-strings, and number registers later in this book.
+For the most part,
+we discuss the requests used
+to define macros, strings, and number registers
+later in this book.
 .PP
-At this point, we want to focus on understanding the basic requests that
-control the basic actions of the formatter.
-We will also learn many of the most useful requests with immediate,
-one-time effects.
-Table 4-1 summarizes the requests that you will use most often.
+At this point,
+we want to focus on understanding the basic requests
+that control the basic actions of the formatter,
+and to show you many of the most useful requests
+with immediate, one-time effects.
+Table 4-1 summarizes the requests that you use most often.
 .Ts "Basic \f[CB]nroff/troff\fP Requests"
 .TS
 center box tab (#);
@@ -1037,36 +1122,42 @@ lfCW lfR | lfCW lfR.
 \&.ll#Specify line length#\&.vs#Set vertical line spacing
 .TE
 .Te
+.
 .Bh "Looking at \f[CB]nroff\fP Output"
 .LP 0
-When we discussed the basic operations of the text formatter, we saw
-that
+When we discussed the basic operations of the text formatter,
+we saw that
 .CW nroff
 and
 .CW troff
 perform rudimentary formatting.
-They will fill and justify the text, using a default line length of 6.5
+They fill and justify the text,
+using a default line length of 6.5 inches,
 .page 69
-inches, but they leave no margins, other than the implicit right margin
+but they leave no margins,
+other than the implicit right margin
 caused by the line length.
 .PP
 To make this clearer, let's look at the sample letter from the last
 chapter as it appears after formatting with
 .CW nroff ,
-without any embedded requests, and without using any macro package.
-From Figure 4-2, you can see immediately that the formatter has adjusted
-all of the lines, so that they are all the same length\c
+without any embedded requests,
+and without using any macro package.
+From Figure 4-2, you can see immediately
+that the formatter adjusted all of the lines,
+so they are all the same length\c
 \(em\c
-even in the
-address block of the letter, where we would have preferred them to be
-left as they were.
-Blank lines in the input produce blank lines in the output, and the
-partial lines at the ends of paragraphs are not adjusted.
+even in the address block of the letter,
+where we would have preferred
+to leave them as they were.
+Blank lines in the input produce blank lines in the output,
+and the partial lines at the ends of paragraphs are not adjusted.
 .PP
-The most noticeable aspect of the raw formatting is a little difficult
-to reproduce here, though we've tried.
+The most noticeable aspect of the raw formatting
+is a little difficult to reproduce here, though we've tried.
 No top or left margin is automatically allocated by
 .CW nroff .
+.
 .Ah "Turning Filling On and Off"
 .LP 0
 Even though filling of uneven text lines resulting from editing is
@@ -1090,10 +1181,12 @@ and
 .PP
 A
 .CW \&.br
-request following a line outputs the current contents of the line buffer
-and starts the next line, even though the buffer is not yet full.
-To produce a properly formatted address block, we could enter the
-following requests in the file:
+request following a line
+outputs the current contents of the line buffer
+and starts the next line,
+even though the buffer is not yet full.
+To produce a properly formatted address block,
+we could enter the following requests in the file:
 .Ps
 Mr. John Fust
 \&.br
@@ -1103,19 +1196,21 @@ Gutenberg Galaxy Software
 \&.br
 Waltham, Massachusetts 02159
 .Pe
-Each individual input line will be output without filling or
-justification.
+Now,
+.CW nroff
+outputs each individual input line
+without filling or justification.
 We could also use the
 .CW \&.nf
 request, which tells
 .CW nroff
 to stop filling altogether.
-Text following this request will be printed by the formatter exactly as
-it appears in the input file.
+The formatter prints text following this request
+exactly as it appears in the input file.
 Use this request when you want text to be laid out as it was typed in.
 .PP
-Because we do want the body of the letter to be filled, we must turn
-filling back on with the
+Because we do want the body of the letter to be filled,
+we must turn filling back on with the
 .CW \&.fi
 (\c
 .I fill )
@@ -1140,9 +1235,10 @@ Dear Mr. Fust:
 .sp -2v
                                 April 1, 1987
 
-Mr.  John  Fust  Vice  President,   Research   and
-Development  Gutenberg  Galaxy  Software  Waltham,
-Massachusetts 02159
+Mr. John Fust
+Vice President, Research and Development
+Gutenberg Galaxy Software
+Waltham, Massachusetts 02159
 
 Dear Mr. Fust:
 
@@ -1187,9 +1283,9 @@ with you towards the end of next week.
 .sp .8v
 .page 71
 .LP
-If you look carefully at the previous example, you will probably notice
-that we entered the two formatting requests on blank lines in the
-letter.
+If you look carefully at the previous example,
+you may notice that we entered the two formatting requests
+on blank lines in the letter.
 If we were to format the letter now, here is what we'd get:
 .sp .7v
 .SS
@@ -1205,22 +1301,27 @@ Dear Mr. Fust:
 .SE
 .sp .8v
 .LP
-As you may notice, we've lost the blank lines that used to separate the
-date from the address block, and the address block from the salutation.
-Lines containing formatting requests do not result in any space being
-output (unless they are spacing requests), so you should be sure not to
-inadvertently replace blank lines when entering formatting codes.
+As you may notice, we've lost the blank lines
+that used to separate the date from the address block,
+and the address block from the salutation.
+Lines containing formatting requests
+do not result in any space being output
+(unless they are spacing requests),
+so avoid inadvertently replacing blank lines
+when entering formatting codes.
+.
 .Ah "Controlling Justification"
 .ix %begin [.ad] request %key ad request
 .ix %begin [troff] formatter, [.ad] request %key troff formatter, [.ad] request
 .ix %begin justification, types~of
 .LP
-Justification can be controlled separately from filling by the
+You can control justification separately from filling
+by using the
 .CW \&.ad
 (\c
 .I adjust )
-request.
-(However, filling must be on for justification to work at all).
+request
+(filling must be on for justification to work at all).
 You can adjust text at either margin or at both margins.
 .PP
 Unlike the
@@ -1243,14 +1344,15 @@ c##center filled line between margins
 .TE
 .RE
 .PP
-There is another related request,
+There is a related request,
 .CW \&.na
 (\c
 .I "no adjust" ).
 .ix [.na] request %key na request
 .ix [troff] formatter, [.na] request %key troff formatter, [.na] request
-Because the text entered in a file is usually left justified to begin
-with, turning justification off entirely with
+Because the text entered in a file
+is usually left justified to begin with,
+turning justification off entirely with
 .CW \&.na
 produces similar results to
 .CW "\&.ad l"
@@ -1259,7 +1361,9 @@ in most cases.
 However, there is an important difference.
 Normally, if no argument is given to the
 .CW \.ad
-request, both margins will be adjusted.
+request,
+.CW troff
+adjusts both margins.
 That is,
 .CW \.ad
 is the same as
@@ -1278,7 +1382,7 @@ That is, the sequence:
 \&.ad
 .I "Some text"
 .Pe
-will adjust both margins in the third block of text.
+adjusts both margins in the third block of text.
 However, the sequence:
 .page 72
 .Ps
@@ -1289,7 +1393,7 @@ However, the sequence:
 \&.ad
 .I "Some text"
 .Pe
-will adjust only the right margin in the third block of text.
+adjusts only the right margin in the third block of text.
 .PP
 It's easy to see where you would use
 .CW "\.ad b"
@@ -1297,20 +1401,21 @@ or
 .CW "\.ad l" .
 Let's suppose that you would like a ragged margin for the body of your
 letter, to make it look more like it was prepared on a typewriter.
-Simply follow the
+Follow the
 .CW \.fi
 request we entered previously with
 .CW "\.ad l" .
 .PP
 Right-only justification may seem a little harder to find a use for.
-Occasionally, you've probably seen ragged-left copy in advertising, but
-that's about it.
-However, if you think for a moment, you'll realize that it is also a
-good way to get a single line over to the right margin.
+Occasionally, you've probably seen ragged-left copy in advertising,
+but that's about it.
+However, it is also a good way
+to get a single line over to the right margin.
 .PP
-For example, in our sample letter, instead of typing all those leading
-spaces before the date (and having it fail to come out flush with the
-margin anyway), we could enter the lines:
+For example, in our sample letter,
+instead of typing all those leading spaces
+before the date (and having it fail to come out flush
+with the margin anyway), we could enter the lines:
 .Ps
 \&.ad r
 April 1, 1987
@@ -1325,23 +1430,25 @@ and
 .CW troff
 collect input in a one-line buffer and only output the saved text when
 the line has been filled.
-There are some non-obvious consequences of this that will ripple all
-through your use of
+There are some non-obvious consequences of this
+that ripple all through your use of
 .CW nroff
 and
 .CW troff .
 If you issue a request that temporarily sets a formatting condition,
-then reset it before the line is output, your original setting may have
-no effect.
+then reset it before the line is output,
+your original setting may have no effect.
 .ft I
-The result will be controlled by the request that is in effect at the
-time the line is output, not at the time that it is first collected in
-the line buffer.
+The request that is in effect when
+.CW troff
+outputs the line controls the result,
+not the request in effect when
+.CW troff first collects text in the line buffer.
 .ft R
 .PP
 .ix breaks, importance~of
-Certain requests cause implicit line breaks (the equivalent of carriage
-returns on a typewriter) in the output, but others do not.
+Certain requests cause implicit line breaks
+in the output, but others do not.
 The
 .CW \.ad
 request does not cause a break.
@@ -1352,7 +1459,7 @@ April 1, 1987
 \&.ad b
 Mr. John Fust
 .Pe
-will result in the following output:
+results in the following output:
 .sp .7v
 .SS
 .Ps
@@ -1376,30 +1483,30 @@ Mr. John Fust
 .page 73
 To make sure that you get the desired result from a temporary setting
 like this, be sure to follow the line to be affected with a condition
-that will cause a break.*
+that causes a break.\**
 .ix breaks, [troff]~requests~which~cause %key breaks, troff requests~which~cause
 .FS
-*The following requests cause a break:
+The following requests cause a break:
 .br
 .ti 3n
 \&.bp\0.br\0.ce\0.fi\0.nf\0.sp\0.in\0.ti
 .br
-All other requests can be interspersed with text without causing a
-break.
-In addition, as discussed later, even these requests can be introduced
-with a spec�al \(lqno break\(rq control character (\c
+You can intersperse all other requests with text
+without causing a break.
+In addition, as discussed later,
+even these requests can be introduced
+with a special \(lqno break\(rq control character (\c
 .CW '
 .ix breaks, no-break control~character
 .ix no-break control~character
 instead of
 .CW \&. )
-so
-that they too will not cause a break.
+so that they too do not cause a break.
 .FE
-For instance, in the previous example, you would probably follow the
-date with a blank line or an
+For instance, in the previous example,
+you would probably follow the date with a blank line or an
 .CW \.sp
-request, either of which will normally cause a break.
+request, either of which cause a break.
 .ix [.sp] request %key sp request
 .ix [troff] formatter, [.sp] request %key troff formatter, [.sp] request
 If you don't, you should put in an explicit break, as follows:
@@ -1410,39 +1517,44 @@ April 1, 1987
 \&.ad b
 Mr. John Fust
 .Pe
-A final point about justification: the formatter adjusts a line by
-widening the blank space between words.
-If you do not want the space between two words adjusted or split across
-output lines, precede the space with a backslash.
+A final point about justification:
+the formatter adjusts a line
+by widening the blank space between words.
+If you do not want the space between two words
+adjusted or split across output lines,
+precede the space with a backslash.
 This is called an
 .I "unpaddable space" .
 .ix unpaddable space
 .PP
-There are many obscure applications for unpaddable spaces; we will
-mention them as appropriate.
+There are many obscure applications for unpaddable spaces;
+we mention them later as appropriate.
 Here's a simple one that may come in handy:
 .CW nroff
 and
 .CW troff
-normally add two blank spaces after a period, question mark, or
-exclamation point.
-The formatter can't distinguish between the end of a sentence and an
-abbreviation, so if you find the extra spacing unaesthetic, you might
-follow an abbreviation like Mr. with an unpaddable space:\0
+normally add two blank spaces after
+a period, question mark, or exclamation point.
+The formatter can't distinguish between the end of a sentence
+and an abbreviation, so if you find the extra spacing unaesthetic,
+you might follow an abbreviation like Mr.\e with an unpaddable space:
 .CW "Mr.\e John Fust" .
 .ix %end [.ad] request %key ad request
 .ix %end [troff] formatter, [.ad] request %key troff formatter, [.ad] request
 .ix %end justification, types~of
+.
 .Ah "Hyphenation"
 .ix %begin [troff] formatter, hyphenation %key troff formatter, hyphenation
 .LP
-As pointed out previously, hyphenation is closely related to filling and
-justification, in that it gives
+As pointed out previously,
+hyphenation is closely related to filling and justification,
+in that it gives
 .CW nroff
 and
 .CW troff
-some additional power to produce filled and justified lines without
-large gaps.
+some additional power
+to produce filled and justified lines
+without large gaps.
 .ix justification
 .PP
 The
@@ -1452,14 +1564,16 @@ and
 programs perform hyphenation according to a general set of rules.
 .ix hyphenation, rules~for
 Occasionally, you need to control the hyphenation of particular words.
-You can specify either that a word not be hyphenated or that it be
-hyphenated in a certain way.
+You can specify either that a word not be hyphenated
+or that it be hyphenated in a certain way.
 You can also turn hyphenation off entirely.
+.
 .Bh "Specifying Hyphenation for Individual Words"
 .ix %begin [.hw] request %key hw request
 .ix %begin [troff] formatter, [.hw] request %key troff formatter, [.hw] request
 .LP
-There are two ways to specify that a word be hyphenated a specific way:
+There are two ways to specify
+that a word be hyphenated a specific way:
 with the
 .CW \.hw
 request and with the special hyphenation indicator
@@ -1469,11 +1583,20 @@ The
 .CW \.hw
 (\c
 .I "hyphenate word" )
-request allows you to specify a small list of words that should be
-hyphenated a specific way.
-The space available for the word list is small (about 128 characters),
-so you should use this request only for words you use frequently, and
-that
+request allows you to specify
+a small list of words
+that should be hyphenated a specific way.
+The space available for the word list is small (about 128 characters)\**,
+.FS
+.CW Groff
+removes this restriction;
+you can create much longer word lists.
+Heirloom
+.CW troff
+retains the original small list.
+.FE
+so you should use this request only for words you use frequently,
+and that
 .CW nroff
 and
 .CW troff
@@ -1482,9 +1605,10 @@ hyphenate badly.
 .PP
 To use
 .CW \.hw ,
-simply specify the word or words that constitute the exception list,
-typing a hyphen at the point or points in the word where you would like
-it to be hyphenated.
+simply specify the word or words
+that constitute the exception list,
+typing a hyphen at the point or points in the word
+where you would want it hyphenated.
 .Ps
 \&.hw hy-phen-a-tion
 .Pe
@@ -1494,34 +1618,38 @@ request, or you can issue multiple
 .CW \.hw
 requests as you need them.
 .PP
-However, if it is just a matter of making sure that a particular
-instance of a word is hyphenated the way you want, you can use the
-hyphenation indication character sequence
+However, if you just want to make sure
+that a particular instance of a word is hyphenated the way you want,
+you can use the hyphenation indication character sequence
 .CW \e% .
-As you type the word in your text, simply type the two characters
+As you type the word in your text, type the two characters
 .CW \e%
-at
-each acceptable hyphenation point, or at the front of the word if you
-don't want the word to be hyphenated at all:
+at each acceptable hyphenation point,
+or at the front of the word
+if you don't want the word to be hyphenated at all:
 .Ps
 \e%acknowledge     \fRthe word\fP \f[I]acknowledge\fP \fRwill not be hyphenated\fP
 ac\e%know\e%ledge   \fRthe word\fP \f[I]acknowledge\fP \fRcan be hyphenated only\fP
                   \fRat the specified points\fP
 .Pe
-This character sequence is the first instance we have seen of a
-formatting request that does not consist of a request name following a
-period in column one.
-We will see many more of these later.
-This sequence is embedded right in the text but does not print out.
+This character sequence
+is the first instance we have seen
+of a formatting request
+that does not consist of a request name
+following a period in column one.
+We show you many more of these later.
+This sequence is embedded in the text,
+but does not print out.
 .PP
 In general,
 .CW nroff
 and
 .CW troff
 do a reasonable job with hyphenation.
-You will need to set specific hyphenation points only in rare instances.
-In general, you shouldn't even worry about hyphenation points, unless
-you notice a bad break.
+You should set specific hyphenation points
+only in rare instances.
+In general, you shouldn't worry about hyphenation points,
+unless you notice a bad break.
 Then use either
 .CW \.hw
 or
@@ -1532,9 +1660,9 @@ to correct it.
 .PP
 .ix [hyphen] command %key hyphen command
 .ix hyphenation, checking~for correctness
-The UNIX
+Use the UNIX
 .CW hyphen
-command can be used to print out all of the hyphenation points in a file
+command to print out all of the hyphenation points in a file
 formatted with
 .CW nroff
 or
@@ -1548,35 +1676,26 @@ $ \f[CB]troff\fP \f[I]options\fP \f[CB]-a\fP \f[I]files\fP \f[CB]| hyphen\fP
 .Pe
 If your system doesn't have the
 .CW hyphen
-command, you can use
-.CW grep
-instead:
-.Ps
-$ \f[CB]nroff\fP \f[I]options files\fP \f[CB]| grep '-$'\fP
-.Pe
-(The single quotation marks are important because they keep
-.CW grep
-from interpreting the
-.CW -
-as the beginning of an option).
-.\" This is incorrect - they do no such thing, as the shell expands the
-.\" single quotation marks before passing the -$ argument to grep.
-.\" grep -e '-$' should be used instead; the single quotation marks are
-.\" still valuable to protect the $ metacharacter. -- Colin
+command, download a working copy
+from the
+.pdfhref W -D https://github.com/larrykollar/Writers-ScriptBench \
+Writer's ScriptBench site.
+.
 .Bh "Turning Hyphenation Off and On"
 .LP
-If you don't want any hyphenation, use the
+If you don't want hyphenation, use the
 .CW \.nh
 (\c
 .I "no hyphenation" )
 request.
-Even if you do this, though, you should be aware that words already
-containing embedded hyphens, em dashes (\(em), or hyphen indication
-characters (\c
+Even if you do this, though,
+you should be aware that words already containing embedded hyphens,
+em dashes (\(em), or hyphen indication characters (\c
 .CW \e% )
-will still be subject to hyphenation.
+are still subject to hyphenation.
 .PP
-After you've turned hyphenation off, you can turn it back on with the
+After you've turned hyphenation off,
+you can turn it back on with the
 .CW \.hy
 (\c
 .I hyphenate )
@@ -1585,7 +1704,8 @@ request.
 .ix %begin [.hy] request %key hy request
 .ix %begin [troff] formatter, [.hy] request %key troff formatter, [.hy] request
 This request has a few twists.
-Not only does it allow you to turn hyphenation on, it also allows you to
+Not only does it allow you to turn hyphenation on,
+it also allows you to
 adjust the hyphenation rules that
 .CW nroff
 and
@@ -1616,33 +1736,36 @@ For example,
 .CW "\.hy 4"
 plus
 .CW "\.hy 8" )
-will keep
+keep
 .CW nroff
 and
 .CW troff
 from breaking short syllables at the beginning or end of words, and
 .CW "\.hy 14"
-will put all three hyphenation restrictions into effect.
+puts all three hyphenation restrictions into effect.
 .ix %end [.hy] request %key hy request
 .ix %end [troff] formatter, [.hy] request %key troff formatter, [.hy] request
 .ix %end [troff] formatter, hyphenation %key troff formatter, hyphenation
+.
 .Ah "Page Layout"
 .ix [troff] formatter, page~layout %key troff formatter, page layout
 .LP
-Apart from the adjusted address block, the biggest formatting drawback
-that you probably noticed when we formatted the sample letter is that
-there was no left or top margin.
-Furthermore, though it is not apparent from our one-page example, there
-is no bottom margin either.
-If there were enough text in the input file to run onto a second page,
+Apart from the adjusted address block,
+the biggest formatting drawback
+that you probably noticed when we formatted the sample letter
+is that it has no left or top margin.
+Although our one-page example does not make it clear,
+it has no bottom margin either.
+If there were enough text in the input file
+to run onto a second page,
 you would see that the text ran continuously across the page boundary.
 .PP
-In normal use, these layout problems would be handled automatically by
-either the
+In normal use, the
 .CW ms
 or
 .CW mm
-macro packages (described later).
+macro packages (described later)
+automatically handle these layout problems.
 Here, though, we want to understand how the formatter itself works.
 .PP
 Let's continue our investigation of the
@@ -1650,18 +1773,19 @@ Let's continue our investigation of the
 and
 .CW troff
 markup language with some basic page layout commands.
-These commands allow you to affect the placement of text on the page.
+These commands let you affect the placement of text on the page.
 Some of them (those whose descriptions begin with the word
 .I set )
-specify conditions that will remain in effect until they are explicitly
-changed by another instance of the same request.
+specify conditions that remain in effect
+until another instance of the same request explicitly
+changes them.
 Others have a one-time effect.
 .PP
-As shown in Table 4-2, there are two groups of page layout commands,
-those that affect horizontal placement of text on the page and those
-that affect vertical placement.
-A moment's glance at these requests will tell you that, before anything
-else, we need to talk about units.
+As shown in Table 4-2, one group of page layout commands
+affect horizontal placement of text on the page and
+another group affects vertical placement.
+A moment's glance at these requests show you that,
+before anything else, we need to talk about units.
 .KS
 .Ts "Layout Commands"
 .TS
@@ -1681,6 +1805,7 @@ Vertical Layout#\f[CW].pl\fP \f[I]n\fP#Set the page length to \f[I]n\fP
 .TE
 .Te
 .KE
+.
 .Bh "Units of Measure"
 .ix %begin [troff] formatter, units~of measure %key troff formatter, units of measure
 .ix [nroff] formatter, units~of measure %key nroff formatter, units of measure
@@ -1701,33 +1826,35 @@ The
 .CW nroff
 program has constant, device-dependent line spacing;
 .CW troff
-has variable line spacing, which is generally proportional to the point
-size.
-However, both programs do allow you to use a variety of other units as
-well.
-You can specify spacing in terms of inches and centimeters, as well as
-the standard
-printer's measures
+has variable line spacing,
+which is generally proportional to the point size.
+However, both programs do allow you
+to use a variety of other units as well.
+You can specify spacing in terms of inches and centimeters,
+as well as the standard printer's measures
 .I picas
 and
 .I points .
 .ix pica (defined)
 .ix point~size
-(A pica is 1/6 of an inch; a point is about 1/72 of an inch.
-These units were originally developed to measure the size of type, and
-the relationship between these two units is not as arbitrary as it might
-seem.
-A standard 12-point type is 1 pica high).
+A pica is 1/6 of an inch; a point is about 1/72 of an inch.
+These units were originally developed to measure the size of type,
+and the relationship between these two units
+is not as arbitrary as it might seem.
+A standard 12-point type is 1 pica high.
 .PP
-Horizontal measures, such as the depth of an indent, can also be
-specified using any of these measures, as well as the printer's measures
+You can specify horizontal measures,
+such as the depth of an indent,
+using any of these measures,
+as well as the printer's measures
 .I ems
 .ix em (defined)
 .ix [troff] formatter, horizontal spacing %key troff formatter, horizontal spacing
 and
 .I ens .
 .ix en (defined)
-These are relative measures, originally based on the size of the letters
+These are relative measures,
+originally based on the size of the letters
 .I m
 and
 .I n
@@ -1738,25 +1865,28 @@ There is also a relationship between these units and points and picas.
 An em is always equivalent in width to the height of the character
 specified by the point size.
 In other words, an em in a 12-point type is 12 points wide.
-An en is always half the size of an em, or half of the current point
-size.
-The advantage of using these units is that they are relative to the size
+An en is always half the size of an em,
+or half of the current point size.
+The advantage of using these units
+is that they are relative to the size
 of the type being used.
 This is unimportant in
 .CW nroff ,
 but using these units in
 .CW troff
-gives increased flexibility to change the appearance of the document
+gives increased flexibility
+to change the appearance of the document
 without recoding.
 .PP
 The
 .CW nroff
 and
 .CW troff
-programs measure not in any of these units, but in device-dependent
-basic units.
-Any measures you specify are converted to basic units before they are
-used.
+programs measure not in any of these units,
+but in device-dependent basic units.
+Any measures you specify
+are converted to basic units
+before the formatters use them.
 Typically,
 .CW nroff
 .ix [nroff] formatter, device units %key nroff formatter, device units
@@ -1775,32 +1905,45 @@ published by AT&T as part of the
 \(em\c
 the
 .CW nroff
-units were chosen as \(lqthe least common multiple of the horizontal and
-vertical resolutions of various typewriter-like output devices.\(rq
+units were chosen as
+\(lqthe least common multiple
+of the horizontal and vertical resolutions
+of various typewriter-like output devices.\(rq
 The units for
 .CW otroff
-were based on the C/A/T typesetter (the device for which
+were based on the C/A/T typesetter
+(the device for which
 .ix C/A/T typesetter
 .CW troff
-was originally designed), which could move in horizontal increments of
-1/432 of an inch and in vertical increments of exactly one-third that,
+was originally designed),
+which could move in horizontal increments of 1/432 of an inch
+and in vertical increments of exactly one-third that,
 or 1/144 inch.
 Units for
 .CW ditroff
 depend on the resolution of the output device.
-For example, units for a 300 dot-per-inch (dpi) laser printer will be
-1/300 of an inch in either a vertical or a horizontal direction.
+For example, units for a 300 dot-per-inch (dpi) laser printer
+are 1/300 of an inch in either a vertical or a horizontal direction.
+Each device (and formatter)
+has its own resolution:
+.CW groff 's
+PostScript and PDF devices have a resolution of 1/72000 inch
+(or 1/1000 point).
+Plan9-based
+.CW troff s
+usually provide 1/720 inch (1/10 point)
+for PostScript output.
 See
 .pdfhref L -D AppendixD -- Appendix D
 for more information on
-.CW ditroff
+.CW troff
 device units.
 .PP
 You don't need to remember the details of all these measures now.
-You can generally use the units that are most familiar to you, and we'll
-come back to the others when we need them.
+You can generally use the units that are most familiar to you,
+and we'll come back to the others when we need them.
 .PP
-To specify units, you simply need to add the appropriate scale indicator
+To specify units, add the appropriate scale indicator
 from Table 4-3 to the numeric value you supply to a formatting request.
 For example, to space down 3 inches rather than 3 lines, enter the
 request:
@@ -1812,7 +1955,7 @@ Before the specified value is used,
 .CW nroff
 and
 .CW troff
-will round the value to the nearest number of device units.
+round the value to the nearest number of device units.
 .page 77
 .LP
 .Ts "Units of Measure"
@@ -1829,15 +1972,15 @@ p#Points
 P#Picas
 u#Device Units
 v#Vertical spaces (lines)
-none#Default
+none#Default for request (see below)
 .TE
 .Te
 .PP
 .ix [troff] formatter, numeric expressions %key troff formatter, numeric expressions
-In fact, you can use any reasonable numeric expression with any request
+You can use any reasonable numeric expression with any request
 that expects a numeric argument.
-However, when using arithmetic expressions, you have to be careful about
-what units you specify.
+However, when using arithmetic expressions,
+be careful about what units you specify.
 .ix [troff] formatter, default units %key troff formatter, default units
 All of the horizontally oriented requests\c
 \(em\c
@@ -1863,8 +2006,7 @@ and
 .CW \.vs ,
 which assume points by default\c
 \(em\c
-but these are not really motion
-requests anyway.
+but these are not really motion requests anyway.
 .PP
 As a result, if you make a request like:
 .Ps
@@ -1893,15 +2035,17 @@ like this:
 \&.ll 7i/2u
 .Pe
 You could easily divide 7 by 2 yourself and simply specify 3.5i.
-The point of this example is that when you are doing arithmetic\c
+The point of this example
+is that when you are doing arithmetic\c
 \(em\c
-usually with values stored in variables called number registers (more on
-these later)\c
+usually with values stored
+in variables called number registers
+(more on these later)\c
 \(em\c
-you will need to pay attention to the interaction
-between units.
-Furthermore, because fractional device units are always rounded down,
-you should avoid expressions like
+you need to pay attention
+to the interactionv between units.
+For example, because fractional device units are always rounded down,
+avoid expressions like
 .CW 7i/2.5u
 because this is equivalent to
 .CW 7i/2u .
@@ -1920,8 +2064,9 @@ For example:
 .Ps
 \&.ll -.5i
 .Pe
-will subtract \(12 inch from the current line length, whatever it is.
+subtracts \(12 inch from the current line length, whatever it is.
 .ix %end [troff] formatter, units~of measure %key troff formatter, units of measure
+.
 .Bh "Setting Margins"
 .LP
 In
@@ -1929,11 +2074,11 @@ In
 and
 .CW troff ,
 margins are set by the combination of the
-.CW \.po
+.CW \&.po
 (\c
 .I "page offset" )
 and
-.CW \.ll
+.CW \&.ll
 (\c
 .I "line length" )
 requests.
@@ -1941,12 +2086,12 @@ requests.
 .ix [.po] request %key po request
 .ix [troff] formatter, [.po] request %key troff formatter, [.po] request
 The
-.CW \.po
+.CW \&.po
 request defines the left margin.
 The
-.CW \.ll
-request defines how long each line will be after filling, and so
-implicitly defines the right margin:
+.CW \&.ll
+request defines how long each line is after filling,
+and thus defines the right margin:
 .LP
 .ix [.ll] request %key ll request
 .ix [troff] formatter, [.ll] request %key troff formatter, [.ll] request
@@ -1959,26 +2104,26 @@ po#ll#right
 .LP
 The
 .CW nroff
-program's default line length of 6.5 inches is fairly standard for an
-8\(12-by-11 page\c
+program's default line length of 6.5 inches
+is fairly standard for US letter paper (8\(12-by-11 inches)\c
 \(em\c
 it allows for 1-inch margins on either side.
 .ix [nroff] formatter, default line~length %key nroff formatter, default line length
 .PP
 Assuming that we'd like 1\(14-inch margins on either side of the page,
-we would issue the following requests:
+we would use the following requests:
 .Ps
 \&.ll 6i
 \&.po 1.25i
 .Pe
-This will give us 1\(14 inches for both the right and left margins.
+This gives us 1\(14 inches for both the right and left margins.
 The
 .CW \.po
 request specifies a left margin, or page offset, of 1\(14 inches.
-When the 6-inch line length is added to this, it will leave a similar
+When the 6-inch line length is added to this, it leaves a similar
 margin on the rlght side of the page.
 .PP
-Let's take a look at how our sample letter will format now.
+Let's take a look at how our sample letter formats now.
 One paragraph of the output should give you the idea.
 .sp .7v
 .SS
@@ -2001,11 +2146,16 @@ product demo and other materials that you sent me.
 As we saw earlier,
 .CW nroff
 assumes a default page offset of 0.
-Either you or the macro package you are using must set the page offset.
+Either you or the macro package you are using
+must set the page offset.
 In
 .CW troff ,
-though, there is a default page offset of 26/27 inch, so you can get
-away without setting this value.
+though, there is a default page offset of 26/27 inch,
+so you can get away without setting this value
+(\c
+.CW groff
+defaults to a full 1\~inch margin).
+.\" XXX Check this vs. heirloom and others…
 .PP
 (Keep in mind that all
 .CW nroff
@@ -2013,19 +2163,21 @@ output examples are actually simulated with
 .CW troff ,
 and are reduced to fit on our own 5-inch wide printed page.
 As a result, the widths shown in our example output are not exact,
-but are suggestive of what the actual result would be on an 8\(12-by-11
+but suggest what the actual result would be on an 8\(12-by-11
 inch page).
+.
 .Bh "Setting Indents"
 .LP
 .ix %begin hanging indents
 .ix %begin indents
 .page 79
-In addition to the basic page offset, or left margin, you may want to
-set an indent, either for a single line or an entire block of text.
+In addition to the basic page offset, or left margin,
+you may want to set an indent,
+either for a single line or an entire block of text.
 You may also want to center one or more lines of text.
 .PP
-To do a single-line indent, as is commonly used to introduce a
-paragraph, use the
+To do a single-line indent,
+as is commonly used to introduce a paragraph, use the
 .CW \.ti
 (\c
 .I "temporary indent" )

@@ -174,9 +174,10 @@ to supply additional capabilities.
 Chapter 2 gives a brief review of
 UNIX fundamentals.
 We assume
-you are already somewhat acquainted with UNIX,
-but we included this information
-to make sure that you are familiar with basic
+you are already somewhat acquainted with
+UNIX,
+but we included
+this information to make sure that you are familiar with basic
 concepts that we will be relying on later in the book.
 .PP
 Chapter 3 introduces the
@@ -192,8 +193,7 @@ system and with almost every type of terminal.
 If you learn
 .CW vi ,
 you can be confident that your text editing skills
-will be completely transferable
-when you sit down at someone
+will be completely transferable when you sit down at someone
 else's terminal or use someone else's system.
 .PP
 Chapter 4 introduces the
@@ -256,8 +256,8 @@ we believe that the reader wants to go beyond the basics.
 As a result, Chapter 4 introduces additional
 basic requests that the casual user might not need.
 However,
-your understanding of what is going on should be considerably
-enhanced.
+your understanding of what is going on
+should be considerably enhanced.
 .PP
 There are two principal macro packages in use today,
 .CW ms
@@ -268,30 +268,14 @@ and
 and
 .CW troff
 used to invoke them).
-Both macro packages were available with
-most
-UNIX
-systems; now, however,
-.CW ms
-is chiefly available on
-UNIX
-systems derived from Berkeley 4.\c
-.I x
-BSD, and
-.CW mm
-is chiefly
-available on
-UNIX
-systems derived from AT&T System V.
-If you
-are lucky enough to have both macro packages on your system,
-you can choose which one you want to learn.
-Otherwise, you
-should read either Chapter 5,
+Both macro packages are available with
+most UNIX systems.
+You can choose which one you want to learn.
+Read Chapter 5,
 .I "The ms Macros" ,
-or Chapter 6,
+and Chapter 6,
 .I "The mm Macros" ,
-depending on which version you have available.
+to determine which one you prefer.
 .page xiii
 .PP
 Chapter 7 returns to
@@ -672,9 +656,8 @@ Stewart Russell, and
 Colin Watson.
 Jon Snader (no stranger to writing books with
 .CW troff )
-recreated a version of the macros
-used for the original book.
-Michael Hobgood and Andreas K�h�ri have done most
+recreated a version of the macros used for the original book.
+Michael Hobgood and Andreas Kähäri have done most
 of the proofreading.
 While we caught and corrected a few typos, we acknowledge that
 we may have introduced others\[em]thus
