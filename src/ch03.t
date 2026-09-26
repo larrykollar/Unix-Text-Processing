@@ -1,8 +1,8 @@
 
 .ig
 	ch03.t
-	Typed by: Heinz-J�rgen Oertel
-	Marked up by: Heinz-J�rgen Oertel
+	Typed by: Heinz-Jürgen Oertel
+	Marked up by: Heinz-Jürgen Oertel
 	Proofed on: 3 Oct 2002
 ..
 .so utp.mac
@@ -10,40 +10,40 @@
 .chapter 3 "Learning  \f[CB]vi\fP" "Chapter" 1
 .ix %begin [vi] editor %key vi editor
 .LP
-UNIX has a number of editors that can process the contents of readable files,
+UNIX provides several editors that can process the contents of readable files,
 whether those files contain data, source code, or text.
-There are line editors,
-such as
+It provides line editors, such as
 .CW ed
 and
 .CW ex ,
-which display a line of the file on the screen,
-and there are screen editors,
-such as
+to display a line of the file on the screen;
+and provides screen editors, such as
 .CW vi
 and
 .CW emacs ,
 .ix [emacs] editor %key emacs editor
-which display a part of the file on your terminal screen.
+to display a part of the file on your terminal screen.
 .PP
 The most useful standard text editor on your system is
-.CW vi .
+.CW vi ,
+or its replacement,
+.CW Vim .
 Unlike
-.CW emacs,
-it is available in nearly identical form
-on almost every UNIX system,
-thus providing a kind of text editing
+.CW emacs ,
+almost every UNIX system has
+.CW Vim
+installed by default,
+providing a kind of text editing
 .I "lingua franca" .
-The same might be said of
+The same can be said of
 .CW ed
 and
 .CW ex ,
 but screen editors are generally much easier to use.
-With a screen editor you can scroll the page,
+With a screen editor, you can scroll the page,
 move the cursor, delete lines, insert characters, and more,
-while seeing the results of your edits as you make them.
-Screen editors are very popular
-because they allow you to make changes as you read a file,
+seeing the results of your edits as you make them.
+Using a screen editor, you can make changes as you read a file,
 much as you would edit a printed copy,
 only faster.
 .PP
@@ -53,32 +53,29 @@ looks unintuitive and cumbersome\c
 \(em\&instead of letting you type normally
 and use special control keys for word-processing functions,
 it uses all of the regular keyboard keys for issuing commands.
-You must be in a special
-.I "insert mode
+You must be in
+.I "insert mode"
 .ix [vi] editor, insert mode %key vi editor, insert mode
-before you can type.
-In addition, there seem to be
-.I "so many
-commands.
+before you can enter text.
+In addition,
+.CW vi
+has many commands.
 .PP
 You can't learn
 .CW vi
-by memorizing every single
-.CW vi
-command.
+by memorizing every single command.
 Begin by learning some basic commands.
-As you do, be aware of the patterns of usage
+As you do, be aware of the patterns
 that commands have in common.
-Be on the lookout for new ways to perform tasks,
+Watch for new ways to perform tasks,
 experimenting with new commands and combinations of commands.
 .PP
 As you become more familiar with
 .CW vi ,
-you will find that you need fewer keystrokes
-to tell
+you find that you need fewer keystrokes to tell
 .CW vi
 what to do.
-You will learn shortcuts that transfer more and more
+You learn shortcuts that transfer more and more
 of the editing work to the computer\c
 \(em\&where it belongs.
 Not as much memorization is required
@@ -86,18 +83,20 @@ as first appears from a list of
 .CW vi
 commands.
 Like any skill,
-the more editing you do, the more you know about it
+the more editing you do,
+the more you know about it
 and the more you can accomplish.
 .PP
-This chapter has three sections,
-and each one corresponds to a set of material about
+This chapter has three sections;
+each section corresponds to a set of material about
 .CW vi
 that you should be able to tackle in a single session.
 After you have finished each session,
 put aside the book for a while and do some experimenting.
 When you feel comfortable with what you have learned,
 continue to the next session.
-.Ah "Session 1: Basic Commands
+.
+.Ah "Session 1: Basic Commands"
 .LP
 The first session contains the basic knowledge
 you need to operate the
@@ -105,8 +104,7 @@ you need to operate the
 editor.
 After a general description of
 .CW vi ,
-you are shown some simple operations.
-You will learn how to
+we show you some simple operations, including how to
 .RS
 .Ls B
 .Li
@@ -138,6 +136,7 @@ When you save your edits,
 copies the buffer into a permanent file,
 overwriting the contents of
 the old file.
+.
 .Ah "Opening a File
 .ix %begin [vi] editor, opening~a file %key vi editor, opening a file
 .LP
@@ -145,7 +144,7 @@ The syntax for the
 .CW vi
 command is:
 .Ps
-vi [\fIfilename\fP]
+\f[CB]vi\fP [\fIfilename\fP]
 .Pe
 where
 .I filename
@@ -153,23 +152,31 @@ is the name of either
 an existing file or a new file.
 If you don't specify a filename,
 .CW vi
-will open an unnamed buffer,
-and ask you to name it before you can save any edits you have made.
+opens an unnamed buffer,
+and asks you to name it before you can save any edits you have made.
 Press
 .I RETURN
 to execute the command.
 .PP
 A filename must be unique inside its directory.
 .ix files, naming restrictions
-On AT&T (System V) UNIX systems,
-it cannot exceed 14 characters.
-(Berkeley UNIX systems allow longer filenames).
+On modern UNIX systems,
+a filename can be 255 bytes long,
+but you should keep your filenames much shorter\**.
+.FS
+Given UTF-8 and other multibyte encodings,
+the maximum filename length could be as small as 64 characters.
+A full pathname can be up to 4,096 bytes long,
+which may be an actual limit in practice.
+.FE
+.PP
 A filename can include any ASCII character
 except /,
 which is reserved as the separator
 between files and directories in a pathname.
-You can even include spaces in a filename
-by \(lqescaping\(rq them with a backslash.
+You can include spaces in a filename
+by \(lqescaping\(rq them with a backslash
+or enclosing the filename in quotes.
 In practice, though,
 filenames consist of any combination of uppercase and lowercase letters,
 numbers, and the characters
@@ -223,14 +230,14 @@ not even blank lines.
 .sp 1.2v
 .LP 0
 If you specify the name of a file that already exists,
-its contents will be displayed on the screen.
+.CW vi
+displays its contents on the screen.
 For example:
 .Ps
 $ \f[CB]vi letter\fP
 .Pe
-might bring a copy of the existing file
-.CW letter
-to the screen.
+might display a copy of the existing file
+.CW letter .
 .SS
 .nf
 .ft CW
@@ -274,7 +281,8 @@ or:
 Visual needs addressable cursor or upline capability
 .Pe
 In both cases,
-there is a problem identifying the type of terminal you are using.
+.CW vi
+cannot identify the type of terminal you are using.
 You can quit the editing session immediately by typing
 .CW :q .
 .PP
@@ -288,14 +296,15 @@ ask your system administrator
 or an experienced user
 to help you set up your terminal.
 If you know your terminal type (\c
-.CW wy50
-for instance),
+.CW xterm-256color
+is a common type on GUI),
 you can set your
 .CW TERM
 environment variable with the following command:
 .Ps
-TERM=wy50; export TERM
+TERM=xterm-256color; export TERM
 .Pe
+.
 .Bh "\f(CBvi\fP Commands
 .LP
 The
@@ -304,8 +313,7 @@ editor has two
 .I modes :
 command mode and insert mode.
 .ix [vi] editor, command mode %key vi editor, command mode
-Unlike many word
-processors,
+Unlike many word processors,
 .CW vi 's
 command mode is the initial or
 .I default
@@ -326,8 +334,8 @@ For example:
 Using letters as commands, you can edit a file quickly.
 You don't have to
 memorize banks of function keys
-or stretch your fingers to reach awkward combinations
-of keys.
+or stretch your fingers to reach
+awkward combinations of keys.
 .PP
 In general,
 .ix [vi] editor, command~syntax %key vi editor, command syntax
@@ -338,7 +346,6 @@ commands
 .Li
 are case-sensitive
 (uppercase and lowercase keystrokes mean different things;
-e.g.,
 .I I
 is different from
 .I i );
@@ -351,29 +358,29 @@ after the command.
 .Le
 .RE
 .PP
-There is also a special group of commands
-that echo on the bottom line of the screen.
+A special group of commands
+echo on the bottom line of the screen.
 Bottom-line commands are indicated by special symbols.
 The slash (\c
 .CW / )
 and the question mark (\c
 .CW ? )
 begin search commands,
-which are discussed in session 2.
+discussed in session 2.
 A colon (\c
 .CW : )
 indicates an
 .CW ex
 .ix [ex] editor, executing~from [vi] %key ex editor, executing from [vi]
 command.
-You are introduced to one
+You should know about two
 .CW ex
-command
-(to quit a file without saving edits)
-in this chapter,
-and the
+commands\[em]\c
+one to quit a file without saving edits,
+and one to save a file and quit.
+We discuss the
 .CW ex
-line editor is discussed in detail in Chapter 7.
+line editor in detail in Chapter 7.
 .PP
 To tell
 .CW vi
@@ -385,15 +392,13 @@ but you can now type any text at the cursor.
 To tell
 .CW vi
 .ix [vi] editor, leaving insert~mode %key vi editor, leaving insert mode
-to stop inserting text,
-press
+to stop inserting text, press
 .I ESC
-and you will return to command mode.
+to return to command mode.
 .PP
 For example, suppose that you want to insert the word
 .I introduction .
-If you type
-the keystrokes
+If you type the keystrokes
 .CW iintroduction ,
 what appears on the screen is
 .Ps
@@ -409,8 +414,7 @@ until you press
 If you need to correct a mistake while in insert mode,
 backspace and type over the error.
 .PP
-While you are inserting text,
-press
+While inserting text, press
 .I RETURN
 to break the lines before the right margin.
 An autowrap option provides a carriage return automatically
@@ -425,7 +429,8 @@ Whenever
 .CW vi
 does not respond as you expect, press
 .I ESC .
-When you hear a beep, you are in command mode.
+If you hear a beep, you are in command mode.
+.
 .Bh "Saving a File
 .ix [vi] editor, saving~a file %key vi editor, saving a file
 .LP
@@ -451,7 +456,9 @@ first check that you are in command mode by pressing
 .I ESC ,
 and then give the write and save command,
 .CW ZZ .
-Your file is saved as a regular file.
+First,
+.CW vi
+saves your file.
 The result is:
 .Ps
 "letter"  [New file]  36 lines,  1331 characters
@@ -461,7 +468,7 @@ If you check the list of files in the directory,
 by typing
 .CW ls
 at the prompt,
-the new file is listed.
+it includes the new file in the listing.
 .Ps
 $ \f[CB]ls\fP
 ch01  ch02  letter
@@ -471,18 +478,17 @@ As an exercise,
 create a file called
 .CW letter
 and insert the text shown in Figure 3-1.
-When you have finished,
-type
+When you have finished, type
 .CW ZZ
 to save the file and return to the UNIX prompt.
-.Ah "Moving the Cursor
+.
+.Ah "Moving the Cursor"
 .ix [vi] editor, cursor~movement %key vi editor, cursor movement
 .ix cursor movement
 .LP
-Only a small percentage of time in an editing session
-may be spent adding new text in insert mode.
-Much of the time,
-you will be editing existing text.
+You may spend only a small percentage of time in an editing session
+adding new text in insert mode.
+More often, you edit existing text.
 .PP
 In command mode,
 you can position the cursor anywhere in the file.
@@ -490,8 +496,7 @@ You start all basic edits
 (changing, deleting, and copying text)
 by placing the cursor at the text
 that you want to change.
-Thus, you want to be able to quickly move the cursor to that
-place.
+Thus, you want to quickly move the cursor to that place.
 .Fs
 .Ps
                                          April 1, 1987
@@ -536,9 +541,8 @@ the end of next week.
 .Fe "A sample letter entered with \f[CB]vi\fP"
 .ix [vi] editor, cursor~movement %key vi editor, cursor movement
 .PP
-There are
-.CW vi
-commands to move
+.CW Vi
+has commands to move
 .RS
 .Ls B
 .Li
@@ -547,7 +551,10 @@ up, down, left, or right, one
 at a time;
 .Li
 forward or backward by
-.I "blocks of text"
+.I "elements of text"
+.\" I changed "blocks" to "elements" on the previous line.
+.\" In modern times, blocks mostly refers to paragraphs, list items, etc.
+.\" Words & sentences are text runs, not blocks. -- LK
 such as words, sentences, or paragraphs;
 .Li
 forward or backward through a file, one
@@ -564,7 +571,8 @@ you'll hear a beep and the cursor stops.
 You cannot move the cursor past the tildes (\c
 .CW \(ap )
 at the end of the file.
-.Bh "Single Movements
+.
+.Bh "Single Movements"
 .ix [vi] editor, moving cursor~by~single~lines %key vi editor, moving cursor by~single~lines
 The keys
 .CW h ,
@@ -572,7 +580,7 @@ The keys
 .CW k ,
 and
 .CW l ,
-right under your fingertips, will move the cursor:
+right under your fingertips, move the cursor:
 .ix [vi] editor, moving cursor~by~spaces %key vi editor, moving cursor by~spaces
 .RS
 \f(CWh\fP         left one space
@@ -592,7 +600,9 @@ or the
 and
 .I BACKSPACE
 keys,
-but they are out of the way and are not supported on all terminals.
+but they are out of the way
+and the arrow keys
+are not supported on all terminals.
 .PP
 You can also combine the
 .CW h ,
@@ -600,10 +610,10 @@ You can also combine the
 .CW k ,
 and
 .CW l
-keys with numeric arguments and
-other
+keys with numeric arguments and other
 .CW vi
 commands.
+.
 .Bh "Numeric Arguments
 .ix [vi] editor, numeric arguments~to commands %key vi editor, numeric arguments to commands
 .LP 0
@@ -646,6 +656,7 @@ gives you more options
 (and power)
 for each command.
 Keep it in mind as you are introduced to additional commands.
+.
 .Bh "Movement by Lines
 .ix [vi] editor, screen~lines~vs.~logical~lines %key vi editor, screen lines~vs.~logical~lines
 .LP 0
@@ -653,12 +664,6 @@ When you saved the file
 .CW letter,
 the editor displayed a message
 telling you how many lines were in that file.
-A
-.I line
-in the file is not necessarily the same length as a
-physical line
-(limited to 80 characters)
-that appears on the screen.
 A line is any text
 entered between carriage returns.
 If you type 200 characters before pressing
@@ -674,10 +679,8 @@ Two useful commands in line movement are:
 .br
 \f(CW$\fP			move to end of line
 .RE
-In the following file,
-the line numbers are shown.
-To get line numbers on your screen,
-enter
+The following example shows line numbers.
+To get line numbers on your screen, enter
 .CW ":set nu" .
 .ix [vi] editor, displaying line~numbers %key vi editor, displaying line numbers
 .Ps
@@ -695,13 +698,13 @@ with the cursor positioned on the
 .I d
 in the word
 .I delete ,
-the cursor would move to the period following the word
+the cursor moves to the period following the word
 .I them .
 .Ps
 1  With the screen editor you can scroll the page,
 2  move the cursor, delete lines, and insert characters,
    while seeing the results of edits as you make them\z_.
-3  Screen editors are very popular .
+3  Screen editors are very popular.
 .Pe
 .ig
 	NOTE:
@@ -721,7 +724,7 @@ the cursor would move to the period following the word
 If you enter
 .CW 0
 (zero),
-the cursor would move back to the letter
+the cursor moves back to the letter
 .I m
 in the word
 .I move ,
@@ -737,12 +740,13 @@ If you do not use the automatic wraparound option (\c
 .CW ":set wm=10" )
 in
 .CW vi ,
-you must break lines with carriage returns
+break lines with carriage returns
 to keep the lines of manageable length.
+.
 .Bh "Movement by Text Blocks
 .ix [vi] editor, moving cursor~by~text~blocks %key vi editor, moving cursor by~text~blocks
 .LP 0
-You can also move the cursor by blocks of text
+You can move the cursor by text elements
 (words, sentences, or paragraphs).
 .PP
 The command
@@ -757,13 +761,12 @@ commands:
 \zm_ove \zt_he \zc_ursor\z,_  \zd_elete \zl_ines\z,_ \za_nd \zi_nsert \zc_haracters\z,_
 .Pe
 You can also move forward one word at a time,
-ignoring symbols and punctuation
-marks,
+ignoring symbols and punctuation marks,
 using the command
 .CW W
 (note the uppercase
 .I W ).
-It causes the cursor to move to the first character
+It moves the cursor to the first character
 following a blank space.
 Cursor movement using
 .CW W
@@ -795,6 +798,7 @@ moves back five words,
 ignoring punctuation.
 Practice using the cursor movement commands,
 combining them with numeric multipliers.
+.
 .ix %begin [vi] editor, deleting single characters %key vi editor, deleting single characters
 .Ah "Simple Edits
 .ix [vi] editor, deleting text %key vi editor, deleting text
@@ -805,7 +809,7 @@ When you enter text in your file,
 it is rarely perfect.
 You find errors or want to improve a phrase.
 After you enter text,
-you have to be able to change it.
+you can change it.
 .PP
 What are the components of editing?
 You want to
@@ -823,12 +827,12 @@ letters and words
 You want to
 .I move
 text from one place to another part of your file.
-And on occasion,
-you want to
+And on occasion, you want to
 .I copy
 text to duplicate it in another part of your file.
 .PP
-There are four basic edit commands:
+.CW Vi
+has four basic edit commands:
 .CW i
 for
 .I insert
@@ -852,7 +856,8 @@ for
 (copy).
 Each type of edit is described in this section.
 Table 3-1 gives a few simple examples.
-.Ts "Basic Editing Commands
+.
+.Ts "Basic Editing Commands"
 .TS
 box, center;
 l l l l
@@ -868,12 +873,13 @@ To beginning of line	c0	d0	y0
 Single character	r	x	yl
 .TE
 .Te
-.Bh "Inserting New Text
+.
+.Bh "Inserting New Text"
 .LP 0
 You have already used the insert command
 to enter text into a new file.
-You also use
-the insert command while editing existing text
+You also use the insert command
+to edit existing text
 to add characters, words, and sentences.
 Suppose you have to insert
 .CW Today ,
@@ -928,15 +934,14 @@ as the new text is inserted.
 That is because we are showing
 .CW vi
 on an \(lqintelligent\(rq terminal,
-which can adjust the screen with each character you type.
+that can adjust the screen with each character you type.
 An insert on a \(lqdumb\(rq terminal
 (such as an
 .CW adm3a )
-will look different.
+looks different.
 The terminal itself cannot update the screen
 for each character typed
-(without a tremendous sacrifice of speed),
-so
+(without a tremendous sacrifice of speed), so
 .CW vi
 doesn't rewrite the screen
 until after you press
@@ -946,11 +951,11 @@ the dumb terminal appears to
 overwrite the existing text.
 When you press
 .I ESC ,
-the line is adjusted immediately so
-that the missing characters reappear.
+.CW vi
+immediately adjusts the line so
+the missing characters reappear.
 Thus, on a dumb terminal,
-the same insert would
-appear as follows:
+the same insert would appear as follows:
 .sp .7v
 .ne 8
 .X1
@@ -989,6 +994,7 @@ plan that shows
 different strategies
 
 .X4
+.
 .Bh "Changing Text
 .ix %begin [vi] editor, changing text %key vi editor, changing text
 .LP 0
@@ -996,9 +1002,9 @@ You can replace any text in your file with the change command,
 .CW c .
 To identify the amount of text that you want replaced,
 combine the change command with a movement command.
-For example,
+For example, use
 .CW c
-can be used to change text from the cursor
+to change text from the cursor
 .RS
 .IP \f(CWcw\fP 10
 to the end of a word
@@ -1016,7 +1022,8 @@ command leaves you in insert mode
 until you press the
 .I ESC
 key.
-.Bh "Words
+.
+.Bh "Words"
 .LP 0
 You can replace a word (\c
 .CW cw )
@@ -1027,14 +1034,12 @@ The
 .CW cw
 command can be thought of as
 \(lqdelete the word marked and insert new text
-until
-.I ESC
-is pressed.\(rq
+until the user presses
+.I ESC .\(rq
 .PP
 Suppose that you have the following lines in your file
 .CW letter
-and want to
-change
+and want to change
 .I "designing"
 to
 .I "putting together" .
@@ -1049,8 +1054,7 @@ I'll start
 
 .X2
 .CW cw
-change a
-word
+change a word
 .X3
 I'll start
 \zd_esignin$ a
@@ -1090,8 +1094,7 @@ putting togethe\zr_ a
 The
 .CW cw
 command also works on a portion of a word.
-For example,
-to change
+For example, to change
 .I putting
 to
 .I puts ,
@@ -1135,18 +1138,18 @@ designin\zg_ a
 
 
 .X4
-.Bh "Lines
+.
+.Bh "Lines"
 .LP 0
-To replace the entire current line,
-there is the special change command
+The special change command
 .CW cc .
-This command changes an entire line,
+replaces the entire current line,
 replacing that line with the text entered before an
 .I ESC .
 The
 .CW cc
 command replaces the entire line of text,
-regardless of where the cursor is located on the line.
+regardless of the cursor location.
 .PP
 The
 .CW C
@@ -1158,10 +1161,11 @@ with the special end-of-line indicator,
 .CW $
 (as in
 .CW c$ ).
-.Bh "Characters
+.
+.Bh "Characters"
 .ix [vi] editor, replacing characters %key vi editor, replacing characters
 .LP 0
-One other replacement edit is performed with the
+One other replacement edit is the
 .CW r
 command.
 This command replaces a single character with another single character.
@@ -1209,10 +1213,11 @@ Following an
 command,
 you are automatically returned to command mode.
 .ix %end [vi] editor, changing text %key vi editor, changing text
+.
 .ix %begin [vi] editor, deleting text %key vi editor, deleting text
-.Bh "Deleting Text
+.Bh "Deleting Text"
 .LP 0
-You can also delete any text in your file with the delete command,
+You can delete any text in your file with the delete command,
 .CW d .
 Like the change command,
 the delete command requires an argument
@@ -1223,7 +1228,7 @@ by line (\c
 .CW dd
 and
 .CW D ),
-or by other movement commands that you will learn later.
+or by other movement commands that we show you later.
 .PP
 With all deletions,
 you move to where you want the edit to take p1ace
@@ -1234,7 +1239,8 @@ followed by the amount of text to be deleted
 .CW w
 for
 .I word ).
-.Bh "Words
+.
+.Bh "Words"
 .LP 0
 Suppose that in the following text
 you want to delete one instance of the word
@@ -1266,7 +1272,7 @@ command deletes from the cursor's position
 to the end of a word.
 Thus,
 .CW dw
-can be used to delete a portion of a word.
+can be used to delete a whole word, or a portion of a word.
 .sp .7v
 .ne 8
 .X1
@@ -1296,7 +1302,7 @@ but also the space before any subsequent word on the same line.
 To retain the space between words,
 use
 .CW de ,
-which will delete only to the end of the word.
+which deletes to the end of the word.
 .sp .7v
 .ne 8
 .X1
@@ -1308,8 +1314,7 @@ that\zt_h shows different
 
 .X2
 .CW de
-delete to
-word end
+delete to word end
 .X3
 that_shows different
 
@@ -1327,7 +1332,8 @@ or to the end or beginning of a line
 .CW d$
 or
 .CW d0 ).
-.Bh "Lines
+.
+.Bh "Lines"
 .LP 0
 The
 .CW dd
@@ -1344,9 +1350,10 @@ Prefix either of these commands with a number
 to delete that number of characters.
 For example,
 .CW 5X
-will delete the five characters to the left of the cursor.
+deletes the five characters to the left of the cursor.
 .ix %end [vi] editor, deleting text %key vi editor, deleting text
-.Bh "Moving Text
+.
+.Bh "Moving Text"
 .ix [vi] editor, moving text %key vi editor, moving text
 .LP 0
 You can move text by deleting it
@@ -1357,9 +1364,8 @@ that deletion is temporarily saved in a buffer.
 You can move to another position in the file
 and use the
 .CW put
-command
-to place the text in a new position.
-Although you can move any block of text,
+command to place the text in a new position.
+Although you can move any amount of text,
 this command sequence is more useful with lines than with words.
 .PP
 The put command,
@@ -1421,8 +1427,7 @@ plan for documenting
 
 .X2
 .CW p
-restore deleted
-line
+restore deleted line
 .X3
 Today, I'll start
 putting together a
@@ -1432,7 +1437,7 @@ that shows
 .X4
 .sp 1v
 .LP 0
-You can also use
+You can use
 .CW xp
 (delete character and put after cursor)
 to transpose two letters.
@@ -1441,26 +1446,26 @@ For example, in the word
 the letters
 .I vo
 are transposed (reversed).
-To correct this,
-place the cursor on
+To correct this, place the cursor on
 .I v
 and press
 .CW x
 then
 .CW p .
 .PP
-After you delete the text,
+After you delete text,
 you must restore it
 before the next change or delete command.
 If you make another edit that affects the buffer,
-your deleted text will be lost.
+you lose that deleted text.
 You can repeat the put command over and over,
 as long as you don't make a new edit.
 In the advanced
 .CW vi
 chapter,
-you will learn how to retrieve text from named
+you learn how to retrieve text from named
 and numbered buffers.
+.
 .Bh "Copying Text
 .ix [vi] editor, copying text %key vi editor, copying text
 .LP
@@ -1478,20 +1483,19 @@ and
 .CW p
 (\c
 .I put ).
-The yank command is used to get a copy of text into the buffer
+The yank command copies text into the buffer
 without altering the original text.
-This copy can then be placed elsewhere in the file
+You can place the copy elsewhere in the file
 with the put command.
 .PP
-Yank can be combined with any movement command
+You can combine yank with any movement command
 (for example,
 .CW yw ,
 .CW y$ ,
 or
 .CW 4yy ).
-Yank is most frequently used with a line
-(or more)
-of text,
+You may find that you use yank most frequently
+with a line (or more) of text,
 because to yank and put a word
 generally takes longer than simply inserting the word.
 For example, to yank five lines of text:
@@ -1508,8 +1512,7 @@ that you sent me.
 \(ap
 .X2
 .CW 5yy
-yank 5
-lines
+yank 5 lines
 .X3
 \zo_n the Alcuin product.
 Yesterday, I received
@@ -1543,8 +1546,7 @@ to insert it above the current line.
 
 .X2
 .CW P
-place yanked
-text
+place yanked text
 .X3
 that you sent me.
 \zo_n the Alcuin product.
@@ -1558,16 +1560,18 @@ that you sent me.
 .X4
 .sp 1v
 .LP 0
-The yanked text will appear
+The yanked text appears
 on the line below the cursor.
 Deleting uses the same buffer as yanking.
-Delete and put can be used in much the same way as yank and put.
+You can use delete and put the same way as yank and put.
 Each new deletion or yank
 replaces the previous contents of the yank buffer.
 As we'll see later,
+you can recall
 up to nine previous yanks or deletions
-can be recalled with put commands.
-.Bh "Using Your Last Command
+with put commands.
+.
+.Bh "Using Your Last Command"
 .LP
 .ix [vi] editor, repeating last~command %key vi editor, repeating last command
 .ix [vi] editor, undoing last change %key vi editor, undoing last change
@@ -1580,7 +1584,7 @@ after a word in your file,
 the command used to insert the text,
 along with the text that you entered,
 is temporarily saved.
-Anytime you are making the same editing command repeatedly,
+If you need to repeat the same editing command,
 you can save time by duplicating the command with
 .CW \.
 (dot).
@@ -1653,13 +1657,10 @@ including delete or change commands.
 You can also
 .I undo
 your last command
+(such as an insertion or deletion)
 if you make an error.
-To undo a command,
-the cursor can be anywhere on the screen.
-Simply press
-.CW u
-to undo the last command
-(such as an insertion or deletion).
+To undo a command, press
+.CW u .
 .PP
 To continue the previous example:
 .sp .7v
@@ -1672,8 +1673,7 @@ Yesterday, I received
 
 .X2
 .CW u
-undo last
-command
+undo last command
 .X3
 Yesterday, I received
 the product demo.
@@ -1683,6 +1683,15 @@ the product demo.
 .X4
 .sp 1v
 .LP 0
+.CW Vim
+supports multiple undo; pressing
+.CW u
+twice undoes the last two changes,
+and so on.
+.CW Vim
+can also save its undo buffer,
+making it available for later editing sessions.
+.PP
 The uppercase version of
 .CW u
 (\c
@@ -1691,11 +1700,12 @@ undoes all edits on a single line,
 as long as the cursor remains on that line.
 After you move off a line, you can no longer use
 .CW U .
+.
 .ix [vi] editor, joining lines %key vi editor, joining lines
 .Bh "Joining Two Lines with J"
 .LP 0
-Sometimes while editing a file,
-you will end up with a series of short lines
+Sometimes, when editing a file,
+you end up with a series of short lines
 that are difficult to read.
 When you want to merge two lines,
 position the cursor anywhere on the first line
@@ -1714,17 +1724,17 @@ the product demo.
 .CW J
 join lines
 .X3
-\zY_esterday, I received
-the product demo.
+\zY_esterday, I received the product demo.
 
 
 
 .X4
 .sp 1v
 .LP 0
-.ix [vi] editor, quitting~without saving edits %key vi editor, quitting without saving edits
 A numeric argument joins that number of consecutive lines.
-.Bh "Quitting without Saving Edits
+.
+.ix [vi] editor, quitting~without saving edits %key vi editor, quitting without saving edits
+.Bh "Quitting without Saving Edits"
 .LP
 When you are first learning
 .CW vi ,
@@ -1765,8 +1775,9 @@ using only the commands you have learned in this session.
 However, to harness the real power of
 .CW vi
 (and increase your own productivity)
-you will want to continue to the next session.
-.Ah "Session 2: Moving Around in a Hurry
+continue to the next session.
+.
+.Ah "Session 2: Moving Around in a Hurry"
 .LP
 You use
 .CW vi
@@ -1786,15 +1797,15 @@ identifying the line numbers to be edited).
 This chapter shows you
 how to think about movement in a variety of ways
 (by screens, text, patterns, or line numbers).
-There are many ways to move in
-.CW vi ,
+.CW Vi
+supports many ways to move around in a file,
 because editing speed depends
 on getting to your destination with only a few keystrokes.
 .ix %begin [vi] editor, scrolling %key vi editor, scrolling
 .ix %begin scrolling
 .ix [vi] editor, moving~by screenfuls %key vi editor, moving by screenfuls
 .PP
-In this session, you will learn how to move around in a file by
+In this session, you learn how to move around in a file by
 .RS
 .Ls B
 .Li
@@ -1807,9 +1818,10 @@ searches for patterns;
 lines.
 .Le
 .RE
+.
 .Ah "Movement by Screens
 .LP
-When you read a book you think of \(lqplaces\(rq in the book by page:
+When you read a book, you think of \(lqplaces\(rq in the book by page:
 the page where you stopped reading
 or the page number in an index.
 Some
@@ -1821,11 +1833,14 @@ But many files have hundreds of lines.
 You can think of a
 .CW vi
 file as text on a long roll of paper.
-The screen is a window of (usually) 24 lines of text
+The screen is a window of text
 on that long roll.
+In the early days,
+most terminals supported 24\~lines;
+terminal windows on GUIs often support 50\~lines or more.
 In insert mode,
 as you fill up the screen with text,
-you will end up typing on the bottom line of the screen.
+you end up typing on the bottom line of the screen.
 When you reach the end and press
 .I RETURN ,
 the top line rolls out of sight,
@@ -1834,20 +1849,20 @@ This is called
 .I scrolling .
 You can move through a file
 by scrolling the screen ahead or back to see any text in the file.
+.
 .Bh "Scrolling the Screen
 .LP
-There are
-.CW vi
-commands to scroll forward and backward through the file
-by full and halfscreens:
+.CW Vi
+has commands to scroll forward and backward through the file
+by full- and half-screens:
 .RS
 \f(CW^F\fP	forward one screen
 .br
 \f(CW^B\fP	backward one screen
 .br
-\f(CW^D\fP	forward halfscreen
+\f(CW^D\fP	forward one half-screen
 .br
-\f(CW^U\fP	backward halfscreen
+\f(CW^U\fP	backward one half-screen
 .RE
 (The
 .CW ^
@@ -1886,7 +1901,7 @@ the screen appears as follows:
 .SS
 .nf
 .CW
-\zb_etter understanding of the product.  I
+\zm_uch better understanding of the product.  I
 confess to being amazed by Alcuin.  Some
 people around here, looking over my shoulder,
 were also astounded by the illustrated
@@ -1900,19 +1915,17 @@ Today, I'll start putting together a written
 .SE
 .sp 1v
 .LP 0
-There are also commands
-to scroll the screen up one line
+Other commands scroll the screen up one line
 (\c
 .CW ^E )
 and down one line
 (\c
 .CW ^Y ).
-(These commands are not available on small systems,
-such as the PDP-11 or Xenix for the PC-XT).
 .ix %end [vi] editor, scrolling %key vi editor, scrolling
 .ix %end scrolling
+.
 .ix [vi] editor, cursor~movement within screen %key vi editor, cursor movement within screen
-.Bh "Movement within a Screen
+.Bh "Movement within a Screen"
 .LP
 You can also keep your current screen or view of the file
 and move around within the screen using:
@@ -1968,11 +1981,12 @@ can also be used for editing.
 For example,
 .CW dH
 deletes to the top line shown on the screen.
+.
 .Bh "Movement within Lines
 .ix [vi] editor, cursor~movement within lines %key vi editor, cursor movement within lines
 .LP
-Within the current screen
-there are also commands to move by line.
+.CW Vi
+also has commands to move within lines.
 You have already learned the line movement commands
 .CW $
 and
@@ -1980,7 +1994,7 @@ and
 .RS
 \fIRETURN\fP		beginning of next line
 .br
-\f(CW^\fP			to first character of current line
+\f(CW^\fP			to first non-blank character of current line
 .br
 \f(CW+\fP			beginning of next line
 .br
@@ -2019,12 +2033,13 @@ by contrast, moves to the first
 .I position
 of the line,
 even if that position is blank).
+.
 .Ah "Movement by Text Blocks
 .ix [vi] editor, cursor~movement~by text~blocks %key vi editor, cursor movement~by text~blocks
 .LP
 Another way that you can think of moving through a
 .CW vi
-file is by text blocks\(emwords,
+file is by text blocks\[em]words,
 sentences, or paragraphs.
 You have already learned to move forward and backward by word (\c
 .CW w
@@ -2052,10 +2067,13 @@ by finding a period followed by at least two spaces,
 or a period as the last nonblank character on a line.
 If you have left only a single space following a period,
 the sentence won't be recognized.
+This is another reason to break lines at sentence endings;
+modern practice is to put only one space between sentences.
 .PP
-A
+.CW Vi
+considers a
 .I paragraph
-is defined as text up to the next blank line,
+as text up to the next blank line,
 or up to one of the default paragraph macros
 (\c
 .CW .IP ,
@@ -2068,8 +2086,10 @@ in the
 or
 .CW ms
 macro packages.
-The macros that are recognized as paragraph separators
-can be customized with the
+You can change which macros
+.CW vi
+recognizes as paragraph separators
+with the
 .CW :set
 command, as described in Chapter 7.
 .sp .7v
@@ -2108,7 +2128,8 @@ using movement commands.
 deletes to the end of the current sentence,
 .CW 2y}
 copies (yanks) two paragraphs ahead.
-.Ah "Movement by Searches
+.
+.Ah "Movement by Searches"
 .ix %begin [vi] editor, search~for pattern %key vi editor, search for pattern
 .ix search
 .LP
@@ -2140,19 +2161,19 @@ that you want to find:
 .RE
 .sp .5v
 .LP 0
-A space before or after
-.I text
-will be included in the search.
-As with all bottom-line commands,
-press
+The search includes a space before or after
+.I text .
+As with all bottom-line commands, press
 .I RETURN
 to finish.
 .PP
 The search begins at the cursor and moves forward,
 wrapping around to the start of the file if necessary.
-The cursor will move to the first occurrence of the pattern
+The cursor moves to the first occurrence of the pattern
 (or the message \(lqPattern not found\(rq
-will be shown on the status line if there is no match).
+appears on the status line if
+.CW vi
+cannot find a match).
 .PP
 If you wanted to search for the pattern
 .I shows :
@@ -2320,30 +2341,49 @@ shows \zt_he different
 .LP 0
 This section has given only the barest introduction
 to searching for patterns.
-Chapter 7 will teach more about pattern matching
+Chapter 7 teaches more about pattern matching
 and its use in making global changes to a file.
+.
 .ix [vi] editor, search~within current~line %key vi editor, search within current~line
-.Bh "Current Line Searches
+.Bh "Current Line Searches"
 .LP 0
-There is also a miniature version of the search command
-that operates within the current line.
+A miniature version of the search command
+operates within the current line.
 The command
 .CW f
-moves the cursor to the next instance of the character you name.
-Semicolons can then be used to repeat the \(lqfind.\(rq
-Note, however, that the
-.CW f
-command will not move the cursor to the next line.
+moves the cursor rightwards
+to the next instance of the character you name, and
+.CW F
+moves leftwards.
+You can use a semicolons to repeat the \(lqfind\(rq
+in the same direction, or commas to repeat
+in the opposite direction.
+Note, however, that these commands
+do not move the cursor to the next line.
 .RS
-.IP \f(CWf\fIx 10
+.IP \f(CWf\fP\fIx\fP 10
 find (move cursor to) next occurrence of
 .I x
 in the line,
 where
 .I x
 can be any character
-.IP \f(CW; 10
-repeat previous find command
+.IP \f[CW]F\fP\fIx\fP
+find previous occurrence of
+.I x
+in the line.
+.IP \f(CW;\fP 10
+repeat previous find command in the same direction
+(forward for
+.CW f ,
+backward for
+.CW F )
+.IP \f[CW],\fP
+repeat previous find command in the opposite direction
+(backward for
+.CW f ,
+forward for
+.CW F )
 .RE
 .LP
 Suppose that you are editing on this line:
@@ -2383,7 +2423,7 @@ As with
 .CW f
 and
 .CW b ,
-a numeric prefix will locate the
+a numeric prefix locates the
 .I n th
 occurrence.
 For example:
@@ -2409,6 +2449,7 @@ Today, I'll s\zt_art
 .X4
 .sp 1v
 .ix %end [vi] editor, search~for pattern %key vi editor, search for pattern
+.
 .ix [vi] editor, cursor~movement~by line~numbers %key vi editor, cursor movement~by line~numbers
 .ix line number, in [vi] %key line number, in vi
 .Ah "Movement by Line Numbers
@@ -2418,16 +2459,17 @@ and you can move through a file by specifying line numbers.
 Line numbers are useful for identifying the beginning
 and end of large blocks of text
 you want to edit.
-Line numbers are also useful for programmers
-because compiler error messages refer to line numbers.
-Line numbers are also used by
+Line numbers are also useful for debugging
+because formatter error messages refer to line numbers.
+The
 .CW ex
-commands, as you will learn in Chapter 7.
+command also uses line numbers;
+Chapter 7 explains it in detail.
 .ix [vi] editor, displaying line~numbers %key vi editor, displaying line numbers
 .PP
 If you are going to move by line numbers,
 you need a way to identify line numbers.
-Line numbers can be displayed on the screen using the
+Display line numbers on the screen using the
 .ix [vi] editor, movement~by line~number %key vi editor, movement by line~number
 .CW :set
 .CW  nu
@@ -2439,6 +2481,8 @@ you can also display the current line number on the bottom of the screen.
 The command
 .CW ^G
 displays the following on the bottom of your screen:
+the filename,
+whether the file has been modified,
 the current line number,
 the total number of lines in the file,
 and what percentage of the total
@@ -2448,11 +2492,12 @@ For example, for the file
 .CW ^G
 might display:
 .Ps
-"letter" line 10 of 40  --25%--
+"letter" [Modified] line 10 of 40  --25%--
 .Pe
 .LP
+Use
 .CW ^G
-is used to display the line number to use in a command,
+to display the line number to use in a command,
 or to orient yourself
 if you have been distracted from your editing session.
 .PP
@@ -2483,7 +2528,7 @@ If you have issued a search command
 or
 .CW ? ),
 .CW ``
-will return the cursor
+returns the cursor
 to its position when you started the search.
 .PP
 The total number of lines shown with
@@ -2500,9 +2545,10 @@ you could give an approximation of your destination with.
 800G
 .Pe
 Movement by line number can get you around quickly in a large file.
-.Ah "Session 3:  Beyond the Basics
+.
+.Ah "Session 3:  Beyond the Basics"
 .LP 0
-You have already been introduced to the basic
+You were introduced to the basic
 .CW vi
 editing commands,
 .CW i ,
@@ -2510,14 +2556,16 @@ editing commands,
 .CW d ,
 and
 .CW y .
-This session expands on what you already know about editing.
-You will learn
+This session expands on what you already know about editing,
+showing you
 .RS
 .Ls B
 .Li
-additional ways to enter vi;
+additional ways to enter
+.CW vi ;
 .Li
-how to customize vi;
+how to customize
+.CW vi ;
 .Li
 how to combine all edits with movement commands;
 .Li
@@ -2529,18 +2577,20 @@ how to mark your place in a file.
 .ix [vi] editor, opening~a~file~to~a specific~place %key vi editor, opening a~file~to~a specific~place
 .Le
 .RE
-.Ah "Command-Line Options
+.
+.Ah "Command-Line Options"
 .LP 0
-There are other options to the
+Command-line options to the
 .CW vi
-command that can be helpful.
+command can be helpful.
 You can open a file directly
 to a specific line number or pattern.
 You can also open a file in read-only mode.
 Another option recovers all changes to a file
 that you were editing when the system crashes.
 .ix [vi] editor, command~line options %key vi editor, command line options
-.Bh "Advancing to a Specific Place
+.
+.Bh "Advancing to a Specific Place"
 .LP 0
 When you begin editing an existing file,
 you can load the file
@@ -2613,12 +2663,13 @@ all you have to remember is
 .CW /ZZZ
 or
 .CW /HERE .
+.
 .ix [vi] editor, read-only mode %key vi editor, read-only mode
 .ix [vi] editor, view mode %key vi editor, view mode
 .ix [view] command %key view command
 .Bh "Read-Only Mode
 .LP 0
-There will be times that you want to look at a file,
+When you want to look at a file,
 but you want to protect that file
 from inadvertent keystrokes and changes.
 (You might want to call in a lengthy file to practice
@@ -2640,21 +2691,33 @@ or:
 .Ps
 $ \f(CBview letter\fP
 .Pe
+.
 .ix [vi] editor, recovering~a buffer %key vi editor, recovering a buffer
 .Bh "Recovering a Buffer
 .LP 0
-Occasionally, there will be a system failure
+Occasionally, you may suffer a system failure
 while you are editing a file.
 Ordinarily, any edits made after your last write (save) are lost.
-However, there is an option,
-.CW -r ,
-which lets you recover the edited buffer at the time of a system crash.
+The,
+.CW -r
+option lets you recover the edited buffer at the time of a system crash.
 (A system program called
 .CW preserve
-saves the buffer as the system is going down).
+saves the buffer as the system is going down)\**.
+.FS
+In recent experience,
+both Linux and MacOS\~X
+keep the entire system status intact
+across system failures and power outages.
+You may have to restart some programs,
+or ask other programs to do an explicit \[lq]restore session,\[rq]
+but the UNIX systems of the late 1980s
+were far ahead of their peers
+when it came to recovering from a crash.
+.FE
 .PP
 When you first log in after the system is running again,
-you will receive a mail message stating that your buffer is saved.
+you receive a mail message stating that your buffer is saved.
 The first time that you call in the file,
 use the
 .CW -r
@@ -2671,8 +2734,8 @@ using the
 .CW -r
 option, your buffered edits are lost.
 .PP
-You can force the system to preserve your buffer
-even when there is not a crash
+You can also force the system to preserve your buffer
+at any time,
 by using the command
 .CW :pre .
 You may find this useful
@@ -2682,22 +2745,19 @@ because you don't have write permission.
 (You could also just write a copy of the file out
 under another name
 or in a directory where you do have write permission.)
+.
 .Ah "Customizing \f[CB]vi\fP"
 .ix customizing [vi] %key customizing vi
 .LP 0
-A number of options that you can set as part of your editing environment
-affect how
+You can set options to affect your editing environment.
 .ix %begin [vi] editor, setting options %key vi editor, setting options
-.CW vi
-operates.
 For example,
-you can set a right margin
-that will cause
+you can set a right margin so
 .CW vi
-to wrap lines automatically,
+wraps lines automatically,
 so you don't need to insert carriage returns.
 .PP
-You can change options from within
+You change options within
 .CW vi
 by using the
 .CW :set
@@ -2709,7 +2769,21 @@ called
 .ix [.exrc] file %key exrc file
 .ix [ex] editor, [.exrc] file %key ex editor, [.exrc] file
 .CW .exrc
-for further operating instructions.
+for further operating instructions.\**
+.FS
+.CW Vim
+can read the
+.CW .exrc
+file, if you set the
+.CW exrc
+option, but in most cases
+you should make all settings in the
+.CW .vimrc
+file.
+Substiute as needed.
+.FE
+.RE
+.PP
 By placing
 .CW set
 commands in this file,
@@ -2723,42 +2797,44 @@ files in local directories
 to initialize various options
 that you want to use in different environments.
 For example, you might define one set of options for editing text,
-but another set for editing source programs.
-The
+and another set for editing source programs.
+.CW Vi
+executes the
 .CW .exrc
-file in your home directory will be executed first,
+file in your home directory first,
 then the one on your current directory.
 .ix [EXINIT] variable %key EXINIT variable
 .ix [ex] editor, [EXINIT] variable %key ex editor, [EXINIT] variable
 .ix environment variables, [EXINIT] %key environment variables, EXINIT
 .PP
-Finally, if the shell variable
+Finally, if you have the shell variable
 .CW EXINIT
-is set in your environment
+set in your environment
 (with the Bourne shell
 .ix Bourne shell, [export] command %key Bourne shell, export command
 .ix [export] command %key export command
 .CW export
 command, or the C shell
 .CW setenv
-command), any commands it contains
-will be executed by
+command),
 .CW vi
+executes any commands it contains
 on startup.
 If
 .CW EXINIT
 is set,
-it will be used instead of
+.CW vi
+uses the file it specified instead of
 .CW \&.exrc ;
 .CW vi
-will not take commands from both.
+does not take commands from both.
+.
 .Bh "The \f[CB]set\fP Command
 .ix [vi] editor, setting options %key vi editor, setting options
 .LP 0
-There are two types of options
-that can be changed with the
+The
 .CW set
-command:
+command can change two types of options:
 toggle options,
 which are either on or off,
 and options that take a numeric or string value
@@ -2807,7 +2883,7 @@ including options that you have set
 and defaults that
 .CW vi
 has chosen.
-The display will look something like this:
+The display looks something like this:
 .sp .7v
 .SS
 .nf
@@ -2815,16 +2891,16 @@ The display will look something like this:
 .ta 22n 48n
 noautoindent	open	tabstop=8
 autoprint	prompt	taglength=0
-noautowrite	noreadonly	term=wy50
+noautowrite	noreadonly	term=xterm-256color
 nobeautify	redraw	noterse
 directory=/tmp	/remap	timeout
-noedcompatible	report=5	ttytype=wy50
+noedcompatible	report=5	ttytype=xterm-256color
 noerrorbells	scrolls=11	warn
 hardtabs=8	sections=AhBhChDh	window=20
 noignorecase	shell=/bin/csh	wrapscan
 nolisp	shiftwidth=8	wrapmargin=10
 nolist	noshowmatch	nowriteany
-magic	noslowopen	
+magic	noslowopen
 mesg	paragraphs=IPLPPPQP LIpp1pipbb
 number	tags=tags /usr/lib/tags
 nooptimize
@@ -2851,6 +2927,7 @@ number  window=20  wrapmargin=10
 See
 .pdfhref L -D AppendixA -- Appendix A
 for a description of what these options mean.
+.
 .ix [.exrc] file %key exrc file
 .Bh "The \f(CB.exrc\fP File
 .LP 0
@@ -2868,9 +2945,9 @@ whenever you use
 or
 .CW ex .
 .PP
-The
+You can modify the
 .CW \&.exrc
-file can be modified with the
+file with the
 .CW vi
 editor, like any other file.
 A sample
@@ -2886,21 +2963,23 @@ before it enters visual mode (\c
 commands in
 .CW \&.exrc
 should not have a preceding colon.
-.Bh "Alternate Environments
+.
+.Bh "Alternate Environments"
 .LP 0
 You can define alternate
 .CW vi
 environments by saving option settings in an
 .CW \&.exrc
-file that is placed in a local directory.
+file in a local directory.
 If you enter
 .CW vi
 from that directory,
-the local
+it reads the local
 .CW \&.exrc
-file will be read in.
+file.
 If it does not exist,
-the one in your home directory will be read in.
+.CW vi
+reads the one in your home directory.
 .PP
 For example, you might want to have one set of options for programming:
 .Ps
@@ -2914,13 +2993,14 @@ Local
 .CW \&.exrc
 files are especially useful
 when you define abbreviations, which are described in Chapter 7.
-.Bh "Some Useful Options
+.
+.Bh "Some Useful Options"
 .LP 0
-As you can see when you type
+As you can see, when you type
 .CW ":set all" ,
-there are many options.
-Most options are used internally by
 .CW vi
+has many options.
+Most options are internal
 and aren't usually changed.
 Others are important in certain cases,
 but not in others
@@ -2928,22 +3008,22 @@ but not in others
 .CW noredraw
 and
 .CW window
-can be useful on a dialup line at a low baud rate).
+can be useful on a slow connection).
 Appendix A contains a brief description of each option.
-We recommend that you take some time
-to play with option setting\(emif an option looks interesting,
+Take some time
+to play with option setting\[em]if an option looks interesting,
 try setting it
 (or unsetting it)
 and watch what happens while you edit.
 You may find some surprisingly useful tools.
 .ix [vi] editor, wrapmargin %key vi editor, wrapmargin
 .PP
-There is one option that is almost essential for editing
+One option is almost essential for editing
 nonprogram text.
 The
 .CW wrapmargin
 option specifies the size of the right margin
-that will be used to autowrap text as you type.
+used to autowrap text as you type.
 (This saves manually typing carriage returns).
 This option is in effect if its value is set to greater than 0.
 A typical value is 10 or l5.
@@ -2951,7 +3031,7 @@ A typical value is 10 or l5.
 set wrapmargin=15
 .Pe
 .PP
-There are also three options that control how
+Three options control how
 .CW vi
 acts in conducting a search.
 By default, it differentiates between uppercase and lowercase
@@ -2984,23 +3064,28 @@ Another useful option is
 This option was designed
 to help programmers properly indent their programs,
 but it can also be useful to writers.
-The
+Use the
 .CW >>
 and
 .CW <<
-commands can be used to indent
-(or un-indent)
+commands to indent (or un-indent)
 text by
 .CW shiftwidth
 characters.
-The position of the cursor on the line doesn't matter\(emthe
-entire line will be shifted.
+The position of the cursor on the line doesn't matter\[em]it
+shifts the entire line.
 The
 .CW shiftwidth
 option is set to 8 by default,
 but you can use
 .CW :set
 to change this value.
+A popular alternate value is 4,
+although some GUI-based editors use 2.
+You will find it convenient to use the same values for both
+.CW shiftwidth
+and
+.CW tabstop .
 .PP
 Give the
 .CW >>
@@ -3015,10 +3100,11 @@ For example:
 .Ps
 10>>
 .Pe
-will indent the next 10 lines by
+indents the next 10 lines by
 .CW shiftwidth .
 .ix %end [vi] editor, setting options %key vi editor, setting options
-.Ah "Edits and Movement
+.
+.Ah "Edits and Movement"
 .LP 0
 You have learned the edit commands
 .CW c ,
@@ -3033,9 +3119,8 @@ or
 .CW 4dd).
 Since that point,
 you have added many more movement commands to your repertoire.
-Although the fact
-that you can combine edit commands with movement
-is not a \(lqnew\(rq concept to you,
+Although combining edit commands with movement
+is not a new concept to you,
 Table 3-2
 gives you a feel for the many editing options you now have.
 .Ts "Combining \f[CB]vi\fP Commands
@@ -3069,38 +3154,38 @@ changes the next two sentences.
 Although this table may seem forbidding,
 experiment with combinations and try to understand the patterns.
 When you find how much time and effort you can save,
-combinations of change and movement keys will no longer seem obscure,
-but will readily come to mind.
+combinations of change and movement keys no longer seem obscure,
+and readily come to mind.
+.
 .ix [vi] editor, alternative insert commands %key vi editor, alternative insert commands
-.Ah "More Ways to Insert Text
+.Ah "More Ways to Insert Text"
 .LP 0
 You have inserted text before the cursor with the sequence:
 .Ps
 i\fItext\fP <ESC>
 .Pe
-There are many insert commands.
-The difference between them is
+The difference among all the insert commands is
 that they insert text at different positions
 relative to the cursor:
 .ix [vi] editor, append text %key vi editor, append text
 .ix [vi] editor, opening~a new~line~for insertion %key vi editor, opening a new~line~for insertion
 .RS
-.IP \f(CWa 10
+.IP \f(CWa\fP 10
 append text after cursor
-.IP \f(CWA 10
+.IP \f(CWA\fP 10
 append text to end of current line
 .sp .5
-.IP \f(CWi 10
+.IP \f(CWi\fP 10
 insert text before cursor
-.IP \f(CWI 10
+.IP \f(CWI\fP 10
 insert text at beginning of line
 .sp .5
-.IP \f(CWo 10
+.IP \f(CWo\fP 10
 open new line below cursor for text
-.IP \f(CWO 10
+.IP \f(CWO\fP 10
 open new line above cursor for text
 .sp .5
-.IP \f(CWR 10
+.IP \f(CWR\FP 10
 overstrike existing characters with new characters
 .RE
 .LP
@@ -3127,20 +3212,20 @@ saves one keystroke over
 Although one keystroke might not seem like a timesaver,
 as you become a more adept
 (and impatient) editor,
-you'll want to omit any unnecessary keystrokes.
+you'll want to omit unnecessary keystrokes.
 .PP
-There are other combinations of commands
-that work together naturally.
+Other combinations of commands
+work together naturally.
 For example,
 .CW ea
 is useful for appending new text to the end of a word.
 (It sometimes helps to train yourself
 to recognize such frequent combinations
-so that invoking them becomes automatic).
+and invoke them without thinking).
+.
 .Ah "Using Buffers
 .LP 0
-While you are editing,
-you have seen that your last deletion
+You now know that your last deletion
 (\c
 .CW d
 or
@@ -3179,18 +3264,19 @@ in your editing session.
 .PP
 The
 .CW vi
-program also saves your last edit command
+program saves your last edit command
 (insert, change, delete, or yank)
 in a buffer.
 Your last command is available to repeat
 or undo with a single keystroke.
+.
 .Bh "Recovering Deletions
 .LP 0
-Being able to delete large blocks of text at a single bound
+Being able to delete large blocks of text
 is all well and good,
 but what if you mistakenly delete 53 lines that you need?
-There is a way to recover any of your past nine deletions,
-which are saved in numbered buffers.
+You can recover any of your past nine deletions,
+saved in numbered buffers.
 The last deletion is saved in buffer 1;
 the second-to-last in buffer 2,
 and so on.
@@ -3220,10 +3306,10 @@ and
 .CW u .
 The
 .CW p
-command will print the last deletion or change,
+command prints the last deletion or change,
 but
 .CW 2p
-will print the last two.
+prints the last two.
 By combining
 .CW p ,
 .CW \&.
@@ -3235,26 +3321,27 @@ you can step back through the numbered buffers.
 .PP
 The
 .CW \(dq1p
-command will put the last deletion,
+command puts the last deletion,
 now stored in buffer 1, back into your text.
 If you then type
 .CW u ,
-it will go away.
+it goes away.
 But when you type the
 .CW \&.
 command,
 instead of repeating the last command (\c
 .CW \(dq1p ),
-it will show the next buffer as if you'd typed
+it shows the next buffer as if you'd typed
 .CW \(dq2p .
 You can thus step back through the buffers.
 For example, the sequence:
 .Ps
 "1pu.u.u.u.u.
 .Pe
-will show you, in sequence, the contents of the last six numbered buffers.
+shows you, in sequence, the contents of the last six numbered buffers.
+.
 .ix %begin [vi] editor, named buffers %key vi editor, named buffers
-.Bh "Yanking to Named Buffers
+.Bh "Yanking to Named Buffers"
 .LP 0
 With unnamed buffers,
 you have seen that you must put
@@ -3268,8 +3355,13 @@ You can also use
 .CW y
 with a set of 26 named buffers
 (\fIa\fP through \fIz\fP),
-which are specifically for copying and moving text.
-If you name a buffer to store the yanked text,
+which are specifically for copying and moving text\**.
+.FS
+.CW Vim
+saves the buffers,
+so you can use them across multiple files.
+.FE
+If you name a buffer to store yanked text,
 you can place the contents of the named buffer
 at any time during your editing session.
 .ix %end [vi] editor, numbered buffers %key vi editor, numbered buffers
@@ -3293,9 +3385,9 @@ or
 .CW P
 to put the text back.
 .RS
-.IP \f(CW"dP 10
+.IP \f(CW"dP\fP 10
 put buffer \fId\fP before cursor
-.IP \f(CW"ap 10
+.IP \f(CW"ap\fP 10
 put buffer \fIa\fP after cursor
 .RE
 .ix [vi] editor, appending~to named buffers %key vi editor, appending to named buffers
@@ -3359,7 +3451,7 @@ Alcuin product.
 .sp 1v
 .LP 0
 There is no way to put part of a buffer
-into the text\(emit is all or nothing.
+into the text\[em]it is all or nothing.
 .PP
 Named buffers allow you to make other edits
 before placing the buffer with
@@ -3378,8 +3470,7 @@ delete five lines into buffer \fIa\fP
 .RE
 .LP
 If you specify the buffer name with a capital letter,
-yanked or deleted text
-will be
+yanked or deleted text is
 .I appended
 to the current contents of the buffer.
 For example:
@@ -3397,8 +3488,7 @@ insert the six lines from buffer \fIb\fP above the cursor
 When you put text from a named buffer,
 a copy still remains in that buffer;
 you can repeat the put as often as you like
-until you quit your editing session
-or replace the text in the buffer.
+until you replace the text in the buffer.
 .PP
 For example, suppose you were preparing a document
 with some repetitive elements,
@@ -3409,16 +3499,17 @@ put it into your file,
 fill in the blanks,
 then put the skeleton in again each time you need it.
 .ix %end [vi] editor, named buffers %key vi editor, named buffers
+.
 .ix [vi] editor, marking place~in file %key vi editor, marking place in file
 .ix marking~a position, in [vi] %key marking a position, in vi
 .ix returning to~a marked position, in [vi] %key returning to a marked position, in vi
-.Ah "Marking Your Place
+.Ah "Marking Your Place"
 .LP 0
 During a
 .CW vi
 session, you can mark your place in the file
 with an invisible \(lqbookmark,\(rq
-perform edits elsewhere,
+edit other parts of the file,
 then return to your marked place.
 In the command mode:
 .RS
@@ -3473,7 +3564,22 @@ written plan that
 Place markers are set only during the current
 .CW vi
 session; they are not stored in the file.
-.Ah "Other Advanced Edits
+.
+.Ah "Going Forward"
+.LP 0
+While you continue to familiarize yourself with
+.CW vi ,
+do a web search for
+.CW "vi cheat sheet" .
+Print out the one you like best,
+and keep it nearby so you can refer to it
+whenever you need to remember a particular command.
+Eventually, your fingers learn
+.CW vi
+commands, and editing becomes something you do
+without having to think about it.
+.
+.Ah "Other Advanced Edits"
 .LP 0
 You may wonder why we haven't discussed global changes,
 moving text between files,

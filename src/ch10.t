@@ -4,7 +4,7 @@
 	Marked up by: Michael Hobgood
 	Proofed on: 17 Oct 2002
 ..
-
+.
 .so utp.mac
 .utp
 .ig
@@ -1887,7 +1887,7 @@ and
 .CW textht
 variables control the width and height respectively, of
 .ix [pic] preprocessor, automatic scaling %key pic preprocessor, automatic scaling
-the area use by
+the area used by
 .CW pic
 on a page.
 (It doesn't refer to the amount of space occupied by an

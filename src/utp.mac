@@ -243,7 +243,7 @@ Version of 16 November 2002
 ..
 .als Hl horizontal_line
 \#
-\#  Standard Section Formating Routine
+\#  Standard Section Formatting Routine
 \#
 .de format_standard_section
 .RT
@@ -451,7 +451,7 @@ Version of 16 November 2002
 ..
 \#
 \# X[1-4]:  Side by side virtual display screens
-\# Contributed by Heinz-Jürgen Oertel
+\# Contributed by Heinz-JÃ¼rgen Oertel
 \#
 .\" Macro definition
 .\" window width
