@@ -4,7 +4,6 @@
 	Marked up by: Michael Hobgood
 	Proofed on: 17 Oct 2002
 ..
-
 .so utp.mac
 .utp
 .ig
@@ -75,18 +74,19 @@ making modifications and improvements.
 .PP
 The
 .CW pic
-preprocessor was designed to produce output on a typesetter,
-which makes
+preprocessor was originally designed
+to produce output on a typesetter.
+In modern times, graphics displays\**
+.FS
+GhostScript is available on all modern UNIX systems.
+The MacOS Preview utility
+can display typeset
 .CW pic
-expensive and difficult to learn.
-Fortunately, some graphics terminals and most laser
-printers can be set up to display or print
+output as well.
+.FE
+and printers can easily display or print
 .CW pic
 drawings.
-Access to one or the other is essential if you are going to
-get enough practice to know how
-.CW pic
-responds.
 .PP
 As a preprocessor,
 .CW pic
@@ -131,7 +131,23 @@ preprocessor as follows:
 .Ps
 $ \f[CB]pic\fP \fIfile\fP \f[CB]| troff |\fP \fIdevice\fP
 .Pe
-.page 254
+For
+.CW groff
+users, the
+.CW gpic
+preprocessor provides extended functionality.
+See the
+.CW gpic
+manual page for a list of extensions.
+Use the
+.CW -p
+option to automatically include
+.CW gpic
+in the pipeline.
+The rest of this chapter
+describes the original version of
+.CW pic .
+.
 .Ah "The \f[CB]pic\fP Preprocessor"
 Imagine that you have to describe over the telephone the
 following picture:
@@ -1935,7 +1951,21 @@ If the
 (\c
 .I F
 for
-.I flyback )
+.I flyback )\**
+.FS
+The
+.CW groff
+version of
+.CW pic
+supports an equivalent flyback macro,
+.CW .FY ,
+for use with the
+.CW -mm
+macro package
+(that uses
+.CW .PF
+as the page footer macro).
+.FE
 macro is used in place of
 .CW .PE ,
 .CW troff
@@ -1948,7 +1978,7 @@ within our large screen.
 \&.PS 2 4
 line right 1; arc; line up ; arc
 line left 1; arc; line down; arc
-\&.PE
+\&.PF
 \&.ft CW
 \&.sp 2
 Alcuin Development System       5/31/87
@@ -1970,11 +2000,11 @@ Please login:
 .Pe
 .SE
 .sp .8v
-.page 281
 .LP 0
 You have to remember to provide the space after the text
 to push the current position past the end of the screen.
 Otherwise subsequent text will also appear within the box.
+.
 .Bh "Debugging \f[CB]pic\fP Descriptions"
 .ix debugging, [pic] %key debugging, pic
 .ix [pic] preprocessor, debugging %key pic preprocessor, debugging
@@ -2170,7 +2200,7 @@ The distance between 0 and 1 is normally 1 inch.
 Because we are scaling this drawing by 4, the actual distance
 is \(14 inch.
 It seems easier to describe a point as 2,3 rather than
-5,.75.
+0.5,0.75.
 This description produces a two-dimensional box:
 .PS
 scale=4
@@ -2819,6 +2849,7 @@ description file associated with independent data files.
 You could write a program to build the data files from
 user input or from some other source.
 .ix %end [pic] preprocessor, macros %key pic preprocessor, macros
+.
 .Bh "Executing UNIX Commands"
 .ix [pic] preprocessor, executing~UNIX~commands~from %key pic preprocessor, executing UNIX~commands~from
 You can execute any UNIX command from
@@ -2837,6 +2868,17 @@ You could issue a command to obtain data from another file:
 .Ps
 sh % awk -F: {print$1} /etc/passwd %
 .Pe
+The
+.CW gpic
+preprocessor turns this functionality off by default.
+To restore it, use the
+.CW -U
+(unsafe) option.
+.ix [pic] preprocessor, unsafe~mode %key pic preprocessor, unsafe mode
+Be sure that you understand what each
+.CW sh
+command is doing before processing in unsafe mode.
+.
 .Ah "\f[CB]pic\fP Enhancements"
 .ix [pic] preprocessor, enhancements~to %key pic preprocessor, enhancements to
 Most of the enhancements found in new versions of
@@ -2856,16 +2898,15 @@ loop allows one or more
 .ix [pic] preprocessor, [for]~loops %key pic preprocessor, [for] loops
 .CW pic
 commands to be executed as long as a condition is met
-.page 292
+.\" Original was 'by .05' giving us like 59 boxes instead of 5
 .Ps
-for i=1 to 3 by .05
-do%
-box ht i;move
+for i=1 to 3 by 0.5 do %
+box ht i; move
 %
 .Pe
-Each time through the loop the value of the variable
+Each time through the loop, the value of the variable
 .CW i
-is incremented by .05, producing five boxes of increasing
+is incremented by 0.5, producing five boxes of increasing
 height.
 The
 .CW by
@@ -2947,14 +2988,16 @@ bit-mapped graphic terminals and translated into
 .CW pic
 output.
 A separate program called
-.CW cip ,
-available on some systems, allows users to create drawings
-using a mouse (a la MacDraw for the Macintosh).
+.CW xfig ,
+available on any modern UNIX system,
+allows users to create drawings using a mouse
+(a la LibreOffice Draw).
 The
-.CW cip
-program generates a
+.CW xfig
+program can export a
 .CW pic
-description of a drawing that can be included in any file
+description of a drawing
+that can be included in any file
 to be processed by
 .CW troff .
 .ix %end [pic] preprocessor %key pic preprocessor

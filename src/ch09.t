@@ -1,4 +1,3 @@
-
 .ig
 	Typed by: Michael Hobgood
 	Marked up by: Michael Hobgood
@@ -34,7 +33,7 @@ requests, but the syntax for describing the printing motions,
 sizes, and fonts are difficult to learn and difficult
 to type in correctly.
 UNIX has formatting tools specifically designed for
-documents containing mathematical symbols\(emthe programs
+documents containing mathematical symbols\[em]the programs
 .CW eqn
 and
 .CW neqn .
@@ -45,6 +44,37 @@ program is a preprocessor for
 .CW neqn
 is a preprocessor for
 .CW nroff .
+When using
+.CW groff ,
+you can use
+.CW geqn
+using
+.CW "groff -e" .
+The
+.CW geqn
+version automatically selects
+.CW neqn
+operation when the output device is one of:
+.RS
+.Ls B
+.Li
+\fBascii\fP
+.Li
+\fBlatin1\fP
+.Li
+\fButf8\fP
+.Li
+\fBcp1047\fP
+.Le
+.RE
+For other
+.CW groff
+extensions, see the
+.CW geqn
+manual page.
+This chapter does not cover extended
+.CW geqn
+features.
 .PP
 With
 .CW eqn
@@ -949,7 +979,7 @@ doesn't recognize it as a special word.
 .PP
 You can also use
 .CW troff
-four-character names for characters, as in the description:
+character names for characters, as in the description:
 .Ps
 #c = a \\(pl b#
 .Pe
@@ -1970,6 +2000,34 @@ subsequent equation in the file to be garbled, and can waste an
 entire formatting run, it makes sense to run
 .CW checkeq
 before you format any files containing equations.
+.PP
+Unfortunately,
+.CW checkeq
+is not generally available in modern UNIX systems.
+If you are using
+.CW groff ,
+the
+.CW geqn
+utility has more complete diagnostics built-in.
+Use a command like:
+.Ps
+$ \f[CB]groff\fP \f[CR]-e -ww -b -z\fP \fIfile\fP
+.Pe
+This command includes
+.CW geqn
+in the pipeline,
+turns on warnings and backtrace,
+and suppresses output so
+.CW groff
+only prints error messages.
+.PP
+If you are only interested in finding
+mismatched delimiters or malformed
+.CW \&.EQ /\C
+.CW \&.EN
+pairs, you can compile the
+.CW checknr
+utility in the Heirloom doctools repository.
 .ix %end [eqn] preprocessor %key eqn preprocessor
 .ig
 	The following .sp -1v just keeps a blank page from

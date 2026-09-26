@@ -115,6 +115,7 @@ command as in the following:
 .Ps
 $ \f[CB]tbl\fP\fI file\fP \f[CB]|\fP \f[CB]troff\fP
 $ \f[CB]tbl\fP\fI file\fP \f[CB]|\fP \f[CB]nroff\fP
+$ \f[CB]groff\fP \f[CR]-t\fP \fIfile\fP
 .Pe
 The
 .CW tbl
@@ -125,6 +126,13 @@ formatting requests, you would normally pipe the output to
 or
 .CW troff
 and then to a printer.
+Using
+.CW groff ,
+the
+.CW -t
+option automatically invokes
+.CW tbl
+and pipes the output to the formatter.
 .PP
 The
 .CW tbl

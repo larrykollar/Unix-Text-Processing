@@ -1,8 +1,6 @@
-
-
 .ig
-	Typed up by: Heinz-Jürgen Oertel
-	Marked up by: Heinz-Jürgen Oertel
+	Typed up by: Heinz-JÃ¼rgen Oertel
+	Marked up by: Heinz-JÃ¼rgen Oertel
 	Proofed on: 13 Oct 2002
 ..
 .so utp.mac
@@ -29,10 +27,6 @@ We'll look at many of the ways
 line editors attack certain problems
 and how that applies to those of us who use full-screen editors.
 .PP
-.ig
-	The original book has "... terminals,"  This is wrong.
-	Fixed by: Heinz-Jürgen Oertel
-..
 Line editors came into existence for use on \(lqpaper terminals\(rq,
 which were basically printers.
 This was before the time of video display terminals.
@@ -72,11 +66,13 @@ But you shouldn't skip this chapter
 	is wrong.  It should read "using a full-screen"  Fixed.
 	--Michael Hobgood
 ..
-just because you won't be using a full-screen editor.
-The purpose of learning
+just because you wouldn't be using a full-screen editor.
+One purpose of learning
 .CW ex
 is to extend what you can do in
 .CW vi .
+.\" Or if your terminfo is borked, or a remote connection is slowwww
+.
 .Ah "The \f[CB]ex\fP Editor
 .LP
 The
@@ -290,7 +286,7 @@ is useful is that sometimes when you are working in
 .CW vi ,
 .ig
 	The original book has "... mode."  This is wrong.
-	Fixed by: Heinz-Jürgen Oertel
+	Fixed by: Heinz-JÃ¼rgen Oertel
 ..
 you might unexpectedly find yourself using \(lqopen mode\(rq.
 For instance,
@@ -375,7 +371,7 @@ requires a good deal of confidence in,
 as well as full knowledge of,
 .ig
 	The original book has "... expressions."  This is wrong.
-	Fixed by: Heinz-Jürgen Oertel
+	Fixed by: Heinz-JÃ¼rgen Oertel
 ..
 the use of pattern matching or \(lqregular expressions\(rq.
 Although somewhat arcane,
@@ -612,7 +608,7 @@ It will display the entire line
 where the string has been located
 .ig
 	The original book has ^^^ in Roman font. This is wrong.
-	Fixed by: Heinz-Jürgen Oertel
+	Fixed by: Heinz-JÃ¼rgen Oertel
 ..
 and the string itself will be marked by a series of carets (\c
 .CW ^^^ ).
@@ -640,7 +636,7 @@ The combination of the
 commands
 .ig
 	The original book has // in Roman font.  This is wrong.
-	Fixed by: Heinz-Jürgen Oertel
+	Fixed by: Heinz-JÃ¼rgen Oertel
 ..
 .CW //
 (repeat last search) and
@@ -837,7 +833,7 @@ to
 .I 9 .
 T}
 .sp 4p
-\e{\fIn\fP,\fIm\fP}\e	T{
+\e{\fIn\fP,\fIm\fP\e}	T{
 Matches a range of occurrences of the single character
 (including a character specified by a regular expression)
 that immediately precedes it.
@@ -867,7 +863,7 @@ will match either
 .I AA
 .ig
 	The original book has ) at the wrong place.
-	Fixed by: Heinz-Jürgen Oertel
+	Fixed by: Heinz-JÃ¼rgen Oertel
 ..
 (as in
 .I AARDVARK )
@@ -921,13 +917,8 @@ and
 .CW \e) ,
 where
 .I n
-is a number from 0 to 9
+is a number from 1 to 9
 and previously saved patterns are counted from the left on the line.
-.ig
-We have an inconsistency here: it says n is 0-9,
-and in the previous row it says 1-9. I'm not sure
-which way it should be so I'll leave it for now. --LK
-..
 T}
 .sp 4p
 \e< \e>	T{
@@ -1104,7 +1095,7 @@ and
 and replay the saved pattern with
 .ig
 	The original book finishes the sentence with ".)"  This is wrong.
-	Fixed by: Heinz-Jürgen Oertel
+	Fixed by: Heinz-JÃ¼rgen Oertel
 ..
 .CW "\e1 ... \e\fIn\fP" .
 .PP
@@ -1249,7 +1240,7 @@ you could enter:
 	The original book has:
 .\"        :g/SYNTAX/,/DESCRIPTION/-1,d
 	This is wrong.
-	Fixed by: Heinz-Jürgen Oertel
+	Fixed by: Heinz-JÃ¼rgen Oertel
 ..
 .Ps
 :g/DESCRIPTION/,/PARAMETERS/-1,d
@@ -1350,7 +1341,7 @@ The effect of this command on several items is:
 	The original book has
 	more-display files becomes display files-more
 	lp-print files becomes print files-lp
-	Fixed by: Heinz-Jürgen Oertel
+	Fixed by: Heinz-JÃ¼rgen Oertel
 
 	Added some highlighting to make the example
 	more clear. --LK
@@ -1899,7 +1890,7 @@ Objects such as
 .CW w
 .ig
 	The original book has "not not"  This is wrong.
-	Fixed by: Heinz-Jürgen Oertel
+	Fixed by: Heinz-JÃ¼rgen Oertel
 ..
 do not work unless enough of them are specified
 so as to exceed a single line.
@@ -1973,7 +1964,7 @@ The input is replaced by the output.
 	This is wrong, and should have single quotes
 	around both sides of each:
 	'[a-z]' and '[A-Z]'
-	Fixed by: Heinz-Jürgen Oertel
+	Fixed by: Heinz-JÃ¼rgen Oertel
 ..
 .ne 10
 .X1
@@ -2020,12 +2011,8 @@ The
 .CW ex
 commands enable you to edit multiple files.
 The advantage to editing multiple files is speed.
-When you are sharing the system with other users,
-it takes time to exit and reenter
-.CW vi
-for each file you want to edit.
 Staying in the same editing session and traveling between files
-is not only faster in access time:  you save abbreviations and
+saves abbreviations and
 command sequences you have defined
 and keep named buffers so that you can copy text from one file to another.
 .Bh "Invoking \f[CB]vi\fP on Multiple Files
@@ -2319,7 +2306,7 @@ with
 and move the cursor to where the copied text will be placed.
 .ig
 	The original book has wrong text in the right window.
-	Fixed by: Heinz-Jürgen Oertel
+	Fixed by: Heinz-JÃ¼rgen Oertel
 ..
 .sp .7v
 .ne 10
@@ -2546,7 +2533,7 @@ Cannot put inside global macro.
 .Pe
 .ig
 	Which is now possible at least with Elvis
-	Remark by: Heinz-Jürgen Oertel
+	Remark by: Heinz-JÃ¼rgen Oertel
 ..
 .LP
 If you want to move lines from one place to another
@@ -2612,7 +2599,7 @@ so that it can be re-executed with a single key-stroke.
 	in Elvis it should be:
 	:map z I.IP "^[ea" 10n^M^[2x~
 	I don't know if the UTP example was correct
-	Remark by: Heinz-Jürgen Oertel
+	Remark by: Heinz-JÃ¼rgen Oertel
 ..
 :map z I.IP "^[ea" 10n^M^[3x\(ap
 .Pe
@@ -2709,7 +2696,7 @@ user, you might want to put font-switch codes on function keys.
 For example:
 .ig
 	Text describes both keys with the same code
-	Fixed by: Heinz-Jürgen Oertel
+	Fixed by: Heinz-JÃ¼rgen Oertel
 ..
 .Ps
 :map #1 i\efI^[

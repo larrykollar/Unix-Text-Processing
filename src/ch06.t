@@ -282,11 +282,22 @@ break midway.
 Generally, you have to go in the file at the
 point where it broke, or before that point, and examine the
 macros or a sequence of macros.
-You can also run a program
-on the input file to examine the code you have entered.
-This program, available at most sites, is called
-.CW checkmm .
+A legacy program,
+.CW checkmm ,
 .ix [checkmm] command %key checkmm command
+examined the specified file and provided information
+about issues such as lists or displays not closed.
+If you are using
+.CW groff ,
+you can use the backtrace and warning functions
+to provide a rough equivalent.
+For example, the command:
+.Ps
+.CW "groff -mm -b -w w file.mm"
+.Pe
+detects and prints syntax errors,
+unmatched macros, and structural issues.
+.\" XXX the above was info from AI... need to verify
 .Bh "Default Formatting
 .ix [mm] macros, default formatting %key mm macros, default formatting
 .ix formatting defaults, [mm] %key formatting defaults, mm
@@ -942,7 +953,9 @@ and
 accept fractions, so that each of the following
 codes has the same result:
 .Ps
-\&.sp .3v   .SP .3   .sp .3
+\&.sp .3v
+\&.SP .3
+\&.sp .3
 .Pe
 .ix %end [.SP] macro ([mm]) %key SP macro mm
 .ix %end [mm] macros, [.SP] macro %key mm macros, SP macro
@@ -1249,6 +1262,7 @@ roman,
 and
 .I italic .
 .ix [mm] macros, italic font %key mm macros, italic font
+Many have a fourth: bold-italic.
 Normal body copy is printed in the roman font.
 You can change temporarily to a bold or italic font
 for emphasis.
@@ -1295,8 +1309,7 @@ by underlining).
 .sp .7v
 .SS
 .Ps
-\fBAlcuin \fP\fRrevitalizes an \fP\fIage-old\fP\fR tradition.\fP
-.sp
+\fBAlcuin\fP revitalizes an \fIage-old\fP tradition.
 .Pe
 .SE
 .sp .8v
@@ -1317,11 +1330,10 @@ handwriting;
 .Pe
 .LP
 The previous example produces:
-.\" Hm, where did all those extra font selectors come from? -LK
 .SS
 .Ps
-\fRThe art of \fP\fBcalligraphy\fP\fR is, quite simply, \fP\c
-\fIbeautiful\fP\fR handwriting;\fP
+The art of \fBcalligraphy\fP is, quite simply,
+\fIbeautiful\fP handwriting;
 .sp
 .Pe
 .SE
@@ -1345,7 +1357,7 @@ This example produces:
 .sp .7v
 .SS
 .Ps
-\fRits opposite is \fP\fBcacography\fP\fR.\fP
+its opposite is \fBcacography\fP.
 .sp
 .Pe
 .SE
@@ -1362,7 +1374,7 @@ This produces:
 .sp .7v
 .SS
 .Ps
-\fRThe ink pen has been replaced by a \fP\fIlight\fP\fR pen.\fP
+The ink pen has been replaced by a \fIlight\fP pen.
 .sp
 .Pe
 .SE
@@ -1378,8 +1390,8 @@ This produces:
 .sp .7v
 .SS
 .Ps
-\fRAlcuin uses three input devices, a \fP\fBlight pen\fP\c
-\fR, a\fP\fB mouse\fP\fR, and a \fP\fBgraphics tablet\fP\fR.\fP
+Alcuin uses three input devices, a \fBlight pen\fP,
+a \fBmouse\fP, and a \fBgraphics tablet\fP.
 .sp
 .Pe
 .SE
@@ -1428,6 +1440,7 @@ character overstrike; specifying an italic font results
 in an underline for each character (not a continuous rule).
 Overstriking and underlining can cause problems on some printers
 and terminals.
+.
 .Bh "Changing Point Size
 .ix %begin [mm] macros, changing point~size %key mm macros, changing point size
 .ix %begin point~size, changing ([mm]) %key point size, changing mm
@@ -1954,13 +1967,14 @@ exhibits, and figures.
 In addition, the display can be labeled
 and numbered in sequence, as well as printed in a table of
 contents at the end of the file.
-The following group of macros are available:
+The following macros are available:
 .RS
 .TS
 lf(CW) l .
 \&.EC	Equation
 \&.EX	Exhibit
 \&.FG	Figure
+\&.TB     Table
 .TE
 .ix %begin [.EC] macro ([mm]) %key EC macro mm
 .ix %begin [mm] macros, [.EC] macro %key mm macros, EC macro
@@ -2467,6 +2481,7 @@ The code checking program,
 .ix [checkmm] command %key checkmm command
 can help; in addition, you may want to format and print
 repeatedly to examine and correct problems with lists.
+.
 .Bh "Marked Lists
 .ix [mm] macros, marked lists %key mm macros, marked lists
 .ix lists, marked ([mm]) %key lists, marked mm
@@ -4385,7 +4400,7 @@ T}
 .sp 4p
 W###T{
 Width of page (line and title length).
-Default is 6 in
+Default is 6i in
 .CW troff ,
 60 characters in
 .CW nroff .

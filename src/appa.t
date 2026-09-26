@@ -1,8 +1,8 @@
 .ig
         appa.t
-        Typed by: Heinz-Jürgen Oertel
-        Marked up by: Heinz-Jürgen Oertel
-        Proofed on: 22 Oct 2002 by Andreas Kähäri <andreas.kahari@unix.net>
+        Typed by: Heinz-JÃ¼rgen Oertel
+        Marked up by: Heinz-JÃ¼rgen Oertel
+        Proofed on: 22 Oct 2002 by Andreas Kï¿½hï¿½ri <andreas.kahari@unix.net>
 
         $Id: appa.t,v 1.1 2003/07/28 01:28:44 lkollar Exp $
 	$Log: appa.t,v $
@@ -16,7 +16,7 @@
 	used .page macro and \(lq, \(rq
 
 	Revision 1.2  2002/11/02 19:53:07  oe
-	1. proof reading by Andreas Kähäri
+	1. proof reading by Andreas Kï¿½hï¿½ri
 
 ..
 .so utp.mac
