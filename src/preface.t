@@ -1,70 +1,162 @@
 .ig
-	preface.t
-	Typed by: Stewart Russell.
-	Marked up by: Stewart Russell.
-	Addendum added by: Larry Kollar.
-	Proofed on: 29 Sep 02
+    Rewritten by Larry Kollar 1 June 2026
 ..
 .so utp.mac
 .utp
 .Nh 0
-.page xi
 .chapter "" "Preface" NONE
 .LP
-Many people think of computers primarily as
-\(lq\c
-number crunchers,\c
-\(rq
-and think of word processors as generating form letters and
-boilerplate proposals.
-That computers can be used productively
-by writers, not just research scientists, accountants, and
-secretaries, is not so widely recognized.
-Today, writers
-not only work with words, they work with computers and the
-software programs, printers, and terminals that are part of
-a computer system.
+Computer technology
+has made astounding advances
+in the 40 years since
+.I "Unix Text Processing"
+was first published.
+Today's cheapest netbooks and tablets
+have more computing power
+than the typical multi-user UNIX system in 1987,
+and many use a derivative of UNIX
+as an operating system.
+And thus, this book 
+In this book, we will use "UNIX"
+as a generic term for
+both commercial UNIX systems
+and for open-source derivatives
+including Linux and BSD systems.
 .PP
-The computer has not simply replaced a typewriter; it has
-become a system for integrating many other technologies.
-As these technologies are made available at a reasonable cost,
-writers may begin to find themselves in new roles as computer
-programmers, systems integrators, data base managers, graphic
-designers, typesetters, printers, and archivists.
+In some cases, the old is new again
+(for example, topic-based writing).
+Outside a few industries,
+where printed documentation is a must,
+documentation has nearly left paper behind entirely.
+The first website was launched in August 1991,
+four years after
+.I "Unix Text Processing"
+was published.
+The PDF format
+was introduced in January 1993.
+EPUB, a standard eBook format specification,
+was released in 2007.
+Typesetters are still around,
+but the vast majority of documentation
+is now delivered through HTML or PDF.
 .PP
-The writer functioning in these new roles is faced with
-additional responsibilities.
-Obviously, it is one thing to have
-a tool available and another thing to use it skillfully.
-Like a craftsman, the writer must develop a number of specialized
-skills, gaining control over the method of production as well
-as the product.
-The writer must look for ways to improve the
-process by integrating new technologies and designing new
-tools in software.
+Consumer-priced inkjet and laser printers
+offer 2400dpi resolution,
+producing output indistinguishable
+from typesetter output for most people.
 .PP
-In this book, we want to show how computers can be used
-effectively in the preparation of written documents, especially
-in the process of producing book-length documents.
-Surely it is important to learn the tools of the trade, and
-we will demonstrate the tools available in the
-UNIX
-environment.
+Input has changed as much as output.
+Unicode is supplanting ASCII at the text level.
+XML-based formats such as DITA and DocBook
+provide the foundation for many high-end
+technical publishing systems,
+while Markdown or similar markup languages
+like AsciiDoc underpin the static site generators
+(SSGs) used to deploy documentation on the Web.
+.PP
+UNIX text processing tools have not been left behind.
+Continued development,
+and in some cases complete re-writes,
+have eliminated many of the limitations
+present in 1987.
+In addition, many of the utilities
+described in this book
+have been released under open-source
+(or at least non-commercial use)
+licenses, so you can mostly recreate
+the environment described in the original version of
+.I "Unix Text Processing" .
+If you prefer,
+you can use independently created versions such as
+.CW groff
+(GNU roff, including many of the preprocessors
+described later),
+.CW gawk
+(GNU awk), and
+.CW vim
+(\c
+.CW vi
+Improved), under completely open-source licenses.
+In many cases,
+the originals have been updated
+to support the extensions provided by
+the independently created versions. 
+.PP
+Technical writing, as a profession,
+has made its own advances
+while continuing to battle the perception
+that "anyone can write"\**.
+.FS
+Anyone can play basketball, too,
+but how many are good enough
+to do it for a living?
+.FE
+.PP
+The recent popularity of LLMs
+(commonly referred to as "AI")
+present both hazards and opportunities
+for technical writers.
+But we can stick with
+the standard text processing tools for now.
+.
+.Bh "So What's Next?"
+.LP
+With all the changes,
+at least one thing has remained constant:
+the need for clear, concise, consistent documentation.
+The tools and techniques described in this book
+provide a framework for delivering higher-quality
+documentation, often with less effort
+than needed by writers using WYSIWYG word processors.
+.PP
+This power does come with some responsibility:
+.RS
+.Ls B
+.Li
+Spending time
+learning and using a command-line interface,
+new file formats, and new ways to edit content.
+.Li
+Abandoning the "one app to do it all" philosophy
+and embracing the tool chain.
+As carpenters, plumbers, and mechanics
+all need a collection of tools for their jobs,
+writers need to embrace the idea
+of having their own collection of tools,
+each tool optimized to do one thing well.
+Going beyond, UNIX encourages creating custom tools
+to perform tasks to exacting specifications.
+.Li
+Considering what might be needed
+to produce documents to be deployed
+to both book formats and the Web.
+.Li
+Wanting to stretch your abilities,
+learning how to become more efficient and productive.
+.Le
+.RE
+.LP 0
 However, it is also valuable to examine text
-processing in terms of problems and solutions: the problems
-faced by a writer undertaking a large writing project and
-the solutions offered by using the resources and power of a
+processing in terms of problems and solutions:
+the problems
+faced by a writer
+undertaking a large writing project and
+the solutions offered
+by using the resources and power of a
 computer system.
 .PP
-In Chapter 1, we begin by outlining the general capabilities
+In Chapter 1, we begin
+by outlining the general capabilities
 of word processing systems.
 We describe in brief the kinds
-of things that a computer must be able to do for a writer,
+of things that a computer must be able to do
+for a writer,
 regardless of whether that writer is working on a
 UNIX
 system or on an
 IBM PC
-with a word-processing package such as WordStar or MultiMate.
+with a word-processing package
+such as Word or FrameMaker.
 Then, having defined basic word-processing
 capabilities, we look at how a text-processing system
 includes and extends these capabilities and benefits.
@@ -74,17 +166,17 @@ processing tools in the
 UNIX
 environment.
 These tools, used individually or in combination,
-provide the basic framework for a text-processing system, one
-that can be custom-tailored to supply additional capabilities.
+provide the basic framework
+for a text-processing system, one
+that can be custom-tailored
+to supply additional capabilities.
 .PP
 Chapter 2 gives a brief review of
-UNIX
-fundamentals.
+UNIX fundamentals.
 We assume
-you are already somewhat acquainted with
-UNIX,
-but we included
-this information to make sure that you are familiar with basic
+you are already somewhat acquainted with UNIX,
+but we included this information
+to make sure that you are familiar with basic
 concepts that we will be relying on later in the book.
 .PP
 Chapter 3 introduces the
@@ -94,13 +186,14 @@ Although many other editors and
 word processing programs are available with
 UNIX,
 .CW vi
-has the advantage that it works, without modification, on almost every
-UNIX
+has the advantage that it works,
+without modification, on almost every UNIX
 system and with almost every type of terminal.
 If you learn
 .CW vi ,
 you can be confident that your text editing skills
-will be completely transferable when you sit down at someone
+will be completely transferable
+when you sit down at someone
 else's terminal or use someone else's system.
 .PP
 Chapter 4 introduces the
@@ -111,9 +204,12 @@ formatting programs.
 Because
 .CW vi
 is a text editor, not a word-processing program,
-it does only rudimentary formatting of the text you enter.
-You can enter special formatting codes to specify how you
-want the document to look, then format the text using either
+it does only rudimentary formatting of the text
+you enter.
+You can enter special formatting codes
+to specify how you
+want the document to look,
+then format the text using either
 .CW nroff
 or
 .CW troff .
@@ -371,17 +467,29 @@ UNIX
 into an
 integrated text-processing environment.
 .PP
-Numerous appendices summarize information that is spread
-throughout the text, or that couldn't be crammed into it.
-.ce 1
-* * *
+In Chapter 19, we explore
+two text formats that have become important
+for technical writing:
+XML and Markdown.
+We introduce the Free 
+.CW Pandoc
+tool, that allows conversion between many
+documentation formats (including 
+.CW troff ,
+at least as a destination format).
+.PP
+Numerous appendices summarize information
+that is spread throughout the text,
+or that couldn't be crammed into it.
+.
+.Bh "Original Edition Acknowledgments"
 .LP
-Before we turn to the subject at hand, a few acknowledgments
+Before we turn to the subject at hand,
+a few acknowledgments
 are in order.
 Though only two names appear on the cover of this
 book, it is in fact the work of many hands.
-In particular, Grace
-Todino wrote the chapters on
+In particular, Grace Todino wrote the chapters on
 .CW tbl
 and
 .CW eqn
@@ -390,11 +498,11 @@ and the chapters on
 .CW vi
 and
 .CW ex
-are based on the O'Reilly & Associates' Nutshell Handbook,
+are based on the O'Reilly & Associates'
+Nutshell Handbook,
 .I "Learning the Vi Editor" ,
 written by Linda Lamb.
-Other members of the O'Reilly & Associates
-staff\c
+Other members of the O'Reilly & Associates staff\c
 \(em\c
 Linda Mui, Valerie Quercia, and Donna Woonteiler\c
 \(em\c
@@ -405,7 +513,7 @@ typesetting, and indexing.
 Donna was new to our staff when she took on responsibility for
 the job of copyfitting\c
 \(em\c
-that final stage in page layout made
+that final stage in page layout, made
 especially arduous by the many figures and examples in this
 book.
 She and Linda especially spent many long hours getting
@@ -415,8 +523,8 @@ doing the final consistency check on examples, making sure that
 copyediting changes or typesetting errors had not compromised
 the accuracy of the examples.
 .PP
-Special thanks go to Steve Talbott of Masscomp, who first
-introduced us to the power of
+Special thanks go to Steve Talbott of Masscomp,
+who first introduced us to the power of
 .CW troff
 and who wrote the first
 version of the extended
@@ -436,17 +544,18 @@ at Hayden Books, for her vision of the Hayden
 UNIX
 series, and this book's place in it.
 .PP
-In the course of this book's development, Hayden was acquired
-by Howard Sams, where Teri's role was taken over by Jim Hill.
-Thanks also to the excellent production editors at Sams,
-Wendy Ford, Lou Keglovitz, and especially Susan Pink Bussiere,
+In the course of this book's development,
+Hayden was acquired by Howard Sams,
+where Teri's role was taken over by Jim Hill.
+Thanks also to the excellent production editors
+at Sams,
+Wendy Ford, Lou Keglovitz,
+and especially Susan Pink Bussiere,
 whose copyediting was outstanding.
 .PP
 Through it all, we have had the help of Steve Kochan and Pat
 Wood of Pipeline Associates, Inc., consulting editors to the
-Hayden
-UNIX
-Series.
+Hayden UNIX Series.
 We are grateful for their thoughtful and
 thorough review of this book for technical accuracy.
 (We must,
@@ -465,19 +574,17 @@ which was used to convert
 .CW ditroff
 output to PostScript, which
 was used in turn to drive a Linotronic L100 typesetter.
+.
 .Bh "The UTP Revival"
 .LP
 A lot of changes have occurred in the
-UNIX
-world since
+UNIX world since
 .I "Unix Text Processing\/"
 was first printed in 1987.
 In the early 21st century,
 personal computers have become dirt cheap, and
-WYSIWYG
-word processors are everywhere.
-Traditional commercial
-UNIX
+WYSIWYG word processors are everywhere.
+Traditional commercial UNIX
 systems are being rapidly replaced\c
 \(em\c
 not only by Microsoft
@@ -489,13 +596,13 @@ Who could have predicted
 .I this
 in 1987?
 .PP
-While
-personal computers became cheaper and more powerful,
+While personal computers
+became cheaper and more powerful,
 .CW troff
-became an expensive add-on item to an increasingly expensive
+became an expensive add-on item
+to an increasingly expensive
 operating system.
-WYSIWYG
-word processors were not nearly as powerful as
+WYSIWYG word processors were not nearly as powerful as
 .CW troff ,
 and only now are beginning to approach
 .CW troff 's
@@ -535,7 +642,8 @@ available under the Open Book Project,
 they were unable to locate a copy of the original
 .CW troff
 source for the book.
-Undaunted, they scanned a proof copy (as bitmaps) and made that
+Undaunted, they scanned a proof copy
+(as bitmaps) and made that
 available for download.
 When the news reached the
 .CW groff
@@ -546,30 +654,30 @@ transcribing the text and recreating the source code.
 People started claiming chapters,
 a list member opened his mouth one time too many
 and became project coordinator, and
-\(lq\c
-here we are.\c
-\(rq
+\[lq]here we are.\[rq]
 After about a year of manic activity
 punctuated with long naps, we have finally
 restored the book to its 1987 glory.
 .PP
-The following people lent a hand with transcription and markup
+The following people
+lent a hand with transcription and markup
 (in alphabetical order):
 Ralph Corderoy,
 Michael Hobgood (who did the bulk of the work),
 Larry Kollar,
 Manas Laha,
-Heinz-Jürgen Oertel,
+Heinz-JÃ¼rgen Oertel,
 Jack Redman (who joined late, yet just in time),
 Stewart Russell, and
 Colin Watson.
 Jon Snader (no stranger to writing books with
 .CW troff )
-recreated a version of the macros used for the original book.
-Michael Hobgood and Andreas Kähäri have done most
+recreated a version of the macros
+used for the original book.
+Michael Hobgood and Andreas Kï¿½hï¿½ri have done most
 of the proofreading.
 While we caught and corrected a few typos, we acknowledge that
-we may have introduced others\(emthus
+we may have introduced others\[em]thus
 we now lay claim to any remaining errors.
 .PP
 The PostScript file accompanying
@@ -583,7 +691,8 @@ from AFPL GhostScript 8.00.
 .PP
 Another essential element in the UTP Revival was the
 emergence of free OCR software.
-While not quite up to the commercial offerings, programs like
+While not quite up to the commercial offerings,
+programs like
 .CW gocr
 gave more people the opportunity to contribute.
 .PP

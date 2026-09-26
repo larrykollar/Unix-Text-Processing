@@ -12,19 +12,18 @@
 .ix %begin [troff] formatter %key troff formatter
 The
 .CW vi
-editor lets you edit text, but it is not much good at formatting.
+editor lets you edit text, but formatting is best left to other utilities.
 A text file such as program source code might be formatted with a simple
 program like
 .CW pr ,
 which inserts a header at the top of every page and handles pagination,
 but otherwise prints the document exactly as it appears in the file.
-But for any application requiring the preparation of neatly formatted
-text, you will use the
+But to prepare neatly formatted text, use the
 .CW nroff
 (\(lqen-roff\(rq) or
 .CW troff
 (\(lqtee-roff\(rq)
-formatting program.
+formatting programs.
 .PP
 These programs are used to process an input text file, usually coded or
 \(lqmarked up\(rq
@@ -1388,7 +1387,7 @@ that will cause a break.*
 All other requests can be interspersed with text without causing a
 break.
 In addition, as discussed later, even these requests can be introduced
-with a specìal \(lqno break\(rq control character (\c
+with a specï¿½al \(lqno break\(rq control character (\c
 .CW '
 .ix breaks, no-break control~character
 .ix no-break control~character

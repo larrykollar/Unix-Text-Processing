@@ -35,38 +35,41 @@ returning again and again to the same piece of prose, adding or
 deleting words, phrases, and sentences, changing the order of
 thoughts, and elaborating a single sentence into pages of text.
 .PP
-A writer working on paper periodically needs to clear the
-deck\c
+A writer working on paper
+periodically needs to clear the deck\c
 \(em\c
 to type a clean copy, free of elaboration.
-As the writer
-reads the new copy, the process of revision continues, a word
-here, a sentence there, until the new draft is as obscured
+As the writer reads the new copy,
+the process of revision continues,
+a word here, a sentence there,
+until the new draft is as obscured
 by changes as the first.
 As Joyce Carol Oates is said to have
 remarked: \(lqNo book is ever finished.
 It is abandoned.\(rq
 .PP
-Word processing first took hold in the office as a tool to help
-secretaries prepare perfect letters, memos, and reports.
-As
-dedicated word processors were replaced with low-cost personal
-computers, writers were quick to see the value of this new
-tool.
-In a civilization obsessed with the written word, it is
-no accident that WordStar, a word processing program, was one
-of the first best sellers of the personal computer revolution.
+Word processing first took hold in the office
+as a tool to help secretaries prepare
+perfect letters, memos, and reports.
+As low-cost personal computers
+replaced dedicated word processors,
+writers were quick to see the value of this new tool.
+In a civilization obsessed with the written word,
+it is no accident that WordStar, a word processing program,
+was one of the first best sellers
+of the personal computer revolution.
 .PP
-As you learn to write with a word processor, your working style
-changes.
-Because it is so easy to make revisions, it is much
-more forgivable to think with your fingers when you write,
-rather than to carefully outline your thoughts beforehand and
-polish each sentence as you create it.
+As you learn to write with a word processor,
+your working style changes.
+Because it is easy to make revisions,
+you can think with your fingers when you write,
+rather than to carefully outline your thoughts beforehand
+and polish each sentence as you create it.
 .PP
-If you do work from an outline, you can enter it first, then
-write your first draft by filling in the outline, section by
-section.
+If you do work from an outline,
+enter it first,
+then write your first draft
+by filling in the outline, section by section.
 If you are writing a structured document such
 .page 2
 as a

@@ -15,12 +15,10 @@ text-processing applications.
 In addition, we introduce several UNIX utilities for
 communications and for reading and writing to tapes and
 floppy disks.
-These utilities are not specifically designed for text
-processing, but we have found them necessary for working in
-the UNIX environment.
-Although you can find more detailed information on these
-utilities in books aimed at a general audience, we've included
-brief discussions of them to encourage you to learn them.
+They may be useful for transferring
+text and code from a legacy UNIX system to a modern one,
+but most people now use Internet services
+to transfer data from one system to another.
 .PP
 UNIX has many standard programs, as a run-down of the table
 of contents for the
@@ -52,22 +50,26 @@ or as parts of other programs.
 (In the next chapter, we go into more detail about shell
 scripts).
 The commands are presented in sections, grouped by function.
+.
 .Ah "Managing Your Files"
 .LP
 One of the realities of using a computer is that you begin
 to think of a document in terms of files, rather than chapters
 or sections.
-You edit and print files; create and copy
-.page 294
-files; delete files accidentally and lose your edits; and look
-through files to find the information that is contained in them.
+You edit and print files;
+create and copy files;
+delete files accidentally and lose your edits;
+and look through files to find
+the information that is contained in them.
 Increasingly, files contain the goods that you trade.
 You exchange not only printed copies of documents, but using
-floppy disks, tapes, or modems, you take files off one system
-and put them on another system.
+USB drives, CD or DVD discs, or the Internet,
+you take files from one system
+and copy them to another system.
 Learning to organize and maintain files is essential to working
 .ix	files, organizing
 on a computer.
+.
 .Bh "Using the File System to Your Advantage"
 One obvious feature of UNIX that makes it easy to handle
 large numbers of files is the hierarchical file system.
@@ -75,46 +77,54 @@ With carefully named files and directories, the pathname,
 which specifies a file's unique place in the file system
 hierarchy, can tell a lot about not only how to get at the
 file, but its contents as well.
-For example, on our system,
-we keep all source files for various books in progress on a
-file system called
-.CW /work ;
-work for a given client is kept in
-a directory named for the client, with a subdirectory for
-each separate manual.
+For example, MacOS\~X and most Linux systems
+provide a directory under each user's home directory called
+.CW Documents .
+Work for a given client can be kept in
+a directory named for the client,
+with a subdirectory for each separate manual.
 Within each manual's subdirectory,
 individual chapters are named consistently,
-.CW ch01 ,
-.CW ch02 ,
+.CW ch01_intro ,
+.CW ch02_install ,
 and so on.
 As a result, it is easy both to locate a file (Chapter I
 of the FORTRAN manual for ABC Corp.
 can predictably be found in
-.CW /work/abc/fortran/ch01 )
+.CW ~/Documents/abc/fortran/ch01_intro )
 and to guess its contents.
 .PP
-If you are using the C shell, you can create an alias that
+If you are using Bash (Bourne Again SHell) or the C shell,
+you can create an alias that
 .ix	C shell
+.ix Bash shell
 .ix	[alias] command %key alias command
 provides a shorthand way of entering a command.
 In the following example, the alias allows you to think in
 terms of manuals instead of directories.
 .Ps
-% \f[CB]alias fortran "cd /work/abc/fortran; pwd"\fP
+% \f[CB]alias fortran "cd ~/Documents/abc/fortran; pwd"\fP
 % \f[CB]pwd\fP
-  /work/fred
+  /home/fred
 % \f[CB]fortran\fP
-  /work/abc/fortran
+  /home/fred/Documents/abc/fortran
 .Pe
 You can place an
 .CW alias
 definition in your
 .CW ".cshrc"
 .ix	[.cshrc] file %key cshrc file
+(C\~shell) or
+.CW ".bashrc"
+(Bash shell)
 file so that it becomes part of your environment.
+When using Bash,
+add an equals (=) sign between the command
+and its definition.
 .PP
-In the Bourne shell, you achieve a similar result by using an
-environment variable called
+In the Bourne or Bash shells,
+you can achieve a similar result
+by using an environment variable called
 .CW CDPATH
 .ix	Bourne shell, [CDPATH] environment~variable %key Bourne shell, CDPATH environment variable
 .ix	[CDPATH] environment~variable %key CDPATH environment variable
@@ -123,13 +133,14 @@ to define a search path for the
 command.
 For example:
 .Ps
-$ \f(CBCDPATH=/work/abc:/work/textp:/usr\f(CW
+$ \f(CBCDPATH=/home/fred/Documents/abc:\e
+/home/fred/Documents/textp:/home\f(CW
 $ \f(CBcd fortran\f(CW
-/work/abc/fortran
+/home/fred/Documents/abc/fortran
 $ \f(CBcd jane\f(CW
 /usr/jane
 $ \f(CBcd ch03\f(CW
-/work/textp/ch03
+/home/fred/Documents/textp/ch03
 .Pe
 When you issue a
 .CW cd
@@ -143,7 +154,22 @@ are specified between colons.
 Directories listed in
 .CW CDPATH
 are searched in order from left to right.
-.page 295
+.PP
+Another useful alias (Bash style):
+.Ps
+% \f[CB]alias l="ls -CF --color"\fP
+.Pe
+Now, typing
+.CW l
+and pressing
+.B Enter
+lists your directory in columns (\c
+.CW -C
+option), highlighting special files (\c
+.CW -F
+option), and using color to highlight directories
+and other files.
+.
 .Bh "Shell Filename Metacharacters"
 .ix	files, metacharacters
 .LP
@@ -288,12 +314,14 @@ one directory to another:
 .Ps
 $ \f(CBcp basic/ch0? /work/backup\f(CW
 .Pe
+.
 .Bh "Locating Files"
 .LP
 Although a hierarchical file system with consistent naming
-conventions helps a lot, it is still easy to lose track of files,
-or just to have difficulty specifying the ones you want to
-manipulate.
+conventions helps a lot,
+it is still easy to lose track of files,
+or just to have difficulty specifying the ones
+you want to manipulate.
 The number of files contained on even a small hard disk can be
 enormous, and complex directory hierarchies can be difficult to
 work with.
@@ -301,13 +329,28 @@ work with.
 It is possible to lose a file on the file system when you have
 forgotten in which directory you put it.
 To look through an
-entire file system or a large directory hierarchy, you need a
-utility called
+entire file system or a large directory hierarchy,
+most modern UNIX (or even Windows) systems
+have an indexed search facility
+that can quickly find any files given a name.
+On Mac\~OS\~X, Spotlight is available from the menu bar
+(or using
+.CW mdfind
+from a Terminal).
+On Windows, Windows Search is available in the Start menu
+(or use
+.CW "winget search"
+from the Command Prompt).
+.PP
+Linux supports a number of different
+optional indexed search facilities.
+If none are installed on your system,
+use a utility called
 .CW find .
 .ix	%begin [find] command %key find command
 The
 .CW find
-utility looks at the external characteristics of a file\(emwho
+utility looks at the external characteristics of a file\[em]who
 created it, when it was last accessed, its name, and so on.
 .PP
 The
@@ -349,13 +392,13 @@ must precede
 .PP
 If you wanted to find any file named
 .CW notes
-on the
-.CW /work
-file system, here's the command to enter:
+in your
+.CW Documents
+directory, here's the command to enter:
 .Ps
-$ \f(CBfind /work -name notes -print\f(CW
-/work/alcuin/notes
-/work/textp/ch02/notes
+$ \f(CBfind ~/Documents -name notes -print\f(CW
+/home/fred/Documents/alcuin/notes
+/home/fred/Documents/textp/ch02/notes
 .Pe
 The output is the pathname (starting with the specified file
 system or directory) of each file that is found.
@@ -386,8 +429,8 @@ and will not be passed to the
 .CW find
 command.)
 .Ps
-$ \f(CBfind /work /usr -name 'memo*' -user fred -print\f(CW
-/usr/fred/alcuin/memo
+$ \f(CBfind /work /home -name 'memo*' -user fred -print\f(CW
+/home/fred/Documents/alcuin/memo
 /work/alcuin/memo.523
 /work/caslon/memo.214
 .Pe
@@ -424,6 +467,11 @@ that will list all files under a given directory, not just those
 at the current directory level.
 As you'll see, this becomes very useful when it comes time to
 back up your files.
+You could also use
+.CW "ls -R" ,
+but
+.CW ls
+does not prepend the file names with their paths.
 .page 298
 .PP
 The longer you work with a UNIX system, the more you will come
@@ -431,6 +479,7 @@ to appreciate
 .CW find .
 Don't be put off by its awkward syntax and many options.
 The time you spend studying this command will be well repaid.
+.
 .Bh "File Characteristics"
 .LP
 Most of us are concerned only with the contents of a file.
@@ -518,6 +567,7 @@ size, or have been modified more recently than a certain date.
 .PP
 Don't get stuck thinking that the only handle you can pick a
 file up with is the file's name.
+.
 .Ah "Viewing the Contents of a File"
 .LP
 You are probably familiar with a number of UNIX commands that
@@ -529,23 +579,22 @@ The
 command streams a file to the screen at a rate that is usually
 too swift.
 The
-.CW pg
-.ix	%begin [pg] command %key pg command
-and
-.CW more
-.ix	[more] command %key more command
-commands display a file one page at a time.
-They are frequently used as
-.I filters ,
-.ix	filters
+.CW less
+.ix	%begin [less] command %key less command
+command displays a file one page at a time.
+It is frequently used as a
+.I filter ,
+.ix	filter
 for instance, to supply paging for
 .CW nroff
 output.
 .page 299
 .Ps
-$ \f(CBnroff -mm ch01 | pg\f(CW
+$ \f(CBnroff -mm ch01 | less\f(CW
 .Pe
-You can also use these commands to examine unformatted files,
+You can also use
+.CW less
+to examine unformatted files,
 proofing formatting codes as well as text.
 Although these are frequently used commands, not everyone is
 aware that they have interactive subcommands, too.
@@ -558,8 +607,8 @@ You can list these subcommands by entering
 .CW h
 when the program pauses at the bottom of a page.
 Here's the help screen
-.ix	[pg] command, help~screens %key pg command, help screens
-.CW pg
+.ix	[less] command, help~screens %key less command, help screens
+.CW less
 provides.
 .rn PS oldPS
 .rn PE oldPE
@@ -573,25 +622,39 @@ provides.
 line 5.25i dashed
 .PE
 .Ps
-h                help
-q or Q           quit
-<blank> or \\n    next page
-l                next line
-d or ^D          display half a page more
-\&.  or ^L         redisplay current page
-f                skip the next page forward
-n                next file
-p                previous file
-$                last page
-w or z           set window size and display next page
-s savefile       save current file in savefile
-/pattern/        search forward for pattern
-?pattern? or
-^pattern^        search backward for pattern
-!command         execute command
-Most commands can be preceded by a number, as in:
-+1\\n  (next page);  -1\\n  (previous page);  1\\n  (page 1).
-See the manual page for more detail.
+                   SUMMARY OF LESS COMMANDS
+
+      Commands marked with * may be preceded by a number, N.
+      Notes in parentheses indicate the behavior if N is given.
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K.
+
+  h  H                 Display this help.
+  q  :q  Q  :Q  ZZ     Exit.
+ ---------------------------------------------------------------------------
+
+                           MOVING
+
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines).
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines).
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines).
+  b  ^B  ESC-v      *  Backward one window (or N lines).
+  z                 *  Forward  one window (and set window to N).
+  w                 *  Backward one window (and set window to N).
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file.
+  d  ^D             *  Forward  one half-window (and set half-window to N).
+  u  ^U             *  Backward one half-window (and set half-window to N).
+  ESC-)  RightArrow *  Right one half screen width (or N positions).
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions).
+  ESC-}  ^RightArrow   Right to last column displayed.
+  ESC-{  ^LeftArrow    Left  to first column.
+  F                    Forward forever; like "tail -f".
+  ESC-F                Like F but stop when search pattern is found.
+  r  ^R  ^L            Repaint screen.
+  R                    Repaint screen, discarding buffered input.
+        ---------------------------------------------------
+        Default "window" is the screen height.
+        Default "half-window" is half of the screen height.
+.B "HELP -- Press RETURN for more, or q when done"
 .Pe
 .PS
 line 5.25i dashed
@@ -599,19 +662,23 @@ line 5.25i dashed
 .rn oldPS PS
 .rn oldPE PE
 .LP
+The last line indicates that
+.CW less
+has more commands beyond what it shows at first.
+Press the space bar to see the next page of commands,
+.B Enter
+to show one more line, or
+.B q
+to exit the help screen.
+.PP
 One advantage of
-.CW pg
-.ix	%end [pg] command %key pg command
-is that you can move backward as well as forward when going
-through a file.
-A special feature of
-.CW more
+.CW less
 is the ability to invoke
 .CW vi
 at the current point in the file.
 When you quit
 .CW vi ,
-.CW more
+.CW less
 resumes paging through the rest of the file.
 .PP
 Another command used for examining a file is
@@ -751,6 +818,7 @@ The
 .CW tail
 command has the same syntax; it can save time when you want to
 check the end of a large file.
+.
 .Ah "Searching for Information in a File"
 .ix	files, searching within
 .LP
@@ -775,7 +843,16 @@ pattern-matching searches using
 and its siblings,
 .CW egrep
 and
+.CW fgrep \**.
+.FS
+GNU
+.CW grep
+merges the functionality of
+.CW grep ,
+.CW egrep ,
+and
 .CW fgrep .
+.FE
 .PP
 The main function of
 .CW grep
@@ -1079,12 +1156,13 @@ and
 can read search patterns from a file using the
 .CW -f
 option.
+.
 .Ah "Proofing Documents"
 .LP
 There are no computer tools that completely replace the close
 examination of final printed copy by the human eye.
-However, UNIX does include a number of proofing aids, ranging
-from a simple spelling checker to programs for checking style
+However, UNIX does support a number of proofing aids, ranging
+from spelling checkers to optional programs for checking style
 and diction, and even sexist usage.
 .PP
 We'll look at some of these programs in this section.
@@ -1094,9 +1172,18 @@ Keep in mind, though, that
 .CW grep
 is also a very powerful proofing aid, which you can use to check
 for consistent usage of words and phrases.
+.
 .Bh "Looking For Spelling Errors"
 .LP
-The
+Using
+.CW vim
+or
+.CW gvim ,
+or programming editors like Brackets or VScodium,
+you can take advantage of built-in spelling libraries
+to flag spelling errors.
+.PP
+The traditional UNIX
 .CW spell
 .ix	[spell] command %key spell command
 command reads one or more files and prints a list of words that
@@ -1108,6 +1195,30 @@ to locate each of the words, and
 or
 .CW ex
 to make the edits.
+The Free software community
+has developed extended spell-checking programs,
+.CW aspell ,
+.CW ispell ,
+and others.
+In particular,
+.CW aspell
+and
+.CW ispell
+offer interactive spell-checking
+and can work with unfiltered
+.CW troff
+files.
+Since the original
+.CW spell
+utility is not readily available,
+and more powerful replacements are pre-installed
+on most modern UNIX systems,
+we will use
+.CW aspell
+in the following examples.
+.ig
+.\" I think we can remove proof because aspell does the heavy lifting. -LK
+.PP
 In the next chapter, though, we introduce a shell script named
 .CW proof
 .ix	[proof] shell~script %key proof shell script
@@ -1118,9 +1229,12 @@ You will probably prefer to use
 .CW spell
 in that manner rather than invoking it manually.
 .PP
-Even if you do build that script, you can use
-.CW spell
-on its own if you are unsure about which of two possible
+Even if you do build that script, 
+..
+.PP
+You can use
+.CW "aspell list"
+if you are unsure about which of two possible
 spellings is right.
 Type the name of the command, followed by a
 .I RETURN ,
@@ -1129,31 +1243,56 @@ Press
 .CW ^D
 (on a line by itself) to end the list.
 The
-.CW spell
+.CW aspell
 command will echo back the word(s) in the list that it considers
 to be in error.
 .Ps
-$ \f(CBspell\f(CW
+$ \f[CB]aspell list\fP
 misspelling
 mispelling
 ^D
 mispelling
 .Pe
-You can invoke
+If you just want to see a list of words that
+.CW aspell
+considers misspelled, like the original
 .CW spell
-in this way from within
-.CW vi ,
-by typing the
-.CW ex
-colon prompt, an exclamation point, and the name of the
-.CW spell
-command.
-.page 305
+behavior, use:
+.Ps
+$ \f[CB]deroff\fP \fIfile\fP | \f[CB]aspell list\fP
+.Pe
+The
+.CW deroff
+utility strips
+.CW roff
+markup from the file
+(making it suitable for
+.CW "aspell" ).
+If you don't have
+.CW deroff
+on your system,
+or it produces garbled output, try:
+.Ps
+$ \f[CB]nroff\fP \fI-macro file\fP | \f[CB]aspell list\fP
+If hyphenation is enabled,
+the output will include words split across two lines.
+You can fix that by adding the line:
+.Ps
+\&.if n .hy 0
+.Pe
+to the beginning of your file.
 .PP
-When you run
-.CW spell
-on a file, the list of words it produces usually includes a
-number of legitimate words or terms that the program does not
+To check a file, use
+.CW "aspell -n check"
+.I file .
+The
+.CW -n
+option instructs it to ignore
+.CW roff
+markup.
+It shows each flagged word in context.
+Often, the words it flags are
+legitimate words or terms that the program does not
 recognize.
 You must cull out the proper nouns and other words
 .CW spell
@@ -1163,113 +1302,181 @@ For instance, look at the results on this sample sentence:
 $ \f(CBcat sample\f(CW
 Alcuin uses TranScript to convert ditroff into
 PostScript output for the LaserWriter printerr.
-$ \f(CBspell sample\f(CW
-Alcuin
-ditroff
-printerr
-LaserWriter
-PostScript
-TranScript
 .Pe
-Only one word in this list is actually misspelled.
-.PP
-On many UNIX systems, you can supply a local dictionary file so
-that spell recognizes special words and terms specific to your
-site or application.
-After you have run
-.CW spell
-and looked through the word list, you can create a file
-containing the words that were not actual misspellings.
-The
-.CW spell
-command will check this list after it has gone through its own
-dictionary.
-.PP
-If you added the special terms in a file named
-.CW dict ,
-you could specify that file on the command line using the
-.CW +
-option:
+When you run
+.CW "aspell check sample" ,
+it displays the file and highlights
+questioned words one at a time.\**
+.FS
+If
+.CW aspell
+does not find any words to flag,
+it exits without displaying anything.
+.FE
+Below the display,
+.CW aspell
+shows a list of suggested replacements
+and other actions:
+.rn PS oldPS
+.rn PE oldPE
+.de PS
+.in 5n
+..
+.de PE
+.in 0
+..
+.PS
+line 5.25i dashed
+.PE
 .Ps
-$ \f(CBspell +dict sample\f(CW
-printerr
+
+Alcuin uses \fUTranScript\fP to convert ditroff into
+PostScript output for the LaserWriter printerr.
+
+
+                                                                                                              
+1) Transcript                         6) Transcribed
+2) Transcripts                        7) Transcribe
+3) Tran Script                        8) Transept
+4) Tran-Script                        9) Transcriber
+5) Transcript's                       0) Manuscript
+i) Ignore                             I) Ignore all
+r) Replace                            R) Replace all
+a) Add                                l) Add Lower
+b) Abort                              x) Exit
+
 .Pe
-The output is reduced to the single misspelling.
+.PS
+line 5.25i dashed
+.PE
+.rn oldPS PS
+.rn oldPE PE
+.LP
+For each flagged word,
+.CW aspell
+displays up to ten suggested replacements,
+and several actions:
+.Ls B
+.Li
+.CW "i) Ignore" :
+skip this word, but flag later instances.
+.Li
+.CW "I) Ignore all" :
+skip all instances of this word,
+without adding it to your dictionary.
+.Li
+.CW "r) Replace" :
+replace this word
+with one you specify yourself.
+.CW aspell
+records replacements in the file
+.CW \&.aspell.en.prepl
+in your home directory.
+.Li
+.CW "R) Replace all" :
+replace all instances of this word
+with one you specify yourself.
+.Li
+.CW "a) Add" :
+Add this word to your dictionary, stored in the file
+.CW \&.aspell.en.pws
+in your home directory.
+Future
+.CW aspell
+runs treat this word as valid.
+.Li
+.CW "l) Add Lower" :
+Add this word to your dictionary, as lower case.
+Future
+.CW aspell
+runs treat this word as valid.
+.Li
+.CW "b) Abort" :
+Quit
+.CW aspell
+without saving changes.
+.Li
+.CW "x) Exit"
+Quit
+.CW aspell
+and save any changes made to this point.
+.Le
+.LP
+To supply a local dictionary file
+of special words and terms
+specific to your site or application,
+you must first generate a word list
+as described above.
+Output the list to a temporary file,
+then edit the file to keep only the words
+you want
+.CW aspell
+to ignore.
+Then, use the following command to create
+a personal dictionary:
+.Ps
+\[CB]aspell\fP --lang=en create master ./\fIdictfile\fP < \fIwordlist\fP
+.Pe
+The
+.CW \&./
+in front of your dictionary file name is important, because
+.CW aspell
+would otherwise create the dictionary
+in its default word list directory.
+.PP
+After creating the dictionary,
+use the
+.CW -p
+option with the specified file name:
+.Ps
+aspell -n -p \fIdictfile\fP check \fIfile\fP
+.Pe
+The
+.CW aspell
+command checks this list
+after it has gone through its own dictionary.
 .PP
 The
-.CW spell
-command will also miss words specified as arguments to
+.CW aspell
+command misses words specified as arguments to
 .CW nroff
 or
 .CW troff
-macros, and, like any spelling checker, will make some errors
+macros, and, like any spelling checker, can make some errors
 based on incorrect derivation of spellings from the root words
 contained in its dictionary.
 If you understand how
-.CW spell
+.CW aspell
 works, you may be less surprised by some of these errors.
 .PP
-The directory
-.CW /usr/lib/spell
-contains the main program invoked by the
-.CW spell
-command along with auxiliary programs and data files.
-.Ps
-$ \f(CBls -l /usr/lib/spell\f(CW
-total 604
--rwxr-xr-x   1 bin    bin    20176 Mar  9  1985 hashcheck
--rwxr-xr-x   1 bin    bin    14352 Mar  9  1985 hashmake
--rw-r--r--   1 bin    bin    53872 Mar  9  1985 hlista
--rw-r--r--   1 bin    bin    53840 Mar  9  1985 hlistb
--rw-r--r--   1 bin    bin     6328 Mar  9  1985 hstop
--rw-rw-rw-   1 root   root  102892 Jul 12 16:10 spellhist
--rwxr-xr-x   1 bin    bin    23498 Mar  9  1985 spellin
--rwxr-xr-x   1 bin    bin    27064 Mar  9  1985 spellprog
-.Pe
-The
-.CW spell
-command pipes its input through
-.CW "deroff -w"
-and
-.CW "sort -u"
-to remove formatting codes and prepare a sorted word list,
-one word per line.
-(The
-.CW deroff
-and
-.CW sort
-commands are discussed later in this chapter.)
-Two separate
-.page 306
-spelling lists are maintained, one for American usage and one
-for British usage (invoked with the
-.CW -b
+By default,
+.CW aspell
+provides spelling lists for
+American, British, Canadian, and Australian usage.
+Lists for other languages are available
+from the
+.CW aspell
+website and invoked with the
+.CW -l
 option to
-.CW spell ).
-These lists,
-.CW hlista
-and
-.CW hlistb ,
+.CW aspell .
+These lists
 cannot be read or updated directly.
 They are compressed files, compiled from a list of words
-represented as nine-digit hash codes.
+represented as hash codes.
 (Hash-coding is a special technique for quick search of
 information.)
 .PP
-The main program invoked by
-.CW spell
-is
-.CW spellprog .
-It loads the list of hash codes from either
-.CW hlista
-or
-.CW hlistb
-into a table, and looks for the hash code corresponding to each
-word on the sorted word list.
+When you start
+.CW aspell ,
+it loads the list of hash codes from
+the chosen language file,
+and looks for the hash code corresponding to each
+word in the file.
 This eliminates all words (or hash codes) actually found in the
 spelling list.
 For the remaining words,
-.CW spellprog
+.CW aspell
 tries to see if it can derive a recognizable word by performing
 various operations on the word stem, based on suffix and prefix
 rules.
@@ -1285,128 +1492,63 @@ A few of these manipulations follow:
 .Pe
 The new words created as a result of these manipulations will be
 checked once more against the spell table.
-However, before the stem-derivative rules are applied, the
-remaining words are checked against a table of hash codes built
-from the file
-.CW hstop .
-The
-.CW stop
-list contains typical misspellings that stem-derivative
-operations might allow to pass.
-For instance, the misspelled word
-.I thier
-would be converted into
-.I thy
-using the suffix rule -y+ier.
-The
-.CW hstop
-file accounts for as many cases of this type of error as
-possible.
 .PP
-The final output consists of words not found in the spell list,
-even after the program tried to search for their stems, and words
-that were found in the stop list.
-.PP
-You can get a better sense of these rules in action by using the
-.CW -v
-or
-.CW -x
-option.
-.PP
-The
-.CW -v
-option eliminates the last lookup in the table, and produces a
-list of words that are not actually in the spelling list along
-with possible derivatives.
-It allows you to see which words were found as a result of
-stem-derivative operations, and prints the rule used.
-.Ps
-$ \f(CBspell -v sample\f(CW
-Alcuin
-ditroff
-LaserWriter
-PostScript
-printerr
-TranScript
-+out  output
-+s    uses
-.Pe
-The
-.CW -x
-option makes
-.CW spell
-begin at the stem-derivative stage, and prints the various
-attempts it makes to find the word stem of each word.
-.page 307
-.Ps
-$ \f(CBspell -x sample\f(CW
-\&...
-=into
-=LaserWriter
-=LaserWrite
-=LaserWrit
-=laserWriter
-=laserWrite
-=laserWrit
-=output
-=put
-\&...
-LaserWriter
-\&...
-.Pe
-The stem is preceded by an equals sign.
-At the end of the output are the words whose stem does not
-appear in the spell list.
-.PP
-One other file you should know about is
-.CW spellhist .
-Each time you run
-.CW spell ,
-the output is appended through a command called
-.CW tee
-into
-.CW spellhist ,
-in effect creating a list of all the misspelled or unrecognized
-words for your site.
-The
-.CW spellhist
-file is something of a \(lqgarbage\(rq file that keeps on growing.
-You will want to reduce it or remove it periodically.
-To extract useful information from this
-.CW spellhist ,
-you might use the
-.CW sort
-and
-.CW "uniq -c"
-commands shown later in this chapter to compile a list of
-misspelled words or special terms that occur most frequently.
-It is possible to add these words back into the basic spelling
-dictionary, but this is too complex a process to describe here.
+As
+.CW aspell
+finds a word not in the spell list,
+it highlights the word and provides a menu
+of actions and suggested replacements.
+.
 .Bh "Checking Hyphenation"
 .LP
 The
 .CW hyphen
 .ix	[hyphen] command %key hyphen command
-command is used on
+command was meant for
 .CW nroff -\c
 formatted files to print a list of words that
 have been hyphenated at the end of a line.
-You can check that
+While the utility or its source is not generally available,
+a very simple
+.CW awk
+script can duplicate its functionality.
+Copy this code into a file called
+.CW hyphen.awk :
+.Ps
+#!/usr/bin/awk -f
+
+broken > 0 {
+    print stem $1
+    broken = 0
+}
+
+$NF ~ /-$/ {
+    stem = $NF
+    broken = 1
+    next
+}
+.Pe
+Now you can check that
 .CW nroff
 has correctly hyphenated words.
 .Ps
-$ \f(CBhyphen ch03.out\f(CW
-ch03.out:
-applica-tion
-pro-gram
-charac-ter
+$ \f[CB]nroff ch03 | awk -f hyphen.awk\fP
+sys-tem.
+documenta-tion
+indistin-guishable
+ver-sions
+de-scribed
 .Pe
 If you disagree with the hyphenation of a word, you can go
 back into your source file and use either the
 .CW \&.hw
 request to specify hyphenation points or the
 .CW \&.nh
-request to inhibit hyphenation of the word.
+request to inhibit hyphenation of the word
+(or set
+.CW \e%
+at the beginning of the word to inhibit hyphenation
+only on that instance).
 If you don't have the
 .CW hyphen
 command on your system, you can print the lines ending in hyphens
@@ -1423,21 +1565,22 @@ or
 .page 308
 described in the next chapter, to create a version of this
 command that would print both lines.
+.
 .Bh "Counting Words"
 .LP
 In the past, writers were paid by the word.
 The
 .CW wc
-command will count words for
-you.
+command counts words for you.
 .Ps
 $ \f(CBwc ch01\f(CW
 180   1529   9496 ch01
 .Pe
 The three numbers printed represent the number of lines, words,
 and characters, respectively.
-(The presence of formatting commands in the input file will
+(The presence of formatting commands in the input file can
 make this measurement somewhat inaccurate).
+.
 .Bh "Writer's Workbench"
 .ix	Writer's~Workbench
 .PP
@@ -1454,30 +1597,34 @@ community.
 But it was made into a separate product when UNIX was
 commercially released.
 .PP
-The three original programs,
+The three original programs are
 .CW style ,
 .CW diction ,
 and
-.CW explain ,
-are available in Berkeley UNIX systems and in Xenix, but not
-in System V.
+.CW explain .
 .PP
-AT&T has released a greatly improved and expanded version,
-including additional programs for proofreading, that is
-controlled from a master program called
-.CW wwb .
-However, this version is only available as a separately priced
-package for 3B2 and 3B5 computers.
-The unfortunate result is that one of UNIX's most unusual
-contributions to text processing is not officially part of UNIX
-and has never been ported to many UNIX systems.
-.PP
-In this section, we'll describe the original
+The GNU project has replacements for
+.CW style
+and
+.CW diction .
+.\" xxx https://www.gnu.org/software/diction/diction.html
+The WWB versions automatically called
+.CW deroff
+to strip markup before performing the analysis;
+the GNU versions require
+you to manually use
+.CW deroff
+(or some other means).
+This allows using
 .CW style
 and
 .CW diction
-programs, with a brief discussion of
-.CW wwb .
+with other documentation formats
+including HTML, XML, and Markdown.
+A word processing program's
+.B "Save as text"
+export allows using these utilities
+on Word or other word processor documents.
 .PP
 The
 .CW style
@@ -1485,67 +1632,77 @@ The
 program analyzes a document's style
 and computes readability indexes based on several algorithms
 widely accepted in the academic community.
-For example, when run on a draft of this section,
+For example, when run on the updated Chapter 1,
 .CW style
 gave the following report:
 .Ps
 readability grades:
-      (Kincaid) 11.1  (auto) 11.6  (Coleman-Liau) 11.0
-      (Flesch) 11.5 (52.7)
+        Kincaid: 10.9
+        ARI: 11.9
+        Coleman-Liau: 10.2
+        Flesch Index: 57.9/100
+        Fog Index: 14.4
+        Lix: 47.5 = school year 8
+        SMOG-Grading: 12.5
 sentence info:
-      no. sent 53 no. wds 1110
-      av sent leng 20.9 av word leng 4.79
-      no. questions 0 no. imperatives 0
-      no. nonfunc wds 624  56.2%   av leng 6.25
-      short sent (<16 ) 34%  (18)  long sent (>31)  17% (9)
-      longest sent 46 wds at sent 4;
-.page 309
-      shortest sent 5 wds at sent 47
-sentence types:
-      simple  32% (17)  complex  47% (25)
-      compound   4% (2)  compound-complex  17% (9)
+        26798 characters
+        5777 words, average length 4.64 characters = 1.48 syllables
+        251 sentences, average length 23.0 words
+        43% (109) short sentences (at most 18 words)
+        15% (38) long sentences (at least 33 words)
+        82 paragraphs, average length 3.1 sentences
+        0% (1) questions
+        67% (169) passive sentences
+        longest sent 65 wds at sent 200; shortest sent 4 wds at sent 103
 word usage:
-      verb types as % of total verbs
-      tobe  29% (33)  aux  28% (32)  inf 15% (17)
-      passives as % of non-inf verbs   9% (9)
-      types as % of total
-      prep 12.0% (133)  conj 3.6% (40)  adv 5.0% (56)
-      noun 26.8% (298)  adj 15.5% (172)  pron 7.3% (81)
-      nominalizations   3%  (30)
+        verb types:
+        to be (248) auxiliary (83) 
+        types as % of total:
+        conjunctions 5% (296) pronouns 6% (356) prepositions 12% (685)
+        nominalizations 2% (111)
 sentence beginnings:
-      subject opener: noun (22)  pron (5)  pos (1)  adj (2)
-                        art  (4 )  tot  64%
-      prep 17% (9)  adv 9% (5)
-      verb  0% (0)  sub_conj 6% (3)  conj 0% (0)
-      expletives  4% (2)
+        pronoun (34) interrogative pronoun (6) article (41)
+        subordinating conjunction (35) conjunction (4) preposition (25)
 .Pe
 Even if you aren't an English teacher and don't know the
 Kincaid algorithm from the Flesch, this report can be very
 useful.
-.PP
-First, regardless of the differences between the algorithms,
-they all give you a general idea of the required reading level
-for what you have written.
-It is up to you to adjust your style according to the audience
-level you want to reach.
-This may not be a trivial task; however, it may be a vital one
-if you are writing a book for a specific audience.
-For example, if you were writing an instruction manual for
-heavy equipment to be used by people reading at the sixth-grade
-level, a
+The
+.CW -p
+option prints sentences that
 .CW style
-report like the one shown would be a dire warning that the manual
+considers passive text.
+.PP
+Regardless of the differences between the algorithms,
+they all give you a general idea of
+the required reading level
+for what you have written.
+You should adjust your style
+according to the audience level you want to reach.
+This may not be a trivial task,
+but it may be vital
+if you are writing a book for a specific audience.
+For example, if you are writing
+an instruction manual for heavy equipment
+to be used by people reading at the sixth-grade level, a
+.CW style
+report like the example
+would warn you that the manual
 would not be successful.
 .PP
-In general, to lower the reading level of a document, use
-shorter sentences and simpler constructions.
-(Incidentally, most writing in newspapers and general circulation
-magazines is at the sixth-grade level.
-But you shouldn't get the impression that text written for a
+In general, to lower the reading level of a document,
+use shorter sentences and simpler constructions.
+(Incidentally, most writing in newspapers
+and general circulation magazines
+is at the sixth-grade level.
+But you shouldn't get the impression
+that text written for a
 lower reading level is better.
-Writing can be clear and effective at any level of complexity.
-At the same time, each of us must recognize, and adjust for, the
-skills of our intended reader.)
+Writing can be clear and effective
+at any level of complexity.
+At the same time,
+each of us must recognize,
+and adjust for, the skills of our intended reader.)
 .PP
 The analysis of reading level is only a small part of what
 .CW style
@@ -1576,14 +1733,13 @@ The
 .ix	Writer's~Workbench, search~for poor phrasing ([diction]) %key Writer's Workbench, search~for poor phrasing (diction)
 program relies on a library of frequently misused words and
 phrases.
-It relentlessly searches out these words and flags them as
+It searches out these words and flags them as
 inappropriate by enclosing them in brackets.
 For example, when run on a previous draft of this section,
 .CW diction
 made the following recommendations:
 .page 310
 .Ps
-wwb
   style performs stylistic analysis of a document  and
   computes readability indexes based on a[ number of ]
   algorithms widely accepted in the academic community.
@@ -1626,17 +1782,16 @@ wwb
 
   number of sentences 37 number of hits 10
 .Pe
-The
+The best way to use
 .CW diction
-program lists \(lqproblem\(rq sentences from
-your source file, with words or
-phrases it has taken exception to enclosed in brackets.
-You can redirect this output
+is to pipe the output of
+.CW deroff
+or
+.CW nroff
+into it.
+You can redirect its output
 .page 311
 to a file, or page through it on the screen.
-Punctuation and macros are first stripped by the
-.CW deroff
-program, which explains the odd appearance of the text.
 .PP
 We find that we ignore
 .CW diction 's
@@ -1648,6 +1803,8 @@ several times, though that was exactly what we meant in
 all but one case.
 However, the twenty percent of its recommendations that we agree
 with are worth the effort of running the program.
+.ig
+.\" explain is nowhere to be found
 .PP
 If you don't understand why
 .CW diction
@@ -1677,6 +1834,8 @@ use "measure" for "perform a measurement"
 phrase?
 ^D
 .Pe
+.
+.\" ignore these too, until we run down replacements
 .PP
 The official release of WWB for 3B computers contains improved
 versions of
@@ -1777,6 +1936,8 @@ called
 .CW proofvi ,
 which stores its output in a temporary file and then allows you
 to edit your original, stepping through each flagged problem.
+..
+.
 .Ah "Comparing Versions of the Same Document"
 .LP
 UNIX provides a number of useful programs for keeping track of
@@ -1790,11 +1951,15 @@ the
 family of programs, which print out lines that are different
 between two or more files
 .Li
-the
+source control systems,
+which let you keep a compact history of
+differences between files,
+so that you can go back and
+reconstruct any previous version.
 .CW SCCS
-system, which lets you keep a compact history of
-differences between files, so that you can go back and
-reconstruct any previous version
+was the original source control system,
+but modern UNIX systems provide
+.CW git .
 .Li
 the
 .CW make
@@ -1802,6 +1967,7 @@ program, which keeps track of a predefined list of dependencies
 between files
 .Le
 .RE
+.
 .Bh "Checking Differences"
 .LP
 The
@@ -2115,6 +2281,7 @@ By capturing
 output in a file, you can keep a record of changes made to any
 document.
 .PP
+.\" rewrite as files for a website
 As another example, suppose a company has a number of text files
 that comprise its help facility.
 These files are shipped with the
@@ -2258,8 +2425,9 @@ We'll use the
 option to suppress the printing of identical lines.
 To make the example fit on the printed page, we specify a
 45-character line length.
-(You would generally use an 80-character line length for the
-screen.)
+(An 80-character line length for the screen
+is a long-standing standard, but modern UNIX systems
+with graphic displays support much wider lines.)
 Because the total line length is limited to 45 characters,
 .CW sdiff
 will be able to display only the first 15 or so characters of
@@ -2320,46 +2488,86 @@ and then passes each one through
 It maintains line numbering as though
 .CW diff
 were operating on one large file.
-.Bh "SCCS"
-.ix	SCCS (Source~Code~Control~System)
+.
+.Bh "Git"
+.ix Git (source~code~control~system)
 .LP
 We've shown an example using
 .CW diff
-to produce a file that described the changes made to a text file
+to produce a file
+that described the changes made to a text file
 for a help facility.
-It allowed the distribution of a smaller file
-describing changes instead of a wholly new version of the file.
+It allowed the distribution of
+a smaller file describing changes
+instead of a wholly new version of the file.
 This indicates a potential application for
 .CW diff ,
-which is fully realized in the Source Code Control System
-or SCCS.
-SCCS is a facility for keeping track of the changes to
-.ix	files, tracking changes to (SCCS)
-files that take place at different stages of a software
+which is fully realized in source code control systems
+such as Git.
+Git keeps track of the changes to files
+.ix	files, tracking changes to (Git)
+that take place at different stages of a software
 development or documentation project.
+For example,
+the revised versions of this book
+(\[lq]UTP Revival\[rq] and
+the current version, \[lq]UTP Revisited\[rq])
+are maintained in an online Git server called GitHub.
 .PP
-Suppose you have a first draft of a manual.
-(This is referred
-to as a
-.I delta
-when it
-is saved in a special SCCS format.)
-The second draft, of course, is based on changes to the first
-draft.
+Suppose your first draft of a manual is stored in Git.
+The second draft, of course,
+Is based on changes to the first draft.
 .PP
-When you make the delta for the second draft, SCCS, instead of
-keeping a separate copy for each draft, uses
+When you
+.I commit
+the second draft using the
+.CW git\~commit
+command, Git uses
 .CW diff
-to record the changes to the first draft that resulted in the
-second draft.
+to record the changes to the first draft
+that resulted in the second draft.
+This is called a
+.I commit ;
+you might create multiple commits
+for several reasons.
+Then, you
+.I push
+any outstanding commits using the
+.CW git\~push
+command to put them in the Git repository.
 Only the changes, and the instructions for having an editor
 make them, need to be maintained.
-SCCS allows you to regenerate earlier drafts, which saves disk
-space.
-.PP
-SCCS is quite complex\(emtoo complex to describe here\(embut
-we seriously suggest that you investigate it if you are working
-on a large, frequently-revised or multiple author writing project.
+This provides several advantages:
+.Ls B
+.Li
+You have a complete history of changes,
+including when the changes were committed
+and who made them
+(and, if the writer includes it, why).
+.Li
+You can revert individual commits if needed,
+or even regenerate earlier drafts.
+.Li
+Multiple writers can work within the same repository.
+If Anne is working on the installation instructions,
+you can update the API instructions
+(assuming they are in different files)
+without worrying about overwriting each other's work.
+Even if you both end up modifying the same files,
+Git has a conflict resolution procedure.
+.Li
+If you move to a new computer,
+you can easily
+.I clone
+the repository to your new computer
+and pick up where you left off.
+.Le
+To get started with Git, read the
+.B gittutorial (7)
+and
+.B giteveryday (7)
+manual pages.
+.
 .page 320
 .Bh "Using \f(CBmake\fP"
 .ix	%begin [make] command %key make command
@@ -2560,6 +2768,7 @@ in Chapter 18.
 .ix	%end [make] command %key make command
 .page 322
 .Ah "Manipulating Data"
+.
 .Bh "Removing Formatting Codes"
 .LP
 The
@@ -2589,81 +2798,91 @@ $ \f(CBderoff temp\f(CW
 	output to reflect "Commands"
 	--Michael Hobgood
 ..
-Miscellany UNIX Commands
+A Miscellany of UNIX Commands
 In this chapter, we present a miscellany of UNIX programs
 with text-processing applications.
 In addition, we introduce several UNIX utilities
 .Pe
-Special rules are applied to text specified as arguments to a
-macro so that they are not passed through
-.CW deroff .
-A word in a macro call must contain at least three letters.
-Thus,
-.I A
-and
-.I of
-are omitted.
-.PP
 The
-.CW deroff
-.CW -w
-command is used by
-.CW spell
-to remove
-.CW troff
-requests and place each word on a separate line.
-You can use
-.CW deroff
-in a similar manner to prepare a word list.
+.CW wordlist
+command takes the output of
+.CW deroff ,
+strips punctuation,
+translates each word to lower case,
+then prints each word on one line.
+You can use this to analyze word usage,
+build lists of words for a local spell dictionary,
+or other purposes.
 .Ps
-$ \f(CBderoff -w temp\f(CW
-Miscellany
-UNIX
+$ \f(CBderoff temp | wordlist\f(CW
+a
+miscellany
+of
+unix
 .ig
 	Again, I really doubt deroff changed Commands to Programs
 ..
-Commands
-In
+commands
+in
 this
 chapter
 we
 present
 miscellany
 of
-UNIX
+unix
 programs
 with
 text
 processing
 applications
-In
+in
 addition
 .Pe
-Again, not all \(lqwords\(rq are recognized as words.
-The
-.CW deroff
-command requires that a word consist of at least two characters,
-which may be letters, numerals,
+One use for
+.CW wordlist
+is to count the number of times each word is used.
+The following example shows partial output
+from a draft of Chapter 1 of this book.
+.Ps
+$ \f[CB]deroff ch01.t | wordlist | sort | uniq -c | sort -nr\fP
+    300 the
+    234 a
+    179 to
+    158 of
+    114 and
+    110 is
+     91 you
+     78 in
+     73 that
+     68 are
+     64 for
+     61 it
+     53 as
+     52 text
+     49 word
+     49 on
+     45 document
+     43 with
+     41 or
+     39 by
+     39 be
+     36 unix
+     34 can
+\&...
+.Pe
+The second sort command,
+.CW "sort -nr" ,
+performs a numeric sort of its input
+and reverses the output
+so the most common words appear first.
+The next section discusses the
+.CW sort
+and
+.CW uniq
+commands in more detail.
 .page 323
-ampersands, or apostrophes.
-(As mentioned above, it applies slightly different rules to
-text specified as an argument to a macro.)
-.PP
-We had hoped
-.CW deroff
-might be useful for our clients who wanted online copies of a
-document but used a word processor.
-Because
-.CW deroff
-.ix	%end [deroff] command %key deroff command
-drops words, it was not practical for stripping out
-.CW troff "-specific"
-constructs.
-Perhaps the best way to do this is to use
-.CW nroff
-to process the file, and then use a combination of terminal
-filters to strip out tabs, backspaces (overstrikes), and reverse
-linefeeds.
+.
 .Bh "The \f(CBsort\fP and \f(CBuniq\fP Commands"
 The
 .CW sort
@@ -2701,6 +2920,17 @@ option folds uppercase and lowercase words together
 The
 .CW -d
 option sorts in dictionary order, ignoring any special characters.
+The
+.CW -n
+option sorts in numeric order
+(in a dictionary or default alphabetic sort,
+the number
+.B 12
+would be sorted as higher than
+.B 100 ).
+The
+.CW -r
+option reverses the sort order.
 .PP
 The
 .CW uniq
@@ -2755,19 +2985,30 @@ option,
 only
 .I grapes
 would appear.
+The
+.CW -c
+option includes a count of each occurrence.
+.Ps
+$ \f(CBsort test* | uniq -c\f(CW
+      3 apples
+      2 chestnuts
+      1 grapes
+      4 oranges
+      3 walnuts
+.Pe
 .PP
 You wouldn't expect
 .CW sort
 to be useful on a document containing long lines of text.
-However, if you bothered to start sentences on a new line
+However, if you start sentences on a new line
 when creating the input file (as we recommended in Chapter 3),
 scanning a sorted file can produce some interesting things.
 The following command sorts the contents of
 .CW ch03
 and pipes the output through
-.CW pg :
+.CW less :
 .Ps
-$ \f(CBsort -u ch03 | pg\f(CW
+$ \f(CBsort -u ch03 | less\f(CW
 .Pe
 Looking at the results gives you a slightly turned about view
 of your document.
@@ -2803,7 +3044,7 @@ provides a count of the occurrences of identical lines.
 and
 .CW -d .)
 .Ps
-$ \f(CBderoff -w ch03 | sort -fd | uniq -c\f(CW
+$ \f(CBderoff -w ch03 | wordlist | sort -fd | uniq -c\f(CW
    1 abort
    1 aborted
    3 about
@@ -2835,7 +3076,7 @@ option is used to
 the comparison, putting the greatest
 number first.
 .Ps
-$ \f(CBderoff -w ch03 | sort -fd | uniq -c | sort -rfd\f(CW
+$ \f(CBderoff ch03 | wordlist | sort -fd | uniq -c | sort -rfd\f(CW
   666 the
   234 to
   219 is
@@ -2861,6 +3102,7 @@ and
 .CW uniq
 .ix	[uniq] command %key uniq command
 and experiment using different options.
+.
 .Bh "The \f(CBjoin\fP Command"
 .LP
 The
@@ -2968,6 +3210,7 @@ aug 20 10
 .Pe
 .ix	%end fields, in~[sort] %key fields, in sort
 .page 327
+.
 .Bh "The \f(CBcomm\fP Command"
 .LP
 The
@@ -3077,6 +3320,7 @@ Because a new shell is created to execute these commands,
 notice that we do not change our current working directory
 when the commands in parentheses have finished executing.
 .ix	%end [comm] command %key comm command
+.
 .Bh "The \f(CBcut\fP and \f(CBpaste\fP Commands"
 .ix	[cut] command %key cut command
 .ix	[paste] command %key paste command
@@ -3334,8 +3578,9 @@ alone would be to construct a multi-column table from a single
 long list
 .page 332
 of words.
-Simply split the list into equal-sized chunks, then paste them
+Split the list into equal-sized chunks, then paste them
 together side by side.
+.
 .Bh "The \f(CBtr\fP Command"
 .ix	[tr] command %key tr command
 .LP
@@ -3418,6 +3663,7 @@ or
 we were able to determine that the word processor used nulls
 (octal 000) instead of newlines (octal 012) to terminate each
 line.
+.\" Make it produce hex: od -A x -t x1z -v
 .PP
 The
 .CW tr
@@ -3430,11 +3676,12 @@ was what we needed to convert the file into a form that could be
 edited with
 .CW vi .
 .page 333
+.
 .Bh "Splitting Large Files"
 .LP
 Splitting a single large file into smaller files can be done out
-of necessity\(emwhen you come across a program that can't handle
-a large file\(emor as a matter of preference\(emwhen you find it
+of necessity\[em]when you come across a program that can't handle
+a large file\[em]or as a matter of preference, when you find it
 easier to work with smaller files.
 UNIX offers two different programs for breaking up files,
 .CW split
@@ -3647,12 +3894,24 @@ $ \f(CBmv ch04.?? ch04.files\f(CW
 Again, the usefulness of filename metacharacters is apparent,
 giving us the ability to move 43 files without typing 43
 filenames.
+.
+.Bh "Analyzing for Reuse and Inconsistencies"
+.LP
+.\" xxx write out this section
+csplit broke up a chapter into its component sections & subsections
+when you're editing a 4000-line file, it's easy to get lost
+introduce reuse (cable modem, CM + tel, CM + wifi, CM + tel + wifi)
+reuse prep: deroff -ms -s [file] | pandoc -f markdown -t plain --wrap=none
+(yes, we know there's no Markdown in it, but both use blank lines for paras)
+reuse uses fuzzy matching, so Analyzing lots of files can take a while
+.
 .Bh Encryption
 .LP
 The cloak-and-dagger set and the security conscious will find
 uses for the encryption facilities of UNIX.
 (These facilities are not available on UNIX systems sold
 outside the United States.)
+.\" xxx is the parenthetical still true?
 The
 .CW crypt
 .ix	[crypt] command %key crypt command
@@ -3688,38 +3947,49 @@ option to read or edit an encrypted file.
 not support the encryption feature.)
 Of course, you have to supply the correct key.
 .page 336
+.
 .Ah "Cleaning Up and Backing Up"
 .ix	%begin backing~up files
 .LP
 In this section, we show some procedures for backing up active
-files to some other medium such as tape or floppy disk.
+files to some other medium such as a USB flash drive.
+.\" xxx USB flash drives, internet, etc
 At many sites, backups are the responsibility of one person,
 who performs these tasks on a regular basis to ensure that
 users can recover much of their data in case there is a serious
 system crash.
+If you are using Github or some other
+source control service,
+the site administrators handle backups
+(but it is always good to have your own copy in a safe place).
 At other sites, individual users might be responsible for doing
 their own backups, especially if there are only a few users on
 the system.
+Many modern computers can automatically
+back up files several times a day, either to
+a local hard drive or to a cloud server.
 Whoever does it must ensure that backups of important files
 are made periodically.
 .PP
 A second reason for learning a backup procedure is to enable
 you to store files on an off-line medium.
-For users of PCs, this is the standard method of operation (and
-therefore much simpler to do), but all UNIX systems have hard
-disks as the primary storage medium.
+All modern computers have either hard
+disks or solid state drives (SSDs) as the primary storage medium.
 No matter how large a disk drive is, sooner or later, users
 will fill it to capacity.
 Frequently, there are useless files that can be deleted.
 Other inactive files, such as an early draft of a document,
 might be removed from the system after you have made a copy
-on floppy disk or tape.
+to a flash drive or a cloud server.
 After a project is finished, you probably want to make several
 copies of all important files.
 At a later time, should you need files that have been stored
 off-line, you can easily restore them to the system.
 .PP
 We are going to describe how to use the
+.\" xxx rewrite for cp -R and tar
+.\" use du -k to get a directory size in 1k blocks
+.\" or du -m to get size in meg
 .CW cpio
 .ix	%begin [cpio] command %key cpio command
 command for backing up one or more working directories.
@@ -3776,6 +4046,9 @@ For practical purposes, this involves doing an
 command on the directory you want backed up and piping the
 results to
 .CW cpio .
+.\" xxx Keep but modify this paragraph.
+.\" Mac, PC, and many Linux systems can auto-mount USB drives.
+.\" But in case you need to know...
 .PP
 You need to know the UNIX filename for the backup device.
 This name is site specific, so you need to check with a
@@ -3784,6 +4057,7 @@ At our site, we have a floppy  disk  drive  named
 .CW /dev/rfp021 .
 A  tape  drive  might  be  named
 .CW /dev/mt0 .
+.\" xxx Also drag and drop an entire directory from GUI
 .PP
 After you have loaded the tape in the tape drive or placed
 the floppy disk in the disk drive, you can perform the backup
@@ -3943,10 +4217,12 @@ it prompts you first to approve the command for each file.
 .ix	%end [cpio] command, using~with [find] %key cpio command, using with [find]
 .ix	%end [find] command, using~with [cpio] %key find command, using with [cpio]
 .ix	%end backing~up files
+.
 .Ah "Compressing Files"
 You can conserve the amount of disk space that text files take
 up by storing some of your files in a compressed form.
 The
+.\" xxx replace with gzip, also point out that tar can gzip its files
 .CW pack
 .ix	[pack] command %key pack command
 command can be used to compress a file.
@@ -3973,6 +4249,7 @@ file to file.
 Obviously, there is less benefit in packing small files.
 .PP
 To expand a packed file, use the
+.\" xxx gunzip
 .CW unpack
 .ix	[unpack] command %key unpack command
 command.
@@ -3992,15 +4269,15 @@ for packed files, called
 .CW pcat .
 .ix	[pcat] command %key pcat command
 Use this command to view a packed file (pipe it through
-.CW more
-or
-.CW pg )
+.CW less )
 or send it as input to another command, as in the following
 example:
 .Ps
 $ \f(CBpcat ch04/sect1 | nroff -mm\f(CW
 .Pe
+.
 .Ah Communications
+.\" xxx internet, ssh
 .LP
 More and more, we find that our projects require us to work on
 several different computer systems, some of them UNIX systems,
@@ -4084,6 +4361,7 @@ been properly configured by the system administrator).
 .PP
 You can send mail to users on these remote systems and transfer
 files.
+.\" xxx email over the net
 .ix	files, transferring~to other systems
 Generally, file transfers take place between
 .I "public directories"
@@ -4189,6 +4467,7 @@ to create directories if needed when doing the restore.)
 .CW tar .
 .ix	[tar] command %key tar command
 See your UNIX manual for details.)
+.
 .Ah "Scripts of UNIX Sessions"
 .LP
 Throughout this chapter, we have provided examples of UNIX
@@ -4196,7 +4475,7 @@ commands.
 These examples were made using a command called
 .CW script
 .ix	[script] command %key script command
-(which is not a standard System V command).
+(which is installed or available on Linux systems).
 The
 .CW script
 command allows you to make a file copy of a UNIX session.
@@ -4234,5 +4513,3 @@ using
 Keeping a script of a procedure is also a good start for
 building a shell script that performs a routine task
 automatically.
-
-

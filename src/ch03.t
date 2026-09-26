@@ -1,8 +1,8 @@
 
 .ig
 	ch03.t
-	Typed by: Heinz-J�rgen Oertel
-	Marked up by: Heinz-J�rgen Oertel
+	Typed by: Heinz-Jürgen Oertel
+	Marked up by: Heinz-Jürgen Oertel
 	Proofed on: 3 Oct 2002
 ..
 .so utp.mac
