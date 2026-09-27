@@ -243,7 +243,7 @@ Version of 16 November 2002
 ..
 .als Hl horizontal_line
 \#
-\#  Standard Section Formating Routine
+\#  Standard Section Formatting Routine
 \#
 .de format_standard_section
 .RT

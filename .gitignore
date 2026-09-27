@@ -12,3 +12,7 @@ Desktop.ini
 *.pdf
 *.ps
 *.tmp
+*.out
+*.bak
+junk.*
+test

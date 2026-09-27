@@ -2,6 +2,7 @@
 # Makefile for _Unix Text Processing_
 #
 # 16 November 2002 - jcs
+# Fixed issue #3 - lk, 31 May 2026
 #
 #
 # Set the next two lines for the paths for groff and awk on your system
