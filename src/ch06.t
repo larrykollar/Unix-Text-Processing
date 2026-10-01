@@ -39,8 +39,7 @@ macros can be processed by either
 .CW nroff
 or
 .CW troff ,
-the two text formatting programs in
-UNIX.
+the two text formatting programs in UNIX.
 The output from these programs can be displayed on a
 terminal screen or printed on a line printer, a laser printer,
 or a typesetter.
@@ -52,8 +51,9 @@ and work productively.
 Others choose from a variety of macros
 to produce a number of different formats.
 More advanced users
-modify the macro definitions and extend the capabilities of
-the package by defining their own special-purpose macros.
+modify the macro definitions
+and extend the capabilities of the package
+by defining their own special-purpose macros.
 .PP
 Macros are the
 .I words
@@ -72,7 +72,7 @@ other macros, like a subroutine in a program, to perform a
 particular function.
 .PP
 After finding out what the macro package allows you to do,
-you will probably decide upon a particular format that you like
+you can decide upon a particular format that you like
 (or one that has evolved according to the decisions of a group
 of people).
 To describe that format, you are likely to use only
@@ -80,7 +80,8 @@ a few of the macros, those that do the job.
 In everyday use,
 you want to minimize the number of codes you need to format
 documents in a consistent manner.
-.Ah "Formatting a Text File
+.
+.Ah "Formatting a Text File"
 .LP
 To figure out the role of a macro package such as
 .CW mm ,
@@ -97,17 +98,16 @@ some not, by any combination of
 formatting instructions.
 A format is a consistent product,
 achieved by a selected set of formatting instructions.
-A macro
-package makes it possible for a format to be recreated again
-and again with minimal difficulty.
+A macro package makes it possible for a format
+to be recreated again and again with minimal difficulty.
 It encourages the user to
-concentrate more on the requirements of a document and less
-on the operations of the text formatter.
+concentrate more on the requirements of a document
+and less on the operations of the text formatter.
 .PP
-Working with a macro package will help reduce the number
+Working with a macro package reduces the number
 of formatting instructions you need to supply.
-This means that a macro package will take care of many things
-automatically.
+This means that a macro package
+takes care of many things automatically.
 However, you should gradually become familiar
 with the operations of the
 .CW nroff /\c
@@ -117,7 +117,8 @@ additional flexibility it offers to define new formats.
 If you have a basic understanding of how the formatter works,
 as described in Chapter 4, you will find it easier to learn
 the intricacies of a macro package.
-.Bh "Invoking \f(CBnroff\fP/\f(CBtroff\fP with \f(CBmm\fP
+.
+.Bh "Invoking \f(CBnroff\fP/\f(CBtroff\fP with \f(CBmm\fP"
 .ix [mm] macros, invoking %key mm macros, invoking
 .LP
 The
@@ -127,9 +128,8 @@ command is a shell script that invokes the
 .CW nroff
 formatter and reads in the files that contain the
 .CW mm
-macro
-definitions before processing the text file(s) specified on
-the command line.
+macro definitions before processing the text file(s)
+specified on the command line.
 .Ps
 $ \f(CBmm\fP \fIoption(s) filename(s)\fP
 .Pe
@@ -182,25 +182,22 @@ by too swiftly to read, just as when you
 a file to the screen.
 Pipe the output of the
 .CW mm
-command through either of the
-paging programs,
-.CW pg
-.ix [pg] command %key pg command
-or
-.CW more ,
-.ix [more] command %key more command
-to view one screenful at a time.
-This will give you a general indication that the formatting
+command through
+.CW less
+.ix [less] command %key less command
+to view one screen at a time.
+This gives you a general indication that the formatting
 commands achieved the results you had expected.
 To print a file formatted with
-mm, simply pipe the output to the print spooler (e.g.,
+.CW mm ,
+pipe the output to the print spooler (e.g.,
 .CW lp )
 .ix [lp] command %key lp command
 instead of to a screen paging program.
 .PP
-Many of the actions that a text formatter performs are dependent
-upon how the document is going to be printed.
-If you want your document to be formatted with
+Many of the actions that a text formatter performs depend
+on how you want to print the document.
+If you want to format your document with
 .CW troff
 instead of
 .CW nroff ,
@@ -215,43 +212,48 @@ option.
 The
 .CW mmt
 command prepares output for laser printers and typesetters.
-The formatted output should be piped directly to the print
+Pipe the formatted output directly to the print
 spooler (e.g.,
-.CW lp )
-or directed to a file and printed separately.
-You will probably need to check at your site for
-the proper invocation of
+.CW lp ),
+or redirect to a file to view it, then print if all looks right.
+Use the
+.CW dpost
+postprocessor with
 .CW mmt
-if your site supports more than
-one type of laser printer or typesetter.
+to produce PostScript,
+unless you have a postprocessor
+that has printer-specific capabilities.
+.PP
+Note that
+.CW mm
+and
+.CW mmt
+are available for the modernized Plan9
+.CW troff
+derivatives;
+.CW groff
+does not use them.
 .page 130
 .PP
-If you are using
-.CW otroff ,
-be sure you don't let
-.CW troff
-send the
-output to your terminal because, in all probability, it will
-cause your terminal to hang, or at least to scream and holler.
-.PP
-In this chapter, we will generally show the results of the
+In this chapter, we generally show the results of the
 .CW mm
 command, rather than
 .CW mmt \c
-\(emthat is, we'll be showing
+\(emthat is, we show
 .CW nroff
 rather than
 .CW troff .
-Where the subject under discussion is better
-demonstrated by
+Where the subject under discussion
+is better demonstrated by
 .CW troff ,
-we will show
+we show
 .CW troff
 output instead.
-We assume that by now, you will be able to tell which of the
-programs has been used, without our mentioning the actual
-commands.
-.Bh "Problems in Getting Formatted Output
+We assume that by now,
+you can tell which formatter we used,
+without our mentioning the actual commands.
+.
+.Bh "Problems in Getting Formatted Output"
 .ix [mm] macros, errors %key mm macros, errors
 .ix errors, in [mm] %key errors, in mm
 .LP
@@ -260,28 +262,29 @@ When you format an
 document, you may only get a portion
 of your formatted document.
 Or you may get none of it.
-Usually, this is because the formatter has had a problem executing
-the codes as they were entered in the input file.
-Most of the time
-it is caused by omitting one of the macros that must be used
-in pairs.
+Usually, this is because the formatter
+had a problem executing the codes
+as they were entered in the input file.
+Most of the time, the problem stems from
+omitting one of the macros that must be used in pairs.
 .PP
-When formatting stops like this, one or more error messages
-might appear on your screen, helping you to diagnose the
-problems.
-These messages refer to the line numbers in the
-input file where the problems appear to be, and try to tell
-you what is missing:
+When formatting stops like this,
+one or more error messages might appear on your screen,
+helping you to diagnose the problems.
+These messages refer to the line numbers
+in the input file where the problems appear to be,
+and try to tell you what is missing:
 .Ps
 \f(CBERROR\fP\fR:(\fP\fIfilename\fP\fR)\fP \fIline number\fP
 \fI   Error message\fP
 .Pe
 .LP
-Sometimes, you won't get error messages, but your output will
-break midway.
-Generally, you have to go in the file at the
-point where it broke, or before that point, and examine the
-macros or a sequence of macros.
+Sometimes, you don't get error messages,
+but your output breaks midway.
+When that happens,
+you have to open the file at the point where output broke,
+work your way back,
+and examine the macros or a sequence of macros.
 A legacy program,
 .CW checkmm ,
 .ix [checkmm] command %key checkmm command
@@ -293,19 +296,20 @@ you can use the backtrace and warning functions
 to provide a rough equivalent.
 For example, the command:
 .Ps
-.CW "groff -mm -b -w w file.mm"
+.CW "groff -mm -b -ww file.mm"
 .Pe
 detects and prints syntax errors,
 unmatched macros, and structural issues.
-.\" XXX the above was info from AI... need to verify
+.
 .Bh "Default Formatting
 .ix [mm] macros, default formatting %key mm macros, default formatting
 .ix formatting defaults, [mm] %key formatting defaults, mm
 .LP
 In Chapter 4, we looked at a sample letter formatted by
 .CW nroff .
-It might be interesting, before putting any macros in
-the file, to see what happens if we format
+It might be interesting,
+before putting any macros in the file,
+to see what happens if we format
 .CW letter
 as it is, this time using the
 .CW mm
@@ -388,6 +392,7 @@ meeting with you towards the end of next week.
 .SE
 .Fe "A Raw \f(CBmm\fP-formatted File
 .sp .8v
+.
 .Ah "Page Layout
 .ix [mm] macros, page~layout %key mm macros, page layout
 .ix page~layout, in [mm] %key page layout, in mm
@@ -395,17 +400,16 @@ meeting with you towards the end of next week.
 .page 132
 When you format a page with
 .CW mm ,
-the formatter is instructed to
-provide several lines at the top and the bottom of the page
+the formatter provides several lines
+at the top and the bottom of the page
 for a header and a footer.
 By default, a page number appears
-on a single line in the header and only blank lines are printed
-for the footer.
+on a single line in the header
+and only blank lines are printed for the footer.
 .PP
-There are basically two different ways to change the default
-header and footer.
-The first way is to specify a command-line
-parameter with the
+There are two different ways
+to change the default header and footer.
+The first way is to specify a command-line parameter with the
 .CW mm
 or
 .CW mmt
@@ -415,35 +419,40 @@ register
 This allows you to affect how pages are numbered
 and where the page number appears.
 The second way is to specify
-in the input file a macro that places text in the header or
-footer.
+in the input file
+a macro that places text in the header or footer.
 Let's look at both of these techniques.
+.
 .Bh "Setting Page Numbering Style
 .ix [mm] macros, page~numbering styles %key mm macros, page numbering styles
 .ix %begin page number, in [mm] %key page number, in mm
 .LP
-When you format a document, pages are numbered in sequence
+When you format a document,
+.CW mm
+numbers pages in sequence
 up to the end of the document.
-This page number is usually
-printed in the header, set off by dashes.
+This page number usually appears
+in the header, set off by dashes.
 .Ps
 -1-
 .Pe
 .LP
-Another style of page numbering, used in documents such
-as technical manuals, numbers pages specific to a section.
+Another style of page numbering,
+used in documents such as technical manuals,
+numbers pages specific to a section.
 The first page of the second section would be printed as:
 .Ps
 2-1
 .Pe
 .LP
-The other type of change affects whether or not the page number
-is printed in the header at the top of the first page.
+The other type of change
+affects whether or not the page number
+prints in the header at the top of the first page.
 .PP
 The number register
 .CW N
 controls these actions.
-This register has a default setting of 0
+This register has a default setting of 0,
 and can take values from 0 through 5.
 Table 6-1 shows the effect of these values.
 .Ts "Page Number Styles, Register \f(CBN\fP
@@ -455,20 +464,20 @@ Value	Action
 _
 .sp 4p
 0	T{
-The page number prints in the header on all pages.
+Places the page number in the header on all pages.
 This is the default page numbering style.
 T}
 .sp 4p
 1	T{
-On page 1, the page number is printed in place of the footer.
+Places the page number in the footer.
 T}
 2	T{
-On page 1, the page number is not printed.
+Omits the page number on page 1.
 T}
 .sp 4p
 3	T{
-All pages are numbered by section, and the page number
-appears in the footer.
+All pages are numbered by section,
+and the page number appears in the footer.
 This setting affects the defaults of several section-related
 registers and macros.
 It causes a page break for a top-level heading
@@ -486,13 +495,13 @@ T}
 .sp 4p
 .page 133
 4	T{
-The default header containing the page number is suppressed,
-but it has no effect on a header supplied by a page header macro.
+Suppresses the default header containing the page number,
+but has no effect on a header supplied by a page header macro.
 T}
 .sp 4p
 5	T{
-All pages are numbered by section, and the page number appears
-in the footer.
+Numbers all pages by section,
+and places the page number in the footer.
 In addition, labeled displays
 .CW \&.FC , (
 .ix [.FC] macro ([mm]) %key FC macro mm
@@ -513,19 +522,20 @@ T}
 .TE
 .Te
 .PP
-The register
+You can set the register
 .CW N
-can be set from the command line using the
+from the command line using the
 .ix page number, setting~from command~line
 .CW -r
 option.
-If we set it to 2, no page number will appear at the
+If we set it to 2, no page number appears at the
 top of page 1 when we print the sample letter:
 .Ps
 $ \f[CB]mm -rN2 letter | lp\fP
 .Pe
 .ix %end page number, in [mm] %key page number, in mm
-.Bh "Header and Footer Macros
+.
+.Bh "Header and Footer Macros"
 .ix [mm] macros, footers %key mm macros, footers
 .ix [mm] macros, headers %key mm macros, headers
 .ix footers
@@ -533,9 +543,9 @@ $ \f[CB]mm -rN2 letter | lp\fP
 .LP
 The
 .CW mm
-package has a pair of macros for defining what should
+package has a pair of macros to define what should
 appear in a page header
-.CW .PH ) (
+.CW .PH ), (
 .ix [.PH] macro ([mm]) %key PH macro mm
 .ix [mm] macros, [.PH] macro %key mm macros, PH macro
 and a page footer
@@ -548,17 +558,17 @@ and footers for odd-numbered pages
 .CW .OH "" (
 and
 .CW .OF )
-or for even numbered pages (\c
-.CW \%.EH
+for even numbered pages (\c
+.CW \&.EH
 .ix [.EH] macro ([mm]) %key EH macro mm
 .ix [mm] macros, [.EH] macro %key mm macros, EH macro
 and
 .CW \&.EF ).
 .ix [.EF] macro ([mm]) %key EF macro mm
 .ix [mm] macros, [.EF] macro %key mm macros, EF macro
-All of these macros have the same
-form, allowing you to place text in three places in the header
-or footer:
+All of these macros have the same form,
+allowing you to place text in three places
+in the header or footer:
 left justified, centered, and right justified. This
 is specified as a single argument in double quotation marks,
 consisting of three parts delimited by single quotation marks.
@@ -617,16 +627,18 @@ Page  2
 .SE
 .sp .8v
 .LP
-The header and footer macros override the default header
-and footer.
-.Bh "Setting Other Page Control Registers
+The header and footer macros override
+the default header and footer.
+.
+.Bh "Setting Other Page Control Registers"
 .ix [mm] macros, page~layout %key mm macros, page layout
 .ix page~layout, in [mm] %key page layout, in mm
 .LP
 The
 .CW mm
-package uses number registers to supply the values that
-control line length, page offset, point size, and page length,
+package uses number registers
+to supply the values that control
+line length, page offset, point size, and page length,
 as shown in Table 6-2.
 .KF
 .Ts "Number Registers
@@ -637,34 +649,32 @@ Register	Contains	\fCtroff\fP Default	\fCnroff\fP Default
 _
 \fCO\fP	Page offset (left margin)	\&.75i	\&.5i
 \fCN\fP	Page numbering style	0	0
-\fCP\fP	Page length	66v	66 lines
+\fCL\fP	Page length	66v	66 lines
 \fCS\fP	Point size (\fCtroff\fP only)	10	NA
 \fCW\fP	Line length or width	6i	60
 .TE
 .Te
 .KE
 .PP
-These registers must be defined before the
-.CW mm
-macro package is
-read by
+These registers must be defined before
 .CW nroff
 or
-.CW troff .
-Thus, they can be set from the command
-line using the
+.CW troff
+reads the
+.CW mm
+macro package.
+Thus, you can set it from the command line using the
 .CW -r
-option, as we showed when we gave a new value
-for register
+option, as we showed when we gave a new value for register
 .CW N .
-Values of registers
+For
+.CW nroff ,
+specify values of registers
 .CW O
 and
 .CW W
-for
-.CW nroff
-must be
-given in character positions (depending on the character size
+in character positions
+(depending on the character size
 of the output device for
 .CW nroff ,
 \&.5i might translate as either
@@ -690,8 +700,19 @@ but:
 $ \f[CB]mmt -rN2 -rW6.5i -rO1i\fP \fIfile\fP
 .Pe
 .LP
-Or the page control registers can be set at the top of your
-file, using the
+The
+.CW groff_mm
+manual page says (for
+.CW groff ),
+\[lq]When setting the registers L or W from the command line,
+use an explicit scaling unit to avoid surprises.\[rq]
+This manual page lists several other differences between
+.CW groff 's
+.CW -mm
+package and the DWB version, as well as many extensions.
+.PP
+You can set the page control registers
+at the top of your file, using the
 .CW \&.so
 request to read in the
 .CW mm
@@ -720,7 +741,8 @@ would cause the
 macro package to be read twice;
 .CW mm
 would trap that error and bail out.
-.Bh "Paragraphs
+.
+.Bh "Paragraphs"
 .ix [mm] macros, paragraphs %key mm macros, paragraphs
 .ix paragraphs, [mm] macros %key paragraphs, mm macros
 .LP
@@ -791,9 +813,20 @@ The third paragraph, which is preceded in the input file by
 .CW \&.P
 without an argument, is a block paragraph.
 .PP
-If you want to create a document in which all the paragraphs
-are indented, you can change the number register that specifies
-the default paragraph type.
+As with the
+.CW -ms
+macro package, you can use the
+.CW \&.blm
+request to call the
+.CW \&.P
+macro:
+.Ps
+\&.blm P
+.Pe
+If you want to create a document
+in which all the paragraphs are indented,
+you can change the number register
+that specifies the default paragraph type.
 The value of
 .CW Pt
 is 0 by default, producing block paragraphs.
@@ -803,7 +836,7 @@ the value of
 to 1.
 Now the
 .CW \&.P
-macro will produce indented paragraphs.
+macro produces indented paragraphs.
 .Ps
 \&.nr Pt 1
 .Pe
@@ -815,16 +848,17 @@ the default type, specify an argument of 0:
 \&.P 0
 .Pe
 .LP
-When you specify a type argument, it overrides whatever
-paragraph type is in effect.
+When you specify a type argument,
+it overrides whatever paragraph type is in effect.
 .PP
-There is a third paragraph type that produces an indented
-paragraph with some exceptions.
+There is a third paragraph type
+that produces an indented paragraph
+with some exceptions.
 .ix [mm] macros, paragraphs~indented~with exceptions %key mm macros, paragraphs indented~with exceptions
 .ix indented ([mm]), indented~with exceptions %key indented (mm), indented with exceptions
-If
+If you set
 .CW Pt
-is set to 2, paragraphs are indented except those
+to 2, paragraphs are indented except those
 following section headings, lists, and displays.
 It is the paragraph type used in this book.
 .PP
@@ -840,15 +874,17 @@ lf(CW) l l l .
 .RE
 .ix %end [.P] macro ([mm]) %key P macro mm
 .ix %end [mm] macros, [.P] macro %key mm macros, P macro
-.Bh "Vertical Spacing
+.
+.Bh "Vertical Spacing"
 .ix vertical spacing
 .LP
 The paragraph macro also controls the spacing between paragraphs.
 .ix [mm] macros, spacing~between paragraphs %key mm macros, spacing between paragraphs
 .ix paragraphs, spacing between %key paragraphs, spacing between
-The amount of space is specified in the number register
-.CW Ps .
-This amount differs between
+The number register
+.CW Ps
+specifies the amount of space used.
+The default amount differs between
 .CW nroff
 and
 .CW troff .
@@ -863,12 +899,12 @@ However, with
 .CW troff ,
 the
 .CW \&.P
-macro outputs a blank space that is equal to
+macro outputs a blank space equal to
 one-half of the current vertical spacing setting.
-Basically, this means that a blank line will
-cause one full space to be output, and the
+Basically, this means that a blank line
+outputs one full space, and the
 .CW \&.P
-macro will output half that space.
+macro outputs half that space.
 .PP
 The
 .CW \&.P
@@ -891,34 +927,36 @@ Sincerely,
 Fred Caslon
 .Pe
 .LP
-Three lines of space will be provided between the salutation
-and the signature lines.
+This example puts three lines of space
+between the salutation and the signature lines.
 .PP
-You do not achieve the same effect if you enter
+Entering
 .CW \&.SP
-macros on three consecutive lines.
-The vertical space does not accumulate
-and one line of space is output, not three.
+macros on three consecutive lines
+produces a different result.
+The vertical space does not accumulate,
+so they output one line of space, not three.
 .PP
 Two or more consecutive
 .CW \&.SP
 macros with numeric arguments
-results in the spacing specified by the greatest argument.
-The other arguments are ignored.
+specifies the spacing of the greatest argument
+and ignores the other arguments.
 .Ps
 \&.SP 5
 \&.SP
 \&.SP 2
 .Pe
 .LP
-In this example, five lines are output, not eight.
+This example outputs five lines, not eight.
 .PP
 Because the
 .CW \&.P
 macro calls the
 .CW \&.SP
-macro, it means that two or more consecutive paragraph
-macros will have the same effect as one.
+macro, two or more consecutive paragraph
+macros have the same effect as one.
+.
 .Bh "The \f(CB.SP\fP Macro versus the \f(CB.sp\fP Request
 .LP
 .page 137
@@ -939,7 +977,7 @@ The following three requests produce eight blank lines:
 .PP
 The argument specified with the
 .CW \&.SP
-macro cannot be scaled nor can it be a negative number.
+macro cannot be scaled, nor can it be a negative number.
 The
 .CW \&.SP
 macro automatically works
@@ -960,6 +998,7 @@ codes has the same result:
 .ix %end [.SP] macro ([mm]) %key SP macro mm
 .ix %end [mm] macros, [.SP] macro %key mm macros, SP macro
 .ix %end [mm] macros, vertical spacing %key mm macros, vertical spacing
+.
 .Ah Justification
 .ix justification, [mm] macros %key justification, mm macros
 .ix [mm] macros, justification %key mm macros, justification
@@ -980,8 +1019,7 @@ If you are using both
 .CW nroff
 and
 .CW troff ,
-it is probably a good
-idea to explicitly set justification on or off rather than
+you should set justification on or off rather than
 depend upon the default chosen by the formatter.
 Use the
 .CW \&.SA
@@ -1002,7 +1040,7 @@ both
 .CW nroff
 and
 .CW troff
-will produce right-justified paragraphs like the following:
+produce right-justified paragraphs like the following:
 .sp .7v
 .SS
 .Ps
@@ -1014,6 +1052,7 @@ product demo and other materials that you sent me.
 .Pe
 .SE
 .sp .8v
+.
 .Ah "Word Hyphenation
 .ix [mm] macros, hyphenation %key mm macros, hyphenation
 .ix hyphenation, in [mm] %key hyphenation, in mm
@@ -1021,50 +1060,57 @@ product demo and other materials that you sent me.
 One way to achieve better line breaks and more evenly filled
 lines is to instruct the formatter to perform word hyphenation.
 .PP
-Hyphenation is turned off in the
+The
 .CW mm
-macro package.
-This means
-that the formatter does not try to hyphenate words
-to make them fit on a line unless you request it by setting
-the number register
+macro package default is to turn hyphenation off.
+This means that the formatter
+does not try to hyphenate words
+to make them fit on a line
+unless you request it
+by setting the number register
 .CW Hy
 to 1.
 If you want the formatter to
-automatically hyphenate words, insert the following line at
-the top of your file:
+automatically hyphenate words,
+insert the following line at the top of your file:
 .page 138
 .Ps
 \&.nr Hy 1
 .Pe
+You can also set it from the command line using the
+.CW -r
+option:
+.Ps
+mm -rHy=1
+.Pe 
 .LP
-Most of the time, the formatter breaks up a word correctly
+Most of the time, the formatter breaks a word correctly
 when hyphenating.
-Sometimes, however, it does not and you have
-to explicitly tell the formatter either how to split a word
-(using the
+Sometimes, however, it does not
+and you have to explicitly tell the formatter
+either how to split a word (using the
 .CW \&.hy
-request) or not to hyphenate at all (using the
+request) or not to hyphenate at all
+(using the
 .CW \&.nh
 request).
+.
 .Ah Displays
 .ix [mm] macros, displays %key mm macros, displays
 .LP
-When we format a text file, the line breaks caused by carriage
-returns are ignored by
+When we format a text file,
 .CW nroff /\c
-.CW troff .
-How text is entered on lines
-in the input file does not affect how lines are formed in the
-output.
-It doesn't really matter whether information is typed
+.CW troff
+ignores the line breaks caused by carriage returns.
+How text is entered on lines in the input file
+does not affect how lines are formed in the output.
+It doesn't matter whether you type information
 on three lines or four; it appears the same after formatting.
 .PP
 You probably noticed that the name and address at the beginning
 of our sample file did not come out in block form.
-The four
-lines of input ran together and produced two filled lines
-of output:
+The four lines of input ran together
+and produced two filled lines of output:
 .Ps
 Mr. John Fust Vice President, Research and Development
 Gutenberg Galaxy Software Waltham, Massachusetts 02159
@@ -1090,20 +1136,20 @@ request is most appropriate when you are forcing a
 break of a single line.
 For larger blocks of text, the
 .CW mm
-macro package provides a pair of macros for indicating that a block
-of text should be output just as it was entered in the input
-file.
-The
+macro package provides a pair of macros to indicate that a block
+of text should be output
+just as it was entered in the input file.
+Place the
 .CW \&.DS
 .ix [.DS] macro ([mm]) %key DS macro mm
 .ix [mm] macros, [.DS] macro %key mm macros, DS macro
 .I "display start" ) (
-macro is placed at the start of the text, and the
+macro at the start of the text, and the
 .CW \&.DE
 .ix [.DE] macro ([mm]) %key DE macro mm
 .ix [mm] macros, [.DE] macro %key mm macros, DE macro
 .I "display end" ) (
-macro is placed at the end:
+macro at the end:
 .Ps
 \&.DS
 Mr. John Fust
@@ -1113,17 +1159,20 @@ Waltham, Massachusetts 02159
 \&.DE
 .Pe
 .LP
-The formatter does not fill these lines, so the address block
-is output on four lines, just as it was typed.
+The formatter does not fill these lines,
+so the address block prints on four lines,
+just as it was typed.
 In addition, the
 .CW \&.DE
 macro provides a line of space following the display.
-.Bh "Our Coding Efforts, So Far
+.
+.Bh "Our Coding Efforts, So Far"
 .LP
-We have pretty much exhausted what we can do using the sample
-letter.
-Before going on to larger documents, you may want to
-compare the coded file in Figure 6-2 with the
+We have pretty much exhausted what we can do
+using the sample letter.
+Before going on to larger documents,
+you may want to compare the coded file in Figure 6-2
+with the
 .CW nroff -formatted
 output in Figure 6-3.
 Look them over and make sure you
@@ -1172,7 +1221,7 @@ end of next week.
 \&.SP 2
                                        Fred Caslon
 .Pe
-.Fe "Coded File
+.Fe "Coded File"
 .page 140
 .sp .7v
 .Fs 0 F
@@ -1227,32 +1276,36 @@ meeting with you towards the end of next week.
 .UTPED
 .SE
 .sp .8v
-.Fe "Formatted Output
+.Fe "Formatted Output"
 .page 141
 .PP
 We have worked through some of the problems presented by a
 very simple one-page letter.
-As we move on, we will
-be describing specialized macros that address the problems of
-multiple page documents, such as proposals and reports.
-In many
-ways, the macros for more complex documents are the feature
-performers in a macro package, the ones that really convince
-you that a markup language is worth learning.
-.Ah "Changing Font and Point Size
+As we move on, we describe specialized macros
+that address the problems of multiple page documents,
+such as proposals and reports.
+In many ways,
+the macros for more complex documents
+are the feature performers in a macro package,
+the ones that really convince you
+that a markup language is worth learning.
+.
+.Ah "Changing Font and Point Size"
 .LP
 When you format with
 .CW nroff
-and print on a line printer, you
-can put emphasis on individual words or phrases by underlining
-or overstriking.
+and print on a line printer,
+you can put emphasis on individual words or phrases
+by underlining or overstriking.
 When you are using
 .CW troff
 and send your output
-to a laser printer or typesetter, you can specify variations
-of type, font, and point size based on the capabilities of
-the output device.
-.Bh "Roman, Italic, and Bold Fonts
+to a laser printer or typesetter,
+you can specify variations
+of type, font, and point size
+based on the capabilities of the output device.
+.
+.Bh "Roman, Italic, and Bold Fonts"
 .LP
 Most typefaces have at least three fonts available:
 roman,
@@ -1262,8 +1315,9 @@ roman,
 and
 .I italic .
 .ix [mm] macros, italic font %key mm macros, italic font
-Many have a fourth: bold-italic.
-Normal body copy is printed in the roman font.
+Many have a fourth:
+.BI bold-italic .
+Normal body copy prints in the roman font.
 You can change temporarily to a bold or italic font
 for emphasis.
 In Chapter 4, you learned how to specify font
@@ -1301,11 +1355,12 @@ revitalizes an
 tradition.
 .Pe
 .LP
-The printed sentence has a word in bold and one in italic.
-(In
+The printed sentence has a word in bold and one in italic
+(in
 .CW nroff ,
 bold space is simulated by overstriking, and italics
-by underlining).
+by underlining, but modern terminals can display
+bold and italic text).
 .sp .7v
 .SS
 .Ps
@@ -1315,8 +1370,8 @@ by underlining).
 .sp .8v
 .page 142
 .LP
-If no argument is specified, the selected font is current
-until it is explicitly changed:
+With no argument, the selected font is current
+until you change it:
 .Ps
 The art of
 \&.B
@@ -1339,9 +1394,10 @@ The art of \fBcalligraphy\fP is, quite simply,
 .SE
 .sp .8v
 .PP
-You've already seen that the first argument is changed to the
-selected font.
-If you supply a second argument, it is printed in the previous font.
+You've already seen that the first argument prints
+in the selected font.
+If you supply a second argument, it prints in the previous font
+with no spacing between it and the first argument.
 Each macro takes up to six arguments for alternating font changes.
 (An argument is set off by a space; a phrase
 must be enclosed within quotation marks to be taken as a
@@ -1441,7 +1497,7 @@ in an underline for each character (not a continuous rule).
 Overstriking and underlining can cause problems on some printers
 and terminals.
 .
-.Bh "Changing Point Size
+.Bh "Changing Point Size"
 .ix %begin [mm] macros, changing point~size %key mm macros, changing point size
 .ix %begin point~size, changing ([mm]) %key point size, changing mm
 .LP
@@ -1463,11 +1519,12 @@ and
 .ix %begin [mm] macros, vertical spacing %key mm macros, vertical spacing
 .ix vertical spacing
 requests in Chapter 4.
-These will work in
+These work in
 .CW mm ;
 however,
 .CW mm
-also has a single macro for changing both the point size
+also has a single macro
+for changing both the point size
 and vertical space:
 .Ps
 \&.S [\fIpoint size\fP] [\fIvertical spacing\fP]
@@ -1498,9 +1555,9 @@ By default, if you don't specify vertical spacing, a relation
 of 2 points greater than the point size will be maintained.
 A null value ("") does not change the current setting.
 .PP
-The new point size and vertical spacing remain
-in effect until you change them.
-Simply entering the
+The new point size and vertical spacing
+remain in effect until you change them.
+Entering the
 .CW \&.S
 macro without arguments restores the previous settings:
 .Ps
@@ -1601,7 +1658,7 @@ using
 you will find
 .Pe
 .LP
-The second argument is concatenated to the first argument,
+The first and second argument print without spacing,
 so that the comma immediately follows the word
 .I UNIX :
 .sp .7v
@@ -1619,8 +1676,8 @@ If you specify three arguments:
 .Pe
 .LP
 The second argument is reduced by one point, but the first
-and third arguments are printed in the current point size,
-and all three are concatenated:
+and third arguments print in the current point size,
+and all three print without spacing:
 .page 145
 .sp .7v
 .SS
@@ -1635,7 +1692,8 @@ and all three are concatenated:
 .ix %end [.SM] macro ([mm]) %key SM macro mm
 .ix %end [mm] macros, [.SM] macro %key mm macros, SM macro
 .sp .8v
-.Ah "More about Displays
+.
+.Ah "More about Displays"
 .ix %begin [mm] macros, displays %key mm macros, displays
 .ix %begin displays, in [mm] macros %key displays, in mm macros
 .LP
@@ -1708,17 +1766,18 @@ and three ens in
 although these values are maintained
 independently in two different number registers,
 .CW Pi
-and
-.CW Si .
-(To change the defaults, simply use the
+for paragraph indents, and
+.CW Si
+for display indents.
+To change the defaults, use the
 .CW \&.nr
-request to put the desired value in the appropriate register).
+request to put the desired value in the appropriate register.
 .PP
-A display can be centered in two ways: either each individual
-line in the display is centered
+You can center a display in two ways:
+either each individual line in the display is centered
 .CW C ) (
-or the entire display is
-centered as a block based on the longest line of the display
+or the entire display is centered
+as a block based on the longest line of the display
 .CW CB ). (
 .PP
 For instance, the preceding list was formatted using
@@ -1759,11 +1818,12 @@ In
 you can specify a scaled number;
 otherwise, the default is ems.
 .PP
-The use of fill mode, along with other indented display options,
+The use of fill mode,
+along with other indented display options,
 can provide a paragraph indented on both sides.
-This is often
-used in reports and proposals that quote at length from another
-source.
+Reports and proposals
+that quote at length from another source
+often use fill mode.
 For example:
 .Ps
 \&.P
@@ -1810,9 +1870,8 @@ found in the product specification:
 .PP
 The use of tabs often presents a problem outside of
 displays.
-Material that has been entered with tabs in the input
-file should be formatted in no-fill mode, the default setting
-of the display macros.
+Format material containing tabs in no-fill mode,
+the default setting of the display macros.
 The following table was designed using
 tabs to provide the spacing:
 .page 147
@@ -1837,7 +1896,8 @@ This table appears in the output just as it looks in the
 file.
 If this material had not been processed inside a display
 in no-fill mode, the columns would be improperly aligned.
-.Bh "Static and Floating Displays
+.
+.Bh "Static and Floating Displays"
 .LP
 There are two types of displays,
 .I static
@@ -1853,17 +1913,16 @@ Both the static and the floating display output the block at
 the top of the next page if it doesn't fit on the current page;
 however, only the floating display allows text that follows
 the display to be used to fill up the preceding page.
-A static
-display maintains the order in which a display was placed in
-the input file.
+A static display maintains the order
+in which a display was placed in the input file.
 .PP
 We have already used
 .CW \&.DS
 and
 .CW \&.DE
-to mark the beginning and end of a static display.
-To specify a floating display, the
-closing mark is the same, but the beginning is marked by the
+to begin and end a static display.
+To specify a floating display, the closing macro is the same,
+but the beginning macro is
 .CW \&.DF
 .ix %begin [.DF] macro ([mm]) %key DF macro mm
 .ix %begin [mm] macros, [.DF] macro %key mm macros, DF macro
@@ -1924,49 +1983,52 @@ cause a page break:
 .X4
 .sp 1v
 .LP
-If there had been room on page 1 to fit the display, it would
-have been placed there, and lines 6 and 7 would have followed
-the display, as they did in the input file.
+If there is room on page 1 to fit the display,
+it would appear there,
+with lines 6 and 7 following the display,
+as they do in the input file.
 .PP
-If a static display had been specified, the display would
-be placed in the same position on page 2, and lines 6 and 7
-would have to follow it, leaving extra space at the bottom of
-page 1.
+If a static display is too long to fit on page\~1,
+the display appears at the beginning of page\~2,
+with lines 6 and 7 following it,
+leaving extra space at the bottom of page\~1.
 A floating display attempts to make the best use of
 the available space on a page.
 .PP
-The formatter maintains a queue to hold floating displays that
-it has not yet output.
-When the top of a page is encountered,
-the next display in the queue is output.
-The queue is emptied
-in the order in which it was filled, (first in, first out).
+The formatter maintains a queue
+to hold floating displays that it has not yet output.
+When a new page begins,
+the formatter outputs the next display in the queue.
+The formatter empties the queue
+in the order in which it was filled: first in, first out.
 Two number registers,
 .CW De
 and
 .CW Df ,
-allow you to control when
-displays are removed from the queue and placed in position.
+allow you to control when the formatter
+removes displays from the queue and places them in position.
 .PP
 At the end of a section, as indicated by the section macros
 .CW \&.H
 and
 .CW \&.HU
-(which we will see shortly), or at the end of the
-input file, any floating displays that remain in the queue
-will be placed in the document.
+(which we will see shortly),
+or at the end of the input file,
+the formatter places
+any floating displays that remain in the queue.
 .ix %end [.DF] macro ([mm]) %key DF macro mm
 .ix %end [mm] macros, [.DF] macro %key mm macros, DF macro
-.Bh "Display Labels
+.
+.Bh "Display Labels"
 .ix [mm] macros, display labels %key mm macros, display labels
 .ix [mm] macros, displays %key mm macros, displays
 .ix displays, labels ([mm]) %key displays, labels mm
 .LP
 You can provide a title or caption for tables, equations,
 exhibits, and figures.
-In addition, the display can be labeled
-and numbered in sequence, as well as printed in a table of
-contents at the end of the file.
+In addition, you can label and number the display in sequence,
+and print the titles in a table of contents
+at the end of the file.
 The following macros are available:
 .RS
 .TS
@@ -1988,13 +2050,17 @@ All of these macros work the same way and are usually specified
 within a pair of
 .CW .DS /\c
 .CW .DE
+or
+.CW .DF /\c
+.CW .DE
 macros, so that the title and the
 display appear on the same page.
 Each macro can be followed by a title.
-If the title contains spaces, it should be enclosed
-within quotation marks.
+If the title contains spaces, enclose
+it in quotation marks.
 The title of a table usually appears at
-the top of a table, so it must be specified before the
+the top of a table,
+so specify it before the
 .CW \&.TS
 macro that signals to
 .CW tbl
@@ -2016,9 +2082,9 @@ The label is centered:
 .SE
 .sp .8v
 .PP
-If the title exceeds the line length, then it will be broken
-onto several lines.
-Additional lines are indented and begin
+If the title exceeds the line length,
+the formatter breaks it onto as many lines as needed,
+indenting additional lines to begin
 at the first character of the title.
 .sp .7v
 .SS
@@ -2034,8 +2100,8 @@ at the first character of the title.
 .SE
 .sp .8v
 .PP
-The label for equations, exhibits, and figures usually follows
-the display.
+The label for equations, exhibits, and figures
+usually follows the display.
 The following:
 .Ps
 \&.FG "Drawing with a Light Pen"
@@ -2052,8 +2118,9 @@ produces a centered line:
 .SE
 .sp .8v
 .PP
-The default format of the label can be changed slightly by
-setting the number register
+You can make small changes
+to the default format of the label
+by setting the number register
 .CW Of
 to 1.
 This replaces the period with a dash.
@@ -2067,9 +2134,8 @@ This replaces the period with a dash.
 .SE
 .sp .8v
 .PP
-Second and third arguments, specified with the label macros,
-can be used to modify or override the default numbering of
-displays.
+Use the second and third arguments to the label macros
+to modify or override the default numbering.
 Basically, the second argument is a literal and
 the third argument a numeric value that specifies what the
 literal means.
@@ -2079,24 +2145,24 @@ If the third argument is
 .TS
 tab (#);
 lf(CW) l.
-0#then the second argument will be treated as a prefix;
+0#the second argument is a prefix;
 .sp 3p
-1#then the second argument will be treated as a suffix;
+1#the second argument is a suffix;
 .sp 3p
-2#then the second argument replaces the normal table number.
+2#the second argument replaces the normal table number.
 .TE
 .RE
 .LP
-Thus, a pair of related tables could be specified as 1a and
-1b using the following labels:
+Thus, you could specify a pair of related tables
+as 1a and 1b using the following labels:
 .Ps
 \&.TB "Estimated Hours: June, July, and August" a 1
 \&.TB "Estimated Hours: September and November," 1b 2
 .Pe
 .LP
-(These labels show two different uses of the third argument.
+These labels show two different uses of the third argument.
 Usually, you would consistently use one technique
-or the other for a given set of tables).
+or the other for a given set of tables.
 .PP
 For
 .CW tbl ,
@@ -2119,34 +2185,33 @@ the delimiters for pictures or diagrams are
 .ix %end [mm] macros, [.EX] macro %key mm macros, EX macro
 .ix %end [.FG] macro ([mm]) %key FG macro mm
 .ix %end [mm] macros, [.FG] macro %key mm macros, FG macro
-These pairs
-of delimiters indicate a block to be processed by a specific
+These pairs of macros indicate a block
+to be processed by a specific preprocessor.
 .page 150
-preprocessor.
-You will find the information about each of
-the preprocessors in Chapters 8 through 10.
-As mentioned, the
-preprocessor creates the display, the display macros position
-it, and the label macros add titles and a number.
+See Chapters 8 through 10 for information
+about each of the preprocessors.
+The preprocessor creates the display,
+the display macros position it,
+and the label macros add titles and a number.
 .PP
-Although it may seem a minor point, each of these steps is
-independent, and because they are not fully integrated, there
-is some overlap.
+Although it may seem a minor point,
+each of these steps is independent,
+and because they are not fully integrated,
+there is some overlap.
 .PP
 The label macros, being independent of the preprocessors,
-do not make sure that a display exists or check whether a
-table has been created with
-.CW tbl .
-You can create a two-column
-table using tabs or create a figure using character symbols
+do not make sure that a display exists
+or (for example) check whether a table exists.
+You can create a two-column table using tabs,
+or create a figure using character symbols,
 and still give it a label.
 Or you can create a table heading
 as the first line of your table and let
 .CW tbl
 process it
 .CW tbl "" (
-won't provide a number and the table won't be collected for
-the table of contents).
+won't provide a number
+and the title won't be collected for the table of contents).
 .PP
 In
 .CW tbl ,
@@ -2160,16 +2225,23 @@ But, as a consequence,
 won't make
 a very good attempt at keeping the table together on one page,
 and you may have to manually break the page.
-It is recommended
-that you use the display macros throughout a document,
+Therefore, use the display macros throughout a document,
 regardless of whether you can get the same effect another way,
 because if nothing else you will achieve consistency.
-.Ah "Forcing a Page Break
+.
+.Ah "Forcing a Page Break"
 .LP
-Occasionally, you may want to force a page break, whether to
-ensure that a block of related material is kept together
-or to allow several pages for material that will be manually
-pasted in, such as a figure.
+Occasionally, you may want to force a page break,
+whether to ensure that
+a block of related material is kept together
+or to allow blank pages for material
+that will be manually pasted in, such as a figure.
+This is usually not an issue in modern times,
+as each version of
+.CW troff
+has ways to allow including graphics,
+but you may encounter this
+when working with older documents.
 The
 .CW \&.SK
 .ix [.SK] macro ([mm]) %key SK macro mm
@@ -2178,28 +2250,27 @@ The
 .ix page breaks, [mm] macros %key page breaks, mm macros
 .I skip ) (
 macro forces a page break.
-The text following this macro is output at the
-top of the next page.
-If supplied with an argument greater
-than 0, it causes that number of pages to be skipped before
-resuming the output of text.
-The \(lqblank\(rq pages are printed,
-and they have the normal header and footer.
+The formatter outputs text following this macro
+at the top of the next page.
+If supplied with an argument greater than 0,
+it skips that number of pages 
+before resuming text output.
+The \(lqblank\(rq pages have the normal header and footer.
 .Ps
 On the next page, you will find a sample page from an
 Alcuin manuscript printed with a 16-color plotter.
 \&.SK 1
 .Pe
-.Ah "Formatting Lists
+.
+.Ah "Formatting Lists"
 .ix %begin [mm] macros, lists %key mm macros, lists
 .ix %begin lists, [mm] macros %key lists, mm macros
 .LP
 The
 .CW mm
-macro package provides a variety of different formats for
-presenting a list of items.
-You can select from four standard
-list types:
+macro package provides a variety of different formats
+for presenting a list of items.
+You can select from these list types:
 .RS
 .Ls B
 .Li
@@ -2210,21 +2281,31 @@ dashed
 numbered
 .Li
 alphabetized
+.Li
+variable/tagged (\c
+.CW groff -only)
+.Li
+broken variable/tagged (\c
+.CW groff -only)
+.Li
+marked (\c
+.CW groff -only)
 .Le
 .RE
 .page 151
 .LP
-In addition, you have the flexibility to create lists with
+In addition, you can create lists with
 nonstandard marks or text labels.
-The list macros can also be
-used to produce paragraphs with a hanging indent.
+You can also use list macros
+to produce paragraphs with a hanging indent.
 .PP
 Each list item consists of a special mark, letter,
-number, or label in a left-hand column with a
-paragraph of text indented in a right-hand column.
-.Bh "Structuring a List
+number, or label in a left-hand column
+with a paragraph of text indented in a right-hand column.
+.
+.Bh "Structuring a List"
 .LP
-The list macros help to simplify what could be a much larger
+The list macros simplify what could be a much larger
 and tedious formatting task.
 Here's the coding for the bulleted list just shown:
 .Ps
@@ -2237,10 +2318,12 @@ dashed
 numbered
 \&.LI
 alphabetized
+\&.LI
+...
 \&.LE
 .Pe
 .LP
-The structure of text in the input file has three parts:
+The list structure has three parts:
 a list-initialization macro
 .CW .BL ), (
 .ix [.BL] macro ([mm]) %key BL macro mm
@@ -2254,24 +2337,25 @@ and a list-end macro
 .ix %begin [.LE] macro ([mm]) %key LE macro mm
 .ix %begin [mm] macros, [.LE] macro %key mm macros, LE macro
 .PP
-First, you initialize the list, specifying the particular
-macro for the type of list that you want.
+First, you initialize the list,
+specifying the particular macro
+for the type of list that you want.
 For instance,
 .CW BL
 initializes a bulleted list.
 .PP
-You can specify arguments with the list-initialization macro
-that change the indentation of the text and turn off the
-automatic spacing between items in the list.
-We will examine
-these arguments when we look at the list-initialization macros
+You can specify arguments
+with the list-initialization macro
+that change the indentation of the text
+and turn off automatic spacing between items in the list.
+We examine these arguments when we look at
+the list-initialization macros
 in more detail later.
 .PP
 Next, you specify each of the items in the list.
-The item-mark
-macro,
+Place the list-item macro,
 .CW \&.LI ,
-is placed before each item.
+before each item.
 You can enter one or more lines of text following the macro.
 .Ps
 \&.BL
@@ -2279,23 +2363,21 @@ You can enter one or more lines of text following the macro.
 Item 1
 \&.LI
 Item 2
+is somewhat longer
 \&.LI
 Item 3
 .Pe
 .LP
-When the list is formatted, the
-.CW \&.LI
-macro provides a line of space before each item.
-(This line can be omitted through
-an argument to the list-initialization macro if you want to
-produce a more compact list.
-We'll be talking more about this
-in a moment).
-.PP
 The
 .CW \&.LI
-macro can also be used to override or prefix the current mark.
-If a mark is supplied as the only argument,
+macro adds a line of space before each item.
+You can omit this space, using an argument
+to the list-initialization macro,
+if you want to produce a more compact list.
+.PP
+If you add a single argument to the
+.CW \&.LI
+macro,
 it replaces the current mark.
 For example:
 .page 152
@@ -2304,16 +2386,17 @@ For example:
 Item 4
 .Pe
 .LP
-If a mark is supplied as the first argument, followed by a
-second argument of 1, then the specified mark is prefixed to
-the current mark.
+If you supply a mark as the first argument,
+followed by a second argument of 1,
+.CW -mm
+prefixes the specified mark to the current mark.
 The following:
 .Ps
 \&.LI - 1
 Item 5
 .Pe
 .LP
-would produce:
+produces:
 .sp .7v
 .SS
 .Ps
@@ -2324,41 +2407,42 @@ would produce:
 .SE
 .sp .8v
 .PP
-A text label can also be supplied in place of the mark, but it
-presents some additional problems for the proper alignment of
-the list.
-We will look at text labels for variable-item lists.
+You can specify a text label
+in place of the mark,
+but it presents some additional problems
+for proper list alignment.
 .PP
 The
 .CW \&.LI
-macro does not automatically provide spacing after
-each list item.
-An argument of 1 can be specified if a line
-of space is desired.
+macro does not automatically provide spacing
+after each list item.
+Use an argument of 1 to set a line of space.
 .PP
-The end of the list is marked by the list-end macro
-.CW \&.LE .
-It restores page formatting settings that were in effect prior to
-the invocation of the last list-initialization macro.
+The list-end macro
+.CW \&.LE
+ends the list.
+It restores page formatting settings
+that were in effect before invoking
+the last list-initialization macro.
 The
 .CW \&.LE
-macro does not output any space following the list unless you
-specify an argument of 1.
-(Don't specify this argument when
-the list is immediately followed by a macro that outputs space,
-such as the paragraph macro).
+macro does not output any space following the list,
+unless you specify an argument of 1.
+Don't specify this argument when
+a paragraph macro, or another macro that outputs space,
+immediately follows.
 .PP
 Be sure you are familiar with the basic structure of a list.
 A common problem is not closing the list with
 .CW \&.LE .
 Most of the time, this error causes the formatter
-to quit at this point in the file.
-A less serious, but nonetheless frequent, oversight
-is omitting the first
+to quit.
+A less serious, but nonetheless frequent,
+oversight is omitting the first
 .CW \&.LI
 between the list-initialization
 macro and the first item in the list.
-The list is output but the first item will be askew.
+The list is output, but the first item is askew.
 .PP
 Here is a sample list:
 .Ps
@@ -2398,17 +2482,19 @@ output produced by the sample list is:
 .SE
 .sp .8v
 .PP
-Complete list structures can be nested within other lists
+You can nest complete list structures
+within other lists,
 .ix [mm] macros, nested lists %key mm macros, nested lists
 .ix lists, nested ([mm]) %key lists, nested mm
 up to six levels.
-Different types of lists can be nested,
+You can nest different types of lists,
 making it possible to produce indented outline structures.
-But, like nested if-then structures in a program, make sure
-you know which level you are at and remember to close each list.
+But, like nested if-then structures in a program,
+make sure you know which level you are at
+and remember to close each list.
 .PP
-For instance, we could nest the bulleted list inside a numbered
-list.
+For instance, we could nest a bulleted list
+inside a numbered list.
 The list-initialization macro
 .CW \&.AL
 generates alphabetized and numbered lists.
@@ -2459,42 +2545,58 @@ This input produces the following formatted list from
 .ix %end [mm] macros, [.LI] macro %key mm macros, LI macro
 .sp .8v
 .PP
-You may already realize the ease with which you can make
+You can now see how you can make
 changes to a list.
-The items in a list can be easily put in a new order.
-New items can be added to a numbered list
-without readjusting the numbering scheme.
-A bulleted list can be changed to an alphabetized list
-by simply changing the list-initialization macro.
-And you normally don't have to
-be concerned with a variety of specific formatting requests,
-such as setting indentation levels or specifying spacing
-between items.
+You can:
+.Ls B
+.Li
+reorder items in a list;
+.Li
+add new items to a numbered list
+without readjusting the numbering scheme;
+.Li
+change a bulleted list to an alphabetized list
+by changing the list-initialization macro.
+.Le
+You don't have to worry about
+a variety of specific formatting requests,
+like setting indentation levels
+or specifying spacing between items.
 .PP
-On the other hand, because the structure of the list is
-not as easy to recognize in the input file as it is in the
-formatted output, you may find it difficult to interpret
-complicated lists, in particular ones that have been nested to
-several levels.
+On the other hand,
+because the structure of the list is
+not as easy to recognize in the input file
+as it is in formatted output,
+you may find it difficult to interpret complicated lists,
+especially those nested several levels deep.
 The code checking program,
 .CW checkmm ,
 .ix [checkmm] command %key checkmm command
-can help; in addition, you may want to format and print
+can help if it's available on your system;
+in addition, you may want to format and print
 repeatedly to examine and correct problems with lists.
+The
+.CW groff
+version of
+.CW -mm
+has built-in diagnostics that you can use
+in place of the
+.CW checkmm
+command.
 .
-.Bh "Marked Lists
+.Bh "Marked Lists"
 .ix [mm] macros, marked lists %key mm macros, marked lists
 .ix lists, marked ([mm]) %key lists, marked mm
 .LP
-Long a standby of technical documents, a marked list clearly
-organizes a group of related items and sets them apart for easy
-reading.
-A list of items marked by a bullet (\(bu) is perhaps
-the most common type of list.
+Long a standby of technical documents,
+a marked list clearly organizes a group of related items
+and sets them apart for easy reading.
+A list of items marked by a bullet (\[bu])
+is perhaps the most common type of list.
 Another type of marked list uses
 a dash (\(em).
 A third type of list allows the user to specify
-a mark, such as a square (\(sq).
+a mark, such as a square (\[sq]).
 The list-initialization macros
 for these lists are:
 .RS
@@ -2513,15 +2615,14 @@ lf(CW) l l.
 .ix [mm] macros, [.ML] macro %key mm macros, ML macro
 .RE
 .LP
-With the
+The
 .CW \&.BL
-macro, the text is indented the same amount as
+macro indents text by the same amount as
 the first line of an indented paragraph.
-A single space is
-maintained between the bullet and the text.
-The bullet is
-right justified, causing an indent of several spaces from the
-left margin.
+It maintains a single space
+between the bullet and the text.
+The bullet is right justified,
+thus indented several spaces from the left margin.
 .PP
 As you can see from this
 .CW nroff -formatted
@@ -2552,12 +2653,13 @@ available on the Alcuin product:
 .LP
 If you specify a
 .I "text indent" ,
-the first character of the text will start at that position.
-The position of the bullet is
-relative to the text, always one space to its left.
+the first character of the text starts at that position.
+The position of the bullet is relative to the text,
+always one space to its left.
 .PP
-If the last argument is 1, the blank line of space separating
-items is omitted.
+If the last argument is 1,
+the list item macro omits the blank line of space
+separating items.
 If you want to specify only this argument,
 you must specify either a value or a null value (\c
 .CW \(dq\(dq )
@@ -2567,7 +2669,7 @@ for a
 \&.BL "" 1
 .Pe
 .LP
-It produces a much more compact list:
+It produces a compact list:
 .sp .7v
 .SS
 .Ps
@@ -2584,13 +2686,14 @@ Because the bullets produced by
 .CW nroff
 are not always appropriate due to the overstriking,
 a dashed list provides a suitable alternative.
-With the
+The
 .CW \&.DL
-macro, the dash is placed in the
-same position as a bullet in a bulleted list.
-A single space
-is maintained between the dash and the text, which, like the
-text with a bulleted list, is indented by the amount specified
+macro places a dash in the same position
+as a bullet in a bulleted list.
+It maintains a single space
+between the dash and the text, and,
+like the text with a bulleted list,
+indents list items by the amount specified
 in the number register for indented paragraphs
 .CW Pi ). (
 .PP
@@ -2635,11 +2738,10 @@ With the
 .ix [mm] macros, [.ML] macro %key mm macros, ML macro
 .ix [mm] macros, user-supplied list~marks %key mm macros, user-supplied list marks
 .ix lists, user-supplied marks ([mm]) %key lists, user-supplied marks mm
-macro, you have to supply the mark for the list.
+macro, you specify the mark for the list.
 Some possible candidates are the square (enter
 .CW \e(sq
-to
-get \(sq), the square root (enter
+to get \(sq), the square root (enter
 .CW \e(sr
 to get \(sr), which
 resembles a check mark, and the gradient symbol (enter
@@ -2652,15 +2754,17 @@ The user-specified mark is the first argument.
 .LP
 Not all of the characters or symbols that you can use in
 .CW troff
-will have the same effect in
+have the same effect in
 .CW nroff .
 .PP
-Unlike bulleted and dashed lists, text is not automatically
-indented after a user specified mark.
-However, a space is added after the mark.
+Unlike bulleted and dashed lists, the
+.CW \&.ML
+macro does not automatically
+indent list items.
+However, it does add a space after the mark.
 The following example of an indented paragraph
-and a list, which specifies a square as a mark, has been
-formatted using
+and a list, which specifies a square as a mark,
+has been formatted using
 .CW nroff .
 The square appears as a pair of brackets.
 .sp .7v
@@ -2675,19 +2779,19 @@ The square appears as a pair of brackets.
 .Pe
 .SE
 .sp .8v
-The user-supplied mark can be followed
+You can follow the user-supplied mark
 by a second argument that specifies a
-.I "text indent"
+.I "text indent" ,
 and a third argument of 1 to omit spacing between items.
 .PP
-The following example was produced using the list-initialization
-command:
+The following example uses the list-initialization command:
 .Ps
 \&.ML \\(sq 5 1
 .Pe
 .LP
 The specified indent of 5 aligns the text with an indented
 paragraph:
+.\" XXX test: could you use \n[Pi] for this?
 .sp .7v
 .SS
 .Ps
@@ -2707,7 +2811,8 @@ steps:
 .ix %end [mm] macros, [.BL] macro %key mm macros, BL macro
 .ix %end [mm] macros, [.DL] macro %key mm macros, DL macro
 .sp .8v
-.Bh "Numbered and Alphabetic Lists
+.
+.Bh "Numbered and Alphabetic Lists"
 .ix %begin [.AL] macro ([mm]) %key AL macro mm
 .ix %begin [mm] macros, [.AL] macro %key mm macros, AL macro
 .ix %begin [mm] macros, alphabetic lists %key mm macros, alphabetic lists
@@ -2717,9 +2822,9 @@ steps:
 .ix %begin lists, numbered ([mm]) %key lists, numbered mm
 .ix %begin numbered lists, [mm] macros %key numbered lists, mm macros
 .LP
-The
+Use the
 .CW \&.AL
-macro is used to initialize automatically numbered or
+macro to initialize automatically numbered or
 alphabetized lists.
 The syntax for this macro is:
 .Ps
@@ -2728,7 +2833,7 @@ The syntax for this macro is:
 .ft CW
 .Pe
 .LP
-If no arguments are specified, the
+With no arguments, the
 .CW \&.AL
 macro produces a numbered list.
 For instance, we can code the following paragraph with
@@ -2775,8 +2880,9 @@ User-oriented documentation recognizes three things:
 .SE
 .sp .8v
 .LP
-The number is followed by a period, and two spaces are
-maintained between the period and the first character of text.
+A period follows the number,
+and the macro maintains two spaces
+between the period and the first character of text.
 .PP
 The level of
 .I "text indent" ,
@@ -2784,28 +2890,28 @@ specified in the number register
 .CW Li ,
 is 6 in
 .CW nroff
-and 5 in
+and 5n in
 .CW troff .
 This value is added to the current indent.
-If a
-.I "text indent"
-is specified, that value is added to
-the current indent, but it does not change the value of
+If you specify a
+.I "text indent" ,
+that value is added to the current indent,
+but it does not change the value of
 .CW Li .
 .PP
 The third argument inhibits spacing between items in the list.
-Additionally, the number register
+Additionally, you can set the number register
 .CW Ls
-can be set to a
-value from 0 to 6 indicating a nesting level.
-Lists after this level will not have spacing between items.
+to a value from 0 to 6, indicating a nesting level.
+Lists after this level do not have spacing between items.
 The default is 6, the maximum nesting depth.
 If
 .CW Ls
 were set to 2, lists only up to
 the second level would have a blank line of space between items.
+.\" XXX test: does the 3rd argument override \n[Ls]?
 .PP
-Other types of lists can be specified with
+You can specify other types of lists with
 .CW \&.AL ,
 using the first argument to specify the list type, as follows:
 .page 158
@@ -2822,10 +2928,10 @@ i#i, ii, iii#Roman numerals (lowercase)
 .TE
 .RE
 .LP
-You can produce various list types by simply changing the
+You can produce various list types by changing the
 .I type
 argument.
-You can create a very useful outline format
+You can create a traditional outline format
 by nesting different types of lists.
 The example we show of
 such an outline is one that is nested to four levels using
@@ -2994,13 +3100,14 @@ Library of Hand-Lettered Fonts
 .ix %end lists, numbered ([mm]) %key lists, numbered mm
 .ix %end numbered lists, [mm] macros %key numbered lists, mm macros
 .sp .8v
-.Bh "Variable-Item Lists
+.
+.Bh "Variable-Item Lists"
 .ix [mm] macros, variable-item lists %key mm macros, variable-item lists
 .ix lists, variable-item ([mm]) %key lists, variable-item mm
 .ix variable-item lists, [mm] macros %key variable-item lists, mm macros
 .LP
-With a variable-item list, you do not supply a mark; instead,
-you specify a text label with each
+With a variable-item list, you do not supply a mark;
+instead, you specify a text label with each
 .CW \&.LI .
 One or more lines of text following
 .CW \&.LI
@@ -3034,13 +3141,15 @@ the indent for the text will be added to the
 .\" 		Figure 6-5 (moved)
 .page 161
 .PP
-Variable-item lists are useful in preparing command reference
-pages, which
-describe various syntax items, and glossaries, which present
-a term in one column and its definition in the other.
-The text label should be a single word or phrase.
-The following
-example shows a portion of the input file for a reference page:
+Variable-item lists are useful
+in preparing command reference pages,
+which describe various syntax items,
+and glossaries, which present a term in one column
+and its definition in the other.
+The text label should be a single word;
+if you use a phrase, see below.
+The following example
+shows a portion of the input file for a reference page:
 .Ps
 \&.VL 15 5
 \&.LI figure
@@ -3080,32 +3189,31 @@ If you don't provide a text label with
 .CW \&.LI
 or give a null argument (\c
 .CW \(dq\(dq ),
-you will get a paragraph with a hanging indent.
-If you want to print an item without a label, specify a
-backslash followed by a space (\c
+you get a paragraph with a hanging indent.
+If you want to print an item without a label,
+specify a backslash followed by a space (\c
 .CW "\e " )
 or
 .CW \e0
 after
 .CW \&.LI .
-Similarly,
-if you want to specify a label that contains a space, you
-should also precede the space with a backslash and enclose
-the label within quotation marks:
+If you want to specify a label that contains a space,
+precede the space with a backslash
+and enclose the entire label within quotation marks:
 .Ps
 \&.LI "point\e size"
 .Pe
 .LP
-or simply substitute a \\0 for a space:
+or substitute a \\0 for a space:
 .Ps
 \&.LI point\\0size
 .Pe
 .LP
-The first line of text is left justified (or indented by the
-amount specified in
-.I "label indent" )
-and the remaining lines
-will be indented by the amount specified by
+A variable list left-justifies the first line of text
+(or indents by the amount specified in
+.I "label indent" ),
+and indents the remaining lines
+by the amount specified by
 .I "text indent" .
 This produces a paragraph with a hanging indent:
 .page 162
@@ -3132,19 +3240,21 @@ There are currently 16 font dictionaries in the Alcuin
 .ix %end lists, [mm] macros %key lists, mm macros
 .ix %end [mm] macros, lists %key mm macros, lists
 .sp .8v
+.
 .Ah Headings
 .ix %begin headings, in [mm] %key headings, in mm
 .LP
-Earlier we used the list macros to produce an indented outline.
-That outline, indented to four levels, is a visual
-representation of the structure of a document.
-Headings perform
-a related function, showing how the document is organized
+Earlier, we used the list macros to produce an indented outline.
+That outline, indented to four levels,
+is a visual representation of the structure of a document.
+Headings perform a related function,
+showing how the document is organized
 into sections and subsections.
-In technical documentation
-and book-length manuscripts, having a structure that is easily
+In technical documentation and book-length manuscripts,
+having a structure that is easily
 recognized by the reader is very important.
-.Bh "Numbered and Unnumbered Headings
+.
+.Bh "Numbered and Unnumbered Headings"
 .LP
 Using
 .CW mm ,
@@ -3161,9 +3271,8 @@ for unnumbered headings.
 .ix %begin [.HU] macro ([mm]) %key HU macro mm
 .ix %begin [mm] macros, [.HU] macro %key mm macros, HU macro
 .ix %begin [mm] macros, unnumbered headings %key mm macros, unnumbered headings
-A different style for each level of heading can be
-specified by setting various number registers and defining
-strings.
+You can specify a different style for each level of heading
+by setting various number registers and defining strings.
 .PP
 Let's first look at how to produce numbered headings.
 The syntax for the
@@ -3179,21 +3288,22 @@ The simplest use of the
 .CW \&.H
 macro is to specify the
 .I level
-as a number between 1 and 7 followed by the text that is printed
+as a number between\~1 and\~7
+followed by the text that is printed
 as a heading.
 If the
 .I "heading text"
-contains spaces, you should enclose it within quotation marks.
-A heading that is longer
-than a single line will be wrapped on to the next line.
-A multiline heading will be kept together in case of a page break.
+contains spaces, enclose it within quotation marks.
+A heading that is longer than a single line
+wraps on to the next line.
+A multiline heading does not break across pages.
 .PP
 If you specify a
 .I "heading suffix" ,
-this text or mark will appear in the heading
-but will not be collected for a table of contents.
+this text or mark appears in the heading
+but is not collected for a table of contents.
 .PP
-A top-level heading is indicated by an argument of 1:
+An argument of 1 indicates a top-level heading:
 .Ps
 \&.H 1 "Quick Tour of Alcuin"
 .Pe
@@ -3205,7 +3315,7 @@ The first-level heading has the number 1.
 1.  Quick Tour of Alcuin
 .Pe
 .LP
-A second-level heading is indicated by an argument of 2:
+An argument of 2 indicates a second-level heading:
 .Ps
 \&.H 2 "Introduction to Calligraphy"
 .Pe
@@ -3215,8 +3325,8 @@ The first second-level heading number is printed:
 1.1  Introduction to Calligraphy
 .Pe
 .LP
-When another heading is specified at the same level, the
-heading-level number is automatically incremented.
+When another heading is specified at the same level,
+the heading-level number automatically increments.
 If the next heading is at the second level:
 .Ps
 \&.H 2 "Digest of Alcuin Commands"
@@ -3227,11 +3337,12 @@ it produces:
 1.2  Digest of Alcuin Commands
 .Pe
 .LP
-Each time you go to a new (higher-numbered) level, .1 is
-appended to the number representing the existing level.
-That number is incremented for each call at the same level.
-When you back out of a level (for instance, from level 5 to 4),
-the counter for the level (in this case level 5), is reset to 0.
+Each time you go to a new (higher-numbered) level, the
+.CW \&.H
+macro appends .1 to the number representing the existing level.
+That number increments for each call at the same level.
+When you back out of a level (for instance, from level\~4 to\~3),
+the counter for the level (in this case level\~4), is reset to\~0.
 .PP
 An unnumbered heading is really a zero-level heading:
 .Ps
@@ -3240,17 +3351,15 @@ An unnumbered heading is really a zero-level heading:
 .PP
 A separate macro,
 .CW \&.HU ,
-has been developed for unnumbered
-headings, although its effect is the same.
+sets unnumbered headings, although its effect is the same.
 .Ps
 \&.HU "Introduction to Calligraphy"
 .Pe
 .LP
 Even though an unnumbered heading does not display a number, it
 increments the counter for second-level headings.
-Thus, in the
-following example, the heading \(lqIntroduction to
-Calligraphy\(rq
+Thus, in the following example,
+the heading \(lqIntroduction to Calligraphy\(rq
 is unnumbered, but it has the same effect on the numbering
 scheme as if it had been a second-level heading (1.1).
 .sp .7v
@@ -3304,7 +3413,8 @@ A simple thing
 you can do is use uppercase letters for a first-level heading.
 .PP
 Here is a list of some of the other things you can do to affect
-the appearance of headings, although some of the items depend
+the appearance of headings,
+although some of the items depend
 .ix %begin [mm] macros, altering heading~style %key mm macros, altering heading style
 upon whether you are formatting with
 .CW nroff
@@ -3329,13 +3439,14 @@ select a different heading mark
 .LP
 The basic issue in designing a heading style is to help the
 reader distinguish between different levels of headings.
-For instance, in an outline form, different levels of indent show
+For instance, in an outline form,
+different levels of indent show
 whether a topic is a section or subsection.
 Using numbered headings is an effective way to accomplish this.
-If you use
-unnumbered headings, you probably want to vary the heading
-style for each level, although, for practical purposes, you
-should limit yourself to two or three levels.
+If you use unnumbered headings,
+you probably want to vary
+the heading style for each level;
+but for practical purposes, limit yourself to two or three levels.
 .PP
 First, let's look at what happens if we use the default
 heading style.
@@ -3348,8 +3459,8 @@ and underlined text in
 After the heading, there is a blank line before
 the first paragraph of text.
 In addition, a top-level heading has two blank lines
-before the heading; all the other levels have a single line
-of space.
+before the heading;
+all other levels have a single line of space.
 .sp .7v
 .SS
 .UTPSD
@@ -3403,14 +3514,14 @@ seven values.
 .PP
 The font for each level of heading can be set by the string
 .CW HF .
-The following codes are used to select a font:
+Use the following codes to select a font:
 .RS
 .TS
 tab (#);
 lf(CW) l l .
-1 ##Roman
-2 ##Italic
-3 ##Bold
+1##Roman
+2##Italic
+3##Bold
 .TE
 .RE
 .LP
@@ -3420,7 +3531,7 @@ resulting in italicized headings in
 and underlining in
 .CW nroff .
 Here the
-.CW \&HF
+.CW  HF
 .ig
 	The original printed book had: .HF
 	This is wrong, it should be HF.  Fixed
@@ -3435,12 +3546,12 @@ levels followed by two italic levels:
 .LP
 If you do not specify a level, it defaults to 1.
 Thus, in the previous example, level 6 and 7 headings
-would be printed in a roman font.
+print in Roman font.
 .PP
 The point size is set by the string
 .CW HP .
-Normally, headings are printed in the same size as the body
-copy, except for bold headings.
+Normally, headings print in the same size
+as the body copy, except for bold headings.
 A bold heading is reduced by 1 point when it
 is a standalone heading, as are the top-level headings.
 The
@@ -3479,10 +3590,10 @@ the level at which some action is to be turned on or off.
 .PP
 The
 .CW Ej
-register is set to the highest-level heading, usually
-1, that should start on a new page.
+register is set to the highest-level heading, usually\~1,
+that should start on a new page.
 Its default setting is 0.
-This ensures that the major sections of a document will
+This ensures that the major sections of a document
 begin on their own page.
 .Ps
 \&.nr Ej 1
@@ -3493,39 +3604,36 @@ The
 register determines if a line break occurs after the heading.
 The
 .CW Hs
-register determines if a blank line is output after the heading.
-Both are set to 2 by default.
-Settings of 2 mean that, for levels 1 and 2,
+register determines if a blank line occurs after the heading.
+Both are set to\~2 by default.
+Settings of\~2 mean that, for levels\~1 and\~2,
 the section heading is printed,
 followed by a line break and a blank line separating
 the heading from the first paragraph of text.
-For lower-level
-headings (an argument greater than 2), the first paragraph
+For lower-level headings (an argument greater than\~2),
+the first paragraph
 follows immediately on the same line.
 .PP
-The
+Set the
 .CW Hc
-register is set to the highest-level heading that
+register to the highest-level heading that
 you want centered.
 Normally, this is not used with numbered
 headings and its default value is 0.
-However, unnumbered
-heads are often centered.
-A setting of 2 will center first- and second-level headings:
+However, unnumbered heads are often centered.
+A setting of\~2 centers first- and second-level headings:
 .Ps
 \&.nr Hc 2
 .Pe
 .LP
-With unnumbered headings, you also have to keep in mind that
-the value of
+With unnumbered headings, remember that the value of
 .CW Hc
 must be greater than or equal to
 .CW Hb
 and
 .CW Hu .
-The
-heading must be on a line by itself; therefore a break must
-be set in
+The heading must be on a line by itself;
+therefore you must set a break in
 .CW Hb
 for that level.
 The
@@ -3535,9 +3643,9 @@ of an unnumbered heading to 2, requiring that
 .CW Hc
 be at least 2 to have an effect on unnumbered headings.
 .PP
-There really is no way, using these registers, to get the
-first and second levels left justified and have the rest of
-the headings centered.
+There really is no way, using these registers,
+to get the first and second levels left justified
+and have the rest of the headings centered.
 .PP
 The number register
 .CW Hi
@@ -3582,13 +3690,14 @@ of devices, including plotters and laser printers.
 .ix %end [mm] macros, unnumbered headings %key mm macros, unnumbered headings
 .sp .8v
 .page 167
-.Bh "Changing the Heading Mark
+.
+.Bh "Changing the Heading Mark"
 .ix %begin [mm] macros, changing~the heading~mark %key mm macros, changing the heading~mark
 .LP
 Remember how the list-initialization macro
 .CW \&.AL
-allowed you to
-change the mark used for a list, producing an alphabetic list
+allowed you to change the mark used for a list,
+producing an alphabetic list
 instead of a numbered list?
 These same options are available for headings using the
 .CW \&.HM
@@ -3598,9 +3707,9 @@ macro.
 .PP
 The
 .CW \&.HM
-macro takes up to seven arguments specifying the mark
-for each level.
-The following codes can be specified:
+macro takes up to seven arguments
+specifying the mark for each level.
+You can specify the following codes:
 .RS
 .TS
 tab (#);
@@ -3614,17 +3723,17 @@ i##Lowercase roman
 .TE
 .RE
 .LP
-If no mark is specified, the default numbering system (arabic)
-is used.
-Uppercase alphabetic marks can be used in putting
+With no specified mark,
+headings use the default numbering system (arabic).
+You can use uppercase alphabetic marks to put
 together a series of appendices.
 You can specify A for the top level:
 .Ps
 \&.HM A
 .Pe
 .LP
-and retain the default section numbering for the rest of the
-headings.
+and retain the default section numbering
+for the rest of the headings.
 This could produce sections in the following series:
 .Ps
 .ft R
@@ -3632,13 +3741,15 @@ A, A.1, A.2, A.2.1, etc.
 .ft CW
 .Pe
 .LP
-Marks can be mixed for an outline style similar to the one we
+You can mix marks for an outline style,
+similar to the one we
 produced using the list macros:
 .Ps
 \&.HM I A 1 a i
 .Pe
 .LP
-Roman numerals can be used to indicate sections or parts.
+You can use Roman numerals
+to indicate sections or parts.
 If you specify:
 .Ps
 \&.HM I i
@@ -3646,7 +3757,7 @@ If you specify:
 .LP
 the headings for the first two levels are marked by roman
 numerals.
-A third-level heading is shown to demonstrate that
+A third-level heading demonstrates that
 the heading mark reverted to arabic by default:
 .sp .7v
 .SS
@@ -3664,10 +3775,12 @@ I.ii.1  Three Methods of Command Entry
 .sp .8v
 .page 168
 .LP
-When you use marks consisting of roman numerals or alphabetic
-characters, you might not want the mark of the current
-level to be concatenated to the mark of the previous level.
-Concatenation can be suppressed by setting the number register
+When you use marks consisting of roman numerals
+or alphabetic characters,
+you might not want the mark of the current level
+to be concatenated to the mark of the previous level.
+You can suppress concatenation
+by setting the number register
 .CW Ht
 to 1:
 .Ps
@@ -3696,24 +3809,19 @@ ii.  Digest of Alcuin Commands
 .ix %end [mm] macros, changing~the heading~mark %key mm macros, changing the heading~mark
 .ix %end headings, in [mm] %key headings, in mm 
 .sp .8v
-.Ah "Table of Contents
+.
+.Ah "Table of Contents"
 .ix %begin [mm] macros, table~of~contents %key mm macros, table of~contents
 .ix %begin table~of~contents, [mm] macros %key table of~contents, mm macros
 .LP
 Getting a table of contents easily and automatically is
 almost reason enough to justify all the energy, yours and the
 computer's, that goes into text processing.
-You realize that
-this is something that the computer was really meant to do.
-.PP
-When the table of contents page comes out of the printer, a
-writer attains a state of happiness known only to a statistician
-who can give the computer a simple instruction to tabulate
-vast amounts of data and, in an instant, get a single piece
-of paper listing the results.
+You realize that this is something
+that the computer was really meant to do.
 .PP
 The reason that producing a table of contents seems so easy is
-that most of the work is performed in coding the document.
+that most of the work happens while setting headings.
 That means entering codes to
 mark each level of heading and all the
 figures, tables, exhibits, and equations.
@@ -3721,15 +3829,14 @@ Processing a table of contents
 is simply a matter of telling the formatter to
 collect the information that's already in the file.
 .PP
-There are only two simple codes to put in a file, one at the
-beginning and one at the end, to generate a table of contents
-automatically.
+There are only two simple codes to put in a file,
+one at the beginning and one at the end,
+to generate a table of contents automatically.
 .PP
-At the beginning of the file, you have to set the number
-register
+At the beginning of the file, set the number register
 .CW Cl
-to the level of headings that you want collected
-for a table of contents.
+to the level of headings
+that you want collected for a table of contents.
 For example, setting
 .CW Cl
 to 2 saves first- and second-level headings.
@@ -3741,7 +3848,7 @@ Place the
 macro at the end of the file.
 This macro actually does the processing and formatting
 of the table of contents.
-The table of contents page is output at the end of a document.
+The table of contents page outputs at the end of a document.
 .PP
 A sample table of contents page follows.
 The header \(lqCONTENTS\(rq
@@ -3778,8 +3885,8 @@ lowercase roman numerals are used as page numbers.
 .LP
 One blank line is output before each first-level heading.
 All first-level headings are left justified.
-Lower-level
-headings are indented so that they line up with the start of
+Lower-level headings are indented
+so that they line up with the start of
 text for the previous level.
 .PP
 If you have included various displays in your document, and used
@@ -3794,12 +3901,12 @@ and
 .CW \&.EX
 .ix %begin [.EX] macro ([mm]) %key EX macro mm
 .ix %begin [mm] macros, [.EX] macro %key mm macros, EX macro
-to specify captions and headings
-for the displays, this information is collected and output when the
+to specify captions and headings for the displays,
+this information is collected and output when the
 .CW \&.TC
 macro is invoked.
-A separate page is printed for each
-accumulated list of figures, tables, and exhibits.
+A separate page prints for each
+list of figures, tables, and exhibits.
 For example:
 .sp .7v
 .SS
@@ -3820,7 +3927,7 @@ TABLE 2. List of Available Resources\*[my_a]\016
 .sp .8v
 .LP
 If you want the lists of displays to be printed immediately
-following the table of contents (no page breaks), you can set
+following the table of contents (no page breaks), set
 the number register
 .CW Cp
 to 1.
@@ -3838,8 +3945,8 @@ Lx##If 0, no exhibits
 .RE
 .page 170
 .LP
-In addition, there is a number register for equations that is
-set to 0 by default.
+In addition, there is a number register for equations
+that is set to 0 by default.
 If you want equations marked by
 .CW \&.EC
 to be listed, specify:
@@ -3847,8 +3954,9 @@ to be listed, specify:
 \&.nr Le 1
 .Pe
 .LP
-There are a set of strings, using the same names as the number
-registers, that define the titles used for the top of the lists:
+There are a set of strings,
+using the same names as the number registers,
+that define the titles used for the top of the lists:
 .RS
 .TS
 tab (#);
@@ -3877,17 +3985,19 @@ as follows:
 .ix %end [.TB] macro ([mm]) %key TB macro mm
 .ix %end [mm] macros, table~of~contents %key mm macros, table of~contents
 .ix %end table~of~contents, [mm] macros %key table of~contents, mm macros
-.Ah "Footnotes and References
+.
+.Ah "Footnotes and References"
 .LP
-Footnotes and references present special problems, as anyone
-who has ever typed a term paper knows.
+Footnotes and references present special problems,
+as anyone who has ever typed a term paper knows.
 Fortunately,
 .CW mm
 has two pairs of specialized macros.
 Both of them follow a marker
-in the text and cause lines of delimited text to be saved
-and output either at the bottom of the page, as a footnote,
+in the text, save lines of delimited text,
+and outputs them either at the bottom of the page, as a footnote,
 or at end of the document, as a reference.
+.
 .Bh Footnotes
 .ix %begin footnotes, [mm] macros %key footnotes, mm macros
 .LP
@@ -3901,10 +4011,11 @@ in an article on desktop publishing.\\*F
 The string
 .CW F
 supplies the number for the footnote.
-It is printed (using
-.CW troff )
-as a superscript in the text and its value is
-incremented with each use.
+.CW Troff )
+prints it as a superscript in the text (\c
+.CW nroff
+prints it normally);
+both formatters increment its value with each use.
 .PP
 The
 .CW \&.FS
@@ -3916,10 +4027,10 @@ macro indicates the start, and
 .ix %begin [mm] macros, [.FE] macro %key mm macros, FE macro
 the end, of the text for the footnote.
 These macros surround the footnote text
-that will appear at the bottom of the page.
+that appear at the bottom of the page.
 The
 .CW \&.FS
-macro is put on the line immediately following the marker.
+macro starts the line immediately following the marker.
 .Ps
 \&.FS
 "Publish or Perish: Start-up grabs early page language lead,"
@@ -3928,8 +4039,7 @@ macro is put on the line immediately following the marker.
 .Pe
 .LP
 You can use labels instead of numbers to mark footnotes.
-The label must be specified as a mark in the text and as an argument
-with
+Specify the label as a mark in the text and as an argument to
 .CW \&.FS .
 .Ps
 \&...in accord with the internal specs.[APS]
@@ -3939,17 +4049,18 @@ with
 .Pe
 .page 171
 .LP
-You can use both numbered and labeled footnotes in the same
-document.
-All the footnotes are collected and output at the
+You can use both numbered and labeled footnotes
+in the same document.
+The formatters collect all the footnotes
+and output them at the
 bottom of each page underneath a short line rule.
 If you are using
 .CW troff ,
-the footnote text will be set in a type size 2
-points less than the body copy.
+the footnote text is set in a type size 2
+points smaller than the body copy.
 .PP
 If you want to change the standard format of footnotes,
-you can specify the
+specify the
 .CW \&.FD
 .ix [.FD] macro ([mm]) %key FD macro mm
 .ix [mm] macros, [.FD] macro %key mm macros, FD macro
@@ -3969,7 +4080,7 @@ can be changed by giving a value between 0 and 11 as the first
 argument with
 .CW \&.FD ,
 as shown in Table 6-3.
-.Ts "\f[CB].FD\fP Argument Values
+.Ts "\f[CB].FD\fP Argument Values"
 .TS
 center box;
 c c c c c.
@@ -3994,8 +4105,8 @@ _
 The second argument for
 .CW \&.FD ,
 if 1, resets the footnote numbering counter to 1.
-This can be invoked at the end of a section or
-paragraph to initialize a new numbering sequence.
+Use this at the end of a section or paragraph
+to restart the numbering sequence.
 If specified by itself, the first argument must be null:
 .Ps
 \&.FD "" 1
@@ -4005,12 +4116,14 @@ If specified by itself, the first argument must be null:
 .ix %end [.FS] macro ([mm]) %key FS macro mm
 .ix %end [mm] macros, [.FS] macro %key mm macros, FS macro
 .ix %end footnotes, [mm] macros %key footnotes, mm macros
-.Bh "References
+.
+.Bh "References"
 .ix %begin [mm] macros, references %key mm macros, references
 .LP
-A reference differs from a footnote in that all references
-are collected and printed on a single page at the end of the
-document.
+A reference differs from a footnote
+in that the formatter collects all references
+and prints them on a single page
+at the end of the document.
 In addition, you can label a reference so that you
 can refer to it later.
 .page 172
@@ -4040,15 +4153,14 @@ Reading, Massachusetts: Addison-Wesley; 1985.
 \&.RF
 .Pe
 .LP
-You can also give as a
-.I "string label
+You can also give a
+.I "string label"
 argument to
 .CW \&.RS
-the name of a string that will be
-assigned the current reference number.
-This string can be referenced later in the document.
-For instance, if we had specified a
-.I "string label
+to assign a string to the current reference number.
+You can reference this string later in the document.
+For instance, if we specified a
+.I "string label"
 in the previous example:
 .Ps
 \&.RS As
@@ -4060,11 +4172,12 @@ The output itself is a readable file which you can interpret
 with the aid of the PostScript manual.\\*(As
 .Pe
 .PP
-At the end of the document, a reference page is printed.
-The title printed on the reference page is defined in the string
-.CW Rp .
-You can replace \(lqREFERENCES\(rq with another title simply by
-redefining this string with
+The reference page prints at the end of the document.
+The string
+.CW Rp
+defines the title printed on the reference page.
+You can replace \(lqREFERENCES\(rq with another title
+by redefining this string with
 .CW \&.ds .
 .sp .7v
 .SS
@@ -4098,37 +4211,39 @@ macro anywhere in a document.
 .LP
 It will print the list of references on a separate page and
 reset the reference counter to 0.
-A
+You can supply a
 .I reset
 argument and a
 .I paging
-argument can be supplied to change these actions.
+argument to change these actions.
 The
 .I reset
 argument is the first value specified with the
 .CW \&.RP
 macro.
-It is normally 0, resetting the reference counter to 1 so that
-each section is numbered independently.
-If reference numbering
-should be maintained in sequence for the entire document,
+It is normally 0, resetting the reference counter to 1
+so that each section is numbered independently.
+If you want to maintain reference numbering 
+in sequence for the entire document,
 specify a value of 1.
 .page 173
 .PP
 The
 .I paging
 argument is the second value specified.
-It controls
-whether or not a page break occurs before and after the list.
+It controls whether or not a page break occurs
+before and after the list.
 It is normally set to 0, putting the list on a new page.
-Specifying
-a value of 3 suppresses the page break before and after the
-list; the result is that the list of references is printed
-following the end of the section and the next section begins
+Specify a value of 3 to suppress the page break
+before and after the list;
+this prints the list of references
+following the end of the section
+and the next section begins
 immediately after the list.
-A value of 1 will suppress only
-the page break that occurs after the list and a value of 2
-will suppress only the page break that occurs before the list.
+A value of 1 suppresses only
+the page break that occurs after the list,
+and a value of 2 suppresses only the page break
+that occurs before the list.
 .PP
 If you want an effect opposite that of the default settings,
 .ix [mm] macros, changing reference~defaults %key mm macros, changing reference defaults
@@ -4153,24 +4268,31 @@ So far, we have covered most but not all of the features of the
 .CW mm
 macro package.
 .PP
-We have not covered the Technical Memorandum macros, a set
-of specialized macros for formatting technical memos and
-reports.
+We have not covered the Technical Memorandum macros,
+a set of specialized macros
+for formatting technical memos and reports.
 Like the ones in the
 .CW ms
 macro package, these macros
 were designed for internal use at AT&T's Bell Laboratories,
 reflecting a company-wide set of standards.
-Anyone outside of
-Bell Labs will want to make some modifications to the macros
-before using them.
-The Technical Memorandum macros are a good
-example of employing a limited set of user macros to produce
-a standard format.
-Seeing how they work will be especially
-important to those who are responsible for implementing
-documentation standards for a group of people, some of whom
-understand the basics of formatting and some of whom do not.
+Modify these macros before using them.\**
+.FS
+.CW Groff
+makes the Technical Memorandum cover pages available, often under
+.CW /usr/local/share/groff/\c
+.I version \c
+.CW /tmac/mm .
+You can modify them as needed for your site.
+.FE
+The Technical Memorandum macros are a good example
+of employing a limited set of user macros
+to produce a standard format.
+Seeing how they work is especially important
+to those who are responsible for implementing
+documentation standards for a group of people,
+some of whom understand the basics of formatting
+and some of whom do not.
 .PP
 Writing or rewriting macros is only one part of the process of
 .ix [mm] macros, modifying %key mm macros, modifying
@@ -4178,10 +4300,9 @@ customizing
 .CW mm .
 The
 .CW mm
-macros were designed as a comprehensive
-formatting system.
-As we've seen, there are even macros to
-replace common primitive requests, like
+macros were designed as a comprehensive formatting system.
+As we've seen, there are even macros to replace
+common primitive requests like
 .CW \&.sp .
 The developers of
 .CW mm
@@ -4197,25 +4318,35 @@ Furthermore, as you will see if you print out the
 macros, the internal code of
 .CW mm
 is extraordinarily dense, and uses
-extremely un-mnemonic register names.
-This makes it very
-difficult for all but the most experienced user to modify the
-basic structure of the package.
-You can always add your own
-macros, as long as they don't conflict with existing macro and
-number register names, but you can't easily go in and change
+extremely un-mnemonic register names.\**
+.FS
+This is less true for
+.CW groff \&'s
+version of
+.CW mm ,
+as it was written as a ground-up work-alike using
+.CW groff
+extensions such as long names.
+It also assumes the limitations
+of 40-year old hardware no longer apply.
+.FE
+This makes it difficult for all but the most experienced user
+to modify the basic structure of the package.
+You can add your own macros,
+as long as they don't conflict
+with existing macro and number register names,
+but you can't easily go in and change
 the basic macros that make up the
 .CW mm
 package.
 .PP
 At the same time, the developers of
 .CW mm
-have made it possible
-for the user to make selective modifications\(emthose which
+made it possible
+for the user to make selective modifications\[em]those which
 .CW mm
 has allowed mechanisms for in advance.
-There are two such
-mechanisms:
+There are two such mechanisms:
 .RS
 .Ls B
 .Li
@@ -4238,19 +4369,20 @@ code
 The
 .CW mm
 package is very heavily parameterized.
-Almost every
-feature of the formatting system\(emfrom the fonts in which
+Almost every feature of the formatting system\[em]from
+the fonts in which
 .ig
 	in the next line, the original printed book read:
 	"levels of heading".  It should be "headings", I think.
 	However, I have left it as is since I am not sure.
 	--Michael Hobgood
 ..
-different levels of heading are printed to the size of indents
-and the amount of space above and below displays\(emis controlled
+different levels of heading are printed
+to the size of indents
+and the amount of space above and below displays\[em]is controlled
 by values in number registers.
-By learning and modifying
-these number registers, you can make significant changes to
+By learning and modifying these number registers,
+you can make significant changes to
 the overall appearance of your documents.
 .PP
 In addition, there are a number of values stored in strings.
@@ -4277,8 +4409,8 @@ Default is 2.
 T}
 .sp 4p
 Cp###T{
-If set to 1, lists of figures and tables appear on same
-page as table of contents.
+If set to 1, lists of figures and tables
+appear on the same page as the table of contents.
 Otherwise, they start on a new page.
 Default is 1.
 T}
@@ -4288,19 +4420,20 @@ Ds###Sets the pre- and post-space used for static displays.
 Fs###Vertical spacing between footnotes.
 .sp 4p
 Hb###T{
-Level of heading for which break occurs before output
-of body text.
+Level of heading for which a line break occurs
+before output of body text.
 Default is 2.
 T}
 .sp 4p
 Hc###T{
 Level of heading for which centering occurs.
-Default is 0.
+Default is 0 (disabled).
 T}
 .sp 4p
 Hi###T{
 Indent type after heading.
 Default is 1 (paragraph indent).
+.\" XXX test: does this or Pt take precedence?
 Legal values are:
 0=left justified;
 1=indented;
@@ -4313,11 +4446,12 @@ T}
 Hs###T{
 Level of heading for which space after heading occurs.
 Default is 2,
-i.e., space will occur after first- and second-level headings.
+i.e., space occurs after first- and second-level headings.
 T}
 .sp 4p
 Hy###T{
 Sets hyphenation.
+.\" XXX can't be set from command line, at least by groff.
 If set to 1, enables hyphenation.
 Default is 0.
 T}
@@ -4379,6 +4513,7 @@ T}
 Ps###T{
 Amount of spacing between paragraphs.
 Default is 3v.
+.\" XXX test: that doesn't sound right. Maybe 0.3v?
 T}
 .sp 4p
 Pt###Paragraph type.  Default is 0.
@@ -4442,30 +4577,30 @@ start of your document:
 \&.ds HP 16 14 12 10 10 10 10
 .Pe
 .LP
-will have the following effects:
+has the following effects:
 .RS
 .Ls B
 .Li
 Top-level headings (generated by
 .CW \&.H1 )
-will be centered.
+are centered.
 .Li
-The first three levels of heading will be followed by a
+The first three levels of heading are followed by a
 blank line.
 .Li
-The fourth-level heading will be followed by a break.
+The fourth-level heading are followed by a break.
 .Li
-Fifth- through seventh-level headings will be run-in with
+Fifth- through seventh-level headings are run-in with
 the text.
 .Li
-All headings will have the following text indented under
+All headings have the following text indented under
 the first word of the
 heading, so that the section number hangs in the margin.
 .Li
-The first five levels of heading will be in bold type;
-the sixth and seventh will be italic.
+The first five levels of heading use bold type;
+the sixth and seventh use italic.
 .Li
-A first-level heading will be printed in 16-point type;
+A first-level heading prints in 16-point type;
 a second-level heading in
 14-point type; a third-level heading in 12-point type; and
 all subsequent levels
@@ -4485,6 +4620,12 @@ begin to get a picture of just how many facets of
 .CW mm
 you can
 modify by changing the values in number registers and strings.
+If you are using
+.CW groff ,
+the
+.CW groff_mm
+manual page has a long list of extended registers and strings
+to aid with localization and letter writing.
 .PP
 The second feature\(emthe provision of so-called \(lquser exit macros\(rq
 .ix [mm] macros, user~exit %key mm macros, user exit
@@ -4554,18 +4695,17 @@ is relatively self-contained).
 There is a slightly different mechanism for generalized
 bottom-of-page processing.
 .ix [mm] macros, bottom-of-page processing %key mm macros, bottom-of-page processing
-The
+Use the
 .CW .BS /\c
 .CW .BE
 .ix [.BS] macro ([mm]) %key BS macro mm
 .ix [.BE] macro ([mm]) %key BE macro mm
 .ix [mm] macros, [.BS] macro %key mm macros, BS macro
 .ix [mm] macros, [.BE] macro %key mm macros, BE macro
-macro pair can be used
-to enclose text that will be printed at the bottom of each page,
+macro pair to enclose text printed at the bottom of each page,
 after any footnotes but before the footer.
-To remove this text
-after you have defined it, simply specify an empty block.
+To remove this text after you have defined it,
+specify an empty block.
 .PP
 The
 .CW \&.VM
@@ -4580,7 +4720,7 @@ For example:
 \&.VM 3 3
 .Pe
 .LP
-will add three lines each to the top and bottom margins.
+adds three lines each to the top and bottom margins.
 The arguments to this macro should be unscaled.
 The first argument
 applies to the top margin, the second to the bottom.
@@ -4593,18 +4733,17 @@ and
 .CW \&.TY
 .ix [.TY] macro ([mm]) %key TY macro mm
 .ix [mm] macros, [.TY] macro %key mm macros, TY macro
-macros allow you to control the appearance of
+macros let you control the appearance of
 the table of contents pages.
 .ix [mm] macros, table~of~contents %key mm macros, table of~contents
 The
 .CW \&.TX
-macro is executed at the
+macro executes at the
 top of the first page of the table of contents, above the title;
 .CW \&.TY
-is executed in place of the standard title (\(lqCONTENTS\(rq).
+executes in place of the standard title (\(lqCONTENTS\(rq).
 .PP
-In Chapter 14, you will learn about writing macro definitions,
-which should give
-you the information you need to write these supplementary
+Chapter 14 shows you how to write macro definitions,
+which should give you the information you need
+to write these supplementary
 \(lquser exit macros.\(rq
-

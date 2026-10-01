@@ -48,6 +48,17 @@ You will need *groff* 1.22 or newer to format it,
 as it uses the -Tpdf driver.
 If you have an older *groff*, switch to the 1.0 branch.
 
+The UTP 2.0 branch, "UTP Revisited," is in process.
+This is an attempt to modernize the book
+to not only illustrate the advances in the *roff family since 1987,
+but to introduce other text formats
+important to technical writers in 2026:
+Markdown and XML.
+Far from being exclusive, "UTP Revisited"
+intends to show how *roff, Markdown, and XML
+can work together to increase writer productivity
+while producing higher-quality documentation.
+
 The UTP Revival Release is
 distributed according to the terms of the
 Creative Commons Attribution License.

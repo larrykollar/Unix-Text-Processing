@@ -11,13 +11,13 @@
 .ix %begin [vi] editor %key vi editor
 Sometimes, in order to advance,
 you have to go backward.
-In this chapter, we are going to demonstrate
+In this chapter, we demonstrate
 how you can improve your text-editing skills
 by understanding how line editors work.
-This doesn't mean you'll have to abandon full-screen editing.
+This doesn't mean you have to abandon full-screen editing.
 The
 .CW vi
-editor was constructed on top of a line editor named
+editor extended a line editor named
 .CW ex ,
 which was an improved version of another line editor named
 .CW ed .
@@ -28,12 +28,12 @@ line editors attack certain problems
 and how that applies to those of us who use full-screen editors.
 .PP
 Line editors came into existence for use on \(lqpaper terminals\(rq,
-which were basically printers.
+which were basically printers with an attached keyboard.
 This was before the time of video display terminals.
 A programmer, or some other person of great patience,
 worked somewhat interactively on a printer.
 Typically, you saw a line of your file by printing it out on paper;
-you entered commands that would affect just that line;
+you entered commands that would affect just that line,
 then you printed out the edited line again.
 Line editors were designed for this kind of process,
 editing one line at a time.
@@ -41,39 +41,21 @@ editing one line at a time.
 People rarely edit files on paper terminals any more,
 but there are diehards who still prefer line editors.
 For one thing, it imposes less of a burden on the computer.
+They are also useful for minimizing distractions
+when composing a first draft.
 Line editors display the current line;
 they don't update the entire screen.
-.PP
 On some occasions,
 a line editor is simpler and faster than a full-screen editor.
-Sometimes, a system's response can be so slow
-that it is less frustrating to work if you switch to a line editor.
-Or you may have occasion to work remotely over a dial-up line
-operating at a baud rate that is too slow
-to work productively with a full-screen editor.
-In these situations,
-a line editor can be a way to improve your efficiency.
-It can reduce the amount of time
-you are waiting for the computer
-to respond to your commands.
+.\" obsolete text deleted
 .PP
-The truth is, however,
-that after you switch from a screen editor to a line editor,
-you are likely to feel deprived.
-But you shouldn't skip this chapter
-.ig
-	The original book has: "using a line editor."  This
-	is wrong.  It should read "using a full-screen"  Fixed.
-	--Michael Hobgood
-..
-just because you wouldn't be using a full-screen editor.
 One purpose of learning
 .CW ex
 is to extend what you can do in
 .CW vi .
 .\" Or if your terminfo is borked, or a remote connection is slowwww
 .
-.Ah "The \f[CB]ex\fP Editor
+.Ah "The \f[CB]ex\fP Editor"
 .LP
 The
 .CW ex
@@ -109,7 +91,7 @@ commands.
 After you invoke
 .CW ex
 on a file,
-you will see a message about the total number of lines in the file,
+you see a message about the total number of lines in the file,
 and a colon command prompt.
 For example:
 .Ps
@@ -122,7 +104,7 @@ $ \f[CB]ex intro\fP
 You won't see any lines in the file,
 unless you give an
 .CW ex
-command that causes one or more lines to be printed.
+command to print one or more lines.
 .ix [ex] editor, printing line(s) %key ex editor, printing line(s)
 .ix [ex] editor, syntax~of commands %key ex editor, syntax of commands
 .PP
@@ -182,8 +164,7 @@ specifies a positive or negative offset from the current line.
 The
 .CW ex
 editor has a command mode and an insert mode.
-To put text in a file,
-you can enter the
+To put text in a file, enter the
 .CW append
 or
 .CW a
@@ -289,12 +270,11 @@ is useful is that sometimes when you are working in
 	Fixed by: Heinz-Jürgen Oertel
 ..
 you might unexpectedly find yourself using \(lqopen mode\(rq.
-For instance,
-if you press
+For instance, if you press
 .CW Q
 while in
 .CW vi ,
-you will be dropped into the
+you enter the
 .CW ex
 editor.
 You can switch to
@@ -321,6 +301,7 @@ Enter an
 command and press
 .I RETURN
 to execute it.
+.
 .Ah "Using \f[CB]ex\fP Commands in \f[CB]vi\fP"
 .ix [vi] editor, [ex] commands~in %key vi editor, [ex] commands in
 .LP
@@ -330,11 +311,11 @@ commands that perform normal editing operations
 have equivalent
 .CW vi
 commands that do the job in a simpler manner.
-Obviously, you will use
+Obviously,
 .CW dw
 or
 .CW dd
-to delete a single word or line rather than using the
+to delete a single word or line is easier than using the
 .CW delete
 command in
 .CW ex .
@@ -364,7 +345,7 @@ substitute	s	Substitute one string for another
 The substitute command best exemplifies the
 .CW ex
 editor's ability to make editing easier.
-It gives you the ability to change any string of text
+It lets you change any string of text in
 every place it occurs in the file.
 To perform edits on a global replacement basis
 requires a good deal of confidence in,
@@ -386,12 +367,13 @@ For all practical purposes,
 they can be seen as an integrated part of
 .CW vi .
 Examples of these capabilities
-are the commands for editing multiple files
+are commands for editing multiple files
 and executing UNIX commands.
 We will look at these after we look at pattern-matching
 and global replacements.
 .ix %end [ex] editor, substitute command %key ex editor, substitute command
-.Ah "Write Locally, Edit Globally
+.
+.Ah "Write Locally, Edit Globally"
 .ix search
 .LP
 Sometimes, halfway through a document or at the end of a draft,
@@ -419,13 +401,13 @@ with
 .Pe
 .LP
 There are really two steps in using a search and replace command.
-The first step is to define the area in which a search will take place.
-The search can be specified locally
+The first step is to define the area in which a search takes place.
+You can specify a local search
 to cover a block of text
-or globally to cover the entire file.
+or a global search to cover the entire file.
 The second step is to specify,
 using the substitute command,
-the text that will be removed and the text that will replace it.
+the text to remove and the replacement text.
 .PP
 At first, the syntax for specifying a search and replace command
 may strike you as difficult to learn,
@@ -434,21 +416,21 @@ Try to keep in mind that this is a very powerful tool,
 one that can save you a lot of drudgery.
 Besides, you will congratulate yourself when you succeed,
 and everyone else will think you are very clever.
-.Bh "Searching Text Blocks
+.
+.Bh "Searching Text Blocks"
 .ix [ex] editor, line addressing~in %key ex editor, line addressing in
 .LP
 To define a search area,
 you need to be more familiar with how line addressing works in
 .CW ex .
 A line address simply indicates which line
-or range of lines
-an
+or range of lines an
 .CW ex
-command will operate on.
+command operates on.
 If you don't specify a line address,
 the command only affects the current line.
-You already know that you can indicate any individual line
-by specifying its number.
+You already know you can indicate any individual line
+by specifying its line number.
 What we want to look at now
 are the various ways of indicating a block of text in a file.
 .PP
@@ -462,7 +444,8 @@ you can use
 .CW ^G
 to find the current line number.
 .PP
-There are also special symbols for addressing particular places in the file:
+There are also special symbols
+for addressing particular places in the file:
 .RS
 .TS
 lf(CW)w(10n) l.
@@ -473,7 +456,7 @@ $	Last line
 .RE
 .LP
 The following are examples that define the block of text
-that the substitute command will act upon:
+that the substitute command acts upon:
 .RS
 .TS
 lfCW l.
@@ -486,8 +469,8 @@ lfCW l.
 .RE
 Within the search area,
 as defined in these examples,
-the substitute command will look for one string of text
-and replace it with another string.
+the substitute command looks for one string of text
+and replaces it with another string.
 .PP
 You can also use pattern matching
 to specify a place in the text.
@@ -516,11 +499,12 @@ It is important to note
 that the action takes place
 on the entire line containing the pattern,
 not simply the text up to the pattern.
-.Bh "Search and Replace
+.
+.Bh "Search and Replace"
 .LP
 You've already seen the substitute command
 used to replace one string with another one.
-A slash is used as a delimiter separating the old string and the new.
+A slash is a delimiter separating the old string and the new.
 By prefixing the
 .CW s
 command with an address,
@@ -568,12 +552,12 @@ It has many applications, especially if you are a poor speller.
 So far, we have replaced one word with another word.
 Usually, it's not that easy.
 A word may have a prefix or suffix that throws things off.
-In a while, we will look at pattern matching.
-This will really expand what you are able to do.
-But first, we want to look
-at how to specify
+Later in this chapter, we look at pattern matching.
+This really expands what you are able to do.
+But first, we want to look at how to specify
 that a search and replace take place globally in a file.
-.Bh "Confirming Substitutions
+.
+.Bh "Confirming Substitutions"
 .ix [ex] editor, confirming replacements %key ex editor, confirming replacements
 .LP
 It is understandable
@@ -587,10 +571,7 @@ Another way to protect your edited file
 is to save the file with
 .CW :w
 before performing a replacement.
-Then, at least you can quit the file
-without saving your edits
-and go back to where you were before the change was made.
-You can also use
+Then, use
 .CW :e!
 to read in the previous version of the buffer.
 .PP
@@ -604,7 +585,7 @@ at the end of the substitute command:
 .Ps
 :1,30s/his/the/gc
 .Pe
-It will display the entire line
+It displays the entire line
 where the string has been located
 .ig
 	The original book has ^^^ in Roman font. This is wrong.
@@ -623,8 +604,7 @@ you must enter
 and press
 .I RETURN .
 .PP
-If you don't want to make a change,
-simply press
+If you don't want to make a change, press
 .I RETURN .
 .Ps
 this can be used for invitations, signs, and menus.
@@ -642,13 +622,14 @@ commands
 (repeat last search) and
 .CW \&.
 (repeat last command)
-is also an extraordinarily useful
-(and quick)
+is also a useful (and quick)
 way to page through a file
 and make repetitive changes
-that require a judgment call rather than an absolute global replacement.
+that require a judgment call
+rather than an absolute global replacement.
 .ix %end [ex] editor, search~and~replace %key ex editor, search and~replace
-.Bh "Global Search and Replace
+.
+.Bh "Global Search and Replace"
 .ix [ex] editor, global search~and~replace %key ex editor, global search and~replace
 .LP
 When we looked at line addressing symbols,
@@ -656,7 +637,7 @@ the percent symbol,
 .CW % ,
 was introduced.
 If you specify it with the substitute command,
-the search and replace command will affect all lines in the file:
+the search and replace command affects all lines in the file:
 .Ps
 :%s/Alcuin/ALCUIN/g
 .Pe
@@ -687,7 +668,7 @@ is the ability to search for a pattern
 and then make a different substitution.
 We call this context-sensitive replacement.
 .PP
-The gist of this command is globally search for a pattern:
+The gist of this command is to globally search for a pattern:
 .Ps
 :g/\fIpattern\fP/
 .Pe
@@ -742,7 +723,8 @@ because we would not expect more than one occurrence per line.
 Actually, after you get used to this syntax,
 and admit that it is a little awkward,
 you may begin to like it.
-.Ah "Pattern Matching
+.
+.Ah "Pattern Matching"
 .ix %begin regular expressions
 .ix [ex] editor, pattern~matching %key ex editor, pattern matching
 .LP
@@ -751,12 +733,13 @@ If you are familiar with
 then you know something about regular expressions.
 In making global replacements,
 you can search not just for fixed strings of characters,
-but also for patterns of words,
+but also for patterns,
 referred to as
 .I "regular expressions" .
 .PP
 When you specify a literal string of characters,
-the search might turn up other occurrences that you didn't want to match.
+the search might turn up other occurrences
+that you didn't want to match.
 The problem with searching for words in a file
 is that a word can be used in many different ways.
 Regular expressions help you
@@ -804,8 +787,7 @@ For example, because
 (dot)
 means any character,
 .CW \&.*
-means
-match any number of any character.
+means match any number of any character.
 T}
 .sp 4p
 [...]	T{
@@ -816,18 +798,18 @@ matches either
 .I A
 or
 .I B .
-A range of consecutive characters can be specified
+You can specify a range of consecutive characters
 by separating the first and last characters in the range
 with a hyphen.
 For example,
 .CW [A-Z]
-will match any uppercase letter from
+matches any uppercase letter from
 .I A
 to
 .I Z
 and
 .CW [0-9]
-will match any digit from
+matches any digit from
 .I 0
 to
 .I 9 .
@@ -844,16 +826,16 @@ and
 are integers between 0 and 256
 that specify how many occurrences to match.
 .CW \e{\fIn\fP\e}
-will match exactly
+matches exactly
 .I n
 occurrences,
 .CW \e{\fIn\fP,\e}
-will match at least
+matches at least
 .I n
 occurrences,
 and
 .CW \e{\fIn\fP,\fIm\fP\e}
-will match any number of occurrences between
+matches any number of occurrences between
 .I n
 and
 .I m .
@@ -884,7 +866,7 @@ Requires that the preceding regular expression
 be found at the end of the line.
 T}
 .sp 4p
-\\	T{
+\e	T{
 Treats the following special character
 as an ordinary character.
 For example,
@@ -968,7 +950,7 @@ Unless you are already familiar with UNIX's wildcard characters,
 this list of special characters probably looks complex.
 A few examples should make things clearer.
 In the examples that follow,
-a square (\(sq) is used to mark a blank space.
+a square (\(sq) marks a blank space.
 .PP
 Let's follow how you might use some special characters in a replacement.
 Suppose you have a long file
@@ -1049,12 +1031,13 @@ and restored on the right-hand side with
 The syntax may seem complicated,
 but this command sequence can save you a lot of work
 in a similar replacement situation.
-.Bh "Search for General Classes of Words
+.
+.Bh "Search for General Classes of Words"
 .ix [ex] editor, search~for general classes~of words %key ex editor, search for general classes~of words
 .LP
-The special character
+Use the special character
 .CW &
-is used in the replacement portion of a substitution command
+in the replacement portion of a substitution command
 to represent the pattern that was matched.
 It can be useful in searching for
 and changing similar but different words and phrases.
@@ -1144,8 +1127,7 @@ either of the following replacement commands will do the trick:
 :g/mg\e([iar]\e)box/s//mg\e1square/
 .Pe
 .LP
-The global replacement keeps track of
-whether an
+The global replacement keeps track of whether an
 .CW i ,
 .CW a ,
 or
@@ -1164,7 +1146,8 @@ mgisquare routine
 mgrsquare routine
 mgasquare routine
 .Pe
-.Bh "Block Move by Patterns
+.
+.Bh "Block Move by Patterns"
 .ix [ex] editor, moving text~blocks~by patterns %key ex editor, moving text blocks~by patterns
 .LP
 You can edit blocks of text delimited by patterns.
@@ -1255,7 +1238,8 @@ For this reason, whenever you are faced with a complex,
 repetitive editing task,
 take the time to analyze the problem
 and find out if you can apply pattern-matching tools to do the job.
-.Bh "More Examples
+.
+.Bh "More Examples"
 .LP
 Because the best way to learn pattern matching is by example,
 the following section gives a list of examples
@@ -1271,8 +1255,9 @@ Delete all blank lines:
 .Ps
 :g/^$/d
 .Pe
-What you are matching is the beginning of the line followed by the end of
-the line, with nothing in between.
+What you are matching is the beginning of the line
+followed by the end of the line,
+with nothing in between.
 T}
 .sp 4p
 2.	T{
@@ -1286,9 +1271,9 @@ italic codes around the word
 Notice that two backslashes (\c
 .CW \e\e )
 are needed in the replacement,
-because the backslash in the
+because regular expressions interpret the backslash in the
 .CW troff
-italic code will be interpreted as a special character.
+font change escapes as a special character.
 (\c
 .CW \efI
 alone would be interpreted as
@@ -1304,8 +1289,7 @@ Modify a list of pathnames in a file:
 .Ps
 :g/\e/usr\e/tim/s//\e/usr\e/linda/g
 .Pe
-A slash (used as a delimiter in the global replacement
-sequence)
+A slash (used as a delimiter in the global replacement sequence)
 must be escaped with a backslash
 when it is part of the pattern or replacement;
 use
@@ -1313,8 +1297,7 @@ use
 to get
 .CW / .
 Another way to achieve this same effect
-is to use a different
-character as the pattern delimiter.
+is to use a different character as the pattern delimiter.
 For example, you could make the previous replacement
 as follows:
 .Ps
@@ -1431,6 +1414,7 @@ and restored on the right-hand side as
 .CW 1 .
 Note that a special character
 such as a period does not need to be escaped within brackets.
+.\" XXX test: is that true? Seems I've used . as wildcard in []
 T}
 .sp 4p
 10.	T{
@@ -1440,6 +1424,7 @@ Delete all leading blanks on a line:
 .Pe
 Search for one or more blanks at the beginning of a line;
 save the rest of the line and replace it without any leading blanks.
+.\" XXX test: shouldn't :g/^\[sq]\[sq]*/s/// do the same?
 T}
 .sp 4p
 11.	T{
@@ -1492,7 +1477,7 @@ in front of a macro prevents
 .CW troff
 from expanding them.
 This command was used frequently throughout this book
-to print an example that contained macros.
+to print examples that contain macros.
 Three backslashes are needed in the replacement pattern:
 two to print a backslash
 and one to have the first ampersand interpreted literally:
@@ -1511,7 +1496,8 @@ T}
 .TE
 .RE
 .ix %end regular expressions
-.Ah "Writing and Quitting Files
+.
+.Ah "Writing and Quitting Files"
 .ix [ex] editor, exiting %key ex editor, exiting
 .ix [ex] editor, saving files %key ex editor, saving files
 .LP
@@ -1520,7 +1506,7 @@ You have learned the
 command
 .CW ZZ
 to quit and write (save) your file.
-But you will usually want to exit a file using
+But you usually want to exit a file using
 .CW ex
 commands, because these commands give you greater control.
 .RS
@@ -1528,7 +1514,8 @@ commands, because these commands give you greater control.
 Writes (saves) the buffer to the file but does not exit.
 You can use
 .CW :w
-throughout your editing session to protect your edits against system failure
+throughout your editing session
+to protect your edits against system failure
 or a major editing error.
 .IP \f(CW:q 10
 Quits the file (and returns to the UNIX prompt).
@@ -1542,7 +1529,7 @@ editor protects existing files and your edits in the buffer.
 For example,
 if you want to write your buffer to an existing file,
 .CW vi
-will give you a warning,
+gives you a warning,
 because this would delete the original file.
 Likewise, if you have invoked
 .CW vi
@@ -1551,7 +1538,7 @@ edits, and want to quit
 .I without
 saving the edits,
 .CW vi
-will give you an error message such as:
+gives you an error message such as:
 .Ps
 No write since last change.
 .Pe
@@ -1573,7 +1560,8 @@ command is an essential editing command
 that allows you to quit without affecting the original file,
 regardless of any changes you made in the session.
 The contents of the buffer are discarded.
-.Bh "Renaming the Buffer
+.
+.Bh "Renaming the Buffer"
 .ix [ex] editor, renaming~the buffer %key ex editor, renaming the buffer
 .LP
 You can also use
@@ -1585,7 +1573,7 @@ under a new filename.
 Suppose that you have a file
 .CW letter
 that contains 600 lines.
-You call in a copy and make extensive edits.
+You open the file and make extensive edits.
 You want to quit and save
 .I both
 the old version of
@@ -1597,11 +1585,12 @@ give the command:
 .Ps
 :wq letter.new
 .Pe
-.Bh "Saving Part of a File
+.
+.Bh "Saving Part of a File"
 .ix [ex] editor, saving part~of~a file %key ex editor, saving part of~a file
 .LP
 In an editing session,
-you will sometimes want to save just part of your file
+you sometimes want to save just part of your file
 as a separate, new file.
 For example,
 you might have entered formatting codes and text
@@ -1631,7 +1620,8 @@ which saves from line 230 to the end of the file, or:
 .LP
 which saves from the current line to line 600 in
 .CW newfile .
-.Bh "Appending to a Saved File
+.
+.Bh "Appending to a Saved File"
 .ix [ex] editor, appending~to existing file %key ex editor, appending to existing file
 .LP
 You can use the UNIX redirect and append operator (>>) with
@@ -1643,15 +1633,16 @@ For example:
 :340,$w>>newfile
 .Pe
 .LP
-The existing file,
+The resulting file,
 .CW newfile ,
-will contain lines 1 through 10,
+contains lines 1 through 10,
 and from line 340 to the end of the buffer.
-.Ah "Reading In a File
+.
+.Ah "Reading In a File"
 .ix [ex] editor, reading~in~a file %key ex editor, reading in~a file
 .LP
 Sometimes you want to copy text or data
-already entered on the system into the file you are editing.
+from another file into the file you are editing.
 In
 .CW vi ,
 you can read in the contents of another file with the
@@ -1681,15 +1672,22 @@ just above the line where you want the new data inserted, and enter:
 :r /work/alcuin/ch01
 .Pe
 .LP
-The entire contents of
+This reads the entire contents of
 .CW /work/alcuin/ch01
-are read into
+into
 .CW letter ,
 beginning below your cursor position.
-.Ah "Executing UNIX Commands
+.
+.Ah "Executing UNIX Commands"
 .ix [ex] editor, executing~UNIX~commands~from %key ex editor, executing UNIX~commands~from
 .LP
-You can also display or read in the results of any UNIX command
+Many text editors have their own
+.I "macro languages"
+used to extend editor functions.
+But
+.CW vi
+has the entire shell at its disposal.
+You can display or read in the results of any UNIX command
 while you are editing in
 .CW vi .
 An exclamation mark (\c
@@ -1709,7 +1707,7 @@ you can enter:
 :!date
 .Pe
 .LP
-The time and date will appear on your screen;
+The time and date appear on your screen;
 press
 .I RETURN
 to continue editing at the same place in your file.
@@ -1808,14 +1806,15 @@ The command:
 :r newfile
 .Pe
 .LP
-will read in the new file:
+reads in the new file:
 .Ps
 "newfile" 35 lines, 949 characters
 .Pe
-.Bh "Filtering Text through a Command
+.
+.Bh "Filtering Text through a Command"
 .ix [ex] editor, filtering~text~through~a UNIX~command %key ex editor, filtering text~through~a UNIX~command
 .LP
-You can also send a block of text as standard input to a UNIX command.
+You can send a block of text as standard input to a UNIX command.
 The output from this command replaces the block of text in the buffer.
 Filtering text through a command can be done either from
 .CW ex
@@ -1843,9 +1842,9 @@ For example, the command:
 :96,99!sort
 .Pe
 .LP
-will pass lines 96 to 99 through the
+passes lines 96 to 99 through the
 .CW sort
-filter, and replace those lines with the output of
+filter, and replaces those lines with the output of
 .CW sort .
 .PP
 In
@@ -1894,6 +1893,7 @@ Objects such as
 ..
 do not work unless enough of them are specified
 so as to exceed a single line.
+.\" XXX test: I think this isn't true for Vim.
 A slash (/) followed by a pattern and a
 .I RETURN
 can also be specified,
@@ -1975,7 +1975,7 @@ Some people around
 
 
 .X2
-.CW tr'[a-z]'
+.CW tr\ '[a-z]'
 .CW '[A-Z]'
 input replaced
 by output
@@ -2002,20 +2002,25 @@ However, remember that the \(lqoriginal\(rq input is replaced by the output.
 If there is a mistake,
 such as an error message being sent instead of the expected output,
 you can undo the command and restore the lines.
-.Ah "Editing Multiple Files
+.
+.Ah "Editing Multiple Files"
 .ix [ex] editor, editing multiple files %key ex editor, editing multiple files
 .ix [vi] editor, editing multiple files %key vi editor, editing multiple files
 .ix files, editing multiple
 .LP
 The
 .CW ex
-commands enable you to edit multiple files.
+and
+.CW vi
+editors can edit multiple files.
 The advantage to editing multiple files is speed.
 Staying in the same editing session and traveling between files
 saves abbreviations and
 command sequences you have defined
-and keep named buffers so that you can copy text from one file to another.
-.Bh "Invoking \f[CB]vi\fP on Multiple Files
+and keep named buffers
+so you can copy text from one file to another.
+.
+.Bh "Invoking \f[CB]vi\fP on Multiple Files"
 .LP
 When you first invoke
 .CW vi ,
@@ -2041,7 +2046,7 @@ writes (saves)
 and
 .CW :n
 .ix [ex] editor, switching files %key ex editor, switching files
-calls in the next file (\c
+loads the next file (\c
 .I file2 ).
 .PP
 Suppose that you know you want to edit two files,
@@ -2064,7 +2069,7 @@ The first named file,
 appears.
 Perform your edits to
 .CW letter ,
-and then save it with the
+then save it with the
 .CW ex
 command
 .CW :w .
@@ -2084,6 +2089,7 @@ There is no practical limit
 to the number of files you can invoke
 .CW vi
 on at one time.
+.\" XXX test: shell has a max buffer size?
 You can use any of the shell's pattern-matching characters,
 or even more complex constructions.
 Suppose you were writing a program,
@@ -2115,7 +2121,7 @@ as the argument list for the first command.
 .PP
 The
 .CW vi
-editor will print a message similar to:
+editor prints a message similar to:
 .Ps
 5 files to edit
 .Pe
@@ -2124,7 +2130,7 @@ before displaying the first file.
 .PP
 If you try to quit without editing all of the files,
 .CW vi
-will issue a warning message:
+issues a warning message:
 .Ps
 4 more files to edit
 .Pe
@@ -2132,9 +2138,10 @@ will issue a warning message:
 You must type
 .CW :q!
 if you want to exit without editing all of the files.
-.Bh "Calling In New Files
+.
+.Bh "Opening New Files"
 .LP
-You don't have to call in multiple files
+You don't have to specify multiple files
 at the beginning of your editing session.
 Any time in
 .CW vi ,
@@ -2161,15 +2168,16 @@ and then return to
 Save
 .CW letter
 with
-.CW w
+.CW :w
 and press
 .I RETURN .
-The file
+.CW Vi
+saves the file
 .CW letter
-is saved and remains on the screen.
+and the file remains on the screen.
 You can now switch to another file,
 because your edits are saved.
-Call in the file
+Open the file
 .ig
 	The original book had letter in the next line.
 	I believe it should be note, since the example is
@@ -2181,7 +2189,7 @@ Call in the file
 ..
 .CW note
 with
-.CW :e
+.CW :e\ note
 and press
 .I RETURN .
 .PP
@@ -2214,7 +2222,7 @@ will not allow you to switch files with
 .CW :e
 or
 .CW :n
-unless you tell it imperatively to do so
+unless you force it to do so
 by adding an exclamation mark after the command.
 For example,
 if after making some edits to
@@ -2226,7 +2234,7 @@ you could type
 .PP
 The command:
 .Ps
-e!
+:e!
 .Pe
 .LP
 is also useful.
@@ -2235,7 +2243,8 @@ and returns to the last saved version of the current file.
 The
 .CW %
 symbol, by contrast,
-is useful mainly when writing out the contents of the buffer to a new file.
+is useful mainly when writing out the contents of the buffer
+to a new file.
 For example,
 a few pages earlier we showed
 how to save a second version of the file
@@ -2245,12 +2254,13 @@ with the command:
 :w letter.new
 .Pe
 .LP
-This could also have been typed:
+You could have typed:
 .Ps
 :w %.new
 .Pe
 .LP
-.Bh "Edits between Files
+.
+.Bh "Edits between Files"
 .ix [ex] editor, yanking~text~from~one~file~to~another %key ex editor, yanking text~from~one~file~to~another
 .LP
 Named buffers provide one convenient way
@@ -2265,7 +2275,8 @@ Thus, by yanking text in one file
 reading in a new file with
 .CW :e ,
 and putting the named buffer into the new file,
-material can be transferred selectively between files.
+you can selectively transfer
+content between files.
 .PP
 The following example illustrates transferring text
 from one file to another.
@@ -2299,10 +2310,10 @@ user's manual on the...
 Save the file with the
 .CW :w
 command.
-Enter the file
+Open the file
 .CW note
 with
-.CW :e ,
+.CW :e\ note ,
 and move the cursor to where the copied text will be placed.
 .ig
 	The original book has wrong text in the right window.
@@ -2336,14 +2347,15 @@ Thank you...
 
 .X4
 .sp 1v
-.Ah "Word Abbreviation
+.
+.Ah "Word Abbreviation"
 .ix [ex] editor, abbreviating recurring phrases %key ex editor, abbreviating recurring phrases
 .ix [vi] editor, abbreviations %key vi editor, abbreviations
 .LP
-Often, you will type the same long phrases over and over in a file.
+Often, you type the same long phrases over and over in a file.
 You can define abbreviations that
 .CW vi
-will automatically expand into the full text
+automatically expands into the full text
 whenever you type the abbreviation in insert mode.
 To define an abbreviation, use the
 .CW ex
@@ -2388,7 +2400,8 @@ the International Materials Research Center
 When you are choosing abbreviations,
 select combinations of characters that don't ordinarily occur
 while you are typing text.
-.Ah "Saving Commands with \f[CB]map\fP
+.
+.Ah "Saving Commands with \f[CB]map\fP"
 .ix [ex] editor, mapping commands~to keys %key ex editor, mapping commands to keys
 .ix [vi] editor, mapping command~sequences %key vi editor, mapping command sequences
 .LP
@@ -2461,7 +2474,7 @@ with the single keystroke
 .CW v .
 .PP
 Note that when defining a map,
-you cannot simply type certain keys,
+you cannot type certain keys,
 such as
 .I RETURN ,
 .I ESC ,
@@ -2535,6 +2548,8 @@ Cannot put inside global macro.
 	Which is now possible at least with Elvis
 	Remark by: Heinz-Jürgen Oertel
 ..
+.\" XXX test: can Vim put entire lines in a map?
+.\" XXX test: can you add map to .exrc?
 .LP
 If you want to move lines from one place to another
 within a mapping,
@@ -2545,7 +2560,8 @@ editor's
 or
 .CW co
 command.
-.Bh "Complex Mapping Example
+.
+.Bh "Complex Mapping Example"
 .ix [ex] editor, mapping commands~to keys %key ex editor, mapping commands to keys
 .LP
 Assume that you have a glossary with entries like this:
@@ -2612,22 +2628,19 @@ followed by
 .I ESC .
 The sequence
 .CW ^M
-is shown when you type
+appears when you type
 .CW ^V
 .I RETURN .
 .PP
-Now, simply typing
+Now, typing
 .CW z
-will perform the entire series of edits.
-On a slow terminal, you can actually see the edits happening individually.
-On a fast terminal,
-it will seem to happen by magic.
+performs the entire series of edits.
 .PP
 Don't be discouraged if your first attempt at key mapping fails.
 A small error in defining the
 .CW map
 can give you very different results than you expect.
-Simply type
+Type
 .CW u
 to undo the edit, and try again.
 .PP
@@ -2635,7 +2648,8 @@ Remember, the best way to define a complex
 .CW map
 is to do the edit once manually,
 writing down each keystroke that you must type.
-.Bh "Mapping Keys for Insert Mode
+.
+.Bh "Mapping Keys for Insert Mode"
 .ix function keys, mapping
 .ix mapping function keys
 .LP
@@ -2666,8 +2680,7 @@ that want to set up those function keys themselves.
 The
 .CW ex
 editor allows you to
-map
-function keys by number, using the syntax:
+map function keys by number, using the syntax:
 .Ps
 :map #1 \fIcommands\fP
 .Pe
@@ -2704,23 +2717,23 @@ For example:
 .Pe
 .LP
 If you are in command mode,
-the first function key will enter insert mode,
-type in the three characters
+the first function key enters insert mode,
+types in the three characters
 .CW \efI ,
-and return to command mode.
+and returns to command mode.
 If you are already in insert mode,
-the key will simply type the three-character
+the key types the three-character
 .CW troff
 code.
 .PP
-Note: If function keys have been redefined in the terminal's setup mode,
-the
+Note: If function keys have been redefined
+in the terminal's setup mode, the
 .CW # \c
 .I n
 syntax might not work
 because the function keys no longer put out the expected control
 or escape sequence as described in the terminal database entry.
-You will need to examine the
+You need to examine the
 .CW termcap
 entry (or
 .CW terminfo
@@ -2774,7 +2787,8 @@ if necessary.
 The shell should display the sequence
 output by the function key
 after trying unsuccessfully to execute it as a command.
-.Bh "\f[CB]@\fP Functions
+.
+.Bh "\f[CB]@\fP Functions"
 .ix [ex] editor, \@~functions %key ex editor, \@ functions
 .LP
 Named buffers provide yet another way
@@ -2825,7 +2839,7 @@ Because
 .CW @
 is interpreted as a
 .CW vi
-command, . will repeat the entire sequence,
+command, . repeats the entire sequence,
 even if it is an
 .CW ex
 command.
@@ -2849,4 +2863,3 @@ because you can store the commands in named buffers
 and access them in any file you edit.
 .ix %end [ex] editor %key ex editor
 .ix %end [vi] editor %key vi editor
-

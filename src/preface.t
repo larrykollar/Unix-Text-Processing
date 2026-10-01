@@ -520,19 +520,16 @@ and indexing mechanism described in the second half of this
 book.
 Steve's help and patience were invaluable during the
 long road to mastery of the
-UNIX
-text-processing environment.
+UNIX text-processing environment.
 .PP
 We'd also like to thank Teri Zak, the acquisitions editor
-at Hayden Books, for her vision of the Hayden
-UNIX
-series, and this book's place in it.
+at Hayden Books, for her vision of the Hayden UNIX series,
+and this book's place in it.
 .PP
 In the course of this book's development,
 Hayden was acquired by Howard Sams,
 where Teri's role was taken over by Jim Hill.
-Thanks also to the excellent production editors
-at Sams,
+Thanks also to the excellent production editors at Sams,
 Wendy Ford, Lou Keglovitz,
 and especially Susan Pink Bussiere,
 whose copyediting was outstanding.
