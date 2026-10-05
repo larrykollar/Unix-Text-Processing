@@ -11,13 +11,14 @@
 .ix %begin [tbl] preprocessor %key tbl preprocessor
 Some information is best presented in tabular format, that is,
 displayed in rows and columns.
-You can structure data in columns using tabs, but that can
-be difficult, especially if the table consists of long lines
+You can structure data in columns using tabs,
+but that can be difficult,
+especially if the table consists of long lines
 of text.
 The
 .CW tbl
-preprocessor was designed to make it easier to prepare
-complicated tables, such as the following.
+preprocessor was designed to make it easier
+to prepare complicated tables, such as the following.
 .sp 5p
 .TS
 center, box;
@@ -41,8 +42,8 @@ Car stereo	15,670	17,456
 .PP
 With
 .CW tbl ,
-you can center, left justify, and right justify columns of
-data or align numeric data within a column.
+you can center, left justify, and right justify
+columns of data or align numeric data within a column.
 You can put headings that span one or more columns or rows,
 and draw horizontal and vertical lines to box individual
 entries or the whole table.
@@ -50,17 +51,17 @@ An entry may contain equations or consist of several lines
 of text, as is usually the case with descriptive tables.
 A table can have as many as 35 columns and essentially an
 unlimited number of rows.
+.\" XXX test: does groff have a column limit?
 .PP
 When you use
 .CW tbl ,
-you should have an idea or, better still, a written design of
-the table.
+you should have an idea of, or a written design, of the table.
 Then, using a few
 .CW tbl
-specifications, you can define how a formatted table
-should look.
-The data is entered row by row; each column is separated
-by ordinary tabs.
+specifications,
+you can define how a formatted table should look.
+Enter data row by row;
+tabs separate each column by default.
 .PP
 For example, the
 .CW tbl
@@ -89,26 +90,28 @@ Car stereo		15,670	17,456
 .ix [tbl] preprocessor, table specifications %key tbl preprocessor, table specifications
 When
 .CW tbl
-processes the specifications, it calculates all the values
-needed to produce the table and passes these values to
+processes the specifications,
+it calculates all the values needed to produce the table
+and passes these values to
 .CW nroff
 or
 .CW troff ,
-which formats or outputs the final table.
+which formats and outputs the final table.
 .PP
-In this chapter, we will show you how to use
+In this chapter, we show you how to use
 .CW tbl
 to specify the general appearance of a table.
 We begin with some very simple examples, then gradually work
 up to more complicated ones to show all of
 .CW tbl 's
 capabilities.
+.
 .Ah "Using \f[CB]tbl\fP"
 The
 .CW tbl
 description can be written in a file or as part of a larger
 file that contains other tables and text.
-You can format a table in a file using the
+You format a table in a file using the
 .CW tbl
 command as in the following:
 .ix [tbl] preprocessor, invoking %key tbl preprocessor, invoking
@@ -120,8 +123,8 @@ $ \f[CB]groff\fP \f[CR]-t\fP \fIfile\fP
 The
 .CW tbl
 command writes its results to standard output.
-Because you will probably not be interested in the generated
-formatting requests, you would normally pipe the output to
+Because you are probably not interested in the generated
+formatting requests, pipe the output to
 .CW nroff
 or
 .CW troff
@@ -170,6 +173,7 @@ The command line for a table with boxes would then read:
 .Ps
 $ \f[CB]tbl\fP\fI file\fP \f[CB]| nroff -Tlp | col\fP
 .Pe
+.
 .Bh "\f[CB]tbl\fP with \f[CB]eqn\fP"
 .ix [eqn] preprocessor, using~[tbl]~with %key eqn preprocessor, using [tbl]~with
 When you have equations within your table and you use the
@@ -195,20 +199,23 @@ $ \f[CB]tbl\fP\fI file\fP \f[CB]| eqn | troff\fP
 .PP
 There is a possible complication that can occur with any of
 the preprocessors (\c
-.CW "tbl,eqn,"
+.CW "tbl,\~eqn,"
 or
 .CW pic ).
 If you read in subsidiary files with the
 .CW .so
-request, those files will never be passed through the
+request, those files never pass through the
 preprocessor, since the
 .CW .so
 request has not been encountered yet by the preprocessor.
-Some UNIX systems support a program called
+.CW Groff
+and some UNIX systems support a program called
 .CW soelim,
 which works just like
 .CW cat ,
 except that it reads in files called by
+.CW .so
+requests and can recursively read nested
 .CW .so
 requests.
 If any subsidiary files contain data that must be processed,
@@ -216,7 +223,24 @@ start your command line with
 .CW soelim :
 .Ps
 $ \f[CB]soelim\fP\fI file\fP \f[CB]| tbl | eqn ... | nroff\fP
+$ \f[CB]groff -ste\fP \fIfile\fP ...
 .Pe
+The
+.CW groff
+command line option
+.CW -s
+invokes
+.CW soelim ,
+.CW -e
+invokes
+.CW eqn ,
+and
+.CW -t
+(as mentioned earlier) invokes
+.CW tbl .
+.CW Groff
+builds the pipeline in the correct order.
+.
 .Ah "Specifying Tables"
 A table is always indicated by a
 .CW .TS
@@ -238,14 +262,14 @@ format section.
 data\fP
 \&.TE
 .Pe
-These delimiters serve two functions.
+These macros serve two functions.
 First, they signal to
 .CW tbl
 the beginning and end
 of the table description.
 The
 .CW tbl
-program processes the table, and enables formatting requests
+program processes the table, and places formatting requests
 into the text of the table.
 .ix [tbl] preprocessor, table~start macro %key tbl preprocessor, table start macro
 .ix [tbl] preprocessor, table~end macro %key tbl preprocessor, table end macro
@@ -267,8 +291,9 @@ define these macros; however, an enterprising user can
 redefine them, and surround a table with consistent
 formatting effects.
 If the macros are undefined,
+it does not affect
 .CW tbl
-will not suffer in any way because the use of
+in any way because the use of
 .CW .TS/.TE
 as delimiters is separate from their secondary use as macros.
 .PP
@@ -279,14 +304,14 @@ sees a table in terms of three distinct parts:
 .RS
 .Ls N
 .Li
-The overall layout of the table described in the
+The overall layout of the table described as the
 .I "global options line" .
-For example, this line describes whether the table is to
-be centered on the page or made as wide as the rest of the
-document.
+For example, global options can describe
+whether the table is to be centered on the page,
+or made as wide as the rest of the document.
 The global options line is optional.
 .Li
-The layout of each column in the table described in the
+The layout of each column in the table described as the
 .I "format section" .
 For example, in this section, you specify whether a column
 is to be left or right justified.
@@ -299,10 +324,11 @@ to be entered in the table.
 .Le
 .RE
 .ix %end [tbl] preprocessor, data %key tbl preprocessor, data
+.
 .Ah "A Simple Table Example"
 .ix [tbl] preprocessor, simple table~example %key tbl preprocessor, simple table example
-Let's start with a simple table like the following to show the
-different parts of the
+Let's start with a simple table like the following
+to show the different parts of the
 .CW tbl
 description:
 .RS
@@ -348,14 +374,13 @@ The
 .CW .TS
 at the beginning says that a table follows.
 .Li
-The options line applies to the layout of the table as a
-whole.
+The options line applies to the layout of the table as a whole.
 The option
 .CW "tab(@)"
-means that you will be using the
+means that this table uses the
 .CW @
-character as a tab character when you input data to the
-table.
+character as a tab character
+when you input data to the table.
 Normally,
 .CW tbl
 expects the columns in
@@ -371,8 +396,7 @@ The options line
 ends with a semicolon (\c
 .CW ; ).
 .Li
-The format section applies to the lines of data in the
-table.
+The format section applies to the lines of data in the table.
 Each format line contains a
 .I "key letter"
 for each column of the table.
@@ -386,14 +410,14 @@ In this case, the
 .I last
 line of the description applies to all remaining lines of data.
 In our example, we have only one format line, so all lines
-in the table will follow this format.
+in the table follow this format.
 For example:
 .br
 .ti +5n
 \f[CW]c l.\fP
 .br
 means that there are two columns in each line.
-The first column will be centered (\c
+The first column is centered (\c
 .CW c ),
 and the second left justified (\c
 .CW l ).
@@ -419,11 +443,13 @@ signals the end of the table description.
 .Le
 .RE
 .ix %end [tbl] preprocessor, format options %key tbl preprocessor, format options
+.
 .Ah "Laying Out a Table"
 The global options line is an optional line that controls
 the overall appearance of the table.
-Normally, a table is positioned on the left-hand side of
-the page.
+Normally,
+.CW tbl
+positions a table on the left-hand side of the page.
 Because the table is probably part of a larger document, you
 may want to center the table and enclose it in a box to make
 it stand out.
@@ -459,10 +485,11 @@ c l.
 .sp 2p
 .PP
 Now you know how to use three of the option names:
-.CW "center,box,"
+.CW center ,
+.CW box ,
 and
 .CW tab() .
-If you use one or more option names, they must be separated
+If you use one or more option names, separate them
 by spaces, tabs, or commas.
 The options line, if present, must
 .I "immediately follow"
@@ -516,19 +543,20 @@ and one that is expanded is the amount of space between
 columns.
 If you specify
 .CW center
-or the default, the width between columns will be three ens.
+or the default, the width between columns is three ens.
 If you specify
 .CW expand ,
 .CW tbl
-will expand the width of the overall columns until the table
+expands the width of the overall columns until the table
 is as wide as the current margins.
 .PP
 If the overall width of the table calculated by
 .CW tbl
 is greater than the width of the text,
 .CW nroff/troff
-will ignore any positioning option you specify.
-The table will be printed as is necessary to fit everything,
+ignores any positioning option you specify, and
+.CS tbl
+formats the table as necessary to fit everything,
 even if the table runs to the edge of the paper.
 .PP
 The
@@ -536,6 +564,7 @@ The
 option changes the width of the lines used in enclosing tables
 to a given point size.
 Normally, the lines are 10 point.
+.\" XXX test: 1.0 point wide lines?
 You can specify an absolute line size, such as
 .CW "linesize "(\c
 .CW 24 ),
@@ -545,14 +574,13 @@ to print thicker box lines, or a relative size, such as
 to produce the same effect.
 .ix %end [tbl] preprocessor, global format options %key tbl preprocessor, global format options
 .PP
-Let's try one more example by enclosing all the data entries
-in boxes.
+Let's try one more example by enclosing all the data entries in boxes.
 The options line for the table now reads:
 .Ps
 center,allbox,tab(@);
 .Pe
 .page 209
-The new table would look like this:
+The new table looks like this:
 .sp 5p
 .TS
 center,allbox,tab (@);
@@ -590,7 +618,8 @@ the latitude to split a table and print each section with
 its own table heading using the
 .CW ".TS H"
 macro, as you will see later.
-.Ah  "Describing Column Formats"
+.
+.Ah "Describing Column Formats"
 .ix [tbl] preprocessor, column format options %key tbl preprocessor, column format options
 Each column in the table is described by a key letter in the
 format section.
@@ -653,7 +682,7 @@ T{
 T}	T{
 T}	T{
 Extend entry from previous row down through this
-row (vertical span). Text will be centered between
+row (vertical span). Text is centered between
 the specified rows.
 T}
 .sp 3p
@@ -661,7 +690,7 @@ T{
 \f[CW]T\fP or \f[CW]t\fP
 T}	T{
 T}	T{
-Also vertical span, but text will appear at the
+Also vertical span, but text appears at the
 top of the column instead of midway within the
 specified area.
 T}
@@ -692,12 +721,13 @@ Suppose you defined four columns in the first format line,
 and then defined only three columns in the succeeding lines.
 The
 .CW tbl
-program will still format your table, but it assumes that the
+program still formats your table, but it assumes that the
 undefined column is left justified.
 .PP
-In the following sections, we will show some typical
+In the following sections, we show some typical
 applications of these and other key letters to format
 table headings and columns of data.
+.
 .Bh "Tables with Headers"
 .ix [tbl] preprocessor, headers %key tbl preprocessor, headers
 You can think of a table header as an extra row of data
@@ -758,7 +788,7 @@ This means that the words
 .I Port
 and
 .I Device
-will be centered in each column.
+are centered in each column.
 The second (and last) format line is the same as in the
 previous example and applies to the rest of the table.
 Note the period at the end of this line.
@@ -774,10 +804,11 @@ is a
 .CW troff
 or
 .CW nroff
-request and passes it unchanged to the formatter. Thus, you
-can vary spacing between rows, or use other
+request and passes it unchanged to the formatter.
+Thus, you can vary spacing between rows, or use other
 .CW nroff/troff
 commands within a table.
+.
 .Bh "Tables with Spanned Headers"
 .ix [tbl] preprocessor, horizontally spanning headers %key tbl preprocessor, horizontally spanning headers
 Our previous table now contains a header for each column.
@@ -839,6 +870,7 @@ Port@Device
 We now have three format lines: the first describes the main
 header, the second describes each column header, and the
 third applies to the rest of the data in the table.
+.
 .Bh "Numeric and Alphabetic Columns"
 .ix [tbl] preprocessor, numeric data columns %key tbl preprocessor, numeric data columns
 .ix [tbl] preprocessor, alphabetic data columns %key tbl preprocessor, alphabetic data columns
@@ -848,7 +880,8 @@ units digit using the key letter
 in the format line.
 When you use
 .CW n ,
-numbers in a column will be aligned as follows:
+.CW tbl
+aligns numbers in a column as follows:
 .\" example table
 .TS
 center;
@@ -867,13 +900,13 @@ designated as
 .CW n .
 On the other hand, you can enter numbers in columns that are
 aligned using any of the other key letters.
-The numbers will just be treated as if they were ordinary
+The numbers are treated as if they were ordinary
 alphabetic characters.
 Thus, a column of numbers might also be centered, left
 justified, or right justified.
 .PP
 .ix [tbl] preprocessor, equations~within tables %key tbl preprocessor, equations within tables
-You should also avoid putting equations in numeric columns
+Avoid putting equations in numeric columns
 because
 .CW tbl
 attempts to split numeric format items into two parts.
@@ -896,8 +929,7 @@ to be divided after 79.909 and not after .157.
 .PP
 Columns designated as
 .CW a
-are always slightly indented relative to left-justified
-columns.
+are always slightly indented relative to left-justified columns.
 If necessary,
 .CW tbl
 increases the column width to force this.
@@ -921,6 +953,7 @@ r n r
 r a r
 .Pe
 are not allowed.
+.\" XXX test: does groff/gtbl allow n/a in same column?
 This is because
 .CW n
 and
@@ -936,10 +969,10 @@ may be used to override the normal alignment of numeric or
 alphabetic data.
 For example, if you use
 .CW \e&
-before a digit, then the digit will line up with the decimal
+before a digit, then the digit lines up with the decimal
 point and
 .CW \e&
-will not appear in the output.
+does not appear in the output.
 The effect of
 .CW \e&
 is as follows.
@@ -958,6 +991,7 @@ processor#processor
 half#half
 half\\&#\|\|half\&
 .TE
+.
 .Bh "Vertically Spanned Columns"
 .ix [tbl] preprocessor, vertically spanning columns %key tbl preprocessor, vertically spanning columns
 Let's see how the vertical span key (\c
@@ -1064,7 +1098,7 @@ by using the key letter
 (or
 .CW T )
 in the format line.
-Any corresponding vertically spanned item will begin at
+Any corresponding vertically spanned item begins at
 the top of its range.
 Thus, if we specify
 .CW t
@@ -1072,35 +1106,36 @@ instead of
 .CW ^
 in the format line, the words
 .I "Fuel and Substance"
-will be in line with
+appear in line with
 .I kcal/ .
+.
 .Bh "Drawing Lines in Tables"
 .ix [tbl] preprocessor, drawing~lines~within tables %key tbl preprocessor, drawing lines~within tables
-Horizontal rules are specified by underscores and by equal
-signs entered between the appropriate lines of data.
-An underscore on a line by itself entered between two rows
-of data produces a single rule running the whole width of
-the table.
-An equal sign on a line by itself produces a double rule.
+Specify a horizontal rule by an underscore,
+and a double horizontal rule by an equal sign,
+entered between the appropriate lines of data.
+Place the underscore or equal sign on a line by itself
+entered between two rows of data.
 .PP
 If you want a horizontal rule to be only as wide as the
 contents of the column, enter an underscore or equal sign
 in that column as part of the data.
 The underscore or equal sign must be separated from the other
-columns by tabs or the tab character we've specified in
+columns by tabs, or the tab character specified in
 the options line.
-To print these characters explicitly, they should be
-preceded by a
-.CW \e&
-or followed by a space before the usual tab or newline
+To print these characters explicitly,
+precede them with a
+.CW \e& ,
+or follow them with a space before the usual tab or newline
 character.
 .PP
 You can also use these two characters in place of a key
 letter in the format line.
 If an adjacent column contains a horizontal or vertical
 line, the horizontal line is extended to meet nearby lines.
-If you enter any data in this column, the data will be
-ignored and you will get a warning message.
+If you enter any data in this column,
+.CW tbl
+ignores the data and prints a warning message.
 The following table has a fairly complicated heading:
 .page 215
 .sp 5p
@@ -1143,24 +1178,23 @@ Color@2,766,004@110.7
 B/W@1,123,539@12.5
 \&.TE
 .Pe
-As you can see from the preceding description, vertical lines
-are drawn by specifying bars
+As you can see from the preceding description,
+specify vertical lines by specifying bars
 .I "within the format lines" .
-A single vertical bar between two key letters draws a single
-vertical line between those two columns in the table.
-You can enter the bar after the first key letter or before
-the second key letter.
-A vertical bar to the left of the first key letter or to the
-right of the last one produces a vertical line at the edge of
-the table.
+A single vertical bar between two key letters
+draws a single vertical line between those two columns in the table.
+You can enter the bar after the first key letter
+or before the second key letter.
+A vertical bar to the left of the first key letter
+or to the right of the last one
+produces a vertical line at the edge of the table.
 Two vertical bars (\c
 .CW || )
 draw a double rule.
 .PP
 These characters are really more useful for drawing lines
 inside the table rather than for manually enclosing a table
-in a box because there are global options that
-automatically do this.
+in a box because there are global options for this.
 To draw vertical and horizontal lines in our table
 \(lqFuels,\(rq
 we modify the relevant format and data lines as follows:
@@ -1197,6 +1231,7 @@ Liquids@Benzene@782
 \^@Ethyl alcohol@328
 \^@Methyl alcohol@171
 .TE
+.
 .Bh "Changing Fonts and Sizes"
 .ix [tbl] preprocessor, fonts %key tbl preprocessor, fonts
 .ix [tbl] preprocessor, point~sizes %key tbl preprocessor, point sizes
@@ -1214,30 +1249,31 @@ fb   fB   b   B    \fRBoldface\fP
 fi   fI   i   I    \fRItalic\fP
 fcw  fCW  cw  CW   \fRConstant width\fP
 .Pe
-If you want to change the font of only some of the entries, you
-should use explicit
+If you want to change the font of only some of the entries,
+use explicit
 .CW nroff/troff
 requests rather than specifying the font in the format line.
-For example, let's change the headers in the previous table to
-boldface and the words
+For example,
+let's change the headers in the previous table to boldface
+and the words
 .I Gases
 and
 .I Liquids
 to italic.
-The format lines would look like this:
+The format lines look like this:
 .Ps
 c | |cB |cB
 ^ | |^ |cB
 l | |l |n.
 .Pe
 .I Gases
-will be written as
+outputs as
 .CW \efIGases\efR
 and
 .I Liquids
 as
 .CW \efILiquids\efR .
-The effect would be as follows:
+The effect is:
 .page 217
 .sp 5p
 .TS
@@ -1259,9 +1295,9 @@ _
 .TE
 .sp 2p
 .PP
-The type size in which headings and data are printed is normally
-10 points.
-You can also change the size of the type by using the key letter
+The type size used for headings and data
+is normally 10 points.
+You can change the size of the type by using the key letter
 .CW p
 and an absolute or relative point size.
 To specify a change in size relative to the existing point size,
@@ -1274,10 +1310,11 @@ For example, a column specification of
 .CW cp12
 or
 .CW cp+2
-will both result in a centered column using 12-point type.
+result in a centered column using 12-point type.
+.
 .Bh "Changing the Column Width"
 .ix [tbl] preprocessor, column~width %key tbl preprocessor, column width
-When you're not using the
+When you don't use the
 .CW expand
 option, the normal spacing between any two columns is three ens.
 You can change the spacing by specifying a numeric value between
@@ -1285,12 +1322,11 @@ the key letters representing those columns.
 The number specifies the separation in ens.
 When you're using the
 .CW expand
-option and you specify a column space, the number is multiplied
-by a constant such that the table is as wide as the current line
-length.
+option and you specify a column space,
+the number is multiplied by a constant
+to make the table as wide as the current line length.
 .PP
-If you don't want any spaces between the columns, simply write
-0, as in:
+If you don't want space between the columns, use 0, as in:
 .Ps
 r0 l
 .Pe
@@ -1305,25 +1341,27 @@ Butane	680
 .TE
 .sp 2p
 .PP
-These spacings are only nominal spacings.
-The data may be so irregular in length that no two columns will
-actually appear to be separated by the specified distance.
-However, varying the amount of separation between two columns
-still leaves
+These spacings are only nominal.
+The data may be so irregular in length
+that no two columns actually appear to be separated
+by the specified distance.
+However, varying the amount of separation
+between two columns still leaves
 .CW tbl
 free to make each column as wide or as narrow as is necessary.
 .PP
-You can specify a minimum width for any column by entering the
-letter
+You can specify a minimum width for any column
+by entering the letter
 .CW w
 (or
 .CW W )
-after the key letter, followed by the desired width in parentheses.
+after the key letter,
+followed by the desired width in parentheses.
 You can use any unit of measurement recognized by
 .CW nroff/troff
 when specifying a width dimension.
-You can also enter a value without a unit of measurement, in
-which case
+You can enter a value without a unit of measurement,
+in which case
 .CW tbl
 assumes the value is in ens.
 Thus the format:
@@ -1340,18 +1378,20 @@ specifies a left-justified column that is 2.25 inches wide.
 .PP
 You can also force
 .CW tbl
-to make the width of particular columns equal by using
-the letter
+to make the width of particular columns equal
+by using the letter
 .CW e
 (or
 .CW E )
 after the key letter for those columns.
-This allows a group of regularly spaced columns.
+This sets a group of regularly spaced columns.
 .PP
 To show that
 .CW tbl
-can be used for any text that needs to be laid out in columns
-(as opposed to tables), we can print the following text:
+can be used for any text
+that needs to be laid out in columns
+(as opposed to tables),
+use the following text:
 .sp 1v
 .TS
 expand, tab(@);
@@ -1377,10 +1417,11 @@ August 31,@J. White@K. Kimura
 1987@@
 \&.TE
 .Pe
-In the last format line, we specified that all three columns
-be 1.3i wide.
-Because all columns will be of equal width, we need to specify
+In the last format line,
+we specified that all three columns be 1.3i wide.
+Because all columns are of equal width, we need to specify
 the width only once.
+.
 .Bh "Other Key Letters"
 .ix [tbl] preprocessor, staggered columns %key tbl preprocessor, staggered columns
 .ix [tbl] preprocessor, vertical~spacing~within data~blocks %key tbl preprocessor, vertical spacing~within data~blocks
@@ -1394,9 +1435,9 @@ l10 lw (4.6i).
 T{
 \f[C]V\fP or \f[C]v\fP
 T}	T{
-Used with a number to indicate the vertical line
-spacing used within a table entry. Used only with
-text blocks (discussed in a later section).
+Used with a number to indicate
+the vertical line spacing used within a table entry.
+Used only with text blocks (discussed in a later section).
 T}
 .sp 3p
 T{
@@ -1413,15 +1454,15 @@ T{
 \f[C]Z\fP or \f[C]z\fP
 T}	T{
 Ignore the data entry in calculating column width.
-This is useful in allowing headings to run across
-adjacent columns where spanned headings might be
-inappropriate.
+This is useful in allowing headings
+to run across adjacent columns
+where spanned headings might be inappropriate.
 T}
 .TE
 .RE
 .sp 2p
 .PP
-Key letters for a column can be written in any order.
+You can specify key letters for a column in any order.
 They do not need to be separated, except when you specify both
 a point size (\c
 .CW p )
@@ -1432,8 +1473,8 @@ column by 12 ens can be written as:
 .Ps
 np18w(1.5i)B 12
 .Pe
-Two or more format lines can also be written on one line by
-separating them with commas.
+You can write two or more format lines on one line
+by separating them with commas.
 For example, the format lines:
 .Ps
 c c c
@@ -1443,10 +1484,12 @@ can be written as:
 .Ps
 c c c, l l n.
 .Pe
+.
 .Ah "Changing the Format within a Table"
 .ix [tbl] preprocessor, changing format~within table %key tbl preprocessor, changing format within table
-All our examples so far have shown tables that consist of
-somewhat complicated headings followed by identical rows of data.
+All our examples so far show tables
+that consist of somewhat complicated headings
+followed by identical rows of data.
 Thus, we can keep the number of format lines comparatively small.
 This may not be the case when a table is divided into sections,
 each of which has its own heading.
@@ -1479,11 +1522,11 @@ c | l | l.
 .sp 2p
 .PP
 It has both a main header and column headers.
-The body of the table is divided into two parts.
-The upper part contains two columns, and the lower part contains
-three.
-To format each part correctly, we must enter a command line for
-each row of data so that
+The body of the table has two parts.
+The upper part contains two columns,
+and the lower part contains three.
+To format each part correctly,
+we enter a command line for each row of data so
 .CW tbl
 can keep track of which rows of the table have which format.
 This process is tedious and prone to error.
@@ -1518,8 +1561,9 @@ data\fP
 .Pe
 There are two things we cannot change after a
 .CW .T&
-request: the global options line and the number of
-columns specified.
+request: the global options line
+and the number of columns specified.
+.\" XXX test: can gtbl's .T& change # of columns?
 Our original options line holds for the entire table.
 .PP
 Let's see how we can use the
@@ -1550,59 +1594,65 @@ c | l | l.
 \\e^@1/12 em space@ignored
 \&.TE
 .Pe
-We take the largest number of columns in the table, which is three.
+We take the largest number of columns in the table,
+which is three.
 We have two
 .CW .T&
-requests to break up the table into three parts with their own
-format sections.
+requests to break up the table into three parts
+with their own format sections.
 The first part applies to the main header only.
 The second describes the column headers and the
 .page 221
 three-column segment of the table.
-Finally, the lower part applies to the last part of the
-table.
+Finally, the lower part applies to the last part of the table.
 .PP
 Although you can have hundreds of lines in a table,
 .CW tbl
 uses only the first 200 lines to set up the table.
+.\" XXX test: does gtbl have this 200-line limitation?
 .ig
 	The original reads: "format changes you make after the
 	200th column", but this should be "line".
 	--Michael Hobgood
 ..
-Any format changes you make after the 200th line will not
-be processed by
+Any format changes you make after the 200th line
+are not processed by
 .CW tbl .
-In this case, you should break up the table into smaller table
-segments.
+In this case, you should break up the table
+into smaller table segments.
 .PP
 Should you specify
 .CW ".TS H"
 but forget to follow it with
 .CW .TH ,
-some strange things will happen.
-One recent instance of this caused the table to be output in a
-nearly endless succession of pages.
+some strange things happen.
+One recent instance of this caused the table to output
+a nearly endless succession of pages.
 (In
 .CW troff
 terms, a diversion created to capture the table heading filled up
-with the table instead; this caused the first page break that
-triggered the output of the diversion at the top of the next
-page; each time the diversion was output, it caused a new page
-break and the diversion was output again).
-.Ah "Putting Text Blocks in a Column\"
+with the table instead;
+this caused the first page break
+that triggered the output of the diversion
+at the top of the next page;
+each time the diversion was output,
+it caused a new page break and the diversion was output again).
+.
+.Ah "Putting Text Blocks in a Column"
 .ix [tbl] preprocessor, putting text~blocks~in~a column %key tbl preprocessor, putting text blocks~in~a column
-Some tables consist of column entries that cannot be conveniently
-typed as a simple string between tabs.
-Descriptive tables, for example, require ordinary flowing text
-justified between the margins of the specific column in which it
-appears in the table.
+Some tables consist of column entries
+that cannot be conveniently typed
+as a simple string between tabs.
+Descriptive tables, for example,
+require ordinary flowing text
+justified between the margins of the specific column
+in which it appears in the table.
 These section of flowing text are called
 .I "text blocks" .
 .PP
-Each block of text is preceded by a
+Each block of text begins with a
 .CW T{
-and followed by a
+and ends with a
 .CW T} .
 The
 .CW T{
@@ -1615,14 +1665,14 @@ must be at the start of a line:
 text\fP
 T}...
 .Pe
-When a text block is included in a row that contains other
-columns of data or text, the
+When a text block is included in a row
+that contains other columns of data or text, the
 .CW T{
-that marks the beginning of the text block must appear at the
-end of the line in the text.
-Even a single blank space following the
+that marks the beginning of the text block must appear
+at the end of the line in the text.
+Any blank space following the
 .CW T{
-will cause the table to fail.
+causes the table to fail.
 Likewise, the
 .CW T}
 symbol must always begin the line:
@@ -1632,8 +1682,8 @@ symbol must always begin the line:
 text\fP
 T}@\f[I]data\fP ...
 .Pe
-This makes it easy for you to revise text when necessary and
-also allows you to insert any special
+This makes it easy for you to revise text when necessary
+and allows you to insert any special
 .CW nroff/troff
 commands before or after the text block.
 .PP
@@ -1741,25 +1791,26 @@ it. \\fIn\\fR and \\fIm\\fP are integers between
 T}
 \&.TE
 .Pe
-What might confuse you about this source text is that each block
-of text occupies two or more lines.
+What might confuse you about this source text
+is that each block of text occupies two or more lines.
 Just think of everything that comes between a
 .CW T{
 and a
 .CW T}
 as a single entry that occupies a single column in that row.
 It is separated from its neighbors by tabs.
-If you keep track of the tabs, you will be able to sort out
-quite easily the sequence of columns.
+If you keep track of the tabs, you can sort out
+the sequence of columns.
 .PP
-In the previous description, we specified a minimum width for
-each column.
+In the previous description, we specified a minimum width
+for each column.
 If a width is not given,
 .CW tbl
 uses the default:
 .Ps
 \f[I]L * C\fP/(\f[I]N\fP+1)
 .Pe
+.\" XXX should we use an equation here???
 where
 .I L
 is the current line length,
@@ -1781,12 +1832,11 @@ to left justify text blocks if the output doesn't come out fully
 justified.
 The
 .CW tbl
-description would be:
+description is:
 .Ps
 \&... T{
 \&.na
-\f[I]Block of
-text\fP
+\f[I]Block of text\fP
 \&.ad
 T}
 .Pe
@@ -1795,56 +1845,71 @@ The
 .CW nroff
 and
 .CW troff
-formatters can accept only about twenty or thirty small text
-blocks in a table without exceeding certain internal limits.
-If the limits are exceeded, you will get error messages like
+formatters can accept only about twenty or thirty small text blocks
+in a table without exceeding certain internal limits.
+If the limits are exceeded, you get error messages like
 \(lqtoo many string/macro names\(rq
 or
 \(lqtoo many number registers.\(rq
+.\" XXX test: does gtbl have text block limitations?
 .PP
-In this case, you should divide the table into two or more
-independent tables, each with its own
+In this case,
+divide the table into two or more independent tables,
+each with its own
 .CW .TS
 and
 .CW .TE
 requests.
-The final formatted sections can be
-\(lqjoined\(rq
-and made to appear
+You can
+\(lqjoin\(rq
+the final formatted sections so they appear
 as one table by inserting minus
 .CW .sp
 requests (such as
 .CW ".sp -12p" )
 between the sections.
-This will cause the formatter to draw them together.
+This makes the formatter draw them together.
 .PP
-You can also change the vertical line spacing within a text
-block using a key letter followed by
+You can also change the vertical line spacing
+within a text block using a key letter followed by
 .CW v
 (or
 .CW V )
 and a number.
-The number may be a signed digit and is taken as an increase
+The number may be a signed digit
+and is taken as an increase
 or decrease from the current vertical spacing.
+.
 .Ah "Breaking Up Long Tables"
 .ix [tbl] preprocessor, breaking~up long tables %key tbl preprocessor, breaking up long tables
-If you have a very long table that will fill many pages, it might
-be helpful to break up the table into several smaller ones, with
-the main heading reproduced at the top of each page.
+If you have a very long table that fills many pages,
+you can use two different approaches:
+.Ls B
+.Li
+Break up the table into several smaller ones,
+with the main heading reproduced at the top of each page.
 Then the reader doesn't have to keep returning to the first page
 to see what the columns indicate.
+.Li
+Study the content of the table,
+and think about ways to present the same content
+without using tables.
+If you have to present your content in both PDF
+and online,
+and your online readers access your content using smartphones,
+they would find long tables difficult to read.
+.Le
 The
 .CW tbl
-program also automatically breaks a boxed table if it runs over
-one page.
+program automatically breaks a boxed table if it runs over one page.
 .PP
 .ix [tbl] preprocessor, repeating table~headers %key tbl preprocessor, repeating table headers
 You can use the
 .CW ".TS H"
 and
 .CW .TH
-macros to reproduce the original heading at the top of each
-page of the table:
+macros to reproduce the original heading
+at the top of each page of the table:
 .Ps
 \&.TS H
 \f[I]options;
@@ -1887,14 +1952,14 @@ main header\fP
 data
 \&.TE
 .Pe
-This causes the table header to appear at the top of the first
-table segment.
-The header will not appear on top of the second segment when
-both segments appear on the same page.
-If the table continues to another page, the heading will still
-appear at the top of the new page.
+The table header appears at the top of the first table segment.
+The header does not appear on top of the second segment
+when both segments appear on the same page.
+If the table continues to another page,
+the heading appears at the top of the new page.
 This feature is useful when breaking a long complex table
 into segments.
+.
 .Ah "Putting Titles on Tables"
 .ix [tbl] preprocessor, titling tables %key tbl preprocessor, titling tables
 The
@@ -1905,10 +1970,10 @@ can be used to automatically number and title a table.
 All tables with
 .CW .TB
 are numbered consecutively.
-The title is centered above the table if it can fit on one line.
-If the title is longer than one line, all succeeding lines of
-the title are indented to line up with the first character of
-the title.
+The title is centered above the table, if it can fit on one line.
+If the title is longer than one line,
+all succeeding lines of the title
+line up with the first character of the title.
 The
 .CW .TB
 macro is normally used inside a
@@ -1919,7 +1984,7 @@ The
 .CW .TB
 macro is not part of
 .CW tbl .
-Thus, it can be used to generate titles or headers for tables
+Thus, you can use it to generate titles or headers for tables
 that are created using only tabs and none of the
 .CW tbl
 commands.
@@ -1934,7 +1999,7 @@ where
 is used to override the normal numbering.
 The
 .I flag
-option can take one of the following values:
+option has one of the following values:
 .Ps
 0   \f[I]n\fP \fRis used as a prefix to the normal table number\fP
 1   \f[I]n\fP \fRis used as a suffix to the normal table number\fP
@@ -1945,13 +2010,13 @@ If you put the
 macro before the
 .CW .TS
 macro, the title is placed above the table.
-You can also put the title below the table by using the
+You can also put the title below the table using the
 .CW .TB
 macro after
 .CW .TE .
 .PP
-For example, we can modify one of our tables by adding a title
-and labeling it as
+For example, we can modify one of our tables
+by adding a title and labeling it as
 .I "Table 5" .
 We add the following lines before the
 .CW .TS :
@@ -2021,11 +2086,13 @@ TABLE 2.  Output Device Configuration...........14
 .sp 1v
 TABLE 3.  Heating Value of Fuels.....................17\fP
 .Pe
+.
 .Ah "A \f[CB]tbl\fP Checklist"
 .ix [tbl] preprocessor, table~formatting checklist %key tbl preprocessor, table formatting checklist
 Most table formatting errors come from specifying too few columns
-in the format section, forgetting a tab character between column
-entries in a table, or omitting one or more of the characters
+in the format section,
+forgetting a tab character between column entries in a table,
+or omitting one or more of the characters
 that
 .CW tbl
 expects in a table description.
@@ -2051,12 +2118,12 @@ a period at the end of the last format line (including format
 sections with a
 .CW .T& )
 .Li
-in the format section, an item for each column and a format line
-for each line of the table
+in the format section, an item for each column
+and a format line for each line of the table
 .Li
-a tab symbol for each column in each line of the table, except
-for the first column when horizontally spanning, and
-within text blocks
+a tab symbol for each column in each line of the table,
+except for the first column when horizontally spanning,
+and within text blocks
 .Li
 for text blocks, a
 .CW T{
@@ -2088,11 +2155,13 @@ a space after each table entry of _ and = unless you want the
 lines to extend across the column
 .Le
 .RE
+.
 .Ah "Some Complex Tables"
 .ix [tbl] preprocessor, complex table~example %key tbl preprocessor, complex table example
 Surely, the best way to learn more about
 .CW tbl
-is to study tables of greater complexity than the ones we've
+is to study tables of greater complexity
+than the ones we've
 .ig
 	Original has: look at so far.
 	This is wrong, should be looked at so far.  Fixed.
@@ -2107,36 +2176,38 @@ provides many fine examples of difficult tables.
 Look at the formatted tables and try to
 \(lqbreak\(rq
 the code that produced them.
-In this section, you'll find two complicated tables followed by
-the
+In this section,
+you'll find two complicated tables followed by the
 .CW tbl
 input for you to decipher.
 .PP
-The weight table shown in Figure 8-1 is taken from a manual that
+The weight table shown in Figure 8-1
+is taken from a manual that
 describes the safe operation of mobile cranes.
-This table was coded by an associate, Daniel Gilly, over several
-hours.
+This table was coded by an associate,
+Daniel Gilly, over several hours.
 The code is listed in Figure 8-2.
 Look at how the vertical line indicator (\c
 .CW | )
-is used between entries to draw a line at the end of each column.
+is used between entries
+to draw a line at the end of each column.
 Note also the use of the alphabetic (\c
 .CW a )
 format specification to produce indented text.
 .PP
-The financial table shown in Figure 8-3 is adapted from a
-prospectus prepared by
+The financial table shown in Figure 8-3
+is adapted from a prospectus prepared by
 .CW troff
 users at a large New York law firm.
 The code for this table is listed in Figure 8-4.
 Note the use of a leader character (\c
 .CW \ea )
-in the first entry, coupled with a fixed width specification
-for the first column, to produce leaders that fill out the
-column.
-Also, notice how the table headings are printed in a smaller
-point size than the rest of the table, using the format
-specification (\c
+in the first entry,
+coupled with a fixed width specification for the first column,
+to produce leaders that fill out the column.
+Also, notice how the table headings
+are printed in a smaller point size than the rest of the table,
+using the format specification (\c
 .CW p8 ).
 .page 228
 .Fs
@@ -2362,4 +2433,3 @@ Assets\\a@41,645.8@34,434.7@32,876.6@27,987.6
 .Pe
 .Fe " Input for Figure 8-3"
 .ix %end [tbl] preprocessor %key tbl preprocessor
-

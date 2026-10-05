@@ -11,12 +11,12 @@ delim ``
 .Se 9 "Typesetting Equations with \f[CB]eqn\fP" "Chapter" 1
 .LP
 .ix %begin [eqn] preprocessor %key eqn preprocessor
-Typesetting mathematical equations has always been a problem
-for users who have a limited knowledge of mathematics or
-typesetting.
-This is because mathematical expressions are often a mixture
-of standard text and special characters in different point
-sizes.
+Typesetting mathematical equations
+has always been a problem for users
+who have a limited knowledge of mathematics or typesetting.
+This is because mathematical expressions
+are often a mixture of standard text
+and special characters in different point sizes.
 For example, the equation:
 .EQ I
 sum from i=0 to {inf} c sup i = lim from {m -> inf} {sum
@@ -77,30 +77,29 @@ This chapter does not cover extended
 features.
 .PP
 With
-.CW eqn
-you can typeset both inline equations and equations that
-are set off from the body of the text like the example
-shown.
-It takes an English-like description of a mathematical
-equation and generates a
+.CW eqn ,
+you can typeset both inline equations
+and equations that are set off from the body of the text
+like the example shown.
+It takes an English-like description
+of a mathematical equation and generates a
 .CW troff
 script.
 You don't need to understand what you are typing.
 .PP
 The
 .CW eqn
-preprocessor was designed to be easy to learn and even
-easier to use.
+preprocessor was designed to be easy to learn and use.
 This implies that normal mathematical conventions such as
 operator precedence and parentheses cannot be used.
 Nor does
 .CW eqn
-assume that parentheses are always balanced, or that
-an expression is better written in another form.
+assume that parentheses are always balanced,
+or that an expression is better written in another form.
 There are only a few rules, keywords, special symbols,
 and operators to remember.
-If something works in one situation, it should work
-everywhere.
+If something works in one situation,
+it should work everywhere.
 .PP
 This section shows you how to typeset mathematical equations
 using a set of special words that belong to the
@@ -118,11 +117,13 @@ the Greek alphabet
 .Li
 special symbols, such as summations (`size 8 sum`),
 .ix [eqn] preprocessor, special character~names %key eqn preprocessor, special character names
-products (`size 8 prod`),integrals (`size 8 int`),
+products (`size 8 prod`),
+integrals (`size 8 int`),
 and square roots (`sqrt ""`)
 .Li
-positional notation, such as subscripts and
-superscripts, fractions, matrices, and vertical piles
+positional notation,
+such as subscripts and superscripts,
+fractions, matrices, and vertical piles
 .Li
 diacritical marks
 .ix [eqn] preprocessor, diacritical marks %key eqn preprocessor, diacritical marks
@@ -136,21 +137,23 @@ horizontal and vertical spacing
 .ix [eqn] preprocessor, vertical spacing %key eqn preprocessor, vertical spacing
 .Le
 .RE
-You can even define a string that appears repeatedly
-throughout the document so that you do not need to type it
+You can define a string
+that appears repeatedly throughout the document
+so you do not need to type it
 in each time it appears.
+.
 .Ah "A Simple \f[CB]eqn\fP Example"
 .ix [eqn] preprocessor, simple example %key eqn preprocessor, simple example
 To best illustrate how
 .CW eqn
-works and how easy it is to learn the syntax, let's take a
-simple example:
+works and how easy it is to learn the syntax,
+let's take a simple example:
 .ix [eqn] preprocessor, syntax %key eqn preprocessor, syntax
 .EQ I
 a sub 2 over b
 .EN
-If you were to read this mathematical expression aloud to
-another person, you might say
+If you were to read this mathematical expression aloud
+to another person, you might say
 \(lqa sub 2 over b.\(rq
 This is exactly how you would describe the expression to
 .CW eqn .
@@ -162,7 +165,7 @@ script;
 the word
 .CW over
 denotes a fraction.
-You will see the other words that
+We show the other words that
 .CW eqn
 treats as special (i.e., that belong to the
 .CW eqn
@@ -174,8 +177,8 @@ it assumes that you have a two-dimensional picture of how
 the equation should appear in the document.
 The key in writing the
 .CW eqn
-description is to familiarize yourself with the special
-words used by
+description is to familiarize yourself with
+the special words used by
 .CW eqn
 in printing mathematical characters.
 Then, describe the equation as if you were reading it aloud
@@ -183,26 +186,26 @@ to another person.
 .PP
 The
 .CW eqn
-preprocessor takes care of the standard things that you
-would expect to happen automatically, such as printing
-superscripts and subscripts in an appropriately
-smaller size, and adjusting the length and size of
-fraction bars.
+preprocessor takes care of the standard things
+that you would expect to happen automatically,
+such as printing superscripts and subscripts
+in an appropriately smaller size,
+and adjusting the length and size of fraction bars.
 Following mathematical convention, variables are made
 italic, parentheses, operators, and digits are made
 roman, and normal spacing is automatically adjusted to
 make the expression look better.
+.
 .Ah "Using \f[CB]eqn\fP"
 The
 .CW eqn
-preprocessor is used not only for typesetting equations,
-but also for typesetting nontechnical documents.
+preprocessor typesets equations,
+and typesets nontechnical documents.
 For example, many documents contain subscripted
 or superscripted words.
 Using
 .CW eqn
-can be easier than formatting the subscript or
-superscript using
+can be easier than formatting the subscript or superscript using
 .CW troff
 commands.
 .PP
@@ -217,10 +220,10 @@ You can then pipe the output to the desired printer.
 The file
 .CW /usr/pub/eqnchar
 contains definitions of additional special characters that
-can be used by
-.CW eqn .
-It is not essential that you use it, but you may get better
-results with certain equations if you do.
+.CW eqn
+can use.
+It is not essential that you use it,
+but you may get better results with certain equations if you do.
 .PP
 If you use
 .CW eqn
@@ -228,8 +231,7 @@ with the
 .CW tbl
 .ix [eqn] preprocessor, using~[tbl]~with %key eqn preprocessor, using [tbl]~with
 .ix [tbl] preprocessor, using~eqn~with %key tbl preprocessor, using eqn~with
-preprocessor to print tables containing mathematical
-expressions, invoke
+preprocessor to print tables containing mathematical expressions, invoke
 .CW tbl
 before
 .CW eqn
@@ -251,28 +253,41 @@ However, printers used with
 .CW nroff
 may be unable to print many of the special characters
 used in equations.
+.PP
+If you use
+.CW groff ,
+use the command-line options
+.CW -te
+to use both
+.CW tbl
+and
+.CW eqn ,
+and
+.CW groff
+builds a pipeline in the correct order.
+.
 .Ah "Specifying Equations"
+.LP
 Mathematical documents contain both displayed equations
 and standard text mixed with mathematical expressions.
 The
 .CW eqn
 preprocessor allows you to typeset both forms.
+.
 .Bh "Displayed Equations"
 .ix [eqn] preprocessor, displayed equations %key eqn preprocessor, displayed equations
 For equations that appear outside the body of the text,
-mark the beginning of each equation with an
+start the beginning of each equation with an
 .CW .EQ
-and the end with an
+and end with an
 .CW .EN .
-Note that these delimiters may or may not also be defined
-as macros.
+Note that they may or may not also be defined as macros.
 They are recognized by
 .CW eqn
 as flags to begin and end processing.
 .PP
-If they are not defined as macros by the package you are
-using, you can define them yourself, or can simply
-supplement them with
+If they are not defined as macros by the package you use,
+you can define them yourself, or supplement them with
 .CW troff
 requests (such as
 .CW .ce
@@ -284,15 +299,14 @@ macro package,
 .CW .EQ
 and
 .CW .EN
-are defined as macros, and the equation is centered by
-default.
+are defined as macros, and the equation is centered by default.
 Thus, if you type:
 .Ps
 \&.EQ
 C=Ax+By
 \&.EN
 .Pe
-the output will be:
+the output is:
 .EQ
 C=Ax+By
 .EN
@@ -304,7 +318,7 @@ you can also left justify the equation using
 or indent it using
 .CW ".EQ I" .
 You can further specify an arbitrary equation number or label
-that will be printed at the right margin.
+that prints at the right margin.
 For example, the lines:
 .Ps
 \&.EQ I (13a)
@@ -315,14 +329,13 @@ produce the following:
 .EQ I (13a)
 C=Ax+By
 .EN
-The mathematical symbols
+You type the mathematical symbols
 .CW + ,
 .CW - ,
 .CW =
 and
 .CW ()
-are typed in just as they
-appear in the equation.
+as they appear in the equation.
 .PP
 If you're using the
 .CW mm
@@ -333,7 +346,7 @@ macro package, put the
 pair inside a
 .CW .DS /\c
 .CW .DE
-pair so that the format looks like this:
+pair so the format looks like:
 .Ps
 \&.DS
 \&.EQ
@@ -351,24 +364,25 @@ immediately following the
 macro but before the
 .CW .EQ
 macro to display the equation at the left margin of the text.
+.
 .Bh "Inline Expressions"
 .ix [eqn] preprocessor, inline expressions %key eqn preprocessor, inline expressions
-If you are using
+If you use
 .CW ms
 or
 .CW mm ,
 .CW .EQ
 and
 .CW .EN
-imply a displayed equation and so cannot be used for short inline
-expressions.
+imply a displayed equation
+and cannot be used for short inline expressions.
 But
 .CW eqn
 provides a shorthand notation for
 displaying this type of expression.
-You can define any two characters as delimiters to mark the
-beginning and end of an inline equation, and then type the expression
-right in the middle of the text.
+You can define any two characters as delimiters
+to mark the beginning and end of an inline equation,
+and then type the expression inline with the text.
 To do this, define the equation delimiters within an
 .CW .EQ
 and an
@@ -393,7 +407,7 @@ pair to enclose a
 .CW .EQ /\c
 .CW .EN
 pair that only defines the delimiters for inline equations.
-If you do, extra blank lines will appear in the output.
+If you do, extra blank lines appear in the output.
 .PP
 Do
 .I not
@@ -407,10 +421,10 @@ or double quotation marks (\c
 .CW \(dq )
 as delimiters because these have a special meaning to
 .CW eqn .
-Choose characters that you are unlikely to use within any equation
-in the document.
-After you have defined your delimiter, you can begin using it
-within a line of text as in the following example:
+Choose characters that you are unlikely to use
+within any equation in the document.
+After you define your delimiter,
+you can use it within a line of text as in the following example:
 .Ps
 The possible prices of an ice cream cone in cents are
 #y sub 1 = 75#, #y sub 2 = 85#, and #y sub 3 = 95#.
@@ -428,8 +442,9 @@ This produces the line:
 .Pe
 The
 .CW eqn
-program leaves enough room before and after a line containing inline
-expressions with fractions or large characters so that they don't
+program leaves enough room before and after a line
+containing inline expressions with fractions
+or large characters so that they don't
 interfere with the surrounding lines.
 .PP
 To turn off the delimiters, use:
@@ -438,11 +453,11 @@ To turn off the delimiters, use:
 delim off
 \&.EN
 .Pe
-Throughout this section, we will use the delimiters ## in our
+Throughout this section, we use the delimiters ## in our
 .CW eqn
 examples.
-However, we will typically show the results as a displayed
-equation.
+However, we typically show the results as a displayed equation.
+.
 .Ah "Spaces in Equations"
 .ix [eqn] preprocessor, spaces~in equations %key eqn preprocessor, spaces in equations
 You may have noticed in the previous example that the word
@@ -481,22 +496,25 @@ C=Ax+By
 	don't know which, I've just let eqn take its course.
 	--Michael Hobgood
 ..
-Note that the spaces and newlines were ignored by
-.CW eqn .
+Note that 
+.CW eqn
+ignored the spaces and newlines.
 .PP
-You should use spaces as freely as possible to break up more
-complex equations and make your input more readable and easier
+Use spaces as freely as possible
+to break up more complex equations
+and make your input more readable and easier
 to edit.
 Remember that any spaces or newlines you enter within an equation are
 .I not
 printed out.
 This is often a point of confusion for new users.
-If your equation doesn't turn out the way it should, chances are you
-missed typing in a space somewhere.
+If your equation doesn't turn out the way it should,
+chances are you missed typing in a space somewhere.
 A useful rule of thumb is: when in doubt, use a space.
+.
 .Bh "Printing Spaces in the Output"
 You may want to fine-tune the printed appearance of an equation by
-adding spaces between groups of terms.
+adding space between groups of terms.
 If you want to print spaces in the output, use a tilde (\c
 .CW  \(ap)
 for each space.
@@ -519,12 +537,13 @@ yields:
 .EQ I
 C^=^Ax^+^By
 .EN
-You can also use tabs to separate parts of an equation, but the tab
+You can use tabs to separate parts of an equation, but set the tab
 .ix [eqn] preprocessor, tabs~within equations %key eqn preprocessor, tabs within equations
-stops must be set by the
+stops with the
 .CW troff
 .CW .ta
 request.
+.\" XXX test: do tabs work in eqn?
 For example:
 .Ps
 \&.ta 1i 1.5i 2i 2.5i
@@ -572,6 +591,7 @@ and
 as you will see later.
 .ix %begin [eqn] preprocessor, subscripts %key eqn preprocessor, subscripts
 .ix %begin [eqn] preprocessor, superscripts %key eqn preprocessor, superscripts
+.
 .Bh "Subscripts and Superscripts: A Common Use"
 .ix subscripts
 .ix superscripts
@@ -579,11 +599,11 @@ Perhaps the most common application of
 .CW eqn
 is in generating subscripts and superscripts within a line of text
 or a table.
-As you have seen in previous examples, subscripts are denoted by
-the word
-.CW sub .
-Superscripts are designated by
-.CW sup .
+As you have seen in previous examples, the word
+.CW sub
+designates a subscript, and
+.CW sup
+designates a superscript.
 For example:
 .Ps
 #y sub 1 = x sup 2^+^1#
@@ -592,8 +612,8 @@ yields:
 .EQ I
 y sub 1 = x sup 2^+^1
 .EN
-There are two simple rules to remember in writing subscripts
-and superscripts:
+There are two simple rules to remember
+in writing subscripts and superscripts:
 .RS
 .Ls N
 .Li
@@ -625,6 +645,13 @@ For example:
 	Therefore, this portion of the book will not match
 	the original.  Another error that needs fixing.
 	--Michael Hobgood
+
+	20-odd (very odd) years later: maybe making the book
+	match the example has already corrected the error,
+	especially since UTP Revisited is not going to attempt
+	to match the original.
+	Applies to Michael's next comment as well.
+	-- Larry K (4 Oct 2026)
 ..
 .Ps
 #y sub 1 =x sup2^+^1#
@@ -658,7 +685,7 @@ or
 .CW sup
 (as in the first example),
 .CW eqn
-will not recognize them as special words, and so will not produce
+does not recognize them as special words, and so does not produce
 a subscript or superscript.
 Also, if you don't leave a space after the subscript or superscript,
 .CW eqn
@@ -711,13 +738,14 @@ and write this expression as:
 .Pe
 .ix %end [eqn] preprocessor, subscripts %key eqn preprocessor, subscripts
 .ix %end [eqn] preprocessor, superscripts %key eqn preprocessor, superscripts
+.
 .Ah "Using Braces for Grouping"
 .ix [eqn] preprocessor, using~braces~for grouping %key eqn preprocessor, using braces~for grouping
-Normally, you would use a blank or a space delimiter to signal
-the end of a subscript or superscript.
+Normally, you would use a blank or a space delimiter
+to signal the end of a subscript or superscript.
 But if your subscript or superscript consists of two or more
 characters or words separated by blanks, or if you are writing
-nested subscripts or superscripts, this will not work.
+nested subscripts or superscripts, this does not work.
 In this case, use braces to mark the beginning and end of your
 subscript or superscript.
 .PP
@@ -760,10 +788,11 @@ Make sure that a left brace always has a corresponding right brace.
 .PP
 If you have to print braces in your document, enclose them in
 double quotation marks like "{" and "}".
+.
 .Ah "Special Character Names"
 .ix [eqn] preprocessor, special character~names %key eqn preprocessor, special character names
-In many mathematical equations, you use the Greek alphabet to define
-variables.
+In many mathematical equations,
+you use the Greek alphabet to define variables.
 To print Greek letters, spell them out in the case that you want.
 .ix [eqn] preprocessor, Greek~alphabet %key eqn preprocessor, Greek alphabet
 For example,
@@ -987,6 +1016,7 @@ which yields:
 .EQ I
 c = a \(pl b
 .EN
+.
 .Ah "Special Symbols"
 .ix [eqn] preprocessor, special character~names %key eqn preprocessor, special character names
 The
@@ -1166,20 +1196,23 @@ sin  cos  tan  sinh cosh tanh arc
 max  min  lim  log  ln   exp
 Re   Im   and  if   for  det	
 .Pe
+.
 .Bh "Summations, Integrals, Products, and Limits"
 .ix [eqn] preprocessor, integrals %key eqn preprocessor, integrals
 .ix [eqn] preprocessor, limits %key eqn preprocessor, limits
 .ix [eqn] preprocessor, summations %key eqn preprocessor, summations
-Summations, integrals, products, and limits often require an upper
-and lower part around the symbol.
+Summations, integrals, products, and limits
+often require an upper and lower part around the symbol.
 The word
 .CW from
 indicates the character sequence to be entered at the lower part;
 the word
 .CW to
 indicates the upper part.
-These parts are both optional, but if they are used, they should
-appear in that order.
+These parts are both optional, but if you use both,
+use
+.CW from
+first.
 For example, you would type:
 .Ps
 .ig
@@ -1205,8 +1238,8 @@ But if the
 .CW from
 and
 .CW to
-parts contain any blanks to separate special words, you must use
-braces around them.
+parts contain any blanks to separate special words,
+use braces around them.
 .PP
 A
 .CW from
@@ -1220,6 +1253,7 @@ which yields:
 .EQ I
 lim from {m -> inf} sum from i=0 to m c sup i
 .EN
+.
 .Bh "Square Root Signs"
 .ix [eqn] preprocessor, quotation~marks %key eqn preprocessor, quotation marks
 To draw a square root sign, use the word
@@ -1262,6 +1296,7 @@ yields:
 .EQ I
 "" sup 3 sqrt x
 .EN
+.
 .Bh "Enclosing Braces and Brackets"
 .ix [eqn] preprocessor, braces~and~brackets %key eqn preprocessor, braces and~brackets
 You can generate big brackets
@@ -1292,8 +1327,8 @@ yields:
 .EQ I
 P~=~R~left [ 1^-^{1+i sup n } over i right ]
 .EN
-The resulting brackets (and any character you specify) are made
-big enough to enclose the quantity.
+The resulting brackets (and any character you specify)
+are big enough to enclose the quantity.
 (Braces are typically bigger than brackets and parentheses).
 Note the spaces surrounding the words
 .CW left
@@ -1323,7 +1358,7 @@ If the
 .CW right
 part is omitted, use braces to enclose the quantity that you want
 the left bracket to cover.
-This is useful when you are making piles, as you will see in the
+This is useful when you are making piles, described in the
 next section.
 .PP
 You can also omit the
@@ -1340,6 +1375,7 @@ The
 .CW left
 .CW \(dq\(dq
 in this equation means a \(lqleft nothing\(rq.
+.
 .Ah "Other Positional Notation"
 .EQ I
 matrix {
@@ -1359,15 +1395,18 @@ However, each column must have the
 .I same
 number of items in it as the other columns.
 .PP
-A matrix should be used when the items in the columns don't all
-have the same height (for example, when you have fractions mixed
+Use a matrix when the items in the columns
+don't all have the same height
+(for example, when you have fractions mixed
 with whole numbers).
 This forces the items to line up because
 .CW matrix
 looks at the entire structure before deciding what spacing to use.
+.
 .Bh "Vertical Piles"
 .ix [eqn] preprocessor, vertical~piles (columns) %key eqn preprocessor, vertical piles (columns)
-To make vertical piles or columns of items, use the word
+To make vertical piles or columns of items,
+use the word
 .CW pile
 before the equation description and the keyword
 .CW above
@@ -1389,8 +1428,9 @@ pile { nu sub 1 above nu sub 2 above cdot
 above cdot above cdot above nu sub N }
 right ]
 .EN
-The items are centered one above the other and separated by the
-word
+.CW Eqn
+centers the items one above the other,
+separated by the word
 .CW above .
 Braces enclose the entire pile list.
 The items in the pile can themselves contain piles.
@@ -1401,12 +1441,12 @@ right justify (\c
 .CW rpile ),
 or center (\c
 .CW cpile ),
-the elements of the pile.
-(A
+the elements of the pile (a
 .CW cpile
 is the same as a regular pile).
-However, the vertical spacing you get using these three forms will
-be somewhat larger than the normal pile.
+However, the vertical spacing you get,
+using these three forms,
+is somewhat larger than the normal pile.
 For example:
 .Ps
 \&.EQ
@@ -1421,8 +1461,10 @@ f sub x (x)^=^left {
 rpile { 0 above 2x above 0 }
 ~~lpile { x < 0 above 0 <= x <= 1 above x > 1}
 .EN
-Note that in this example, we have a left brace without a
-corresponding right brace.
+Note that in this example,
+we have a left brace without
+a corresponding right brace.
+.
 .Ah "Diacritical Marks"
 .ix [eqn] preprocessor, diacritical~marks %key eqn preprocessor, diacritical marks
 With
@@ -1492,19 +1534,20 @@ corresponding mark.
 Just remember that
 .CW eqn
 doesn't print the spaces you type in.
+.
 .Ah "Defining Terms"
 .ix [eqn] preprocessor, abbreviating~a string %key eqn preprocessor, abbreviating a string
-In some documents, you type a string of characters often, either
-within the text or within several equations.
-If you notice a string that is frequently used, you can name it
-using a
+In some documents, you often type the same string of characters,
+either within the text or within several equations.
+If you notice a string that is frequently used,
+name it using a
 .CW define
-statement within an
+statement within
 .CW .EQ
 and
 .CW .EN .
-Then you can use the name within an expression instead of typing
-the whole string.
+Then you can use the name within an expression
+instead of typing the whole string.
 .PP
 Suppose you notice that the string
 .CW "2 sup i"
@@ -1573,6 +1616,7 @@ by typing:
 define / 'over'
 \&.EN
 .Pe
+.
 .Ah "Quoted Text"
 .ix [eqn] preprocessor, quotation~marks %key eqn preprocessor, quotation marks
 You have seen the use of double quotation marks as placeholders
@@ -1605,8 +1649,8 @@ in the
 vocabulary and converting them.
 (The word
 .CW size
-is used to change the size of the characters from the
-10 point default).
+changes the size of the characters
+from the 10 point default).
 .PP
 Any string entirely within quotation marks is not subject to font
 changes and spacing adjustments normally done by
@@ -1626,20 +1670,23 @@ italic "cos(x)" + cos (x)
 To print a literal quotation mark, you must escape it with a
 backslash character in the form
 .CW \e" .
+.
 .Ah "Fine-Tuning the Document"
-Typesetting a technical document is not only a matter of getting
-the
+Typesetting a technical document
+is not only a matter of getting the
 .CW eqn
-vocabulary right so you can print the appropriate mathematical
-expressions.
+vocabulary right so you can print
+the appropriate mathematical expressions.
 Although
 .CW eqn
-tries to make some actions automatic and puts items in the proper
-places, some fine-tuning is occasionally needed.
+tries to make some actions automatic
+and puts items in the proper places,
+sometimes you need to do some fine-tuning.
 With
 .CW eqn ,
-you can line up equations, define font sizes and types, and
-vary horizontal and vertical spacing.
+you can line up equations, define font sizes and types,
+and vary horizontal and vertical spacing.
+.
 .Bh "Lining Up Equations"
 .ix [eqn] preprocessor, lining~up equations %key eqn preprocessor, lining up equations
 Earlier we showed you how to line up pieces of an equation
@@ -1676,8 +1723,9 @@ at any place in an equation.
 Successive equations should also contain
 .CW lineup
 only once.
-Thus, when you have a series of equations that require you to line
-up items in more than one position, like the following:
+Thus, when you have a series of equations
+that require you to line up items in more than one position,
+like the following:
 .RS
 .TS
 lw (1i) l l.
@@ -1704,29 +1752,30 @@ T}	T{
 T}
 .TE
 .RE
-it might be better to line up the pieces of the equation on the
-left-hand side using tabs, and those on the right-hand side using
+it might be better to line up the pieces of the equation
+on the left-hand side using tabs,
+and those on the right-hand side using
 .CW mark
 and
 .CW lineup .
 .PP
-If at all possible, you should type in the longest expression first
+If at all possible, enter the longest expression first
 to serve as the
 .CW mark ing
 point.
-If you type in shorter expressions first,
+If you enter shorter expressions first,
 .CW mark
-will not have enough room to line up successive longer expressions.
+does not have enough room to line up successive longer expressions.
+.
 .Bh "Changing Fonts and Sizes"
 .ix [eqn] preprocessor, fonts %key eqn preprocessor, fonts
 .ix [eqn] preprocessor, point~sizes %key eqn preprocessor, point sizes
 .ix fonts, changing ([eqn]) %key fonts, changing (eqn)
 .ix point~size, changing ([eqn]) %key point size, changing (eqn)
-In
-.CW eqn ,
-equations are automatically set in 10-point type, with standard
-mathematical conventions to write some characters as roman or
-italic.
+.CW Eqn
+automatically sets equations in 10-point type,
+with standard mathematical conventions
+to write some characters as roman or italic.
 To change sizes and fonts, use the following keywords:
 .RS
 .TS
@@ -1803,21 +1852,22 @@ lf(CW)p9 7 l.
 #size 8 {A + B}#	`size 8 {A + B}`
 .TE
 .RE
-If the entire paper is to be typeset in a nonstandard size or
-format, you can avoid redefining each and every character sequence
+If you typeset the entire paper
+in a nonstandard size or format,
+you can avoid redefining each and every character sequence
 by setting a global size (\c
 .CW gsize )
 or font (\c
 .CW gfont )
-that will affect the whole document.
-You can set this up at the top of your file (or wherever the font
-and size changes begin) within an
+that affects the whole document.
+You can set this up at the top of your file
+(or wherever the font and size changes begin) within an
 .CW .EQ
 and
 .CW .EN .
 .PP
-For example, to change the fonts to roman and the size to 12, you
-could enter:
+For example, to change the fonts to roman
+and the size to 12, enter:
 .Ps
 \&.EQ
 gfont R
@@ -1828,11 +1878,12 @@ The rest of the equations in the document (up to another
 .CW gfont
 or
 .CW gsize )
-will be set in 12-point roman type.
+print in 12-point roman type.
 You can use any other
 .CW troff
 font names in place of
 .CW R .
+.
 .Bh "Horizontal and Vertical Motions"
 .ix [eqn] preprocessor, vertical spacing %key eqn preprocessor, vertical spacing
 You have already learned how to obtain small extra horizontal spaces
@@ -1861,18 +1912,19 @@ or
 .I n ,
 where
 .I n
-is the same unit of measure as described.
+is also 1/100s of an em.
 These local horizontal and vertical motions affect only the
 character(s) next to the keyword.
 To move larger strings or whole expressions, enclose them
 in braces.
+.
 .Ah "Keywords and Precedence"
 .ix [eqn] preprocessor, precedence~of operations %key eqn preprocessor, precedence of operations
-Braces are used to group items or change the precedence of operations
+Braces group items or change the precedence of operations,
 .ix [eqn] preprocessor, grouping items %key eqn preprocessor, grouping items
 if you are unsure of how
 .CW eqn
-will treat multiple keywords in a single expression.
+treats multiple keywords in a single expression.
 If you don't use braces,
 .CW eqn
 performs the operations in the following order:
@@ -1888,6 +1940,7 @@ group to the left:
 .Ps
 over sqrt left right
 .Pe
+.
 .Ah "Problem Checklist"
 .ix [eqn] preprocessor, problem~checklist %key eqn preprocessor, problem checklist
 The
@@ -1898,40 +1951,42 @@ To check a document before printing, type:
 .Ps
 $ \f[CB]eqn\fP \fIfiles\fP \f[CB]> /dev/null\fP
 .Pe
-This discards the output but prints the error message.
+This discards the output, but prints any error messages.
 Some of the error messages you might encounter are:
+.\" XXX make this a proper list (variable list)
 .Ps
 eqn: syntax error between lines 14 and 42, file book
 .Pe
-A syntax error (such as leaving out a brace, having one too many
-braces, having a
+A syntax error (such as leaving out a brace,
+having one too many braces, having a
 .CW sup
-with nothing before it, or using a wrong delimiter) has occurred
-between lines 14 and 42, approximately, in the file
+with nothing before it, or using a wrong delimiter)
+has occurred between lines 14 and 42, approximately, in the file
 .CW book .
-These line numbers are not accurate, so you have to look at
-nearby lines as well.
-If the following message is displayed:
+These line numbers are not accurate,
+so you have to look at nearby lines as well.
+If you see the following message:
 .Ps
 word overflow
 .Pe
 you have exceeded the limits of
 .CW troff 's
 internal buffer.
-If you print the equation as a displayed equation, this message
-will usually go away.
+.\" XXX test: does groff/geqn have practical limits?
+If you print the equation as a displayed equation,
+this message usually goes away.
 If the message is
 .CW "line overflow" ,
-the only solution is to break up the equation across multiple
-lines, marking each with a separate
+the only solution is to break up the equation
+across  lines, marking each with a separate
 .CW .EQ
 and
 .CW .EN .
 The
 .CW eqn
-program does not warn about equations that are too long for one
-line.
-If the following message is displayed:
+program does not warn about equations
+that are too long for one line.
+If you see the following message:
 .Ps
 eqn: fatal error: Unexpected end of input at 2 sub a
 .Pe
@@ -1952,6 +2007,7 @@ The
 .ix [checkeq] command %key checkeq command
 program checks for misplaced or missing inline delimiters and
 similar problems.
+.\" XXX need to find or recreate source for checkeq
 .PP
 For example, when run on a draft of this chapter,
 .CW checkeq
@@ -1986,8 +2042,7 @@ B#f( theta )
 .Pe
 Because there was only one delimiter,
 .CW eqn
-gets \(lqout of phase\(rq and all subsequent delimiters
-are misplaced.
+gets \(lqout of phase\(rq and misplaces all subsequent delimiters.
 After we fixed this one error,
 .CW checkeq
 printed the following \(lqnull\(rq report:
@@ -1995,9 +2050,9 @@ printed the following \(lqnull\(rq report:
 $ \f[CB]checkeq sect1\fP
 sect1:
 .Pe
-Because a simple problem like the one shown here can cause every
-subsequent equation in the file to be garbled, and can waste an
-entire formatting run, it makes sense to run
+Because a simple problem like the one shown here
+can affect subsequents equation in the file,
+and can waste an entire formatting run, you could run
 .CW checkeq
 before you format any files containing equations.
 .PP

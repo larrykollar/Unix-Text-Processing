@@ -41,11 +41,11 @@
 .page 253
 .ix %begin [pic] preprocessor %key pic preprocessor
 .ix graphics
-If you are one of those who can't draw a straight line, let
-alone a decent picture or graph, you probably replace
-pictures with verbal descriptions.
-Perhaps you know what it is like to describe a drawing to a
-person who knows how to draw.
+If you are one of those who can't draw a straight line,
+let alone a decent picture or graph,
+you probably replace pictures with verbal descriptions.
+Perhaps you know what it is like to describe a drawing
+to a person who knows how to draw.
 The
 .CW pic
 preprocessor requires you to follow the process of using
@@ -62,13 +62,14 @@ method of
 describing simple pictures and graphs in your documents.
 The second is to offer a
 \(lqprogramming language\(rq
-for
-generating pictures and graphs with minimal user input.
+for generating pictures and graphs
+with minimal user input.
 Learning
 .CW pic
-is an iterative process: describe what you want and then
-look at what you get.
-We have included many examples that show both the
+is an iterative process:
+describe what you want,
+then look at what you get.
+We show many examples that show both the
 description and the resulting picture or graph.
 Take the time to create variations of these descriptions,
 making modifications and improvements.
@@ -126,11 +127,12 @@ pic \f[I]description\fP
 .ix [pic] preprocessor, start~and~end macros %key pic preprocessor, start and~end macros
 When you format a document that contains
 .CW pic
-descriptions, you must invoke the
+descriptions, invoke the
 .CW pic
-preprocessor as follows:
+preprocessor in one of the following ways:
 .Ps
 $ \f[CB]pic\fP \fIfile\fP \f[CB]| troff |\fP \fIdevice\fP
+$ \f[CB]groff -p -T\fP\fIdevice\fP \fIfile\fP
 .Pe
 For
 .CW groff
@@ -229,6 +231,7 @@ We'll look at it later in this chapter after we've covered
 the basics of the
 .CW pic
 language.
+.
 .Bh "Naming Objects"
 The
 .CW pic
@@ -244,9 +247,9 @@ macros:
 circle
 \&.PE
 .Pe
-When this description is processed by
+When 
 .CW pic
-it produces:
+processes this description, it produces:
 .PS
 circle
 .PE
@@ -261,19 +264,19 @@ There are seven graphic primitives:
 and
 .CW spline .
 .ix [pic] preprocessor, basic figures (graphics~primitives) %key pic preprocessor, basic figures (graphics primitives)
-We will show these primitives in examples that present
-additional aspects of
+In this chapter, we show these primitives
+in examples that present additional aspects of
 .CW pic .
 .PP
-In using a computer language, you have to be precise, using
-as few words as possible to get the picture you want.
+When using a computer language, you have to be precise,
+using as few words as possible to get the picture you want.
 This means that you allow the program to make as many
 of the decisions about the drawing as is practical.
 After you understand
 .CW pic 's
-normal behavior, you will know what
+normal behavior, you understand what
 .CW pic
-will do on its own.
+does on its own.
 .PP
 For instance, we didn't specify the size of the circle in
 the last example.
@@ -281,8 +284,8 @@ By default,
 .CW pic
 draws a circle with a diameter of \(12 inch (or a radius of
 \&.25 inch).
-You can get a circle of a different size, but you have to
-specify the size.
+You can get a circle of a different size,
+but you have to specify the size.
 .ix [pic] preprocessor, specifying size~of graphics~primitives %key pic preprocessor, specifying size of graphics~primitives
 .KS
 .Ps
@@ -312,11 +315,10 @@ circle radius .5
 .PP
 Similarly, if you specify
 .CW box ,
-you will get a box with a height of .5 inch and a width
+you get a box with a height of .5 inch
+and a width of .75 inch.
 .ix [pic] preprocessor, height~of object %key pic preprocessor, height of object
-of .75 inch.
-You can get a larger or smaller box by changing its
-dimensions:
+You can change a box's dimensions:
 .ix [pic] preprocessor, specifying dimensions %key pic preprocessor, specifying dimensions
 .Ps
 \&.PS
@@ -334,10 +336,9 @@ You can also use the abbreviations
 and
 .CW wid
 for these attributes.
-The order in which you specify the dimensions does not
-matter, and you can change one attribute without
-changing the other.
-That is how we can draw a square:
+The order in which you specify the dimensions does not matter,
+and you can change one attribute without changing the other.
+That is how to draw a square:
 .Ps
 \&.PS
 box ht .75
@@ -359,11 +360,13 @@ For instance, after you had described the square box,
 .CW "box same"
 would duplicate a square of the same size.
 .page 257
+.
 .Bh "Labeling Objects"
 .ix [pic] preprocessor, labeling objects %key pic preprocessor, labeling objects
-To provide a label for any object, specify the text
-within double quotation marks after the name of the object.
-The label is placed at the center of the object.
+To provide a label for any object,
+specify the text within double quotation marks
+after the name of the object.
+The label prints at the center of the object.
 .Ps
 \&.PS
 box ht .75 "Square One"
@@ -377,7 +380,7 @@ box ht .75 "Square One"
 .PE
 Even if a label does not contain blank spaces, you must
 enclose it within double quotation marks.
-Each individually quoted item will be output on a new line.
+Each individually quoted item prints on a new line.
 .Ps
 box wid .5 "Second" "Square"
 .Pe
@@ -393,27 +396,27 @@ actually handles the text,
 .CW pic
 doesn't really try to fit a label inside an object.
 .ix [pic] preprocessor, adjusting label~placement %key pic preprocessor, adjusting label placement
-You must determine the amount of text that will fit.
+You must determine how much text can fit.
 The
 .CW pic
-program ignores lines beginning with a period, permitting
-you to use
+program ignores lines beginning with a period,
+permitting you to use
 .CW troff
 requests to change the point size, font, or typeface.
 .ix [pic] preprocessor, used~with [troff] %key pic preprocessor, used with [troff]
 .ix [troff] formatter, using~[pic]~with %key troff formatter, using [pic]~with
-It is best to avoid spacing requests, and be sure
-to reset any change in point size.
+Avoid spacing requests,
+and reset any change in point size.
 .PP
 When you specify a single text label with a
 .CW line ,
 .CW pic
 centers it on the line.
 .ix [pic] preprocessor, line %key pic preprocessor, line
-For instance, inline
+For instance, you can use inline
 .CW troff
-requests can be used to print a label in 14-point
-italic (i.e., 4 points larger than the current point size).
+requests to print a label in 14-point italic
+(i.e., 4 points larger than the current point size).
 .Ps
 \&.PS
 line "\\fI\\s14pic\\s10\\fR"
@@ -429,12 +432,13 @@ It produces:
 .PS
 line "\f[I]\s14pic\s10\fP"
 .PE
-Because the standard placement of labels is not always
-useful, you can specify the attributes
+If you need to place labels differently,
+specify the attributes
 .CW above
 or
 .CW below .
-In the following example, the point size is specified using
+In the following example,
+we specify the point size using
 the following
 .CW .ps
 request:
@@ -450,10 +454,10 @@ line "\f[I]\s+2PIC\s-2\fP" above
 .PE
 If you supply two quoted arguments with
 .CW line ,
-the first will be printed above the line and the
-second printed below.
+the first argument prints above the line and the
+second prints below.
 .PP
-You can also select a
+You can also create a
 .CW line
 or
 .CW box
@@ -463,9 +467,10 @@ or
 .CW dashed ,
 as you can see in the next example:
 .Ps
-box dotted "\\f(CWbox dotted\\fP" above
+box dotted "\\f[C]box dotted\\fP" above
 .Pe
-Note the inline request to invoke the constant-width font
+Note the inline request
+to invoke the Courier font
 for the label.
 The
 .CW above
@@ -474,17 +479,17 @@ This description produces:
 .PS
 box dotted "\f[C]box dotted\fP" above
 .PE
-The box, composed of dots, contains a label printed in
-constant-width font.
-It is obvious here that
+The box, composed of dots,
+contains a label printed in Courier font.
+You can see that
 .CW pic
 made no attempt to fit the label
 \(lqinside\(rq
 the box.
 The
 .CW above
-attribute does not place text above the box, but rather
-above the center of the box.
+attribute does not place text above the box,
+but above the center of the box.
 The description:
 .Ps
 line dashed "sign here" below
@@ -495,18 +500,18 @@ line dashed "sign here" below
 .PE
 If the attributes of texture are followed by a value,
 .CW pic
-will try to keep that amount of spacing between the dashes
-or dots.
+tries to keep that amount of spacing
+between the dashes or dots.
 The description
 .CW "dashed .1"
-will result in dashes spaced .1 inch apart.
+results in dashes spaced .1 inch apart.
 .Bh "\f[CB]pic\fP's Drawing Motion"
 .ix [pic] preprocessor, drawing~motion %key pic preprocessor, drawing motion
 After you have named an object and determined its size,
 you have to think about where
 .CW pic
-is going to draw it.
-(Indentation and other matters concerning the placement of
+draws it.
+Indentation and other matters concerning the placement of
 the drawing on the page are supplied by either the
 .CW .PS /\c
 .CW .PE
@@ -516,7 +521,7 @@ or
 macros.
 The
 .CW pic
-program places a single object at the left margin.
+program, by default, places a single object at the left margin.
 If you name three objects in the same description,
 where will
 .CW pic
@@ -535,10 +540,10 @@ circle "A"
 line "1" "2"
 box "B"
 .PE
-Objects are placed one after another from left to right.
 The
 .CW pic
-program assumes that objects should be connected, as in the
+program places objects one after another, from left to right.
+It assumes that objects should be connected, as in the
 following example:
 .Ps
 \&.PS
@@ -570,18 +575,19 @@ to the right of a
 circle "A" ; move ; box "B"
 \&.PE
 .Pe
-As shown in this example,
+As shown in this example, you can enter
 .CW pic
-commands can be entered on the same line, separated by
-semicolons, instead of on separate lines.
+commands on the same line, separated by semicolons,
+instead of on separate lines.
 This description produces:
 .PS
 circle "A" ; move ; box "B"
 .PE
 .page 260
+.
 .Bh "Changing Direction"
 .ix [pic] preprocessor, changing direction~of drawing %key pic preprocessor, changing direction of drawing
-As you have seen,
+As we showed above,
 .CW pic
 places objects in a continuous motion from left to right.
 You can also get
@@ -599,13 +605,12 @@ The distance of a
 is the same length as a
 .CW line
 (.5 inch).
-If you want to change the distance of a
+If you want to change the motion of a
 .ix [pic] preprocessor, adjusting drawing~motion %key pic preprocessor, adjusting drawing motion
 .CW move
 or the length of a
 .CW line ,
-then the change must be accompanied by an attribute of
-direction.
+then accompany the change with a direction attribute.
 Although it seems natural to write:
 .Ps
 line 2; move 1; arrow 1 \f[I]Wrong\fP
@@ -615,24 +620,25 @@ does not accept this command unless you specify directions
 for all three cases.
 When
 .CW pic
-objects to your choice of words, it will display the
-offending line, using a caret (^) to mark the error.
+objects to your choice of words,
+it displays the offending line,
+using a caret (^) to mark the error.
 .Ps
 pic: syntax error near line 1, file test
  context is
        line 2 ^; move 1
 .Pe
-Only the first error on the line is marked. (It is
-acceptable to write
+Only the first error on the line is marked.
+You can write
 .CW line ;
 .CW move ,
-using the standard length and distance).
+using the standard length and distance.
 The next example shows how to draw a line of a specified
 length and how to move a specified distance.
 The
 .CW pic
-program assumes that any value is in inches; thus you can
-say
+program assumes that any value is in inches
+so you can say
 .CW 2i
 or simply
 .CW 2
@@ -640,7 +646,7 @@ to indicate 2 inches.
 .Ps
 line up 2; move down 1; arrow right 1
 .Pe
-Note that the attribute of direction precedes the distance.
+Note that the direction attribute precedes the distance.
 The preceding description produces:
 .PS
 line up 2; move down 1; arrow right 1
@@ -656,7 +662,7 @@ or
 These attributes change the direction of the motion used
 to draw objects.
 They do not cause movement.
-The attributes of direction affect the position of the
+The direction attributes affect the position of the
 objects that follow it, as shown in the next example.
 .page 261
 .Ps
@@ -687,11 +693,11 @@ circle "A"; down; line; box "B"
 .PP
 The
 .CW pic
-program keeps track of the start and end points for each
+program keeps track of the start and end points for each object,
 .ix [pic] preprocessor, start~and~end~of~an object %key pic preprocessor, start and~end~of~an object
-object, and their relationship to the direction in which
+and their relationship to the direction in which
 objects are being drawn.
-The next object is drawn from the exit point of the
+The next object begins at the exit point of the
 previous object.
 Entry and exit points may seem obvious for a line,
 but not so obvious with circles.
@@ -717,9 +723,9 @@ This description produces:
 left; arrow; circle "A"; arrow; box "B"
 .PE
 .PP
-You can draw a diagonal line by applying two changes in
+You can draw a diagonal line by applying
+two changes in direction.
 .ix [pic] preprocessor, diagonal lines %key pic preprocessor, diagonal lines
-direction.
 Look at how we describe a right triangle:
 .KS
 .Ps
@@ -736,8 +742,10 @@ line down 1i
 line right 1i
 line up 1i left 1i
 .PE
-The diagonal line is drawn by combining two attributes of
-direction,
+The
+.CW pic
+program draws the diagonal line
+by combining two attributes of direction,
 .CW up
 and
 .CW left .
@@ -754,8 +762,8 @@ arrow down 1i then right 1i then up 1i left 1i
 .Pe
 When using
 .CW then ,
-you have to define the motion on a single line or escape
-the end of the line with a backslash
+you define the motion on a single line
+or escape the end of the line with a backslash
 .CW \e ). (
 It produces:
 .PS
@@ -773,17 +781,18 @@ An
 .CW arc
 .ix [pic] preprocessor, [arc] %key pic preprocessor, [arc]
 is a portion of a circle.
-Naming four arcs consecutively will draw a circle.
-An arc is drawn counterclockwise from the current position
+Naming four arcs consecutively draws a circle.
+The
+.CW pic
+program draws an arc
+counterclockwise from the current position
 (from 6 o'clock to 3 o'clock, for instance).
-The next example uses arcs to produce a box with rounded
-corners:
+The next example uses arcs to produce a box with rounded corners:
 .Ps
 line right 1; arc; line up ; arc
 line left 1; arc; line down; arc
 .Pe
-This description starts with the bottom line of the curved
-box.
+This description starts with the bottom line of the curved box.
 The motion is counterclockwise.
 .PS
 line right 1; arc; line up; arc
@@ -800,10 +809,10 @@ This description produces:
 .PS
 arc "A"; arc "B" cw
 .PE
-Note that text is placed at what
+Note that
 .CW pic
-considers to be the center of the arc, which is the
-center of the corresponding circle.
+places the text where it considers the center of the arc,
+which is the center of the corresponding circle.
 .PP
 A
 .CW spline
@@ -812,7 +821,7 @@ is a cross between an
 .CW arc
 and a
 .CW line .
-It is used to draw smoothed curves.
+Use it to draw smoothed curves.
 In this example, a spline traces a path between two circles.
 .Ps
 circle rad .25
@@ -826,9 +835,9 @@ spline right 1 then down .5 left 1 then right 1
 circle same
 .PE
 .page 264
-A
+Use a
 .CW spline
-is used in the same way as a
+the same way as you use a
 .CW line .
 When drawn continuously using
 .CW then ,
@@ -841,6 +850,7 @@ would produce an angle).
 We'll see more examples of
 .CW spline
 later.
+.
 .Bh "Placing Objects"
 .ix [pic] preprocessor, placing objects %key pic preprocessor, placing objects
 It isn't always useful to place objects in a continuous
@@ -862,8 +872,9 @@ right; arrow; ellipse; arrow
 .PE
 Note the short arrow, drawn from the box to the circle.
 What happened?
-The end point of the box was not on the right, but on the
-bottom, because the motion in effect where the box is drawn is
+The end point of the box was not on the right,
+but on the bottom,
+because the motion in effect where the box is drawn is
 .CW down .
 Changing direction (\c
 .CW right )
@@ -871,16 +882,16 @@ affects only the direction in which the arrow is drawn;
 it does not change where the arrow begins.
 Thus, the arrow is drawn along the bottom line of the box.
 .PP
-Sometimes, it is best to place an object in relation to
-previously placed objects.
+Sometimes, the solution is to place an object
+in relation to previously placed objects.
 The
 .CW pic
-program provides a natural way to locate objects that have
-been drawn.
+program provides a natural way
+to locate objects that have been drawn.
 For example, the attribute
 .CW first
-locates the first occurrence of an object, and the
-attribute
+locates the first occurrence of an object,
+and the attribute
 .CW from
 specifies that the object serves as a starting point
 for the next object drawn.
@@ -896,28 +907,32 @@ It produces:
 circle ; move; circle ; arrow up from 1st circle
 .PE
 .page 265
-You can reference each type of object using an ordinal
-number.
-Referring to the order in which an object is drawn, you can
-say
+You can reference each type of object
+using an ordinal number.
+Referring to the order in which an object is drawn,
+you can say
 .CW "first box"
 (\c
 .CW "1st box"
 is also acceptable) or
 .CW "2nd circle" .
-You can also work back from the last object, specifying the
+You can also work back from the last object,
+specifying the
 .CW "last box"
 or
 .CW "2nd last box" .
 .PP
-The center of each object is used as the reference point.
-In the last example, the arrow was drawn from the center
-of the circle.
-The attribute
+The center of each object is the reference point.
+The last example draws the arrow
+from the center of the circle.
+Use the attribute
 .CW chop
-can be used to chop off the part of the line that would
+to chop off the part of the line that would
 extend to the center of each circle.
-In the next example, a chopped line is drawn between the
+In the next example,
+the
+.CW pic
+program draws a chopped line between the
 first and third circles:
 .Ps
 \&.PS
@@ -932,22 +947,27 @@ circle "1" ; move down from last circle
 circle "2" ; move right from last circle; circle "3"
 line from 1st circle to last circle chop
 .PE
-The amount that is chopped is by default equal to the radius
-of the circle.
-You can specify how much of the line is chopped, for use
-with other objects or text, by supplying either one or
+The amount that is chopped
+is by default equal to the radius of the circle.
+You can specify how much of the line is chopped,
+for use with other objects or text,
+by supplying either one or
 two values after the attribute.
-If a single value is given, then both ends of the line
-are chopped by that amount.
-If two values are given, the start of the line is chopped
-by the first amount and the end of the line chopped by the
-second amount.
+If you use a single value,
+.CW pic
+chops both ends of the line by that amount.
+If you use two values,
+.CW pic
+chops the start of the line by the first amount
+and chops the end of the line by the second amount.
 .PP
-It is important to remember that movement
+Remember that
+.CW pic
+measures movement
 .CW from
-a referenced object is measured from its center, unless
+the center of a referenced object,
+unless otherwise specified.
 .ix [pic] preprocessor, movement~from~a referenced object %key pic preprocessor, movement from~a referenced object
-otherwise specified.
 Look at these four circles:
 .PS
 circle "1"
@@ -955,23 +975,26 @@ move right from last circle; circle "2"
 move right from right of last circle; circle "3"
 move right from bottom of last circle; circle "4"
 .PE
-The second circle is produced by the description:
+The
+.CW pic
+program produces the second circle by the description:
 .Ps
 move right from last circle; circle "2"
 .Pe
 Because the distance (.5 inch by default) is measured
 from the center of the circle, there is only .25 inch
 between the two circles.
-The third circle is produced by the description:
+It produces the third circle by the description:
 .page 266
 .Ps
 move right from right of last circle; circle "3"
 .Pe
-Now the distance is measured from the right of the second
-circle.
-There is twice as much space between the second and third
-circle as between the first and second.
-The fourth circle is produced by the description:
+Now the distance is measured
+from the right of the second circle.
+There is twice as much space
+between the second and third circle
+as between the first and second.
+It produces the fourth circle by the description:
 .Ps
 move right from bottom of last circle; circle "4"
 .Pe
@@ -988,9 +1011,9 @@ and
 you can locate specific points on any object.
 .ix [pic] preprocessor, locating specific points %key pic preprocessor, locating specific points
 .ix [pic] preprocessor, turning~a corner %key pic preprocessor, turning a corner
-In the next example, we solve the problem of turning a
-corner by specifying the place from which the arrow will
-be drawn:
+In the next example,
+we solve the problem of turning a corner
+by specifying the place from which we draw the arrow:
 .Ps
 \&.PS
 down; arrow; box
@@ -998,8 +1021,9 @@ right; arrow from right of last box; ellipse; arrow ; box
 up; arrow from top of last box
 \&.PE
 .Pe
-In our earlier example, the arrow was drawn from the bottom
-of the box; now we change the starting point of the arrow
+In our earlier example,
+the arrow started at the bottom of the box;
+now we change the starting point of the arrow
 to the
 .CW right
 of the previous box.
@@ -1027,8 +1051,8 @@ box; arrow from upper right of last box;
 arrow down from lower left of last box
 .PE
 .page 267
-With objects like lines and arcs, it is more useful to refer
-to the
+With objects like lines and arcs,
+you should refer to the
 .CW start
 and
 .CW end
@@ -1042,7 +1066,7 @@ line right
 line from start of 1st line to end of 2nd line
 \&.PE
 .Pe
-The last line could also be written:
+You could also make the last line:
 .Ps
 line to start of 1st line
 .Pe
@@ -1064,9 +1088,9 @@ description shown at the beginning of this chapter.
 The only thing we haven't covered is how to get a
 double-headed arrow.
 .ix [pic] preprocessor, double-headed arrow %key pic preprocessor, double-headed arrow
-Because an
+Because you can specify an
 .CW arrow
-can also be specified as
+as
 .CW "line ->"
 or
 .CW "line <-" ,
@@ -1091,12 +1115,12 @@ you can get a double-headed arrow with
 The lines in this description are numbered for easy
 reference in the following exercise.
 .PP
-As is true with almost anything you describe, a
+As is true with almost anything you describe, you can write a
 .CW pic
-description could be written in several different ways.
-In fact, you will learn a lot about
+description in several different ways.
+In fact, you can learn a lot about
 .CW pic
-by making even minor changes and checking the results.
+by making minor changes and checking the results.
 See if you can answer these questions:
 .page 268
 .RS
@@ -1119,10 +1143,10 @@ allow you to say
 as well as
 .CW "move down 1.25" ?
 .Li
-Where is the exit point  of the
+Where is the exit point of the
 .CW circle
-when it is drawn with a downward motion in effect?
-If lines 5 and 6 were replaced by:
+when a downward motion in effect?
+If you replaced lines 5 and 6 with:
 .Ps
 .ti +13n
 move left 1i; box
@@ -1132,8 +1156,8 @@ move right 2i; box
 where would the boxes be drawn?
 .Li
 There is 1 inch between the circle and each box.
-How much space would there be if lines 5 and 6 were
-replaced by:
+How much space would there be
+if you replaced lines 5 and 6 with:
 .Ps
 .ti +13n
 move left from last circle; box
@@ -1146,15 +1170,15 @@ of .35 inch.
 .Li
 Line 8 draws an arrow from the lower right of the ellipse
 to the top of the right-hand box.
-If it were simplified to:
+If you simplified it to:
 .Ps
 .ti +13n
 arrow from last ellipse to 2nd box
 .Pe
 where would the beginning and ending of the arrow be?
 .Li
-This drawing can present an interesting problem if the
-circle is omitted.
+This drawing can present an interesting problem
+if you omit the circle.
 How would you draw the two boxes if the circle was not
 there as a reference point?
 .Le
@@ -1230,12 +1254,14 @@ This description produces:
 arrow right
 .PE
 .page 270
+.
 .Bh "Placing Text"
 .ix [pic] preprocessor, placing text~in~a drawing %key pic preprocessor, placing text in~a drawing
-Text can be placed in a drawing just like an object.
-You have to take care in placing text, as in the
-next example, where we specify a move so that the compass
-points are not drawn on top of the arrowheads:
+You can place text in a drawing just like an object.
+You have to take care in placing text,
+as in the next example,
+where we specify a move so that the compass points
+are not drawn on top of the arrowheads:
 .Ps
 \&.PS
 {arrow down; move; "S" }
@@ -1244,9 +1270,9 @@ points are not drawn on top of the arrowheads:
 {arrow right; move; "E" }
 \&.PE
 .Pe
-Notice that the attributes of direction cause the object to
-be drawn in that direction and establish a new motion for
-successive objects.
+Notice that the attributes of direction
+draws the object in that direction
+and establishes a new motion for successive objects.
 This description produces:
 .PS
 {arrow down; move; "S" }
@@ -1260,31 +1286,33 @@ does not really handle text, allowing
 .CW troff
 to do the work.
 In some ways, this is unfortunate.
-The thing to remember is that
+Remember that
 .CW pic
 does not know where the text begins or ends.
-(You can use the attributes
+You can use the attributes
 .CW ljust
-or
+to left-justify (position the first character at that point) or
 .CW rjust
-to have the text left justified\(emthe first character
-is positioned at that point\(emor right justified\(emthe
-last character is at that point.
-These attributes can also be used with text labels).
+to right-justify (position the last character at that point).
+You can also use these attributes with text labels.
 .PP
 The
 .CW pic
-program does not keep track of the start and the end of a
-text object.
-It only knows a single point which is the point where
+program does not keep track of
+the start and end of a text object.
+It only knows a single point:
+the point where
 .CW troff
 centers the text.
-In other words, a text item does not cause a change in
-position.
-Two consecutive quoted items of text (not used as labels
-to another object) will overwrite one another.
-Objects are drawn without regard to where the text item
-is, as shown in the next example:
+In other words, a text item does not change the position.
+Two consecutive quoted items of text
+(not used as labels to another object)
+overwrite one another.
+The
+.CW pic
+program draws objects without regard
+to where the text item is,
+as shown in the next example:
 .Ps
 "Start"; line;arrow;line; "Finish"
 .Pe
@@ -1292,34 +1320,34 @@ This description produces:
 .PS
 "Start"; line; arrow; line; "Finish"
 .PE
-This example can be improved by right justifying the first
-text item (\c
+You can improve this example by right-justifying
+the first text item (\c
 .CW \(dqStart\(dq
 .CW  rjust )
-and left justifying the last text item (
+and left-justifying the last text item (
 .CW \(dqFinish\(dq
 .CW ljust ).
-As you'll
 .page 271
-notice, though, the picture starts at the margin, and the
-label is forced out where it doesn't belong.
+Note that the picture starts at the margin,
+and the label is forced out where it doesn't belong.
 .PS
 "Start" rjust; line; arrow; line; "Finish" ljust
 .PE
 The location of the point that
 .CW pic
 knows about is unchanged.
-Most of the time, you will have to use the
+Most of the time, you have to use the
 .CW move
 command before and after inserting text.
 .PP
 Because
 .CW pic
-works better with objects than text, the
+works better with objects than text,
+you can use the
 .CW invis
-attribute can be used to disguise the object behind the
-text, and give you a way to place text where you can
-point to it.
+attribute to disguise the object behind the text,
+and give you a way to place text
+where you can point to it.
 .Ps
 \&.PS
 down
@@ -1345,21 +1373,22 @@ arrow from lower left of last ellipse to top of 1st box
 arrow from lower right of last ellipse to top of 2nd box
 line <-> from bottom of last ellipse to top of last circle
 .PE
-You may have recognized that the description for this
-drawing is basically the same one that produced the
+The description for this drawing
+is basically the same one that produced the
 drawing at the beginning of this chapter.
 The
 .CW invis
 attribute makes text
 labels, not objects, the subject of this picture.
-This should lead you to the idea that
+This should lead you to the idea that you can reuse
 .CW pic
-descriptions can be reused.
-Try to think of the form of a drawing separately from its
-content.
-Most drawings contain forms that can be reworked in the
-service of new material.
+descriptions.
+Try to think of the form of a drawing
+separately from its content.
+Most drawings contain forms that you can rework
+in the service of new material.
 .page 272
+.
 .Bh "Place and Position Notation"
 .ix [pic] preprocessor, place~and~position notations %key pic preprocessor, place and~position notations
 Can you locate the starting points of the arrows on this
