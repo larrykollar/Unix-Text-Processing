@@ -16,8 +16,7 @@ have more computing power
 than the typical multi-user UNIX system in 1987,
 and many use a derivative of UNIX
 as an operating system.
-And thus, this book 
-In this book, we will use "UNIX"
+And thus, in this book, we use "UNIX"
 as a generic term for
 both commercial UNIX systems
 and for open-source derivatives
@@ -76,16 +75,16 @@ described later),
 .CW vim
 (\c
 .CW vi
-Improved), under completely open-source licenses.
+iMproved), under completely open-source licenses.
 In many cases,
 the originals have been updated
-to support the extensions provided by
+to support some of the extensions provided by
 the independently created versions. 
 .PP
 Technical writing, as a profession,
 has made its own advances
 while continuing to battle the perception
-that "anyone can write"\**.
+that \[lq]anyone can write.\[rq]\**
 .FS
 Anyone can play basketball, too,
 but how many are good enough
@@ -98,6 +97,9 @@ present both hazards and opportunities
 for technical writers.
 But we can stick with
 the standard text processing tools for now.
+When you look at a now-obscure utility
+that was once essential, you might think,
+\[lq]Could I use AI to perform this function?\[rq]
 .
 .Bh "So What's Next?"
 .LP
@@ -136,11 +138,10 @@ learning how to become more efficient and productive.
 .Le
 .RE
 .LP 0
-However, it is also valuable to examine text
-processing in terms of problems and solutions:
-the problems
-faced by a writer
-undertaking a large writing project and
+However, you should examine text processing
+in terms of problems and solutions:
+the problems faced by a writer
+undertaking a large writing project, and
 the solutions offered
 by using the resources and power of a
 computer system.
@@ -152,19 +153,15 @@ We describe in brief the kinds
 of things that a computer must be able to do
 for a writer,
 regardless of whether that writer is working on a
-UNIX
-system or on an
-IBM PC
-with a word-processing package
+UNIX system or on an
+IBM PC with a word-processing package
 such as Word or FrameMaker.
 Then, having defined basic word-processing
 capabilities, we look at how a text-processing system
 includes and extends these capabilities and benefits.
 Last, we introduce the set of text
 .page xii
-processing tools in the
-UNIX
-environment.
+processing tools in the UNIX environment.
 These tools, used individually or in combination,
 provide the basic framework
 for a text-processing system, one
@@ -174,11 +171,10 @@ to supply additional capabilities.
 Chapter 2 gives a brief review of
 UNIX fundamentals.
 We assume
-you are already somewhat acquainted with
-UNIX,
+you are already somewhat acquainted with UNIX,
 but we included
 this information to make sure that you are familiar with basic
-concepts that we will be relying on later in the book.
+concepts that we rely on later in the book.
 .PP
 Chapter 3 introduces the
 .CW vi
@@ -193,7 +189,7 @@ system and with almost every type of terminal.
 If you learn
 .CW vi ,
 you can be confident that your text editing skills
-will be completely transferable when you sit down at someone
+are completely transferable when you sit down at someone
 else's terminal or use someone else's system.
 .PP
 Chapter 4 introduces the
@@ -566,10 +562,9 @@ In the early 21st century,
 personal computers have become dirt cheap, and
 WYSIWYG word processors are everywhere.
 Traditional commercial UNIX
-systems are being rapidly replaced\c
-\(em\c
-not only by Microsoft
-operating systems, but by the free Linux and
+systems are being rapidly replaced\(em\c
+not only by Microsoft operating systems,
+but by the free Linux and
 BSD implementations of UNIX.
 The most popular commercial UNIX
 has become Apple's MacOS X (ten).

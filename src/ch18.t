@@ -37,40 +37,42 @@
 .page 542
 .Se 18 "Putting It All Together" "Chapter" 1
 .ix [format] shell~script %key format shell script
-Before returning to the topic of table of contents and
-index processing, using shell tools that we will build,
+Before returning to the topic of
+table of contents and index processing,
+using shell tools that we build,
 let's review what we've covered so far.
 .PP
 We started with a promise to show you how the UNIX environment
 could support and enhance the writing process.
-To do that, we've had to delve into many details and
-may have lost the big picture.
+To do that, we had to delve into many details
+and may have lost the big picture.
 .PP
 Let's return to that big picture here.
 First, UNIX provides what any computer with even
-rudimentary word-processing capabilities provides: the
-ability to save and edit text.
-Few of us write it perfectly the first time, so the
-ability to rewrite the parts of a document we don't like
-without retyping the parts we want to keep is a major step
-forward.
+rudimentary word-processing capabilities provides:
+the ability to save and edit text.
+Few of us write it perfectly the first time,
+so the ability to rewrite the parts of a document we don't like
+without retyping the parts we want to keep
+is a major step forward.
 .PP
-However, no one will argue that UNIX offers better tools
-at this simple level than those available in other
-environments.
+At this simple level,
+UNIX offers few advantages to other environments.
 The
 .CW vi
-editor is a good editor, but it is not the easiest to learn
+editor is a good editor,
+but it is not the easiest to learn
 and lacks many standard word-processing capabilities.
 .PP
-Where UNIX's editing tools excel is in performing complex
+Where UNIX's editing tools excel
+is in performing complex
 or repetitive edits.
-A beginner may have little use for pattern matching, but
-an advanced user cannot do without it.
-Few, if any, microcomputer-based or standalone word
-processors can boast the sophisticated capabilities for
-global changes that UNIX provides in even its most
-primitive editors.
+A beginner may have little use for pattern matching,
+but an advanced user cannot do without it.
+Few, if any, word processors
+can boast the sophisticated capabilities
+for global changes
+that UNIX provides in its most primitive editors.
 .PP
 When you go beyond
 .CW vi ,
@@ -80,25 +82,29 @@ and begin to use programs such as
 and
 .CW awk ,
 you have unmatched text-editing capabilities\(empower,
-if you will, at the expense of user friendliness.
+perhaps, at the expense of user friendliness.
 .PP
-Second, UNIX's hierarchical file system, multiuser
-capabilities, and ample disk storage capacity make it
+Second, UNIX's multitasking capabilities
+and networking utilities make it
 easy to organize large and complex writing jobs\(emespecially
-ones involving the efforts of more than one
-person.
+ones involving the efforts of more than one person.
 This can be a major advantage of UNIX over
-microcomputer-based or dedicated word processors.
+word processors.
+Component content management systems (CCMS)
+offer similar capabilities,
+but often come with high price tags
+for implementation, training, and maintenance.
 .PP
-Anyone who has tried to write a multiauthor work on a
-floppy-based system knows how easy it is to lose track
-of the latest version of a file, and to get lost among a
-multitude of disks.
+Anyone who has tried to write a multi-author work
+without content management
+knows how easy it is to lose track
+of the latest version of a file,
+and to get lost among a multitude of versions.
 UNIX makes it easy to share files, and to set up a
-consistent framework for managing them.
+consistent framework for managing content.
 .page 543
 .PP
-In addition to storing multiple versions of documents on line,
+In addition to storing multiple versions of documents online,
 you can use the file system to set up specific environments
 for writing.
 For example, a separate
@@ -113,47 +119,57 @@ Using
 .CW tbl ,
 and
 .CW eqn ,
-you can easily typeset books.
-This is not as unique and powerful a capability as it was
-even two or three years ago.
-The advent of low-cost laser printers and
+you can easily typeset complex, technical books.
+This is not as unique and powerful a capability
+as it was.
+The advent of laser printers and
 .I wysiwyg
 \(lqdesktop publishing\(rq
-tools like Microsoft WORD, MacWrite,
-and Aldus Pagemaker allow PC users to do typesetting
+tools like Microsoft Word, MacWrite,
+and Aldus Pagemaker allow PC users to format books
 as well.
 .PP
-However, despite the glamour of desktop publishing, and the
-easy-to-use appeal of products for the Macintosh, the
-UNIX typesetting facilities offer many advantages.
+However, despite the glamour of desktop publishing,
+and their easy-to-use appeal,
+UNIX typesetting facilities still offer many advantages.
 Chief among these advantages is the very feature in which
 .CW troff
-at first seems much weaker than its low-end competitors,
-namely, the use of embedded codes to control formatting.
+at first seems much weaker than its competitors:
+the use of embedded codes to control formatting.
 .PP
 .I Wysiwyg
-systems are easy for beginners to use, and they are very
-satisfying because you can immediately see what you are
-going to get on the printed page.
-But have you ever tried to make a global font change
-in MacWrite?
-Or had to make a change to a document after it was
-\(lqpasted up\(rq
-with Pagemaker?
-Or had to wait endlessly while Microsoft WORD reformats
+systems are easy for beginners to use,
+and they are very satisfying
+because you can immediately see
+what you are going to get on the printed page.
+But have you ever tried to make
+a global font change in MacWrite?\**
+.FS
+Brian Kernighan, of Bell Labs,
+has observed that
+.I wysiwyg
+really means
+\[lq]What you see is
+.I all
+you get.\[rq]
+.FE
+Or had to make a change to a document
+after it was \(lqpasted up\(rq with PageMaker?
+.\" The following is probably obsolete.
+Or had to wait while Microsoft Word reformats
 an entire document after you change the margins?
 .PP
 Because
 .CW troff
-codes can be edited, just like any other text in a file,
-it is very easy to change your mind about formatting and
-make global changes.
-And after you have mastered the art of writing macros, it
-is even easier to change formats simply by changing
-macro definitions.
+codes can be edited,
+just like any other text in a file,
+you can easily change your mind about formatting
+and make global changes.
+Once you have mastered the art of writing macros,
+you can change formats by changing macro definitions.
 And because the editing and formatting functions are
 separate, you don't have to wait for the computer while
-you are making those changes\(emthat happens while you
+you are making those changes\(emthat happens when you
 print.
 .PP
 This is not to say that
@@ -161,26 +177,24 @@ This is not to say that
 is superior to the best possible
 .I wysiwyg
 system.
-High-end systems from companies like Interleaf, Xyvision,
-and Texet offer power, speed, and ease of use all at once.
-Unfortunately, the software is costly, and requires the
-use of high-cost bit-mapped workstations.
-This can lead to a bottleneck in document production unless
-you have enough money to spend on hardware.
+High-end systems like Adobe FrameMaker
+offer power, speed, and ease of use all at once.
+Unfortunately, the software is costly.
+This can lead to a bottleneck in document production
+unless you can afford the latest hardware.
 Because
 .CW troff
-requires only a standard alphanumeric terminal, it provides
+runs on older hardware, it provides
 much more \(lqbang for the buck.\(rq
 .PP
-There is no question that the publishing system of the
-future will be a
+Commercial publishing systems gravitate toward
 .I wysiwyg
-system.
-But for now, a low-cost UNIX system with
+systems.
+Still, a low-cost UNIX system with
 .CW vi
 and
 .CW troff
-is still one of the most cost-effective publishing
+is one of the most cost-effective publishing
 systems around.
 .PP
 This brings us to the final strength of
@@ -188,49 +202,55 @@ UNIX\(emits extensibility.
 More than an operating system or a collection of programs,
 UNIX is a philosophy of computing.
 Let's consider an analogy.
-The Volkswagen beetle was a unique automobile of the
+The Volkswagen Beetle was a unique automobile of the
 sixties and seventies.
 Its simple design was one of the reasons that made it
 popular; the \(lqbug\(rq was user-maintainable.
 VW owners (\(lqusers\(rq) could tinker with their cars,
-performing such tasks as changing spark plugs by hand.
-They scoffed at owners of other cars who depended upon
-mechanics.
+drawing on a huge aftermarket
+to modify their cars as desired.
+They scoffed at owners of other cars
+who depended upon mechanics.
+The Mazda Miata of the 1990s
+had the same advantages,
+ease of maintenance and a thriving aftermarket
+for those who want to modify their cars.
+.PP
 It is perhaps this same feeling of
 independence\(emlet me do it myself\(emthat the UNIX
 environment fosters in its users.
-There are many quite capable software environments that
-are packaged to keep users out.
-In some ways, the secret of UNIX is that its working
-parts are visible.
+There are many quite capable software environments
+that are packaged to keep users out.
+In some ways, the secret of UNIX
+is that its working parts are visible.
 The UNIX environment,
 .page 544
-like the VW beetle, is designed so that users can take it
+like the VW Beetle,
+is designed so users can take it
 apart and put it back together.
 UNIX is a philosophy of computing.
-As we've stressed again and again, UNIX provides
-general-purpose tools, all of which are designed
-to work together.
+As we've stressed again and again,
+UNIX provides general-purpose tools,
+all of which are designed to work together.
 .PP
-No single program, however well thought out, will solve
-every problem.
-There is always a special case, a special need, a situation
-that runs counter to the expected.
-But UNIX is not a single program: it is a collection of
-hundreds.
+No single program, however well thought out,
+solves every problem.
+There is always a special case, a special need,
+a situation that runs counter to the expected.
+But UNIX is not a single program:
+it is a collection of hundreds.
 And with these basic tools, a clever or dedicated person
-can devise a way to meet just about any text-processing
-need.
+can devise a way to meet any text-processing need.
 .PP
 Like the fruits of any advanced system, these capabilities
 don't fall unbidden into the hands of new users.
 But they are there for the reaching.
 And over time, even writers who want a word processor they
-don't have to think about will gradually reach out
+don't have to think about gradually reach out
 for these capabilities.
 Faced with a choice between an hour spent on a boring,
 repetitive task and an hour putting together a tool that
-will do the task in a flash, most of us will choose to
+does the task in a flash, most of us would choose to
 tinker.
 .PP
 .ix table~of~contents
@@ -240,6 +260,7 @@ tools to do a job that no one of them can easily do alone.
 Its explanation is a fitting end to this book, which has
 tried throughout to put the UNIX text-processing tools
 in a wider context.
+.
 .Ah "Saving an External Table of Contents"
 As discussed in the last chapter,
 .CW troff
@@ -301,7 +322,7 @@ to various ancillary formatting tasks.
 The collection of a table of contents and index requires
 that we first return to this script.
 As we left Chapter 17, both the table of contents
-and the index macros simply write data to standard error.
+and the index macros write data to standard error.
 .PP
 A Bourne shell user can redirect this error output to a
 file using the following syntax:
@@ -330,15 +351,16 @@ the temporary file removed.
 The trick here is naming the files into which the saved
 data is stored by
 .CW sed .
-It is not appropriate simply to append table of contents
-data to one file, because we are likely to reformat a
-document many times while rewriting and revising it.
+It is not appropriate to just
+append table of contents data to one file,
+because we can reformat a document many times\
+while rewriting and revising it.
 Instead, we want to have a unique table of contents file
 and a unique index file for each source file that
 we format.
 The best way to do this without cluttering up the current
 directory is to create a subdirectory for each type of
-data we want to save \(em
+data we want to save\[em]\c
 .CW toc ,
 .CW index ,
 and so on.
@@ -423,33 +445,35 @@ exit
 .page 547
 Now, for example, when we format a file called
 .CW ch01 ,
-a file of the same name will be written in each of the
+the script writes a file of the same name in each of the
 four subdirectories
 .CW toc ,
 .CW index ,
 .CW figlist ,
 and
 .CW tablist .
-Each time we reformat the same file, the output will
-overwrite the previous contents of each accessory file,
+Each time we reformat the same file, the output
+overwrites the previous contents of each accessory file,
 giving us the most up-to-date version.
 When we use the
 .CW -o
-option for only partial formatting, writing out of these
-files is disabled by redirecting error output to
+option for only partial formatting,
+the script redirects error output to
 .CW /dev/null ,
-so that we don't end up with a partial table of contents
-file.
+so that we don't end up with a
+partial table of contents file.
 .PP
-There's also a
+There's also an
 .CW -x
-option, to allow us to format a file to produce the table
+option, to format a file to produce the table
 of contents and index without producing any regular
 output.
 This option uses
 .CW troff 's
 .CW -z
-option to suppress formatted output, and sets the
+option to suppress formatted output,
+.\" XXX test: groff has the -z option, Plan9 does not.
+and sets the
 .CW post
 and
 .CW lp
@@ -512,9 +536,29 @@ Chapter 2 Getting Started with Alcuin
 \&.
 \&.
 .Pe
-The index will require more serious postprocessing.
+The index requires more serious postprocessing.
 .ix indexing
+.
 .Ah "Index Processing"
+.ig
+XXX refer to CSTR 128 for a alternate method
+XXX I used it for large documents and liked the results.
+
+I think I understand why Tim & company did things
+this way in resource-constrained 1987 -- if you updated
+only one chapter in a big manual, you could save some time
+by only replacing the ToC and index parts for that chapter --
+but by 2002, I could spin a 1000-page manual, including a
+second pass for ToC generation, in less time than it took
+to walk to the men's room and back (5 minutes the first time,
+3 minutes after because everything was cached). I drove the
+whole thing out of a Makefile. This "format" script was a
+good exercise in shell scripting, but I'm seriously
+considering rewriting at least this section. CSTR 128
+came out in Oct 1986 (40 years ago, happy b-day!) but Tim
+might not have been aware of it until after UTP was published.
+ --LK 2026 Oct 28
+..
 It is relatively simple to assemble the components of a
 table of contents into sequential order, but it is much
 more difficult to process the index entries, because they
@@ -522,8 +566,8 @@ must be sorted and manipulated in a variety of ways.
 .PP
 This is one of the most complex tasks presented in this
 book.
-So let's start at the beginning, with the raw data that
-is output by
+So let's start at the beginning, with the raw data
+output by
 .CW troff ,
 and directed to our index subdirectory by the
 .CW format
@@ -531,7 +575,7 @@ shell script.
 For illustration, we'll assume a sparse index for a short
 book containing only three chapters.
 .PP
-As you may recall, the user creates the index simply
+As you may recall, the user creates the index
 by entering macro calls of the form:
 .ix indexing, form~of user~entries
 .Ps
@@ -558,8 +602,8 @@ capitalization, and spelling.
 A comma separates optional subordinate entries from the
 major term.
 .PP
-An index term should be entered on any page that the user
-wants indexed\(emat the start and end of a major topic,
+Enter an index term on any page you
+want indexed\(emat the start and end of a major topic,
 at least, and
 perhaps several in between if the discussion spans
 several pages.
@@ -575,10 +619,10 @@ The indexing term entered by the user is printed,
 separated from the current page number by a tab.
 Certain cross reference entries do not have a page
 number.
-The content of the raw index files after chapters 1
-through 3 have been formatted follows.
-(Here, and in the following discussion, a tab is
-represented by the symbol
+The content of the raw index files after chapters\~1
+through\~3 have been formatted as follows
+(here, and in the following discussion,
+a tab is represented by the symbol
 .CW |\(em\(em\(em| ).
 .Ps
 $ \f[CB]cat index/ch??\fP
@@ -612,8 +656,8 @@ need to do the following:
 .Ls B
 .Li
 Sort the entries into dictionary order, and remove
-duplicates, if any.
-(Duplicate entries occur whenever the user enters
+duplicates, if any
+(duplicate entries occur whenever the user enters
 .CW .XX
 macros with the same argument over several input pages,
 and two or more of those entries fall on the same
@@ -624,11 +668,11 @@ a complete list of page numbers and properly
 subordinating secondary terms.
 .Li
 Introduce formatting codes, so that the resulting file
-will have a pleasing, consistent appearance.
+has a pleasing, consistent appearance.
 .Le
 .RE
 Just how complex a task this is may not be immediately
-apparent, but rest assured that it takes the combined
+apparent, but it takes the combined
 operations of
 .CW sort ,
 .CW uniq ,
@@ -644,12 +688,13 @@ type is:
 .Ps
 $ \f[CB]cat index/\fP\f[I]files\fP \f[CB]| indexprog > book.ndx\fP
 .Pe
+.
 .Bh "Sorting the Raw Index"
 .ix [sort] command %key sort command
 .ix indexing, sorting raw entries
 The first part of
 .CW indexprog
-processes the index entries before they are passed to
+processes the index entries before passing them to
 .CW awk .
 The
 .CW sort
@@ -682,9 +727,9 @@ letters before all lowercase ones; and
 .CW "+0 -1"
 ensures that the alphabetic sort considers only the
 first field.
-The secondary sort that is performed on the second field
+The secondary sort performed on the second field
 .CW +1n ) (
-is numeric and ensures that page numbers will appear in
+is numeric and ensures that page numbers appear in
 sequence.
 .PP
 Now let's look at the index entries after they have
@@ -738,7 +783,7 @@ additional problems that we did not encounter here.
 Two-digit section numbers and page numbers, as well as
 appendices
 .I A-1,A-2,A-3 ) (
-will not be sorted correctly.
+are not sorted correctly.
 For instance, this might cause the indexing program to
 produce the following entry:
 .Ps
@@ -771,8 +816,8 @@ the entries are sorted and another one
 that operation to restore the entry.
 Then
 .CW sort
-will treat section numbers and page numbers separately
-in secondary numeric sort operations, and get them in
+treats section numbers and page numbers separately
+in secondary numeric sort operations, and puts them in
 the right order.
 .PP
 The only remaining problem is how to handle appendices.
@@ -796,6 +841,7 @@ sed '
 .Pe
 Now the sorting operation of our index program handles
 a wider range of entries.
+.
 .Bh "Building the Page Number List"
 .ix %begin [awk] %key awk
 .ix %begin [awk], used~for indexing %key awk, used for indexing
@@ -804,10 +850,9 @@ The next step is more complex.
 We must now combine multiple occurrences of each term
 that differ only in the page number, and combine all
 of the page numbers into a single list.
-The
+We can use an
 .CW awk
-program is the tool of choice.
-We can use a script for comparing and manipulating
+script for comparing and manipulating
 successive lines similar to the one described in
 Chapter 13.
 We begin by building the page number list for each entry.
@@ -831,7 +876,7 @@ First, the program sets the output record separator
 .CW ORS ) (
 to the null string, rather than the default
 newline.
-This means that output records will be appended to
+This means the script appends output records to
 the same line, unless we specify an explicit newline.
 .page 552
 .PP
@@ -920,6 +965,7 @@ startup, of system|\(em\(em\(em|2-1,2-2
 symbolic names|\(em\(em\(em|3-3
 .Pe
 .page 553
+.
 .Bh "Subordinating Secondary Entries"
 .ix indexing, subordinating secondary entries
 The next trick is to subordinate secondary entries under
@@ -984,8 +1030,8 @@ For example:
 Alcuin, overview of|\(em\(em\(em|1-1
 Alcuin, supported input devices|\(em\(em\(em|1-2
 .Pe
-When the first line is processed, the split will return
-a value of 0, so the entire line will be output.
+When the first line is processed, the split returns
+a value of 0, so the entire line is output.
 .PP
 When the second line is processed,
 .CW lastentry
@@ -1089,9 +1135,10 @@ startup
 symbolic names|\(em\(em\(em|3-3
 .Pe
 That's starting to look like an index!
+.
 .Bh "Adding Formatting Codes"
 .ix indexing, adding formatting~codes
-We could simply quit here, and let the user finish
+We could quit here, and let the user finish
 formatting the index.
 However,
 .CW awk
@@ -1103,8 +1150,7 @@ to put in headings and divide the index into
 alphabetic sections.
 In addition, it would be nice to insert indentation
 requests, so that we can format the index source
-file in fill mode, so that any long lines will
-wrap correctly.
+file in fill mode, so that any long lines wrap correctly.
 .PP
 Let's look at the coded output before we look at the
 script that produces it.
@@ -1191,9 +1237,9 @@ NF > 0 {
 .Pe
 Every line in the input
 .CW "NF > 1" ) (
-will be subjected to the last three lines in the
+is subjected to the last three lines in the
 program.
-It will be surrounded by formatting codes and printed out.
+Those lines get surrounded by formatting codes and printed out.
 .Ps
 printf ("%s\\n", ".ti -4n")
 printf ("%s\\n", $0)
@@ -1223,8 +1269,8 @@ entry with the previous until it detects a change.
 .PP
 The program is basically looking for alphabetic characters,
 but must test (especially in computer manuals) for strings
-that begin with nonalphabetic characters.
-(If it doesn't do this, it will loop endlessly when it
+that begin with nonalphabetic characters
+(if it doesn't do this, it loops endlessly when it
 comes to a string that doesn't begin with an
 alphabetic character).
 If the program loops 100 times on a single line,
@@ -1238,13 +1284,14 @@ capital letter and associated formatting requests.
 Primary terms beginning with nonalphabetic characters are
 output without causing a change of heading.
 (Because they are already sorted to the beginning of
-the file, they will all be listed at the head of the
+the file, they are all listed at the head of the
 output before the A's).
 .ix %end [awk], used~for indexing %key awk, used for indexing
+.
 .Bh "Final Formatting Touches"
 .ix indexing, final formatting~codes
 Having come this far, it hardly seems fair not to finish
-the job, and put in the final formatting codes that will
+the job, and put in the final formatting codes that
 allow us to format and print the index without ever
 looking at the source file (although we should save it
 to allow manual fine-tuning if necessary).
@@ -1267,7 +1314,7 @@ s/|\(em\(em\(em|/  /"
 .page 558
 Assuming that we're using our extended
 .CW ms
-macros, these initial macros will create the section
+macros, these initial macros create the section
 heading
 .I Index ,
 print the index in two columns, and use a page number
@@ -1280,11 +1327,12 @@ Backslashes must be protected from the shell,
 .CW sed ,
 and
 .CW troff .
-This line will be processed quite a few times, by
-different programs, before it is output).
+Different programs process this line
+quite a few times before output time.
 .PP
 Finally, the script converts the tab separating the index
 entry from the first page number into a pair of spaces.
+.
 .Bh "Special Cases"
 .ix indexing, special formatting problems
 But our indexing script is not complete.
@@ -1295,7 +1343,7 @@ through \(lqcomputer voice\(rq or italics into the index.
 .PP
 However, the
 .CW troff
-font-switch codes will interfere with the proper sorting
+font-switch codes interfere with the proper sorting
 of the index.
 There is a way around this\(emawkward, but effective.
 As you may recall, we use a
@@ -1325,7 +1373,7 @@ Within an
 .CW \&.XX
 or
 .CW \&.XR
-macro, the script will change the standard
+macro, the script changes the standard
 .CW troff
 font-switch codes into an arbitrary string of nonalphabetic
 characters.
@@ -1340,11 +1388,11 @@ command in the index program.
 This option causes
 .CW sort
 to ignore nonalphabetic characters when making comparisons.
-(The exception will be lines like
+The exception is lines like
 .CW @
 .I operator ,
 which contain no alphabetic characters in the first field.
-Such lines will still be sorted to the front of the list).
+Such lines are still sorted to the front of the list.
 .PP
 Finally, we use the concluding
 .CW sed
@@ -1364,10 +1412,10 @@ We might also want to consider the case in which a leading
 period (as might occur if we were indexing
 .CW troff
 formatting requests) appears in an index entry.
-Inserting the following line one line from the end of the
-last
+To fix this, insert the following line
+one line from the end of the last
 .CW awk
-script we created will do the trick.
+script we created.
 These lines insulate
 .CW troff
 codes in index entries from the formatter when the index
@@ -1380,10 +1428,11 @@ if ($0 ~ /^%%~~*\\./) printf ("\\\\&")
 .Pe
 Lines beginning with a
 .CW .
-will be preceded with a
+are preceded with a
 .CW troff
 zero-width character
 .CW \e& ). (
+.
 .Bh "The Entire Index Program"
 We have broken the indexing process into stages to make
 it easier to understand.
@@ -1392,7 +1441,7 @@ However, there is no need to keep individual
 and
 .CW sed
 scripts; they can be combined into a single shell program
-simply by piping the output of one portion to another,
+by piping the output of one portion to another,
 within the shell program.
 .ix [format] shell~script %key format shell script
 .PP
@@ -1410,6 +1459,8 @@ BEGIN { ORS = ""; FS = "|\(em\(em\(em|" }
 NF == 1 { if (NR == 1) printf ("%s", $0);
 .	\" Note:
 .	\" is the ; needed in the previous line?
+. \" (Answer: Probably not, but it doesn't hurt anything.) --LK 2026 Oct 29
+. \" XXX test: why not remove the ; and see what happens?
           else printf ("\\n%s", $0) }
 NF > 1 {
  if ($1 == curr)
@@ -1526,7 +1577,7 @@ we can format and print the index as follows:
 .Ps
 $ \f[CB]cat indexfiles/* | indexprog | ditroff -mS | ... | lp\fP
 .Pe
-The result will look something like this:
+The result looks something like this:
 .sp 1v
 .page 562
 .ch18@start
@@ -1566,8 +1617,17 @@ bit pad (see input devices)#
 .sp
 \(bu
 .ch18@end
+.
 .Ah "Let \f[CB]make\fP Remember the Details"
 .ix [make] command, coordinating final book~production~with %key make command, coordinating final book production~with
+.ig
+Rant: *make* should be introduced far earlier
+in the book, maybe even before the shell chapter.
+Especially in those resource-constrained days,
+when we had to use spears to hunt wild tacos for lunch,
+make could make things go a lot faster.
+-- LK 2026 Oct 29
+..
 Even though we've hidden the really complex details of
 index processing inside a shell script, and the format
 shell script itself handles a lot of the dirty work, there
@@ -1585,13 +1645,13 @@ been done:
 .RS
 .Ls B
 .Li
-All of the relevant sections have been printed in their
-most up-to-date form.
+All of the relevant sections are up-to-date and printed.
 Odd as it may seem, it is possible to have last minute
 changes to a file that never make it into the printed
 book.
+.\" Not so odd, even with modern tools. --LK 2026 Oct 29
 .Li
-The book has been proofed using whatever automatic tools
+The book was proofed using whatever automatic tools
 we have provided, including the
 .CW proof
 and
@@ -1599,10 +1659,10 @@ and
 shell scripts (or
 .CW wwb
 if you have it).
-All \(lqreview notes\(rq embedded in the text must also be
+All \(lqreview notes\(rq embedded in the text are
 satisfied and removed.
 .Li
-An updated table of contents and index have been printed.
+The table of contents and index are up-to-date and printed.
 .Le
 .RE
 You can probably think of others as well.
@@ -1611,9 +1671,9 @@ You can probably think of others as well.
 The
 .CW make
 utility is the perfect tool for this job.
-We've already seen in Chapter 11 how it can be used to
-specify the files (and the formatting options) required
-for each section of the book.
+We've already seen in Chapter 11 how you can use it
+to specify the files (and the formatting options)
+required for each section of the book.
 Unfortunately, this part of the job requires that you
 keep formatted output files, which are quite large.
 If disk space is a problem, this drawback might lead you
@@ -1639,6 +1699,8 @@ itself to print your document, you could put the
 .CW touch
 command into the makefile.
 Your makefile might look like this:
+.\" XXX Nowadays, printing by chapter is more trouble
+.\" XXX than it's worth. -- LK 2026 Oct 29
 .Ps
 book: print/ch01 print/ch02 print/ch03...
 
@@ -1653,14 +1715,15 @@ print/ch02 : ch02
 				\&.
 				\&.
 .Pe
-Notice that in order to execute the local formatting shell
-script, it is necessary to execute
+To execute the local formatting shell script,
+.CW make
+has to execute
 .CW sh
 and specify the complete pathname.
 The options specified with the
 .CW format
 shell script can be specific to each file that is formatted.
-However, generally you want to use the same options to
+In general, you want to use the same options to
 format all the files that make up a particular document.
 Using variables, you can create a more generalized
 makefile that is easier to change.
@@ -1686,21 +1749,22 @@ print/ch02 : ch02
 The variables used by
 .CW make
 are set like shell variables.
-But when they are referenced, the name of the variable must
-be enclosed in parentheses in addition to being prefixed
-with a dollar sign.
+But when you reference them,
+enclose the name of the variable
+in parentheses and prefix it with a dollar sign.
 .PP
-A user can now easily edit the OPTIONS variable to add or
-remove options.
+Now you can easily edit the OPTIONS variable
+to add or remove options.
 You could also place additional options on the command
 for a particular file.
 This is not necessary, though, just because some of the
 files have tables, equations, or pictures and others
 don't.
 Other than the small bit of extra processing it requires,
+which is negigible with modern hardware,
 there's no reason not to run the preprocessor on all files.
 .PP
-Our makefile can be further expanded.
+We can our expand our makefile further.
 To make sure that our index and table of contents are
 up-to-date (and to automate the process of creating
 them out of the individual raw output files that the
@@ -1767,7 +1831,7 @@ We can therefore enter:
 .Ps
 $ \f[CB]make book.toc\fP
 .Pe
-and the table of contents will be compiled automatically.
+and the table of contents is compiled automatically.
 When you enter the above command, the
 .CW make
 program recognizes
@@ -1790,10 +1854,12 @@ made to
 .CW ch02
 since the file
 .CW book.toc
-was compiled, the source file will be formatted again,
+was compiled,
+.CW make
+formats the source file again,
 producing new toc entries.
 The other files, assuming that they have not been changed,
-will not be reformatted as their entries are up-to-date.
+are not reformatted as their entries are up-to-date.
 .PP
 We can add other \(lqtargets\(rq,
 for instance, to check whether
@@ -1804,8 +1870,8 @@ you could invoke the
 .CW proof
 program on the associated file,
 .CW grep
-for Review Note macros, or just print a message to the
-user reminding him or her to proof the file.
+for Review Note macros, or just print a message to users
+reminding them to proof the file.
 .PP
 To do this, we create a pseudo-target.
 If no file with the name
@@ -1814,7 +1880,7 @@ exists, it can never be up-to-date, so typing:
 .Ps
 $ \f[CB]make proof\fP
 .Pe
-will automatically force proofing of the document
+automatically forces proofing of the document
 according to the rules you have specified in the makefile.
 .PP
 The
@@ -1827,15 +1893,17 @@ that must be specified for a particular file.
 And if all these reasons don't convince you to learn
 .CW make
 and begin constructing makefiles for large documents,
-perhaps this next benefit will.
-It gives you a simple two-word command to print an
+consider the next benefit:
+it gives you a simple two-word command to print an
 entire book and its apparatus.
 .page 566
 .Ps
 $ \f[CB]make book\fP
 .Pe
-When you enter this command, each formatting command as
-it is being executed will be displayed on the screen.
+When you enter this command,
+.CW make
+displays each formatting command as it is executed
+on the screen.
 If you wish to suppress these messages while you do other
 work, invoke
 .CW make
@@ -1844,20 +1912,21 @@ with the
 option or place the line
 .CW \&.SILENT:
 at the top of the makefile.
+.
 .Bh "Building the Makefile"
 You are limited only by your imagination and ingenuity in
 organizing your work with a makefile.
 However, the more complex the makefile, the longer it
 gets, and the more difficult for inexperienced users
-to create.
+to modify.
 .PP
 .ix [make] command, building makefile with~a shell~script %key make command, building makefile with a shell~script
-You can get around this problem too\(emjust write
+You can get around this problem too\[em]write
 a shell script to build the makefile, taking
 as arguments the files that make up the document.
 Here's such a script, called
 .CW buildmake ,
-that will produce a makefile similar to the one just
+that produces a makefile similar to the one just
 described.
 (The
 .CW make
@@ -1931,14 +2000,14 @@ do
     echo "|\(em\(em\(em|$(FORMAT) $(OPTIONS) -x $x" >> makefile
 done
 .Pe
-To create a complex makefile, all the user needs to do
-is type:
+To create a complex makefile, type:
 .Ps
 $ \f[CB]buildmake\fP \f[I]files\fP
 .Pe
-In addition, the user may want to manually edit the
+In addition, you may want to manually edit the
 first line of the makefile, which specifies
 formatter options.
+.
 .Ah "Where to Go from Here"
 Large as this book is, it is far from comprehensive.
 We have covered the basic editing and formatting tools
@@ -1958,6 +2027,6 @@ is a subject as well as a tool, the challenge of taking
 more control over the process of book production can
 be endlessly fascinating.
 The subject and the method of inquiry become ever more
-intertwined, until, in Yeat's immortal phrase:
+intertwined, until, in Yeats's immortal phrase:
 .PP
 How can you know the dancer from the dance?

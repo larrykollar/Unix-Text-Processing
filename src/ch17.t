@@ -32,15 +32,15 @@
 .ix %begin extended [ms] macros %key extended ms macros
 .Se 17 "An Extended \f[CB]ms\fP Macro Package" "Chapter" 1
 .LP 0
-In the previous chapter, we've looked at some of the essential
+In the previous chapter, we looked at some of the essential
 elements of a macro package\(emthe innards that make
 it tick.
-However, few people will write a macro package just because
+However, few people write a macro package just because
 they think they can do a better job at the basics than
 .CW ms
 or
 .CW mm .
-More often, users who need specific formatting effects will
+More often, users who need specific formatting effects
 build a macro set to achieve those effects.
 .PP
 The macros used to produce this book are a good example
@@ -57,7 +57,7 @@ and macros for inserting italicized commentary in examples.
 .PP
 To illustrate more concretely the issues that force you to
 create or significantly extend a macro package, this chapter
-will look at a set of extended
+looks at a set of extended
 .CW ms
 macros for typesetting technical manuals.
 Extensions built into this package fall into two major
@@ -86,18 +86,24 @@ One of the chief weaknesses of the
 and
 .CW mm
 packages is that they were designed for smaller documents.
-For example,
+For example, the AT&T version of
 .CW ms
-does not provide table of contents generation, and the
-approach used by
+does not provide table of contents generation\**
+.FS
+Berkeley extensions provide a crude method, and
+.CW groff
+extends it further with \[lq]hook\[rq] macros.
+.FE
+and the approach used by
 .CW mm
 is suitable only for short documents.
 Neither package supports automatic index generation.
-In this chapter and the next, we will also look at
+In this chapter and the next, we also look at
 ways to redress these problems.
 .page 510
+.
 .Ah "Creating a Custom Macro Package"
-In this chapter, we will present an extended macro package
+In this chapter, we present an extended macro package
 designed for technical documentation.
 Based on the
 .CW ms
@@ -117,7 +123,7 @@ original
 package.
 We wanted to read in the standard
 .CW tmac.s
-package, and then simply overwrite or remove unwanted macros.
+package, and then overwrite or remove unwanted macros.
 Then we organized our extensions into three groups:
 redefinitions of standard
 .CW ms
@@ -130,10 +136,24 @@ The format macros can be modified for the specifications
 of a unique document format.
 Each format design has its own file, and the user only
 needs to specify which of these formats are to be read in
-during the formatting run.
+during the formatting run.\**
+.FS
+In 1987, sourcing different groups of macros
+was necessary to conserve memory and computing resources.
+Such restrictions no longer apply,
+outside of embedded systems
+(but typesetting on embedded systems
+is a rarity).
+.CW Groff 's
+rewritten versions of
+.CW ms
+and
+.CW mm
+read in the entire package.
+.FE
 .PP
-Following is a summary of the steps we followed to
-implement our
+Following is a summary of the steps we followed
+to implement our 
 .CW mS
 macro package.
 While describing this implementation, we don't pretend that
@@ -154,7 +174,8 @@ Create the
 file to contain definitions of standard
 .CW ms
 macros that we've redefined, such as
-.CW \&.VIZ .
+.CW \&.IZ .
+.\" Renamed from VIZ to IZ -- LK 2026 Oct 26
 .Li
 Create the
 .CW tmac.Scommon
@@ -185,8 +206,8 @@ file in the macro directory.
 The master file of this package is
 .CW tmac.S ,
 although it does not contain any macro definitions.
-It allows users to set some parameters from the command
-line, and then it reads in the standard
+It allows users to set some parameters
+from the command line, then it reads in the standard
 .CW ms
 macro package and the two files that contain redefinitions
 and common macros.
@@ -247,11 +268,14 @@ Both
 .CW ms
 and
 .CW mm
-include a number of Bell-specific macros that are not very
-useful for users outside of AT&T.
-For example, it is unlikely that you will require the
+include a number of Bell-specific macros
+that are not very useful for users outside of AT&T.
+For example, the
 various styles of technical memoranda used internally
-at Bell Labs.
+at Bell Labs are not needed
+(the
+.CW groff
+rewrite removed many of these).
 Unused macro definitions need not get in your way, but
 they do use up possible names and number registers that
 may conflict with what you want to do.
@@ -259,9 +283,9 @@ may conflict with what you want to do.
 .ix [troff] formatter, [.rm] request %key troff formatter, [.rm] request
 The
 .CW \&.rn
-macro allows you to rename a macro;
+macro renames a macro;
 .CW \&.rm
-will remove the definition of a macro.
+removes the definition of a macro.
 .PP
 You may want to remove selected macros.
 For example, you might want to start the modifications to
@@ -274,13 +298,7 @@ with the following request:
 .Pe
 (Note the use of the backslash to make this apparent
 two-line request into a single long line).
-.PP
-There is a slight performance loss in reading in a large
-macro package, and then removing a number of the macros.
-For efficiency, you'd be better off removing the
-undesirable macros from your copy of the
-.CW ms
-source file.
+.\" obsolete text removed --LK 2026 Oct 26
 .page 512
 .PP
 Reading in
@@ -291,8 +309,17 @@ overwrites some of the standard
 .CW ms
 macros with our own definitions.
 The standard versions are thus not available.
-If you want to retain a standard macro definition, you can
-make it available under a different name.
+If you want to retain a standard macro definition,
+you can make it available under a different name.
+Use long names to rename the original;
+for example, if you want to replace the
+.CW \&.FX
+(For Example) macro with your own definition:
+.Ps
+.rn FX FX-old
+.de FX
+\fIyour definition\fP
+\&..
 .ix [.rn] request %key rn request
 .ix [troff] formatter, [.rn] request %key troff formatter, [.rn] request
 Use the
@@ -307,24 +334,24 @@ Because the standard
 .CW \&.IZ
 macro is invoked from
 .CW tmac.s
-at the start of the formatting run, we can't simply
+at the start of the formatting run, we can't
 overwrite its definition.
 We must either delete the standard
 .CW \&.IZ
 macro definition or comment out its invocation.
-Then the new
+Then the formatter executes the new
 .CW \&.IZ
 macro in
-.CW tmac.Sredefs
-will be executed.
+.CW tmac.Sredefs .
 .PP
-As you develop your own set of extensions, you will
-undoubtedly consider additional modifications.
-Appendix F lists the set of extended macros that we use.
+As you develop your own set of extensions,
+expect to consider additional modifications.
+Appendix\~F lists the set of extended macros that we use.
 You may not need many of the specialized macros provided
 in this package.
-But it will show you how to build on an existing package
+But it does show you how to build on an existing package
 and how easy it is to modify the appearance of a document.
+.
 .Ah "Structured Technical Documents"
 The
 .CW ms
@@ -341,8 +368,12 @@ The technical papers collected in that volume bear
 superficial resemblance to the chapters of a book.
 However, they lack continuity\(emsection,
 figure, and table numbers, where present, are
-relative only to the current section, not to the entire
-volume.
+relative only to the current section,
+not to the entire volume.
+In fictional terms, the book is more of an
+.I anthology
+than a
+.I novel .
 .PP
 A macro package designed for producing technical books
 or manuals may need at least some modification to produce
@@ -350,16 +381,20 @@ or manuals may need at least some modification to produce
 section headings.
 Chapter and section headings should make the structure of
 a document visible.
-In a nontechnical book, chapters are often the only major
-structural element.
+In a nontechnical book, chapters and scenes
+(often separated by three bullet characters,
+centered on one line)
+are often the only major structural elements.
 They divide the book into major topics, and give readers
 stopping points to digest what they have read.
 .PP
-Chapters are usually distinguished from a formatting point
-of view by a page break and some kind of nonstandard
-typesetting.
-For example, a chapter number and title may be set in large
-type, and the text may begin lower on the page.
+Chapters are usually distinguished
+from a formatting point of view
+by a page break
+and some kind of nonstandard typesetting.
+For example, a chapter number and title
+may be set in large type,
+with body text beginning lower on the page.
 .PP
 In technical books and manuals, which are often not read
 straight through as much as they are used for reference,
@@ -379,24 +414,44 @@ Properly used, section numbers can be very helpful in a
 technical manual.
 They allow detailed cross references to different parts
 of the book without using page numbers.
-Referencing by page numbers can result in error because
-page numbers are not fixed until the book is done.
+Cross-referencing by page number
+requires special handling, usually as part of a
+.I two-pass
+formatting process.
+The first pass generates data
+used for cross-references and table of contents generation;
+the second pass uses this data
+to provide accurate page numbering.
+In 1987, this could have been done
+in an overnight run
+(while hoping no errors cropped up).
+But using a blue and white Mac G3 (2000-vintage hardware),
+running MacOS\~X,
+a two-pass process generated a 1000-page PDF file
+with accurate table of contents and cross-references
+in five minutes or less.
 .page 513
 .PP
 Detailed breakdown of a chapter into subsections can also
 help the writer of a technical manual.
-Because a manual (unlike an essay or other free-form work
-of non-fiction) has definite material that must be covered,
-it can be written successfully from an outline.
-It is often possible to write technical material by
+Because a manual
+(unlike an essay or
+other free-form work of non-fiction)
+has definite material that must be covered,
+you can start from an outline.
+For example, write technical material by
 entering the outline in the form of section and subsection
 headings and then filling in the details.
+The Tines outliner
+supports export to
+.CW ms
+headings and text.
 .PP
 In this approach, numbered sections also have a place
 because they make the outline structure of the document
 more visible.
 In reviewing technical manuals, we can often identify
-many weaknesses simply by looking at the table of contents.
+many weaknesses by looking at the table of contents.
 Sections in a technical manual should be hierarchical, and
 the table of contents should look effective
 .I "as an outline" .
@@ -484,7 +539,13 @@ for alternate or additional emphasis.
 .ix extended [ms] macros, chapter headings %key extended ms macros, chapter headings
 In our package, we include five levels of heading: a
 chapter-level heading and four levels of numbered or
-unnumbered subsection headings.
+unnumbered subsection headings.\**
+.FS
+Use the lowest (fifth) level sparingly, if at all.
+If you find you need five (or more!) levels
+to adequately document your product,
+consider breaking your content into separate manuals.
+.FE
 .PP
 As described in the previous section, our custom macro
 package incorporates several different versions of the
@@ -504,16 +565,25 @@ nearly so.
 Thus, we don't increase the number of new macros that
 our users must learn, and it eliminates the recoding
 of existing documents to achieve a new format.
+In modern terms, this is called
+.I "separating the structure from the format" .
+You might find it possible to reuse
+content written for one client
+in work for second client, with little or no changes.
+The formatter uses the same input
+to produce different outputs for each client.
 .PP
 This approach is also useful when you support different
 types of output devices.
 Originally, our designs were developed for the HP LaserJet
-printer, which supports a limited set of fonts and sizes.
-When we purchased an Apple LaserWriter and Linotronic L100
-typesetter, our formatting options increased, making
-available multiple fonts and variable point sizes.
+printer, that supports a limited set of fonts and sizes.
+When we purchased an Apple LaserWriter
+and Linotronic L100 typesetter,
+our formatting options increased,
+making available multiple fonts and variable point sizes.
 In an environment supporting multiple types of printers,
 you might want to adapt formats for specific printers.
+.
 .Bh "The Chapter Heading"
 The chapter heading is in a class by itself, because it
 requires more emphasis than subsection headings, and because
@@ -521,8 +591,8 @@ the macro that produces it may need to initialize or reset
 certain registers used within the chapter (such as section,
 figure, or table numbers).
 .PP
-In an arbitrary reversal of terminology, we call our
-chapter macro
+In an arbitrary reversal of terminology,
+we call our chapter macro
 .CW \&.Se
 .I section ). (
 It could just as well be called
@@ -531,25 +601,28 @@ for chapter, but we use
 .CW \&.Ch
 for a subsection heading (as we'll see in a moment) and
 want to avoid confusion.
-In addition, this macro can be used for appendices as well
-as chapters, so the more general name seems appropriate.
+In addition, you can use this macro for appendices
+as well as chapters,
+so the more general name seems appropriate.
+.\" Uh-huh... I sense a retcon happening here. --LK
 .PP
 The chapter heading has three major parts:
 .page 515
 .RS
 .Ls B
 .Li
-chapter-specific register initialization, including registers
-for section numbering, table and figure numbering, and
-page numbering
+chapter-specific register initialization,
+including registers for section numbering,
+table and figure numbering,
+and page numbering
 .Li
 appearance of the actual chapter break
 .Li
 table of contents processing
 .Le
 .RE
-Because this is a long macro definition, let's look at
-it in sections.
+Because this is a long macro definition,
+let's look at it in sections.
 .Ps
 \&.de Se				\\" section; $1 = number; $2 = name;
 \&.				\\" $3 = type (Chapter, Appendix, etc)
@@ -559,9 +632,10 @@ it in sections.
 \&.ie !"\\\\$1"" \\{.		\\" Test for sect number
 \&.	nr sE \\\\$1		\\" Assign to register sE
 \&.	if !\\\\n(sE \\{.	\\" Test if not a numeric
-\&.		.af sE A	\\" Handle appendices
+\&.		af sE A	\\" Handle appendices
 .	\" Note:
 .	\" does the above line have one too many dots?
+.	\" Yes. --LK 2026 Oct 26
 \&.		if "\\\\$1"A" .nr sE 1
 \&.		if "\\\\$1"B" .nr sE 2
 \&.		if "\\\\$1"C" .nr sE 3
@@ -621,10 +695,11 @@ the alphabet.
 If so, a number is stored into the register, but the
 output format is changed to alphabetic.
 .PP
-If the argument is not a letter between A and J, a message
-is printed.
-This message is more verbose than you would generally want
-to use, but it is included to make the point that you
+If the argument is not a letter between A and J,
+the macro prints a message.
+This message is more verbose
+than you would generally want to use,
+but it is included to make the pointthat you
 can include detailed messages.
 .PP
 The macro next sets up the special page numbering scheme
@@ -644,8 +719,8 @@ appearance of the chapter heading.
 This is the part of the macro that has led us to develop
 several different versions.
 .PP
-In designing chapter headings, let your imagination be your
-guide.
+In designing chapter headings,
+let your imagination be your guide.
 Look at books whose design you like, and work from there.
 Three different designs we used on the HP LaserJet
 are shown in Figure 17-1.
@@ -736,15 +811,15 @@ or:
 \&.Se A "Summary of Alcuin Drawing Primitives" "Appendix"
 .Pe
 The heading starts on a new page.
-If a third argument is not present, it is assumed that the
-section type is
+If a third argument is not present,
+the macro assumes that the section type is
 .I Chapter ,
-and the section is labeled accordingly.
-An alternate section type can be specified in the optional
-third argument.
+and labels the section accordingly.
+You can specify an alternate section type
+in the optional third argument.
 This argument is usually
-.I Appendix
-but can be any string the user wants printed before the
+.I Appendix ,
+but can be any string printed before the
 section number.
 .page 518
 .ix %begin extended [ms] macros, chapter headings %key extended ms macros, chapter headings
@@ -794,18 +869,19 @@ this code:
 .RS
 .Ls B
 .Li
-The actual section title, as specified in the second argument,
+The actual section title,
+as specified in the second argument,
 is forced to all uppercase using the
 .CW \&.tr
 request.
 .Li
 .ix extended [ms] macros, drawing horizontal~lines %key extended ms macros, drawing horizontal lines
-The horizontal line under the title is drawn using a utility
-macro called
+The horizontal line under the title
+is drawn using a utility macro called
 .CW \&.Hl
 .I "horizontal line" ), (
-which simply draws a line the width of the page, less any
-indent that is in effect:
+that draws a line the width of the page,
+less any indent that is in effect:
 .page 519
 .sp
 .nf
@@ -824,13 +900,14 @@ indent that is in effect:
 .ft P
 .Li
 .ix no-space mode
-No-space mode is turned on at the end of the macro, to
-inhibit inconsistent spacing caused by users placing
-spacing requests or paragraph macros after the
+No-space mode is turned on at the end of the macro,
+to inhibit inconsistent spacing
+caused by users placing spacing requests or paragraph macros
+after the
 .CW \&.Se
 macro.
 All of the heading macros use this technique because
-inconsistent spacing around heading will give the page
+inconsistent spacing around heading give the page
 an uneven look.
 .Le
 .RE
@@ -856,13 +933,15 @@ This code produces the heading in Figure 17-1.
 \&.ad b
 \&.ns
 .Pe
-This version is much simpler; it doesn't print the section
-type at all, just the number or letter.
-However, because it prints a right-justified title, we
-have given the user the option of splitting a long
+This version is much simpler;
+it doesn't print the section type at all,
+just the number or letter.
+However, because it prints a right-justified title,
+we give the user the option of splitting a long
 title into two parts.
 .PP
-The final part of the macro (in either version) adds the
+The final part of the macro
+(in either version) adds the
 section title to the table of contents.
 As was the case with
 .CW \&.Hl ,
@@ -877,6 +956,7 @@ We'll discuss how this works later.
 .ix %end extended [ms] macros, chapter headings %key extended ms macros, chapter headings
 .page 520
 .Pe
+.
 .Bh "A Mechanism for Numbered Headings"
 .ix extended [ms] macros, numbered headings %key extended ms macros, numbered headings
 Before we describe the lower-level headings used within
@@ -895,8 +975,8 @@ macro, but the font and spacing requests specified in the
 .CW ms
 .CW \&.NH
 macro are removed.
-All that this macro now does is generate the section
-number string.
+All that this macro does
+is generate the section number string.
 .Ps
 \&.de NH				\\" redefine from -MS
 \&.nr NS \\\\$1			\\" Set NS to arg 1
@@ -920,12 +1000,13 @@ number string.
 \&\\\\*(SN					\\" Output SN string
 \&..
 .Pe
-This macro repays study, because it shows several clever
-ways to use number registers.
-First, the argument to the macro is placed into a number
-register.
-This register is then used to select which of a series
-of further registers will be incremented:
+Study this macro,
+because it shows several clever ways
+to use number registers.
+First, the argument to the macro
+is placed into a number register.
+This register selects which of a series
+of further registers to increment:
 .Ps
 \&.nr NS \\\\$1
 \&	.
@@ -937,18 +1018,19 @@ If the macro is called as
 .CW "\&.NH 1" ,
 register
 .CW H1
-will be incremented; if the call is
+is incremented; if the call is
 .CW "\&.NH 2" ,
 register
 .CW H2
-will be incremented, and so on.
+is incremented, and so on.
 Then, depending on the value of that same
 .CW NS
-register, the appropriate register value will be appended
+register, the appropriate register value is appended
 to the section number string
 .CW SN .
 .page 521
 .ix %begin extended [ms] macros, section headings %key extended ms macros, section headings
+.
 .Bh "Subsection Headings"
 .ix section headings
 In our package, we allow four levels of subsection headings,
@@ -1030,9 +1112,9 @@ lower-level headings as well
 Some pointers: First, whenever you force capitalization with
 .CW \&.tr ,
 be sure to turn off ligatures, because they do not capitalize.
-Second, when you boldface a user-supplied string, it is
-wise to artificially embolden italics as well, in case the
-user embeds an italic font switch in the heading.
+Second, when you boldface a user-supplied string,
+you should artificially embolden italics as well,
+in case the user embeds an italic font switch in the heading.
 Third, don't forget to enter no-space mode to ensure
 consistent spacing following the heading.
 .PP
@@ -1051,7 +1133,7 @@ sets the first number in the numbered heading string
 .CW H1  ). (
 If
 .CW \&.Se
-has been called, the subsection headings start at level 2,
+was called, the subsection headings start at level 2,
 otherwise they start from the top.
 .PP
 To make it very easy for even novice users to specify
@@ -1062,17 +1144,19 @@ the package includes a macro called
 that turns numbering on or off:
 .Ps
 \&.de Nh    \\" Numbered headings; $1 = turn on (1) or off (0)
-\&.         \\" $1 = 2 will cause only A heads to be numbered
+\&.         \\" $1 = 2 only A heads are numbered
 \&.nr nH \\\\$1
 \&..
 .Pe
 .ix macros, style
 This is a matter of macro package style, as mentioned earlier.
-Steve Talbott's style, when he initially developed this package
-was to code everything as macros, even where the macro simply
-sets a number register or defines a string.
-This makes the package very easy to learn, because you can
-give a new user a concise, unambiguous list of macros
+Steve Talbott's style,
+when he initially developed this package
+was to code everything as macros,
+even where the macro sets a number register or defines a string.
+This makes the package very easy to learn,
+because you can give a new user a concise,
+unambiguous list of macros
 to enter into a file.
 .PP
 .ix extended [ms] macros, headers~and~footers %key extended ms macros, headers and~footers
@@ -1084,7 +1168,7 @@ and
 .I title
 and
 .I subtitle )
-macros, described in Appendix F, which simply define the
+macros, described in Appendix F, which define the
 .CW "ms RF"
 and
 .CW LF
@@ -1092,11 +1176,12 @@ string for running footers.
 Because of the mnemonically named macros, new users don't have
 to remember whether the title goes in the right footer or
 the left, and so on.
-They simply enter the title of the book and chapter as
+They enter the title of the book and chapter as
 arguments to the respective macros.
 The disadvantage is that users are insulated from an
 understanding of what is really going on, which
 may be an obstacle to learning more advanced skills.
+.
 .Bh "An Alternate Definition"
 .ix headings, in~wide~margin
 To give you an idea of how easy it is to change the look
@@ -1162,18 +1247,19 @@ Here's the modified macro to produce this heading:
 \&.tC \\\\*(SN \\\\$1 Ah	\\" Output TOC info
 \&..
 .Pe
+.
 .Ah "Figure and Table Headings"
 .ix extended [ms] macros, figure numbering %key extended ms macros, figure numbering
 .ix extended [ms] macros, table numbering %key extended ms macros, table numbering
-In technical manuals, it is common to number and title
-all figures and tables, both for easy reference from
-within the text, and for collection into lists of
-figures and tables that will appear in the table
-of contents.
+In technical manuals,
+it is common to number and title all figures and tables,
+both for easy reference from within the text,
+and for collection into lists of
+figures and tables for the table of contents.
 .PP
-These macros are easy to construct and, apart from
-whatever appearance you decide to give them, nearly
-identical in content.
+These macros are easy to construct and,
+apart from whatever appearance you decide to give them,
+nearly identical in content.
 There is a \(lqstart\(rq macro and an \(lqend\(rq macro:
 .Ps
 \&.de Fs				\\" Start figure; $1 = reserved space;
@@ -1208,14 +1294,14 @@ There is a \(lqstart\(rq macro and an \(lqend\(rq macro:
 As you can see, the
 .CW \&.Fs
 .I "figure start" ) (
-macro allows the user to reserve space for a figured to
-be pasted in, and for it to float to a new page, using
-the
+macro allows the user to reserve space
+for pasted in a figure,
+and for it to float to a new page, using the
 .CW ms
 \(lqfloating keep\(rq mechanism.
 .PP
 Neither of the options are necessary.
-The macro can simply bracket a figure created with
+The macro can bracket a figure created with
 .CW pic ,
 for example, in which case all that the macro provides is
 a consistent amount of space before the figure starts.
@@ -1229,21 +1315,21 @@ If a keep is in effect,
 terminates it.
 In addition, it prints the figure caption below the figure
 and adds a consistent amount of space below the caption.
-The figure is automatically numbered with the section
-number, and a figure number that is incremented each
-time the macro is called.
+The figure is automatically numbered
+with the section number,
+and a figure number incremented each time the macro is called.
 As you may remember, this figure number register,
 .CW fG ,
 was initialized to 0 in
 .CW \&.Se .
 .PP
-To give the user some options with figure numbering, a
-second argument allows the user to turn it off entirely.
-In addition, if the section is unnumbered, the section
-number and hyphen will be omitted.
-To accomplish this involves a little juggling of strings
-and number registers (which is something you should plan
-to get used to when you write macros).
+To give the user some options with figure numbering,
+a second argument allows the user to turn it off entirely.
+In addition, if the section is unnumbered,
+the section number and hyphen are omitted.
+This involves a little juggling of strings
+and number registers (which is something you should
+get used to when you write macros).
 Notice that we use the string
 .CW H1
 for the section number rather than the section number
@@ -1261,7 +1347,7 @@ above and below the figure, and print the caption left
 justified and in italics below the bottom line.
 .PP
 The figure end macro also calls the table of contents
-macro, which will be described later.
+macro, described later.
 .PP
 The macros for labeling tables are very simple, because
 the standard
@@ -1291,6 +1377,7 @@ In this case, the caption is at the top:
 \&.sp
 \&..
 .Pe
+.
 .Ah "Lists, Lists, and More Lists"
 .ix %begin extended [ms] macros, lists %key extended ms macros, lists
 .ix %begin lists, alphabetic~([mS]) %key lists, alphabetic (mS)
@@ -1347,7 +1434,7 @@ r@Numbered with lowercase roman numerals
 .PP
 The bulleted list uses the bullet character (\(bu))
 by default.
-However, as you will see, the macro allows you to specify
+However, the macro allows you to specify
 an alternate bullet using an optional third argument.
 This \(lqbullet\(rq could be a dash, a box
 .CW \e(sq ), (
@@ -1355,8 +1442,9 @@ a checkmark
 .CW \e(sr ), (
 or any other character.
 .PP
-Lists can be nested, and there is a default list type for
-each level of nesting, so the type argument does not really
+Lists can be nested, and there is a default list type
+for each level of nesting,
+so the type argument does not really
 need to be specified.
 .PP
 Here's the list start macro:
@@ -1394,8 +1482,9 @@ Here's the list start macro:
 \&.RS
 \&..
 .Pe
-When you first look at this macro, you may be a little
-overwhelmed by the complex number register names.
+When you first look at this macro,
+the complex number register names
+may be overwhelming.
 In fact, there is not much to it.
 .PP
 .ix [troff] formatter, number~registers %key troff formatter, number registers
@@ -1419,8 +1508,8 @@ name of another number register:
 It is this second number register interpolation\(em
 .CW l\en+(l0 \(emthat
 is actually used to number the list.
-This is a technique we promised to show you back when we
-were first describing number registers.
+This is a technique we promised to show you
+when we first described number registers.
 We create a series of related number register names by
 interpolating the value of another register as one character
 in the name.
@@ -1447,7 +1536,7 @@ is 1).
 A second call to
 .CW \&.Ls
 without closing the first list (which, as we shall see, bumps
-the counter back one) will define number register
+the counter back one) defines number register
 .CW l2 ,
 and so on.
 .PP
@@ -1456,16 +1545,17 @@ In a similar way, another series of number registers
 allows a different indent to be specified for each nested
 level, if the user so desires.
 .PP
-With the exception of the bulleted list, all of the different
-list types are numbered using the same number register
+With the exception of the bulleted list,
+all of the different list types
+use the same number register
 (\c
 .CW l \c
 .I n ,
 where
 .I n
 is the nesting depth).
-The different types of lists are created simply by changing the
-output format of this register using the
+The list macros create the different types of lists
+by changing the output format of this register using the
 .CW \&.af
 request.
 .PP
@@ -1482,16 +1572,19 @@ macro:
 \&.IP "\\\\n(l\\\\n(l0." "\\\\n(i\\\\n(l0" \\}
 \&..
 .Pe
-The actual list counter itself (as opposed to the nesting
-counter) is incremented, and the appropriate value printed.
+The actual list counter itself
+(as opposed to the nesting counter)
+is incremented, and the appropriate value printed.
 .PP
 .ix [ms] macros, [.IP] macro %key ms macros, [.IP] macro
 .ix [.IP] macro %key IP macro
-The number and the associated text is positioned with the
-standard
+The standard
 .CW ms
 .CW \&.IP
-macro.
+macro positions
+the number and the associated text.
+.ig
+.\" Everyone has access to -ms these days. --LK 2026 Oct 27
 If you don't have access to the
 .CW ms
 macros, you could simulate the action of the
@@ -1507,9 +1600,10 @@ macro as follows:
 \&\\\\$1\\t\\c
 \&..
 .Pe
+..
 However, there is one drawback to using an
-.CW \&.IP
--style macro as the basis of the list.
+.CW \&.IP -style
+macro as the basis of the list.
 .	\" Note:
 .	\" code to simulate the original showing the
 .	\" differences between O'Reilly .Lx and the .IP macro
@@ -1547,14 +1641,16 @@ Here's the macro that produced the second example:
 \&..
 .Pe
 .ix lists, extended~in [mS] %key lists, extended in mS
-This version of the macro places the mark not just at a
-position half the depth of the indent, but exactly in the
-middle of the indent by adjusting the indent by the width
+This version of the macro places the mark
+not just at a position half the depth of the indent,
+but exactly in the middle of the indent
+by adjusting the indent by the width
 of the mark argument.
-Number registers are used for clarity, to avoid nesting
+Number registers are used for clarity,
+to avoid nesting
 the various constructs too deeply.
 .PP
-(Note that this simplified
+Note that this simplified
 .CW \&.IP
 macro lacks some of the functionality of the
 .CW ms
@@ -1564,12 +1660,12 @@ you to nest indents by using the
 .CW \&.RS
 and
 .CW \&.RE
-macros).
+macros.
 .PP
 If you are using
 .CW ms ,
 and you want to create a macro that puts the mark in the
-center of the indent, be sure to name this macro
+center of the indent, name your macro
 something other than
 .CW \&.IP ,
 so that you don't conflict with the existing macro
@@ -1577,7 +1673,7 @@ of that name.
 .PP
 Here's the list end:
 .Ps
-\&.de Le	\\" List end; $1 = no blank line following last item
+\&.de Le	\\" List end; $1 = 0: no blank line following last item
 \&.br
 \&.rr l\\\\n(l0
 \&.rr i\\\\n(l0
@@ -1607,6 +1703,7 @@ register containing the
 by default).
 .ix %end extended [ms] macros, lists %key extended ms macros, lists
 .ix %end numbered lists, [mS] macros %key numbered lists, mS macros
+.
 .Ah "Source Code and Other Examples"
 In a technical manual, there are often further issues
 brought out by the need to show program source code
@@ -1620,9 +1717,11 @@ As previously discussed, the basic trick in
 is to use the
 .CW CW
 font.
+.ig
+.\" obsolete
 If you are using
 .CW otroff ,
-you will need to use the
+you need to use the
 .CW cw
 preprocessor (see your UNIX manual for details) or some
 other type of workaround.
@@ -1646,6 +1745,7 @@ worked\(emso if you are stuck with
 don't despair.
 Put your ingenuity to work and you should come up with
 something).
+..
 .PP
 Besides the change to the
 .CW CW
@@ -1691,15 +1791,16 @@ situation:
 .ix environments
 .ix number~registers
 .ix number~registers, substituting~for environment~switch
-The trick of saving the current environment in temporary
-registers is a useful one.
-The alternative is to use a separate environment for
-the printouts, but this assumes that the
-available environments are not already in use for
-some other purpose.
+The trick of saving the current environment
+in temporary registers, as shown above, was once useful.
+Modern versions of
+.CW troff
+allow arbitrarily-named environments,
+so an environment switch is far easier
+both to code and to understand.
 You could also
 .page 530
-call a reset macro to restore the default state\(embut
+call a reset macro to restore the default state\[em]but
 this may not actually be the state that was in
 effect at the time.
 .PP
@@ -1709,36 +1810,42 @@ ability to return to the previous setting by making
 a request like
 .CW \&.ll
 without any argument.
-If you do so, an error might result if the user has
-himself made an
+If the user made an
 .CW \&.ll
-request in the interim.
+request in the interim,
+the line length might be unexpected
+until the next reset.
 .PP
 In short, you should either save registers or use a
-different environment whenever you change formatting
-parameters in the opening macro of a macro pair.
+different environment
+whenever you change formatting parameters
+in the opening macro of a macro pair.
 Then restore them in the closing macro of the pair.
+.
 .Ah "Notes, Cautions, and Warnings"
 .ix %begin extended [ms] macros, notes %key extended ms macros, notes
 .ix %begin notes, cautions~and~warnings
-Another important macro for technical manuals is one
-that gives a consistent way of handling notes,
+Another important macro for technical manuals
+gives a consistent way of handling notes,
 cautions, and warnings.
-(Traditionally, a note gives users important
-information that they should not miss, but will not
-cause harm if they do.
-A caution is used for
-information that, if missed or disregarded, could lead
-to loss of data or damage to equipment.
-A warning is
-used for information that is critical to the user's
-life or limb).
+Traditionally, a note gives users important
+information that they should not miss,
+but does not cause harm if they do.
+A caution, if missed or disregarded,
+could lead to loss of data or damage to equipment
+(or, in network environments, loss of service).
+A warning, if missed or disregarded,
+could cause injury or death.
 .PP
-Obviously, this is a simple macro\(emall
+Obviously, this is a simple macro\[em]all
 that is required is some way of making the note,
 caution, or warning stand out from the body of the text.
 You could redefine the macro shown here in any number
 of ways depending on the style of your publications.
+.\" XXX "Admonition" is the generic term for these;
+.\" XXX and maybe omitting $1 = "N"
+.\" XXX Caution & warning have standardized icons, more or less
+.\" XXX Maybe "O" for Other, like laser warnings
 .Ps
 \&.de Ns			\\" note/caution/warning $1 = type "N", "C", "W"
 \&.sp 2
@@ -1781,7 +1888,7 @@ A warning looks like this:
 .ll 5i
 .in 5n
 You should be careful when reading books on \f[C]troff\fP,
-because they can be damaging to your health.
+because they can be damaging to your health.\" Oh, come ON. --LK 2026 Oct 27
 \|Although\| escape\| sequences\| are\| allowed,\| they
 are not exactly high adventure.
 .sp 2v
@@ -1841,7 +1948,7 @@ It uses a graphic symbol to mark a caution statement.
 .UTPGc
 One client had a convention of marking a caution
 statement with a large diamond in a square.
-These diamonds will appear in a second color
+These diamonds appear in a second color
 in the printed book.
 .UTPGE
 .rm UTPGc
@@ -1857,17 +1964,15 @@ Then we read it into our macro definition.
 to draw the symbol without
 .CW pic 's
 help; this would result in much more compact code).
-The drawing of the symbol does take up most of
-the
+The drawing of the symbol does take up most of the
 .CW \&.Gc
 macro definition.
-Before we actually output the symbol, the current
-vertical position is marked.
-After it is output, we mark its bottom position.
+Before we actually output the symbol,
+we mark the current vertical position.
+After printing the symbol, we mark its bottom position.
 Then we return to the top before placing the warning
 label and processing the text.
-After the caution statement is output, the closing
-macro,
+After printing the caution statement, the closing macro,
 .CW .GE ,
 checks the current vertical position against
 the bottom position of the symbol.
@@ -1921,6 +2026,7 @@ the bottom position of the symbol.
 \&.sp .3v
 \&..
 .Pe
+.
 .Ah "Table of Contents, Index, and Other End Lists"
 .ix extended [ms] macros, table~of contents %key extended ms macros, table of contents
 .ix table~of contents
@@ -1946,6 +2052,10 @@ request.
 This diversion is then output from within a special
 macro called the \(lqend macro,\(rq which we have yet
 to discuss.
+The user has to move the table of contents
+to its proper position by physically relocating pages
+(for printed output), or
+using a PostScript or PDF editor to move the pages before printing.
 .PP
 .ix [.tm] request %key tm request
 .ix [troff] formatter, [.tm] request %key troff formatter, [.tm] request
@@ -1955,36 +2065,47 @@ The second technique is to use the
 request to write the desired information to
 standard error output.
 Then that output is redirected to capture the messages
-in a file, where they can be edited manually or
-automatically processed by other programs.
+in a file, where they can be automatically processed
+and then inserted in the right place during a second pass.\**
+.FS
+In 1987, two-pass formatting was considered
+a waste of computing resources,
+but it became the most efficient
+way to format a table of contents at least 25\~years ago.
+.FE
 .page 533
 .PP
 The advantage of the first approach is that it is clean
 and simple, and entirely internal to the formatter.
 However, it is really suitable only for short documents.
+.\" XXX the next two sentences are probably obsolete as well.
 A long document such as a book is not normally
 formatted in a single pass, but chapter by chapter.
 It is not desirable to format it all at once just
 to get the table of contents at the end.
 .ix diversions
-In addition, a large document generally will end
+.ig
+.\" obsolete
+In addition, a large document generally ends
 up creating a large diversion\(emoften
 one that is too large for
 .CW troff
 to handle.
+..
 .PP
-The second approach, on the other hand, opens up
-all kinds of possibilities for integration with
-other tools in the UNIX environment.
+The second approach, on the other hand,
+opens up all kinds of possibilities
+for integration with other tools in the UNIX environment.
 The output can be saved, edited, and processed in
 a variety of ways.
-As you can imagine from our philosophy of letting
-the computer do the dirty work, this is the
-approach we prefer.
+As you can imagine from our philosophy of
+letting the computer do the dirty work,
+this is the approach we prefer.
 .PP
 However, there is still a place for diversions, so
 we'll take a close look at both approaches in the
 sections that follow.
+.
 .Bh "Diverting to the End"
 Although we prefer to create our major end
 lists\(emthe table of contents and index\(emby writing to
@@ -1994,8 +2115,7 @@ another type of list.
 .PP
 We've added a couple of special macros that allow
 a writer to insert remarks intended specifically for
-the reviewers of a draft document or for personal
-use.
+the reviewers of a draft document or for personal use.
 Because technical reviewers frequently miss questions
 embedded in the text, we designed the
 .CW \&.Rn
@@ -2024,8 +2144,8 @@ at the end of the document.
 .Pe
 Another macro,
 .CW \&.Pn ,
-is used to collect a list of personal notes or
-reminders and output them on a page at the end.
+collects a list of personal notes or
+reminders and outputs them on a page at the end.
 These notes do not appear in the body of the text.
 .Ps
 \&.de Pn				\\" Personal Note; $1 = note
@@ -2065,8 +2185,8 @@ In the
 macro, we print a box character (\(sq) (to
 give the feeling of a checklist), then the page
 number on which the review note occurred.
-This allows the reviewer or the writer to easily go
-back and find the note in context.
+This allows the reviewer or the writer
+to go back and find the note in context.
 In the
 .CW \&.Pn
 macro, we use an autoincrementing counter to number
@@ -2077,54 +2197,57 @@ in parentheses.
 .PP
 The formatting of text inside a diversion can be
 tricky.
-The text could be formatted twice: when it is read into
-the diversion, and when the diversion is output.
-The one thing to keep in mind is that you don't want line
-filling to be in effect both times.
-If line filling is in effect when the text is read into
-the diversion, you should turn it off when the diversion
-is output.
+The text could be formatted twice:
+when it is read into the diversion,
+and when the diversion is output.
+The one thing to keep in mind
+is that you don't want line filling
+to be in effect both times.
+If line filling is in effect
+when reading text into the diversion,
+turn it off when invoking the diversion.
 .ix transparent output
 You can also use transparent output
 .CW \e! ) (
-to hide macros or requests so that they will be executed
-only at the time the diversion is output.
-We have also taken the precaution of processing the
+to hide macros or requests
+so they are executed
+when the diversion outputs.
+We also process the
 diversion in a separate environment.
 .PP
-Now what about printing the list at the end?
+What about printing the list at the end?
 Well, as it turns out,
 .CW nroff
 and
 .CW troff
-include a special request called
+support a special request called
 .CW \&.em
-that allows you to supply the name of a macro that will
-be executed at the very end of the processing run, after
-everything else is finished.
+that allows you to specify a macro
+to execute at the very end of the processing run,
+after everything else is finished.
 .ix [.em] request %key em request
 .ix [troff] formatter, [.em] request %key troff formatter, [.em] request
 .PP
 The
 .CW \&.em
-request allows you to define the name of a macro that
-will be executed when all other input has been processed.
+request lets you specify the macro
+to execute after all other input has been processed.
 For example, the line:
 .Ps
 \&.em EM
 .Pe
-placed anywhere in a file or macro package, will request
-that the macro
+placed anywhere in a file or macro package,
+executes
 .CW \&.EM
-be executed after everything else has been done.
+after everything else is done.
 The definition of
 .CW \&.EM
 is up to you.
 .PP
+.\" XXX test: does -ms support EM? I don't think groff -ms does.
 The
 .CW ms
-macros already have specified the name of this macro
-as
+macros designate the name of this macro as
 .CW \&.EM ,
 the
 .I "end macro" .
@@ -2132,26 +2255,27 @@ In its usual obscure way,
 .CW mm
 calls its end macro
 .CW \&.)q .
-If you are writing your own package, you can call it
-anything you like.
+If you are writing your own package,
+you can call it anything you like.
 .ix [.am] request %key am request
-You can either edit the existing end macro, or simply
-add to it using the
+You can either edit the existing end macro,
+or add to it using the
 .CW \&.am
 .I "append to macro" ) (
 request.
 .PP
-All that
+The default behavior with
 .CW ms
-does with this macro is to process and output any
-diversions that have not been properly closed.
-(This might happen, for example, if you requested a
+is to process and output any
+diversions that have not been properly closed
+(this might happen, for example, if you requested a
 floating keep, but its contents had not yet been
 printed out).
 .page 535
 .PP
-The end macro is a good place to output our own special
-diversions that we've saved for the end.
+The end macro is a good place to output any special
+diversions that we've saved for the end,
+followed by a \[lq]back page.\[rq]
 What we need to do now is to add some code for
 processing our list of review notes:
 .Ps
@@ -2187,6 +2311,7 @@ Reviewers, please address the following questions:
 \&.\\}
 \&..
 .Pe
+.\" XXX obsolete?
 (Note: we have found that to print anything from the
 .CW \&.EM
 macro in the standard
@@ -2227,6 +2352,7 @@ Reviewers, please address the following questions:
 .KE
 .ch17@end
 .ix %end end macro
+.
 .Bh "A Diverted Table of Contents"
 .ix %begin diversions
 .ix table~of contents, created~by~diversion
@@ -2236,6 +2362,15 @@ The magic
 .CW \&.tC
 macro we kept invoking from our heading might look
 something like this:
+.ig
+Really?
+I sent ToC and index data to stderr all the time.
+Using diversions, let alone special macros,
+is overkill. Modify the heading macros to send
+the text and page number to stderr (easier in mm,
+unless you redefine ms's SU to handle everything).
+-- LK 2026 Oct 27
+..
 .Ps
 \&.de tC		\\" table of contents; $1=sec number;
 \&.					 \0$2=title; $3=type
@@ -2275,20 +2410,21 @@ something like this:
 .Pe
 The diversion
 .CW sL
-is set up to handle the main heading (chapter, appendix,
-unit, or section) and two levels of subheadings
+handles the main heading
+(chapter, appendix, unit, or section)
+and two levels of subheadings
 (A-heads or B-heads).
 The diversions
 .CW fL
 and
 .CW tL
-are set up to compile lists of figures and
-tables, respectively.
+compile lists of figures and tables, respectively.
 .PP
-In the end macro, to print the table of contents,
-you have to cause a break to a new page, print:
-introductory captions, and so on, and then follow by
-outputting the collected diversion of each type.
+In the end macro,
+to print the table of contents,
+you break to a new page,
+print a title, then
+output the collected diversion of each type.
 The following example shows the code to print:
 .Ps
 \&.br		\\" Automatically invoke diverted toc
@@ -2305,13 +2441,13 @@ The following example shows the code to print:
 \&.		\\" Add code here to output figure
 \&.		\\" and table list diversions
 .Pe
-We set two tab stops based on the default line
-length
+We set two tab stops
+based on the default line length
 .CW \en(LLu ).  (
-The second tab stop is used to set a right-adjusted
-page number in the right margin.
-The first tab stop is used to run a leader from
-the entry to the page number.
+The second tab stop sets
+a right-adjusted page number in the right margin.
+The first tab stop runs a leader
+from the entry to the page number.
 The escape sequences that output the leader and
 tab (\c
 .CW \ea
@@ -2321,7 +2457,7 @@ were specified in the
 .CW \&.tC
 macros.
 (And to protect the escape sequence inside a
-diversion an extra backslash was required).
+diversion, an extra backslash was required).
 .PP
 Now we can obtain a table of contents each
 time we format the document.
@@ -2354,12 +2490,16 @@ Chapter Two: Getting Started with Alcuin
 .tc
 .ch17@end
 .page 538
+.
+.\" XXX Obsolete? When 8GB of RAM is the norm,
+.\" XXX are diversions ever going to get too big?
+.\" XXX Besides, sending to stderr eliminates this issue.
 .Bh "When Diversions Get Too Big"
 One of the major problems with collecting a table
 of contents in a diversion is that, with a large
 document, the diversions quickly grow too large
 for the formatter to handle.
-It will abort with a message like \(lqOut of temp
+It aborts with a message like \(lqOut of temp
 file space.\(rq
 .PP
 .ix diversions, naming~by number~register interpolation
@@ -2406,17 +2546,16 @@ exceeds 100\(emthat is, until
 .CW \&.tC
 has been called 99 times\(em\c
 .CW x0
-will be equal to 1.
+is equal to 1.
 From 100 to 199,
 .CW x0
-will be equal to 2, and so on.
+is equal to 2, and so on.
 .PP
-Accordingly, the actual macro into which output
+Accordingly, the first macro into which output
 is diverted\(emrepresented as
-.CW x\e\en(x0 \(em
-will first be
+.CW x\e\en(x0 \(emis
 .CW x1 ,
-then
+the next
 .CW x2 ,
 and so on.
 .PP
@@ -2429,7 +2568,7 @@ the entire series:
 \&.x3
 \&.x4
 .Pe
-Here, we are assuming that we will have no more
+Here, we assume that we need no more
 than 400 entries.
 If there are fewer entries, one or more of these
 diverted macros may be empty, but there's no
@@ -2442,6 +2581,7 @@ failed to print them out.
 We have the option of adding another in the series
 of calls in the end macro, or rebuking the user
 for having such a large table of contents!
+.
 .Bh "Writing to Standard Error"
 .ix standard error
 .ix table~of contents, written~to standard~error
@@ -2465,23 +2605,32 @@ of contents in some form that could be saved,
 so the tables from each chapter could be assembled
 into a single large table of contents for the
 entire book.
+.\" XXX obsolete again... Even with 2000-vintage
+.\" XXX hardware, it was much easier to format the
+.\" XXX entire document at once. The whole thing,
+.\" XXX done in two passes, finished in less than
+.\" XXX five minutes for a 1000-page manual (faster
+.\" XXX than a bathroom run).
 .PP
-(Incidentally, producing a table of contents for a
+Incidentally, producing a table of contents for a
 large document introduces some other issues as well.
 For example, you may want to have an overall table
 of contents that shows only top-level headings,
 and individual chapter table of contents that give
 more detail.
 Working out the macros for this approach is left
-as an exercise for the reader).
+as an exercise for the reader.
 .PP
-The best way to produce a table of contents for a
-large book is simply to write the entries to
-standard error using
+The best way to produce a table of contents
+for a large book is to write the entries
+to standard error using
 .CW .tm ,
 .ix [.tm] request %key tm request
-and rely on an external program to capture and
-process the entries.
+and rely on an external script
+to capture and process the entries.
+.\" XXX Obsolete the next paragraph;
+.\" XXX the .sy request is considered unsafe.
+.ig
 .PP
 In
 .CW ditroff ,
@@ -2503,6 +2652,7 @@ Also, because it does not work with
 .CW otroff ,
 we have used the more general approach provided by
 .CW \&.tm .
+..
 .PP
 Our
 .CW \&.tC
@@ -2525,16 +2675,16 @@ Instead of diverting the section lists to separate
 macros from the lists of figures and tables, we
 send all entries out to standard error.
 .PP
-To capture this output in a file, we simply need to
-redirect the error output:
+To capture this output in a file,
+we redirect the error output:
 .Ps
 $ \f[CB]ditroff -Tps ... 2> toc\fP
 .Pe
 .ix [format] shell~script %key format shell script
-To do this, we will use our
+To do this, we use our
 .CW format
-shell script, which was introduced in Chapter 12,
-and will be revisited in the next (and final) chapter.
+shell script, introduced in Chapter 12.
+We revisit it in the next (and final) chapter.
 .PP
 Because actual error messages might be present in
 the output, we prefix a label indicating the type
@@ -2547,20 +2697,19 @@ of entry, for example:
 ><TABLE:
 .ft P
 .Pe
-It will be up to some outside program to separate the
-different groups of entries and subject them to
-further processing.
-We'll use a
-.CW sed
-script to separate the entries in the table of contents
-from the figure lists, table lists, and index entries.
-(In the next chapter, we'll look at the post-processing
-of these entries).
+A script separates
+different groups of entries
+for further processing.
+In the next chapter,
+we show the post-processing
+of these entries.
 Now, let's look at a macro to generate index entries
-that will also be written to standard error.
+written to standard error.
+.
 .Bh "Indexes"
 .ix indexing
-A simple index can be handled in much the same way
+You can handle a simple index
+in much the same way
 as a table of contents.
 A macro for a simple index might look like this:
 .Ps
@@ -2571,15 +2720,15 @@ A macro for a simple index might look like this:
 \&..
 .Pe
 .PP
-You might also want to have a macro that doesn't
-print the page number, but is just used for a
-cross-reference:
+You might also want to have a macro
+that doesn't print the page number,
+but is used for a cross-reference:
 .Ps
 \&.XN	\\" Cross-reference Index entry, no page number
 \&.tm INDEX:\\\\$1
 \&..
 .Pe
-You might also want a macro pair that will index over
+You might also want a macro pair that indexes over
 several different pages:
 .Ps
 \&.de IS			\\" Index macro
@@ -2602,13 +2751,14 @@ The
 .CW \&.IS
 macro prints out an entry, just like
 .CW \&.XX .
-However, in addition, it saves the argument into a
-string, and takes a letter or digit as an optional
-second argument.
-This second argument is used to define a number
-register and string that will be saved, and
+However, in addition,
+it saves the argument into a string,
+and takes a letter or digit
+as an optional second argument.
+This second argument defines
+a number register and string to save, and
 .page 541
-not printed until the index and macro is called
+held until the index and macro is called
 with the same argument.
 The index and macro print the starting number,
 followed by a hyphen and the current page number.
@@ -2619,6 +2769,7 @@ raw output after you have it, because a great deal
 of sorting, concatenation, and reorganization is
 required to rearrange the entries into a
 meaningful order.
-Fortunately or unfortunately, this topic will have
+Fortunately or unfortunately, this topic has
 to wait until the next chapter.
 .ix %end extended [ms] macros %key extended ms macros
+.\" XXX Why not used BWK's indexing scripts?

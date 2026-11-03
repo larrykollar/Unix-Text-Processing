@@ -617,7 +617,7 @@ Alternatively, you can give
 the latitude to split a table and print each section with
 its own table heading using the
 .CW ".TS H"
-macro, as you will see later.
+macro, as we show later.
 .
 .Ah "Describing Column Formats"
 .ix [tbl] preprocessor, column format options %key tbl preprocessor, column format options

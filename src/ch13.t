@@ -9,8 +9,8 @@
 .LP
 .page 387
 .ix %begin [awk] %key awk
-A program is a solution to a problem, formulated in the
-syntax of a particular language.
+A program is a solution to a problem,
+formulated in the syntax of a particular language.
 It is a small step from writing
 complex editing scripts with
 .CW sed
@@ -21,29 +21,67 @@ but it is a step that many writers may fear to take.
 \(lqprogram\(rq for many people,
 but an editing script is still a program.
 .PP
-Each programming language has its own \(lqstyle\(rq that
-lends itself to performing certain tasks better
-than other languages.
+Each programming language has its own \(lqstyle\(rq
+that lends itself to performing certain tasks
+better than other languages.
 Anyone can scan a reference page and
 quickly learn a language's syntax,
 but a close examination of programs written in that language
-is usually required before you understand how to apply this
-knowledge.
-In this sense, a programming language is simply
-another tool; you need to know not only how to use it but also
-when and why it is used.
+is usually required
+before you understand how to apply this knowledge.
+In this sense, a programming language
+is just another tool;
+you need to know not only how to use it,
+but also when and why it is used.
 .PP
-We recommend that you learn more than one programming
-language.
-We have already looked at a number of different
+You should learn more than one programming language,
+and how to leverage the strengths of each
+to accomplish whatever task you need to automate.
+\[lq]Trendy\[rq] programming languages,
+like Perl (in the past) or Python (currently),
+have attempted to replace
+.CW awk ;
+they offer huge libraries of routines
+that purport to help you focus
+on what you want to do.
+The drawback is that there are so many
+competing libraries, you may find it difficult
+to find the one that works best.
+.PP
+The advantages of
+.CW awk
+include:
+.Ls B
+.Li
+Any operating system that
+aspires to be POSIX-compliant
+includes a version of
+.CW awk .
+If you install the
+.CW ish
+app on your iPhone, you have a version of
+.CW awk
+that runs on it.
+.Li
+Documentation for
+.CW awk
+runs to less than ten printed pages,
+so you can start writing useful scripts
+in an hour or two.
+.Li
+You can find parsers
+for many document types,
+including XML and JSON, online.
+.Le
+We have already looked at
 programs or scripts written for and executed by the shell,
 .CW ex ,
 and
 .CW sed .
 As you learn the
 .CW awk
-programming language, you will
-notice similarities and differences.
+programming language,
+you might notice similarities and differences.
 .ix [awk], similarities~to [sed] %key awk, similarities to [sed]
 Not insignificantly, an
 .CW awk
@@ -60,8 +98,8 @@ program's basic operations are not
 .ix [awk], basic operations %key awk, basic operations
 much different from
 .CW sed 's:
-reading standard input one line
-at a time, executing instructions that consist of two parts,
+reading standard input one line at a time,
+executing instructions that consist of two parts,
 .I pattern
 and
 .I procedure ,
@@ -78,11 +116,10 @@ for which adequate tools did not exist.
 The
 .CW awk
 program was designed for text-processing applications,
-particularly those
-in which information is structured in records and fields.
+particularly those where information is structured in records and fields.
 The major capabilities of
 .CW awk
-that we will demonstrate in upcoming pages are as follows:
+that we demonstrate in upcoming pages are:
 .RS
 .Ls B
 .Li
@@ -101,12 +138,13 @@ built-in functions
 .Le
 .RE
 .LP
-A quick comparison of a single feature will show you how one
-programming language can differ from another.
-You will find it
-much easier to perform arithmetic operations in
+A quick comparison of a single feature
+shows you how one programming language
+can differ from another.
+An
 .CW awk
-than in the shell.
+script can perform arithmetic operations
+easily, compared to the shell.
 To increment the value of
 .CW x
 by 1 using the shell, you'd use the following line:
@@ -121,7 +159,7 @@ command is a UNIX program that is executed as a
 separate process returning the value of its arguments.
 In
 .CW awk ,
-you only have to write:
+you write:
 .Ps
 ++x
 .Pe
@@ -130,12 +168,13 @@ This is the same as
 .CW "x = x + 1" .
 (This form could also be used in
 .CW awk ).
-.Ah "Invoking \f(CBawk\fP
+.
+.Ah "Invoking \f(CBawk\fP"
 .ix %begin [awk], invoking %key awk, invoking
 .LP
 The
 .CW awk
-program itself is a program that, like
+program, like
 .CW sed ,
 runs a specified program on lines of input.
 You can enter
@@ -145,7 +184,7 @@ from the command line, or from inside a shell script.
 $ \f(CB]awk\fP '\f[I]program\fP' \f[I]files\fP
 .Pe
 .LP
-Input is read a line at a time from one or more
+It reads input a line at a time from one or more
 .I files .
 The
 .I program ,
@@ -155,8 +194,8 @@ from the shell, consists of
 and
 .I procedure
 sections.
-If the pattern is missing, the procedure is performed on all
-input lines:
+If the pattern is missing,
+it performs the procedure on all input lines:
 .ix [awk], pattern matching %key awk, pattern matching
 .Ps
 .ta 3i
@@ -165,8 +204,9 @@ $ \f[CB]awk '{print}' sample\fP	\fIPrints all lines in \fPsample \f[I]file\fP
 .Pe
 .LP
 The procedure is placed within braces.
-If the procedure is
-missing, lines matching the pattern are printed:
+If the procedure is missing,
+.CW awk
+prints lines matching the pattern:
 .Ps
 .ta 3i
 $ \f[CB]awk '/programmer's guide/' sample\fP	\fIPrints lines matching pattern
@@ -191,8 +231,10 @@ can be a string or numeric constant (for example,
 .I red
 or
 .I 1 ),
-a variable (whose value is a string or numeric), or a function
-(which we'll look at later).
+a variable (whose value is a string or numeric),
+a comparison (for example,
+.CW "f > 3" ),
+or a function (which we'll look at later).
 .PP
 You can associate a pattern with a specific procedure as follows:
 .Ps
@@ -209,13 +251,15 @@ You can associate a pattern with a specific procedure as follows:
 Like
 .CW sed ,
 only the lines matching the particular pattern are
-the object of a procedure, and a line can match more than one
-pattern.
-In this example, the third procedure is performed on
-all input lines.
+the object of a procedure,
+and a line can match more than one pattern.
+In this example,
+.CW awk
+performs the third procedure
+on all input lines.
 Usually, multi-line
 .CW awk
-scripts are placed
+scripts are saved
 in a separate file and invoked using the
 .CW -f
 option:
@@ -223,7 +267,8 @@ option:
 $ \f[CB]awk -f awkscript sample\fP
 .ix %end [awk], invoking %key awk, invoking
 .Pe
-.Ah "Records and Fields
+.
+.Ah "Records and Fields"
 .ix records, in [awk] %key records, in awk
 .ix %begin fields, in [awk] %key fields, in awk
 .LP
@@ -232,8 +277,9 @@ Perhaps the most important feature of
 is that it divides
 each line of input into fields.
 .ix [awk], dividing~input~into records~and~fields %key awk, dividing input~into records~and~fields
-In the simplest case, each field contains a
-single word, delimited by a blank space.
+In the simplest case,
+each field contains a single word,
+delimited by a blank space.
 The
 .CW awk
 program allows you to reference these fields
@@ -264,8 +310,8 @@ GIGO
 GIRL
 .Pe
 .LP
-We can construct a useful program that would allow you to
-specify an acronym and get its description.
+We can construct a useful program
+to specify an acronym and get its description.
 We could use
 .CW awk
 just like
@@ -291,10 +337,11 @@ Print only the description.
 .Le
 .RE
 .page 390
-.Ah "Testing Fields
+.
+.Ah "Testing Fields"
 .ix [awk], testing fields %key awk, testing fields
 .LP
-The pattern as specified will match the word
+The pattern as specified matches the word
 .I BASIC
 anywhere on the line.
 That is, it might match
@@ -329,8 +376,8 @@ Its opposite,
 evaluates true if the expression does not match the
 regular expression.
 .PP
-Although these two examples look very similar, they achieve
-very different results.
+Although these two examples look very similar,
+they achieve very different results.
 The relational operator
 .CW ==
 evaluates true if the first field is
@@ -348,7 +395,8 @@ Variables cannot be used inside a regular expression
 with the exception of shell variables,
 as shown in the next section.
 Constants cannot be evaluated using the pattern-matching operator.
-.Ah "Passing Parameters from a Shell Script
+.
+.Ah "Passing Parameters from a Shell Script"
 .ix [awk], passing parameters~from~a shell~script %key awk, passing parameters from~a shell~script
 .LP
 Our program is too specific and requires too much typing.
@@ -360,8 +408,8 @@ option.
 Or we can put the command inside a shell script,
 named for the function it performs.
 This shell script should
-be able to read the first argument from the command line (the
-name of the acronym) and pass it as a parameter to
+be able to read the first argument from the command line
+(the name of the acronym) and pass it as a parameter to
 .CW awk .
 We'll call the shell script
 .CW awkronym
@@ -416,13 +464,13 @@ Notice that we had to test the parameter as a string
 This is because we can't pass the parameter inside
 a regular expression.
 Thus, the expressions
-.CW "$1 ~ /search/" '' ``
+.CW "$1 ~ /search/" \[rq] \[lq]
 or
-.CW "$1 ~ search" '' ``
-will produce syntax errors.
+.CW "$1 ~ search" \[rq] \[lq]
+produces syntax errors.
 .PP
-As an aside, let's look at another way to import a shell
-variable into an
+As an aside, let's look at another way
+to import a shell variable into an
 .CW awk
 program that even works inside a regular expression.
 However, it looks complicated:
@@ -451,22 +499,23 @@ Therefore,
 never sees the shell
 variable and evaluates it as a constant string.
 .PP
-You will come upon situations when you
-wish it were possible to place
+There are situations when you want to place
 .CW awk
 variables within regular expressions.
 As mentioned
 in the previous section, pattern matching allows us to search
 for a variety of occurrences.
 For instance, a field might also
-include incidental punctuation marks and would not match a fixed
-string unless the string included the specific punctuation mark.
+include incidental punctuation marks
+and would not match a fixed string
+unless the string included the specific punctuation mark.
 Perhaps there is some undocumented way of getting an
 .CW awk
 variable interpreted inside a regular expression, or maybe
 there is a convoluted work-around waiting to be figured out.
 .ix %end fields, in [awk] %key fields, in awk
-.Ah "Changing the Field Separator
+.
+.Ah "Changing the Field Separator"
 .ix [awk], changing~the field~separator %key awk, changing the field~separator
 .LP
 The
@@ -492,7 +541,7 @@ It is obvious that we can't just say
 and get the entire description.
 But that is what we'd like to be able to do.
 .PP
-This will require that we change the input file using another
+This requires that we change the input file using another
 character (other than a blank) to delimit fields.
 A tab is frequently used as a field separator.
 We'll have to insert a
@@ -500,7 +549,8 @@ tab between the first and second fields:
 .Ps
 $ \f(CBcat acronyms\fP
 .ta .5i
-awk	Aho, Weinstein & Kernighan
+.\" Original had *Weinstein." Wow. --LK 16 Oct 2026
+awk	Aho, Weinberger & Kernighan
 BASIC	Beginner's All-Purpose Symbolic Instruction Code
 CICS	Customer Information Control System
 COBOL	Common Business Orientated Language
@@ -511,8 +561,8 @@ GIRL	Generalized Information Retrieval Language
 .Pe
 .page 392
 .LP
-You can change the field separator from the command line using
-the -F option:
+You can change the field separator from the command line
+using the -F option:
 .Ps
 $ \f[CB]awk -F"|\(em\(em|" '$1 == search {print $2}' search=$1 acronyms\fP
 .Pe
@@ -520,9 +570,12 @@ $ \f[CB]awk -F"|\(em\(em|" '$1 == search {print $2}' search=$1 acronyms\fP
 Note that
 .CW |\(em\(em|
 is entered by typing a double quotation
-mark, pressing the
+mark, pressing
+.I Ctrl-V
+and then the
 .I TAB
 key, and typing a double quotation mark.
+
 This makes the tab character (represented in the example as
 .CW |\(em\(em| )
 the exclusive field separator; spaces no longer
@@ -533,7 +586,8 @@ enhancements, let's see how the program works:
 $ \f(CBawkronym GIGO\fP
 Garbage In, Garbage Out
 .Pe
-.Ah "System Variables
+.
+.Ah "System Variables"
 .ix [awk], system variables %key awk, system variables
 .LP
 The
@@ -599,13 +653,14 @@ $ \f[CB]awk '{print $NF}' test\fP
 .LP
 If there are five fields in the current record,
 .CW NF
-will be set to five;
+is set to five;
 .CW $NF
 refers to the fifth and last field.
 Shortly, we'll look at a program,
 .CW double ,
 that makes good use of this variable.
 .page 393
+.
 .Ah Looping
 .LP
 The
@@ -636,10 +691,10 @@ The
 .ix [awk], [while]~loops %key awk, [while] loops
 statement can be employed to build a loop.
 For instance, if we want to perform a procedure three times,
-we keep track of how many times we go through the loop by
-incrementing a variable at the bottom of the loop, then we
-check at the top of the loop to see if that variable is greater
-than 3.
+we keep track of how many times we go through the loop
+by incrementing a variable at the bottom of the loop,
+then we check at the top of the loop
+to see if that variable is greater than 3.
 Let's take an example in which we print
 the input line three times.
 .Ps
@@ -703,22 +758,23 @@ for (i = 1; i <= 3; i++)
 .LP
 The
 .CW for
-statement consists of three expressions within
-parentheses.
+statement consists of three expressions
+within parentheses.
 The first expression,
 .CW "i = 1" ,
 sets the initial
 value for the counter variable.
-The second expression states
-a condition that is tested at the top of the loop.
+The second expression states a condition
+tested at the top of the loop.
+.\" XXX test: is the parenthetical statement true?
 (The
 .CW while
 statement tested the condition at the bottom of the loop).
 The third expression increments the counter.
 .PP
-Now, to loop through remaining fields on the line, we have
-to determine how
-many times we need to execute the loop.
+Now, to loop through remaining fields on the line,
+we have to determine how many times
+we need to execute the loop.
 The system variable
 .CW NF
 contains the number of fields on the current input record.
@@ -726,14 +782,14 @@ If we compare our counter
 .CW i ) (
 against
 .CW NF
-each time through the
-loop, we'll be able to tell when all fields have been read:
+each time through the loop,
+we'll be able to tell when all fields have been read:
 .page 394
 .Ps
 for (i = 1; i <= NF; i++)
 .Pe
 .LP
-We will print out each field
+We print out each field
 .CW $i ), (
 one to a line.
 Just to show how
@@ -747,15 +803,18 @@ awk '{ for (i = 1; i <= NF; i++)
 Notice that the print statement concatenates
 .CW NR ,
 a colon, and
-.CW i .
-The comma produces an output field separator, which is
-a blank by default.
+.CW i
+(using
+.CW "print NR \":\" i, $i"
+works as well, and is easier to read).
+The comma produces an output field separator,
+which is a space by default.
 .PP
 This program produces the following results on a sample file:
 .Ps
 1:1 awk
 1:2 Aho,
-1:3 Weinstein
+1:3 Weinberger
 1:4 &
 1:5 Kernighan
 2:1 BASIC
@@ -764,6 +823,7 @@ This program produces the following results on a sample file:
 2:4 Symbolic
 2:5 Instruction
 2:6 Code
+.\|.\|.
 .Pe
 .LP
 .CW Symbolic
@@ -777,13 +837,50 @@ Because we did not change the default field separator,
 interpreted the tab or blank as a field separator.
 This allows you to write programs in which
 the special value of the tab is ignored.
-.Bh "Conditional Statements
+.PP
+If you want to print all but the first field,
+and you know there's a tab between the first and second fields,
+you can use a much simpler construct:
+.Ps
+$ \f[CB]awk '{ sub(/^.*\t/, ""); print }' acronyms\fP
+Aho, Weinberger & Kernighan
+Beginner's All-Purpose Symbolic Instruction Code
+Customer Information Control System
+Common Business Orientated Language
+Data Base Management System
+Garbage In, Garbage Out
+Generalized Information Retrieval Language
+.\|.\|.
+.Pe
+The
+.CW sub
+function, that we'll discuss later in this section,
+replaces the results of the regular expression
+specified in the first argument
+by the string specified in the second argument.
+The regular expression
+.CW "^.*\t"
+means to match all characters
+from the start of the line
+up to (and including)
+the first tab character.
+The second argument, replacement text, is an empty string;
+.CW awk
+replaces the regular expression
+(the acronym and the tab following)
+with nothing, effectively deleting the first argument.
+Note that this does not affect the data in the
+.CW acronyms
+file.
+.
+.Bh "Conditional Statements"
 .ix [awk], conditional statements %key awk, conditional statements
 .ix conditional execution, in~[awk] %key conditional execution, in awk
 .LP
-Now let's change our example so that when given an argument,
-the program returns the record and field number where that
-argument appears.
+Now let's change our example
+so that when given an argument,
+the program returns the record and field number
+where that argument appears.
 .PP
 Essentially, we want to test each field to see
 if it matches the argument;
@@ -793,7 +890,7 @@ We need to introduce another flow control construct, the
 statement.
 The
 .CW if
-statement evaluates an expression\(emif
+statement evaluates an expression\[em]if
 true, it performs the procedure; if false, it does not.
 .PP
 In the next example, we use the
@@ -814,8 +911,8 @@ This new procedure prints
 .I 2:1
 or
 .I 3:4
-and isn't very useful
-by itself, but it demonstrates that you can retrieve and test
+and isn't very useful by itself,
+but it demonstrates that you can retrieve and test
 any single field from any record.
 .page 395
 .PP
@@ -838,10 +935,13 @@ NF > 0 {
 }' $1
 .Pe
 .LP
-When the first line of input is read, if the number of fields
-is greater than 0, then the expression in the
+When the first line of input is read,
+if the number of fields
+is greater than 0, then
+.CW awk
+evaluates the expression in the
 .CW if
-statement is evaluated.
+statement.
 Because the variable
 .CW lastword
 has not been set, it evaluates to false.
@@ -852,7 +952,8 @@ to the variable
 .CW $NF "" (
 refers to the last field; the value of
 .CW NF
-is the number of the last field).
+is the number of the last field;
+beginners commonly confuse the two).
 When the next input line is read,
 the first word is compared against the value of
 .CW lastword .
@@ -867,8 +968,16 @@ This version of
 .CW double
 is based on the program presented
 by Kernighan and Pike in
-.I "The UNIX Programming Environment" .
-(Writer's Workbench now includes this program).
+.I "The UNIX Programming Environment" .\**
+.FS
+Writer's Workbench includes this program,
+but the source is not easy to find.
+Fortunately, the GNU version of
+.CW diction
+includes a search for double words,
+so this program is now mostly useful
+as an exercise.
+.FE
 Kernighan and Pike's program also checks for duplicate words,
 .ix Kernighan~and~Pike, {UNIX~Programming~Environment} %key Kernighan and~Pike, UNIX~Programming~Environment
 side-by-side, in the same line.
@@ -878,17 +987,24 @@ loop and checking the current field against the previous field.
 Another feature of Kernighan and Pike's
 .CW double
 is that you can run the program on more than one file.
-To allow for additional files, you can change the shell variable
-from
+To allow for additional files,
+you can change the shell variable from
 .CW $1
 to
-.CW $*
+.CW $* ,
 but the record or line number printed by
 .CW NR
-will correspond to consecutive input lines.
+corresponds to consecutive input lines.
 Can you write a procedure to reset
 .CW NR
-to 0 before reading input from a new file?
+to 0 before reading input from a new file?\**
+.FS
+Answer: the
+.CW FNR
+variable provides the record number
+of the current file name.
+.FE
+.
 .Bh Arrays
 .ix [awk], arrays %key awk, arrays
 .LP
@@ -900,17 +1016,25 @@ it to a variable.
 In
 .CW awk ,
 unlike several other programming
-languages, variables do not have to be initialized before
-they are referenced in a program.
+languages, variables do not have to be initialized
+before they are referenced in a program.
 In the previous program, we evaluated
 .CW lastword
 at the top, although it was not actually
 assigned a value until the bottom of the program.
 The
 .CW awk
-program initialized the variable, setting it to the null string
-or 0, depending upon whether the variable is referenced as a
-string or numeric value.
+program initialized the variable,
+setting it to the null string or 0,
+depending upon whether the variable is referenced as a
+string or numeric value.\**
+.FS
+If you use a construct like
+.CW "x = \"4\"" ,
+assigning a numeric value as a string to a variable,
+you can still perform arithmetic functions on it like
+.CW "print x+6" .
+.FE
 .PP
 An array is a variable that allows
 you to store a list of items or elements.
@@ -925,10 +1049,10 @@ Each item on this menu is numbered:
 .DE
 .page 396
 .LP
-One way of ordering roast beef is to say simply
+One way of ordering roast beef is to say
 \(lqNumber 2.\(rq
-Using ordinary variables, you would have had to define a
-variable
+Using ordinary variables,
+you would have to define a variable
 .I two
 and assign it the value
 .I "roast beef and gravy" .
@@ -953,21 +1077,24 @@ to
 In
 .CW awk ,
 you don't have to declare
-the size of the array; you only have to load the
-array (before referencing it).
-If we put our three menu choices on separate
-lines in a file, we could load the array with the following
-statement:
+the size of the array;
+you only have to load the array before referencing it.
+If we put our three menu choices
+on separate lines in a file,
+we could load the array with the following statement:
 .Ps
 menu[NR] = $0
 .Pe
 .LP
 The variable
 .CW NR ,
-or record number, is used as the subscript for the array.
-Each input line is read into the next element in the array.
-We can print an individual element by referring to the
-value of the subscript (not the variable that set this value).
+or record number, is the subscript for the array.
+The
+.CW awk
+program reads each input line into the next element in the array.
+We can print an individual element
+by referring to the value of the subscript
+(not the variable that set this value).
 .Ps
 print menu[3]
 .Pe
@@ -985,8 +1112,8 @@ It has the following syntax:
 for (\fIelement\fP in \fIarray\fP)
 .Pe
 .LP
-This statement can be used to descend the array to print all
-of the elements:
+You can use this statement to descend the array
+to print all of the elements:
 .Ps
 for (choice in menu)
 	print menu[choice]
@@ -1003,12 +1130,12 @@ array that uses a numeric subscript as an index to the elements.
 .PP
 Now, let's use arrays to increase the functionality of
 .CW awkronym .
-Our new version will read acronyms from a file
-and load them into an array; then we'll read a second file
+Our new version reads acronyms from a file
+and loads them into an array;
+then we'll read a second file
 and search for the acronyms.
-Basically, we're reading one
-input file and defining keywords that we want to search for
-in other files.
+Basically, we're reading one input file
+and defining keywords that we want to search for in other files.
 A similar program that reads a list of terms
 in a glossary might show where the words appear in a chapter.
 Let's see how it works first:
@@ -1038,8 +1165,8 @@ for ( name in acro_desc )
 .LP
 The current filename is stored in the system variable
 .CW FILENAME .
-The procedure within the first conditional statement is only
-performed while input is taken from
+The procedure within the first conditional statement
+is only performed while input is taken from
 .CW acronyms .
 The
 .CW next
@@ -1048,7 +1175,8 @@ reading the next line of input from the file.
 Thus, the program does not advance beyond this procedure
 until input is taken from a different file.
 .PP
-The purpose of the first procedure is to assign each acronym
+The purpose of the first procedure
+is to assign each acronym
 .CW $1 ) (
 to an element of the array
 .CW acro_desc ;
@@ -1081,8 +1209,9 @@ statement.
 What if we changed
 .CW awkronym
 so that it not only scanned
-the file for the acronym, but printed the acronym with the
-description as well?
+the file for the acronym,
+but printed the acronym
+with the description as well?
 If a line refers to
 .I BASIC ,
 we'd like
@@ -1092,8 +1221,7 @@ We can design such a program for use as a
 .I filter
 that prints all lines, regardless of whether or
 not a change has been made.
-To change the previous version,
-we simply move the
+To change the previous version, we move the
 .CW print
 statement outside the conditional statement.
 However, there are other changes we must make as well.
@@ -1127,7 +1255,7 @@ That is, given the name of the acronym, we can locate the element
 corresponding to the description.
 Thus the expression
 .CW acro_desc[GIGO]
-will access
+accesses
 .CW "Garbage In, Garbage Out" .
 .PP
 Now let's look at the second half of the program:
@@ -1173,8 +1301,9 @@ then the value of the field is set to:
 BASIC  (Beginner's All-Purpose Symbolic Instruction Code)
 .Pe
 .PP
-For this program to be practical, the description should be
-inserted for the first occurrence of an acronym, not each time.
+For this program to be practical,
+it should insert the description
+for the first occurrence of an acronym, not each time.
 (After we've inserted the description of the acronym, we don't
 need the description any more).
 We could redefine that element
@@ -1183,7 +1312,7 @@ in the array after we've used it.
 acro_desc[name] = name
 .Pe
 .LP
-In this instance, we simply make the element equal
+In this instance, we make the element equal
 to the subscript.
 Thus,
 .CW acro_desc[BASIC]
@@ -1217,11 +1346,11 @@ The
 expressions have to be true for the compound expression to
 be true.
 .PP
-Another problem that we can anticipate is that we might produce
-lines that exceed 80 characters.
+Another problem that we can anticipate
+is that we might produce lines that exceed 80 characters.
 After all, the descriptions are quite long.
-We can find out how many characters are in a
-string, using a built-in
+We can find out how many characters are in a string,
+fusing a built-in
 .CW awk
 function,
 .CW length .
@@ -1243,22 +1372,25 @@ if ( length($0) > 70 ) {
 	}
 .Pe
 .LP
-The length of the current input record is evaluated after the
-description has been concatenated.
+The length of the current input record is evaluated
+after the description has been concatenated.
 If it is greater than 70 characters,
 then two conditions test where to put the newline.
-The first procedure concatenates a newline and the
-current field; thus we only want to perform this action when we
-are not near the beginning of a line (field greater than 2).
-The second procedure concatenates the newline and the next
-field
+The first procedure concatenates
+a newline and the current field;
+thus we only want to perform this action when we
+are not near the beginning of a line
+(field greater than 2).
+The second procedure
+concatenates the newline and the next field
 .CW (i+1)
 so that we check that we are not near the end of the line.
 The newline precedes the field in each of these operations.
-Putting it at the end of the field would result in
+Putting it at the end of the field results in
 a new line that begins with a space output with the next field.
 .PP
-Another way to handle the line break, perhaps more efficiently,
+Another way to handle the line break,
+perhaps more efficiently,
 is to use the
 .CW length
 function to return a value for each field.
@@ -1304,10 +1436,10 @@ C, the language of the UNIX environment,
 is used by systems programmers.
 Of the high-level languages, BASIC is probably
 the easiest to learn, and C is the most difficult.
-Nonetheless, you will find the fundamental programming
-constructs common to most languages.
+Nonetheless, the fundamental programming
+constructs are common to most languages.
 
-$ \f(CBawkronym sect1\fP
+$ \f[CB]awkronym sect1\fP
 Most users of microcomputers have had some
 exposure to
 BASIC (Beginner's All-Purpose Symbolic Instruction Code)
@@ -1319,8 +1451,8 @@ C, the language of the UNIX environment,
 is used by systems programmers.
 Of the high-level languages, BASIC is probably
 the easiest to learn, and C is the most difficult.
-Nonetheless, you will find the fundamental programming
-constructs common to most languages.
+Nonetheless, the fundamental programming
+constructs are common to most languages.
 .Pe
 .LP
 Notice that the second reference to
@@ -1330,8 +1462,8 @@ There are other features we might add to this program.
 For instance, we could use
 .CW awk 's
 pattern-matching capabilities so that we
-don't make the change on lines containing macros, or on lines
-within pairs of certain macros, such as
+don't make the change on lines containing macros,
+or on lines within pairs of certain macros, such as
 .CW .DS /\c
 .CW .DE .
 .PP
@@ -1342,13 +1474,15 @@ occurrence of UNIX and place
 .CW \e(rg
 after it.
 .ix %end [awk], [awkronym] script %key awk, [awkronym] script
-.Ah "\f(CBawk\fP Applications
+.
+.Ah "\f(CBawk\fP Applications"
 .LP
-A shell program is an excellent way to gather data interactively
+A shell program is an excellent way
+to gather data interactively
 .ix [read] shell~command %key read shell command
 and write it into a file in a format that can be read by
 .CW awk .
-We're going to be looking at a series of programs for
+We'll look at a series of programs for
 maintaining a project log.
 A shell script collects the name of
 a project and the number of hours worked on the project.
@@ -1371,6 +1505,9 @@ case $# in
 2) proj=$1; hrs=$2;;
 esac
 set `who am i`; name=$1; month=$3; day=$4;
+.\" XXX test: "set `who am i`" bears no resemblance to line 1555
+.\" XXX bash on Ubuntu ignores "who am i" and dumps the variable list
+.\" XXX bash on Ubuntu only recognizes `whoami`
 echo $name"\\t"$month $day"\\t"$hrs"\\t"$proj>>$HOME/daily
 .Pe
 .LP
@@ -1378,7 +1515,8 @@ The
 .CW case
 statement checks how many arguments are entered
 on the command line.
-If an argument is missing, the user is prompted to enter a value.
+If an argument is missing,
+the script prompts the user to enter a value.
 .ix shell~scripts, reading data interactively
 Prompting is done through a pair of statements:
 .CW echo
@@ -1389,10 +1527,14 @@ The
 command displays the prompt on the user's terminal;
 .CW \ec
 suppresses the carriage return at the end of the prompt.
+You could use
+.CW "echo -n"
+as well.
 The
 .CW read
-command waits for user input, terminated by
-a carriage return, and assigns it to a variable.
+command waits for user input,
+terminated by a carriage return,
+and assigns it to a variable.
 Thus, the variables
 .CW proj
 and
@@ -1401,9 +1543,9 @@ are defined by the end of the
 .CW case
 statement.
 .PP
-The
+Use the
 .CW set
-command can be used to divide the output of a command
+command to divide the output of a command
 into separate arguments
 .CW $1 , (
 .CW $2 ,
@@ -1413,9 +1555,11 @@ By executing the command
 from within
 .CW set ,
 we supply the user's name and the day's date automatically.
+.\" XXX this doesn't happen in bash, at least in Ubuntu.
+.\" XXX test: see if zsh (MacOS shell) does it.
 The
 .CW echo
-command is used to write the information to the file.
+command writes the information to the file.
 There are four fields, separated by tabs.
 (In the Bourne shell, the escape sequence
 .CW \et
@@ -1477,12 +1621,13 @@ by project
 hours[$4] += $3
 .Pe
 .LP
-Each time a record is read, the value of the third field is
+Each time a record is read,
+the value of the third field is
 added to the accumulated value of
 .CW project[$4] .
 .PP
-We don't want to print anything until all input records
-have been read.
+We don't want to print anything
+until reading all input records.
 An
 .CW END
 procedure prints the accumulated results.
@@ -1490,7 +1635,7 @@ Here's the first version of
 .CW tot :
 .Ps
 awk '
-	BEGIN { FS="|\(em\(em|" }
+	BEGIN { FS="\t" }
 {
 		total += $3
 		hours[$4] += $3
@@ -1515,42 +1660,45 @@ Text-processing book 10
 Total Hours: 38
 .Pe
 .LP
-The program performs the arithmetic tasks well, but the
-report lacks an orderly format.
+The program performs the arithmetic tasks well,
+but the report lacks an orderly format.
 It would help to change the output field separator (OFS)
 to a tab.
-But the variable
-lengths of the project names prevent the project hours from
+But the variable lengths of the project names
+prevent the project hours from
 being aligned in a single column.
 The
 .CW awk
 program offers an alternative print statement,
 .CW printf ,
 which is borrowed from the C programming language.
-.Bh "Formatted Print Statements
+.
+.Bh "Formatted Print Statements"
 .ix [awk], formatted print~statement %key awk, formatted print statement
 .LP
 The
 .CW printf
-statement has two parts: the first is a quoted
-expression that describes the format specifications; the
-second is a sequence of arguments such as variable names.
+statement has two parts: the first is a quoted expression
+that describes the format specifications;
+the second is a sequence of arguments such as variable names.
 The two main format specifications are
 .CW %s
 for strings and
 .CW %d
 for decimals.
 (There are additional specifications for octal,
-hexadecimal, and non-integer numbers).
+hexadecimal, and non-integer numbers.)
 Unlike the regular
 .CW print
 statement,
 .CW printf
 does not automatically supply a newline.
-This can be specified as
-.CW \en .
-A tab is specified as
-.CW \et .
+Use
+.CW \en
+to place a newline.
+Use
+.CW \et
+to specify a tab.
 .page 403
 .PP
 A simple
@@ -1561,17 +1709,17 @@ specifications is:
 printf "%s\\t%d\\n" , project, hours[project]
 .Pe
 .LP
-First
-.CW project
-is output, then a tab
+This first outputs the value of
+.CW project ,
+then a tab
 .CW \et ), (
 the number of hours, and a newline
 .CW \en ). (
-For each format specification, you must
-supply a corresponding argument.
+Supply a corresponding argument
+for each format specification.
 .PP
-Unfortunately, such a simple statement does not solve our
-formatting problem.
+Unfortunately, such a simple statement
+does not solve our formatting problem.
 Here are sample lines that it produces:
 .Ps
 Course Development 11
@@ -1579,8 +1727,8 @@ Administrative  2
 Programmer's Guide 7
 .Pe
 .LP
-We need to specify a minimum field width so that the tab
-begins at the same position.
+We need to specify a minimum field width
+so the second column begins at the same position.
 The
 .CW printf
 statement allows you to place this specification between the
@@ -1610,7 +1758,7 @@ procedure to print the report, we can include a
 .CW BEGIN
 procedure to print a header for the report:
 .Ps
-BEGIN { FS="|\(em\(em|"
+BEGIN { FS="\t"
 	printf "%20s%s\\n\\n", "PROJECT    ",  " HOURS"
 	}
 .Pe
@@ -1629,7 +1777,8 @@ Text-processing book		10
 		Total Hours:		38
 .Pe
 .page 404
-.Bh "Defensive Techniques
+.
+.Bh "Defensive Techniques"
 .LP
 After you have accomplished the basic task of
 a program\(emand the code at this point is fairly
@@ -1639,8 +1788,9 @@ procedures designed to trap inconsistent input
 records and prevent the program from failing.
 For instance, in the
 .CW tot
-program, we might want to check that the number of hours
-is greater than 0 and that the project description is not null
+program, we might want to check
+that the number of hours is greater than 0
+and that the project description is not null
 for each input record.
 We can use a conditional expression, using the logical operator
 .CW && .
@@ -1663,33 +1813,35 @@ In other words, what do we want to have happen after
 the program detects an error?
 The previous condition is set up so that if the procedure
 is not executed, the next line of input is read.
-In this example the program keeps going, but in
-other cases you might want the program to print an error
-message and halt if such an error is encountered.
+In this example, the program keeps going,
+but in other cases you might want the program
+to print an error message and halt
+if such an error is encountered.
 .PP
 However, a distinction between \(lqprofessional\(rq
 and \(lqamateur\(rq programmers might be useful.
 We are definitely in the latter camp, and
 we do not always feel compelled to write 100% user-proof programs.
-For one thing, defensive programming is quite
-time consuming and frequently tedious.
-Second, an amateur
-is at liberty to write programs that perform the way he
-or she expects them to; a professional has to write for an
-audience and must account for their expectations.
+For one thing, defensive programming is
+time-consuming and frequently tedious.
+Second, amateurs are at liberty to write programs
+that perform the way they expect them to;
+a professional has to write for an audience
+and must account for their expectations.
 Consider the possible uses and users of any program you write.
-.Bh "\f(CBawk\fP and \f(CBnroff/troff\fP
+.
+.Bh "\f(CBawk\fP and \f(CBnroff/troff\fP"
 .LP
 It is fairly easy to have an
 .CW awk
-program generate the necessary codes for form reports.
+program generate the necessary markup for form reports.
 For instance, we enhanced the
 .CW tot
 program to produce a
 .CW troff -formatted
 report:
 .Ps
-awk ' BEGIN { FS = "|\(em\(em|"
+awk ' BEGIN { FS = "\t"
 print ".ce"
 print ".B "
 print "PROJECT ACTIVITY REPORT"
@@ -1723,8 +1875,8 @@ print ".sp"
 }'  $HOME/daily
 .Pe
 .LP
-We incorporated one additional procedure in this version to
-determine the weekly period.
+We incorporated one additional procedure in this version
+to determine the weekly period.
 The start date of the week is taken from the first record
 .CW "NR == 1" ). (
 The last record provides the final day of the week.
@@ -1754,10 +1906,11 @@ and other
 .CW troff
 preprocessors such as
 .CW pic .
-.Bh "Multiline Records
+.
+.Bh "Multiline Records"
 .LP
-In this section, we are going to take a look at a set of
-programs for order tracking.
+In this section, we take a look
+at a set of programs for order tracking.
 We developed these programs to help operate a small,
 mail-order publishing business.
 These programs could be easily adapted to track documents in
@@ -1770,11 +1923,12 @@ for data entry.
 The program has two purposes:
 The first is to enter the customer's name and mailing address
 for later use in building a mailing list.
-The second is to display seven titles and prompt
-the user to enter the title number, the number of copies,
+The second is to display seven titles
+and prompt the user to enter the title number,
+the number of copies,
 and the price per copy.
-The data collected for the mailing
-list and the customer order are written to separate files.
+The script writes the data collected for the mailing list
+and the customer order to separate files.
 .PP
 Two sample customer order records follow:
 .Ps
@@ -1793,31 +1947,32 @@ P.O  NONE   Date: 03/14/87
 #2 5  6.75
 .Pe
 .LP
-These are multiline records, that is, a newline is used as the
-field separator.
+These are multiline records, that is,
+a newline is the field separator.
 A blank line separates individual records.
-For most programs, this will require that we redefine
+For most programs, this requires that we redefine
 the default field separator and record separator.
-The field separator
-becomes a newline, and the record separator is null.
+The field separator becomes a newline,
+and the record separator is null.
 .Ps
 BEGIN { FS = "\\n"; RS = "" }
 .Pe
 .LP
-Let's write a simple program that multiplies the number of
-copies by the price.
-We want to ignore the first two lines
-of each record, which supply the customer's name, a purchase
-order number, and the date of the order.
+Let's write a simple program
+that multiplies the number of copies by the price.
+We want to ignore the first two lines of each record,
+which supply the customer's name,
+a purchase order number,
+and the date of the order.
 We only want to read the lines that specify a title.
 There are a few ways to do this.
 With
 .CW awk 's
-pattern-matching capabilities, we could select
-lines beginning with a hash
+pattern-matching capabilities,
+we could select lines beginning with a hash
 .CW # ) (
-and treat them as individual
-records, with fields separated by spaces.
+and treat them as individual records,
+with fields separated by spaces.
 .Ps
 awk ' /^#/ {
 		amount = $2 * $3
@@ -1837,19 +1992,19 @@ conversion
 .CW %f
 prints a floating-point number;
 .\" original - 2
-.CW 6.2
+.CW %f6.2
 specifies a minimum field width of 6
 and a precision of 2.
-Precision is the number of digits to the
-right of the decimal point; the default for
+Precision is the number of digits
+to the right of the decimal point; the default for
 .CW %f
 is 6.
 We print the current record along with
 the value of the variable
 .CW amount .
-If a line is printed within this procedure, the next line is
-read from standard input.
-Lines not matching the pattern are simply passed through.
+If this procedure prints a line,
+it reads the next line from standard input.
+Lines not matching the pattern are passed through.
 Let's look at how
 .CW addem
 works:
@@ -1870,15 +2025,14 @@ P.O  NONE   Date: 03/14/87
 .Pe
 .page 407
 .LP
-Now, let's design a program that reads multiline records and
-accumulates order information for a report.
+Now, let's design a program that reads multiline records
+and accumulates order information for a report.
 This report should display the total number of copies
 and the total amount for each title.
 We also want totals reflecting all copies ordered
 and the sum of all orders.
 .PP
-We know that we will not be using the information in the
-first two fields of each record.
+We ignore the first two fields of each record.
 However, each record has a variable number of fields,
 depending upon how many titles have been ordered.
 First, we check that the input record has
@@ -1892,15 +2046,15 @@ NF >= 3 {
 for (i = 3; i <= NF; ++i)
 .Pe
 .LP
-In database terms, each field has a value and each value can
-be further broken up into subvalues.
-That is, if the value of a
-field in a multiline record is a single line, subvalues are the
-words on that line.
+In database terms, each field has a value
+and each value can contain subvalues.
+That is, if the value of a field in a multiline record
+is a single line,
+subvalues are the words on that line.
 You have already seen the
 .CW split
-function
-used to break up an input record; now we'll see it used to
+function used to break up an input record;
+now we'll use it to
 .ix [awk], subdividing~a field %key awk, subdividing a field
 subdivide a field.
 The
@@ -1922,8 +2076,8 @@ function returns the number of elements loaded into the array.
 The
 .I string
 can be a literal (in quotation marks) or a variable.
-For instance, let's digress a minute and look at an isolated
-use of
+For instance, let's digress a minute
+and look at an isolated use of
 .CW split .
 Here's a person's name and title with each part
 separated by a comma:
@@ -1942,10 +2096,12 @@ need = split (title, name, ",")
 .Pe
 .LP
 This procedure prints each part on a separate line.
-The number
-of elements in the array (3) is saved in the variable
+The
+.CW split
+function saves the number of elements in the array (3)
+in the variable
 .CW need .
-This variable is passed as an argument to an
+The script passes this variable as an argument to an
 .CW .ne
 request, which tells
 .CW troff
@@ -1954,8 +2110,8 @@ at the bottom of the page before outputting the first line.
 .PP
 The
 .CW awk
-program has twelve built-in functions, as shown in
-Table 13-2.
+program has twelve built-in functions,
+as shown in Table 13-2.
 Four of these are specialized arithmetic functions
 for cosine, sine, logarithm, and square root.
 The rest of these functions manipulate strings.
@@ -1966,12 +2122,12 @@ See
 .pdfhref L -D AppendixA -- Appendix A
 for the syntax of these functions.
 .PP
-Going back to our report generator, we need to split each field
-into subvalues.
+Going back to our report generator,
+we need to split each field into subvalues.
 The variable
 .CW $i
-will supply the value of the
-current field, subdivided as elements in the array
+supplies the value of the current field,
+subdivided as elements in the array
 .CW order .
 .Ps
 sv = split ($i, order)
@@ -2006,17 +2162,18 @@ substr	Substring extraction
 .Te
 .KE
 .LP
-The number of elements returned by the function is saved in
-the
+The number of elements returned by the function
+is saved in the
 .CW sv
 variable.
 This allows us to test that there are three subvalues.
 If there are not, the
 .CW else
-statement is executed, printing the error message to the screen.
+statement is executed,
+printing the error message to the screen.
 .PP
-Next, we assign the individual elements of the array to a
-specific variable.
+Next, we assign the individual elements of the array
+to a specific variable.
 This is mainly to make it easier to remember
 what each element represents.
 .Ps
@@ -2100,8 +2257,8 @@ TITLE  COPIES SOLD	TOTAL
         Total  16  $ 116.25
 .Pe
 .LP
-After you solve a programming problem, you will find that you
-can re-use that approach in other programs.
+After you solve a programming problem,
+you can re-use that approach in other programs.
 For instance, the method used in the
 .CW awkronym
 program to load acronyms into an
@@ -2164,7 +2321,8 @@ Emma  Fleming        25   $ 187.50
 Antonio Pollan        5   $  37.50
 Hugh Blair           15   $ 112.50
 .Pe
-.Ah "Testing Programs
+.
+.Ah "Testing Programs"
 .ix %begin [awk], debugging %key awk, debugging
 .ix %begin debugging, in~[awk] %key debugging, in awk
 .LP
@@ -2173,18 +2331,18 @@ Usually this means creating a sample input file.
 It is a good idea to test a program at various stages of
 development.
 Each time you add a function, test it.
-For instance, if you implement a conditional procedure, test that
-the procedure is executed when the expression is true; test
-what happens when it is false.
+For instance, if you implement a conditional procedure,
+test what happens when the expression is true,
+and when it is false.
 Program testing involves making sure that the syntax is correct
 .I and
 that the problem has been solved.
 .PP
 When
 .CW awk
-encounters syntax errors it will tell you that it is
+encounters syntax errors, it tells you that it is
 \(lqbailing out.\(rq
-Usually it will print the line number associated with the error.
+Usually, it prints the line number associated with the error.
 Syntax errors can be caused
 by a variety of mistakes, such as forgetting to quote strings
 or to close a procedure with a brace.
@@ -2196,8 +2354,8 @@ program's
 error messages are seldom helpful, and a persistent effort is
 often required to uncover the fault.
 .PP
-You might even see a UNIX system error message, such as the
-dreadful declaration:
+Rarely, you could see a UNIX system error message,
+such as the dreadful declaration:
 .Ps
 Segmentation fault-core dumped.
 .Pe
@@ -2217,7 +2375,7 @@ and re-examine our code.
 .PP
 Again, check each construct as you add it to the program.
 If you wait until you have a large program, and it fails, you
-will often have difficulty finding the error.
+can have difficulty finding the error.
 Not only that,
 but you are likely to make unnecessary changes, fixing what's
 not broken in an attempt to find out what is.
@@ -2225,7 +2383,7 @@ not broken in an attempt to find out what is.
 Checking that you have solved the problem you set out to tackle
 is a much larger issue.
 After you begin testing your program
-on larger samples, you will undoubtedly uncover
+on larger samples, you can uncover
 \(lqexceptions\(rq, otherwise known as
 .I bugs .
 In testing the
@@ -2244,7 +2402,7 @@ and
 .I BASIC.
 were not equal.
 This would not be a problem if we could
-test the search string as a regular expression but we have to
+test the search string as a regular expression, but we have to
 test the array variable as a literal string.
 .PP
 Programming is chiefly pragmatic in its aims.
@@ -2254,8 +2412,8 @@ certain exceptions are important enough to adapt the general
 program to account for them.
 Sometimes, in large public programs
 as well as small private ones, bugs just become part of the
-program's known behavior, which the user is left to cope with
-as best as he or she can.
+program's known behavior, which users are left to cope with
+as best as they can.
 The bug found in
 .CW awkronym
 is a common enough problem, so it is necessary to implement a fix.
@@ -2291,3 +2449,6 @@ sed	's/ @@@\\([.,!;]\\)/\\1/g'
 .ix %end [awk] %key awk
 .ix %end [awk], debugging %key awk, debugging
 .ix %end debugging, in~[awk] %key debugging, in awk
+.
+.\" XXX new section for parsing CSV & XML
+.\" XXX suggest /usr/local/lib/awk/ for the parsers

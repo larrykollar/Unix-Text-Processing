@@ -8,7 +8,7 @@
 .Se 16 "What's in a Macro Package?" "Chapter" 1
 .page 481
 .LP
-In Chapters 4, 14, and 15, you've seen almost all of the
+In Chapters 4, 14, and 15, you saw almost all of the
 individual formatting requests that
 .CW nroff
 and
@@ -18,30 +18,30 @@ together in macros.
 However, writing individual macros is still a far cry from
 putting together a complete package.
 .PP
-In Chapters 5 and 6, you've seen the features built into the
+In Chapters 5 and 6, you saw the features built into the
 .CW ms
 and
 .CW mm
 macro packages, so you can imagine the amount and complexity
 of macro definitions.
 Perhaps you have even looked at a macro package and
-determined that it was impossible to decipher.
-Nonetheless, it is possible even as a beginner to write
-your own macro package or to make extensions to one of
-the existing packages.
+determined it impossible to decipher.
+Nonetheless, even as a beginner,
+you can write your own macro package
+or extend one of the existing packages.
 .ix macros, developing~a package
 .ix macros, structure~of package
 .PP
-In this chapter, we'll look at the structure of a macro
+In this chapter, we look at the structure of a macro
 package\c
 \(em\c
 the essentials that allow you to handle basic page formatting.
-Then, in the next chapter, we'll look at a macro package
-with extensions for formatting large technical manuals or
-books.
+Then, in the next chapter, we look at a macro package
+with extensions for formatting large technical manuals or books.
 Even if you have no plans to write a new macro package,
-this chapter will help you understand and work with
+this chapter helps you understand and work with
 existing packages.
+.
 .Ah "Just What Is a Macro Package, Revisited"
 .LP
 When considering what a macro package is, you might think
@@ -49,20 +49,19 @@ only of the visible features provided by macros in existing
 macro packages.
 But a macro package is more than a collection of user macros
 that implement various features.
-Failing to understand this fact might cause someone to import
-an
+Failing to understand this might cause someone to import an
 .CW mm
 macro into an
 .CW ms\(em \c
 based macro package, and never understand why this macro
 fails to work.
 .PP
-Individual macros are dependent upon other elements of the
+Individual macros depend on other elements of the
 macro package, which sometimes makes it hard to isolate a
 particular macro, even for purposes of understanding what
 it does.
 These interdependencies also make it difficult to understand
-what a macro package is doing.
+what a macro package does.
 That is why we want to look at the underlying structure of
 a macro package, and not just the obvious features it provides.
 We want to look first at what a macro package
@@ -83,14 +82,14 @@ formatters do the actual collecting and formatting of lines
 of text, as steadily as a bricklayer placing bricks in a row.
 But they do not define the structure that is so obvious by
 the end result.
-Fundamentally, it is the macro package that defines the
+Fundamentally, the macro package defines the
 placement of lines on a page.
-At a minimum, a macro package must set traps and create
+At a minimum, a macro package sets traps and creates
 macros to handle page transitions.
 It usually also defines the layout of the physical page.
 .PP
-A macro package may also provide a way to arrange the parts
-of
+A macro package may also provide a way
+to arrange the parts of
 .	\" NOTE: small typo fixed here.  can't have " a documents"
 .	\" so I changed it to "documents"
 documents and affect their appearance.
@@ -98,53 +97,59 @@ Remember the distinction we made earlier between
 .I formatting
 and
 .I formats .
-A format reflects the type of document being produced, just
-as a floor plan reflects the functions of rooms in a building.
-For instance, a technical manual might consist of chapters
-and sections that require headings.
-Other elements might be bulleted lists and numbered lists,
+A format reflects the type of document being produced,
+just as a floor plan reflects the functions of rooms in a building.
+For instance, a technical manual
+consists of chapters and sections
+that require headings.
+Other elements include bulleted lists and numbered lists,
 a table of contents, and an index.
 These elements help readers to identify and to locate
 important parts of the document.
-But these features\c
-\(em\c
-so obviously important to users\c
-\(em\c
+But these features\(em\c
+so obviously important to users\(em\c
 are really not the essential elements in a macro package.
 .PP
-Page formatting is the foundation of a macro package, and
-this foundation must be solid before you can build a variety
+Page formatting is the foundation of a macro package,
+and this foundation must be solid
+before you can build a variety
 of custom document formats.
+.
 .Bh "New or Extended?"
 .ix macros, new~or~extended?
 .LP
-The first question to ask when you contemplate writing a
-whole new package is whether you need to do it all yourself
-or can simply build on an existing package.
+The first question to ask,
+when you contemplate writing a new package,
+is whether you need to do it all yourself
+or can build on an existing package.
 .PP
-There are benefits to either approach.
+Either approach has its benefits.
 The existing macro packages are quite complex (especially
 .CW mm ).
-It can be easier to start over, writing only the macros you
-need, than to learn the intricate internals of
+You could start over,
+writing only the macros you need,
+than to learn the intricate internals of
 .CW ms
 or
 .CW mm .
-A custom macro package can be quite small, including only
-macros for page transition (which can be minimal, as we
-shall see) and whatever other macros you want.
-This is the best approach if you have something specific
-in mind.
+A custom macro package can be quite small,
+including only macros for page transition
+(which can be minimal, as we shall see)
+and whatever other macros you want.
+This is the best approach
+if you have something specific in mind.
 .PP
-As with all programming projects, though, you may find your
-package growing larger than intended, as your needs and
-understanding grow and you start to add features.
+As with all programming projects, though,
+you may find your package growing larger than intended,
+as your needs and understanding grow
+and you start to add features.
 A macro package begun haphazardly can also end that way,
 without any consistent structure.
 .PP
-If you do find yourself wanting to create an entire macro
-package, rather than just a few macros, you should think
-about modular programming techniques.
+If you find yourself
+wanting to create an entire macro package,
+rather than just a few macros,
+think about modular programming techniques.
 Modular programming suggests that you break the tasks to be
 performed by a program into the smallest possible
 functional units, then build up larger tasks with each of
@@ -190,15 +195,15 @@ to them.
 .Le
 .RE
 .LP
-In our own work, we have chosen to extend the
+In our own work, we chose to extend the
 .CW ms
 macro package rather than to build an entirely new package.
-In this chapter, though, we're going to take a hybrid
-approach.
+In this chapter, though,
+we take a hybrid approach.
 We'll build a minimal
 .CW ms -like
-package that illustrates the essentials of a macro
-package and allows users who don't have access to the full
+package that illustrates the essentials of a macro package
+and allows users who don't have access to the full
 .CW ms
 package to make use of some of the extensions described
 in this and later chapters.
@@ -217,6 +222,7 @@ a macro package can reduce its functionality.
 However, we see it as part of the learning process, to
 recognize that a macro in a certain situation fails to work
 and understand the additional code needed to make it work.
+.
 .Bh "Implementing a Macro Package"
 .LP
 .ix macros, [/usr/lib/tmac] %key macros, /usr/lib/tmac
@@ -231,22 +237,42 @@ which tells the program to look in the directory
 .CW /usr/lib/tmac
 for a file with a name of the form
 .CW tmac. \c
-.I x .
+.I x .\**
+.FS
+.CW Groff
+looks for macro files in
+.CW /usr/local/share/groff/ \c
+.I version \c
+.CW /tmac ,
+where
+.I version
+is the version of
+.CW groff
+installed on you computer.
+The file it searches for is named
+.I x \c
+.CW .tmac ,
+reversing the name and extension
+compared to the original
+.CW troff .
+.FE
 This means you can invoke your own macro package from the
-command line simply by storing the macro definitions in a
+command line by storing the macro definitions in a
 file with the appropriate pathname.
-This file will be added to any other files in the
+This file is added to any other files in the
 formatting run.
 .PP
 If you don't have write privileges for
-.CW /usr/lib/tmac ,
+.CW /usr/lib/tmac
+or
+.CW /usr/local/share/groff ,
 you can't create the
 .CW tmac .\c
 .I x
 file (although your system administrator might be willing
 to do it for you).
 But you can still create a macro package.
-You will simply have to read it into the formatter some
+You have to read it into the formatter some
 other way.
 You can either
 .KS
@@ -276,8 +302,8 @@ you may want to build it as a series of small files that
 are called
 .page 484
 in by a single master file.
-You may also want to have different versions of some macros
-for
+You may also want to have different versions
+of some macros for
 .CW nroff
 and
 .CW troff .
@@ -303,7 +329,8 @@ requests in
 \&.so /work/macros/hayden/cols
 .Pe
 Or, like
-.CW mm ,
+.CW mm
+in older versions,
 you might have two large files, one for
 .CW nroff
 and one for
@@ -337,6 +364,7 @@ as follows:
 \&		.
 \&		.
 .Pe
+.
 .Ah "Building a Consistent Framework"
 .LP
 One of the chief factors that distinguishes a macro package
@@ -353,7 +381,7 @@ it is the one thing
 .CW nroff
 and
 .CW troff
-do not do.
+do not do on their own.
 .page 485
 .ix [troff] formatter, traps %key troff formatter, traps
 .ix traps
@@ -367,7 +395,15 @@ such as the page offset (left margin) and line length.
 is 0, which is not likely to be a useful value, and
 .CW troff 's
 default line length of 6.5 inches is really too long
-for a typeset line).
+for a typeset line).\**
+.FS
+One way to determine an optimal line width
+is to find the length of a lowercase alphabet, twice,
+given a font and type size.
+Use the
+.CW \ew
+escape to find that line width.
+.FE
 .Li
 Setting default values for typographical elements in
 .CW troff
@@ -413,14 +449,16 @@ In
 we also need to mount the default fonts with
 .CW \.fp ,
 as described in Chapter 4; in
-.CW ditroff ,
+.CW ditroff
+and modern versions,
 a default set of fonts is already mounted).
 .PP
-Simply setting up explicit default values like this will do
+Setting up explicit default values like this does
 the trick, but for a more effective and flexible macro package,
 you should take the further step of storing default values
 into number registers.
 This has numerous advantages, as we'll see in a moment.
+.
 .Bh "Using Number Registers to Increase Flexibility"
 .ix [ms] macros, number~register default~values %key ms macros, number register default~values
 .ix [troff] formatter, number~registers %key troff formatter, number registers
@@ -431,12 +469,12 @@ This has numerous advantages, as we'll see in a moment.
 Writing
 .CW troff
 macros is essentially a kind of programming.
-If you pay heed to the principles learned by programmers, you
-will find that your macros are more effective, if at first
-somewhat more complex to write and read.
+If you pay heed to the principles learned by programmers,
+your macros are more effective,
+if at first somewhat more complex to write and read.
 .PP
-One important lesson from programming is not to use explicit
-(so called
+One important lesson from programming
+is not to use explicit (so called
 \(lq\c
 hard-coded\c
 \(rq )
@@ -446,17 +484,17 @@ with an explicit value, such as:
 .Ps
 \&.in 5n
 .Pe
-you make it difficult for users to change this value at a
-later time.
+you make it difficult for users to change this value
+at a later time.
 But if you write:
 .Ps
 \&.in \\\\n(INu
 .Pe
-the user can change the indent of all paragraphs simply by
-changing the value stored in number register
+the user can change the indent of all paragraphs
+by changing the value stored in number register
 .CW IN .
-Of course, for this to work, you must give a default value
-to the
+Of course, for this to work,
+you must give a default value to the
 .CW IN
 register.
 .PP
@@ -499,17 +537,17 @@ The
 .CW mm
 package uses
 .I many
-more number registers\c
-\(em\c
-in particular, it uses number registers as flags to globally
-control the operation of macros.
-For example, in addition to registers similar to those shown
-for
+more number registers\(em\c
+in particular, it uses number registers as flags
+to globally control the operation of macros.
+For example, in addition to registers
+similar to those shown for
 .CW ms
 in Table 16-1, there are registers for paragraph type,
-numbering style in headings, hyphenation, spacing between
-footnotes, as well as counters for automatic numbering of
-figures, examples, equations, tables, and
+numbering style in headings, hyphenation,
+spacing between footnotes,
+as well as counters for automatic numbering
+of figures, examples, equations, tables, and
 section headings.
 (See
 .pdfhref L -D AppendixB Appendix B
@@ -518,6 +556,7 @@ However, the registers used in
 .CW ms
 should give you a sufficient idea of the kinds of values
 that can and should be stored in registers.
+.
 .Bh "An Initialization Sequence"
 .ix [ms] macros, initialization sequence %key ms macros, initialization sequence
 .ix [.IZ] macro %key IZ macro
@@ -527,15 +566,15 @@ In the
 macro package, a major part of the initialization sequence
 is performed by the
 .CW \.IZ
-macro.*
+macro.\**
 .FS
-*There's no real reason why this sequence needs to be put
+There's no real reason why this sequence needs to be put
 in a macro at all, other than the consistency of putting
 two backslashes before number registers when they are
 read in.
 .FE
-This macro is executed at the start of a formatting run; then
-it is removed.
+This macro is executed at the start of a formatting run;
+then it is removed.
 Let's take a look at a
 .I much
 simplified version of the initialization sequence for an
@@ -571,32 +610,38 @@ simplified version of the initialization sequence for an
 \&.IZ					\\" Execute IZ
 \&.rm IZ					\\" Remove IZ
 .Pe
-As you can see, the initialization sequence stores default
-values into registers, then actually puts them into effect
+As you can see,
+the initialization sequence
+stores default values into registers,
+then actually puts them into effect
 with individual formatting requests.
 .PP
 A number of the points shown in this initialization sequence
-will be a bit obscure, particularly those relating to trap
-positions for top and bottom margins.
+can be a bit obscure,
+particularly those relating to trap positions
+for top and bottom margins.
 We'll return to the topic of page transitions shortly.
+.
 .Bh "A Reset Macro"
 .ix macros, reset
 .ix reset macro
 .ix %begin [ms] macros, reset macro %key ms macros, reset macro
 .LP
-After you have initialized number registers, the next
-question is how to make use of the default values in coding.
-Some registers, like a paragraph indent, will be used in a
-paragraph macro.
+After you have initialized number registers,
+the next question is how to make use of the default values in coding.
+Some registers, like a paragraph indent,
+are used in a paragraph macro.
 But where, for example, might you use the
 .CW LL
 register?
 .PP
-First of all, as suggested, putting default values into
-number registers allows users to change values without
+First of all, as suggested,
+putting default values into number registers
+allows users to change values without
 modifying the macro package itself.
-For instance, a user can globally change the interparagraph
-spacing just by putting a new value into the
+For instance,
+a user can globally change the interparagraph
+spacing by putting a new value into the
 .CW PD
 register.
 .PP
@@ -671,7 +716,7 @@ line length:
 but you forget to increment it again.
 You may never notice the fact, because
 .CW ms
-will restore the line length at the next paragraph macro.
+restores the line length at the next paragraph macro.
 Other packages are far less forgiving.
 .PP
 Unless you plan to explicitly test for and terminate on
@@ -717,7 +762,7 @@ without ending the diversion.
 .PP
 If you look at the actual
 .CW ms
-reset macro, you will see that it calls another macro, named
+reset macro, you see that it calls another macro, named
 .ix [.BG] macro ([ms]) %key BG macro ([ms])
 .ix [ms] macros, [.BG] macro %key ms macros, [.BG] macro
 .CW \.BG ,
@@ -746,6 +791,7 @@ body of a document.
 This can be useful if a format requires a number of
 preliminary or header macros that supply information
 about the document.
+.
 .Ah "Page Transitions"
 .ix macros, page~transition
 .LP
@@ -757,12 +803,10 @@ and
 .CW troff
 to produce paged output.
 An example of this simplest of all possible macro packages
-follows.*
+follows.\**
 .FS
-*This
-\(lq\c
-package\c
-\(rq
+This
+\(lqpackage\(rq
 was contributed by Will Hopkins of VenturCom, Inc.
 .FE
 .Ps
@@ -811,9 +855,7 @@ are equivalent.
 The second form is the most common.
 .PP
 This simple
-\(lq\c
-package\c
-\(rq
+\(lqpackage\(rq
 provides only one macro for page transition.
 The bottom margin of the text portion of the page is
 determined by the trap location; the top margin by a
@@ -865,13 +907,15 @@ macro then causes a page break, which in turn invokes
 .CW \.NP
 at the top of the new page.
 It is important that both of these macros avoid causing
-a break, so that text in fill mode will continue
+a break, so that text in fill mode continues
 smoothly onto the next page.
 .PP
-By setting traps for both the top and bottom of a page you
-have more control over the size of the bottom and top
-margins, the placement of headers and footers, and
-advanced features like footnotes and multiple-column processing.
+By setting traps for both the top and bottom of a page,
+you have more control over the size
+of the bottom and top margins,
+the placement of headers and footers,
+and advanced features like footnotes
+and multiple-column processing.
 .PP
 Take some time to experiment with this bare bones macro
 package.
@@ -882,10 +926,11 @@ example:
 .Ps
 $ \f[CB]nroff pagemacs text\fP
 .Pe
+.
 .Bh "No-Space Mode in Page Transitions"
 .ix no-space mode
-No-space mode is often used in a page transition macro to keep
-space from being output at the top of a page.
+No-space mode is often used in a page transition macro
+to keep space from being output at the top of a page.
 It is standard page makeup for the top line of each page
 to begin at the same point.
 Without no-space mode, a spacing request
@@ -905,7 +950,7 @@ the page (to paste in a figure, for example), use
 .CW \.rs
 .I "restore spacing" ) (
 before the spacing request.
-The following sequence can be used to start a new page and
+Use the following sequence to start a new page and
 space down 2 inches below the top margin:
 .page 491
 .Ps
@@ -921,7 +966,7 @@ restore spacing.
 .ix [troff] formatter, [.fl] request %key troff formatter, [.fl] request
 An
 .CW \.fl
-request will do the trick:
+request does the trick:
 .Ps
 \&.fl
 \&.rs
@@ -934,6 +979,7 @@ The
 .CW \.fl
 request is useful when you want to flush the line buffer
 and cause a break.
+.
 .Bh "The First Page"
 .ix [troff] formatter, pseudo-page~transition %key troff formatter, pseudo-page transition
 .ix pseudo-page~transition
@@ -969,6 +1015,7 @@ Even though this request does not cause a break, it does
 initiate processing of text, and so the
 .CW \.NP
 macro is not executed.
+.
 .Ah "Page Transitions in \f[CB]ms\fP"
 .LP
 Let's take a closer look now at the trap positions we set
@@ -1081,7 +1128,7 @@ Note the use of
 rather than
 .CW \.bp
 so that any partially filled line is not output, but is
-held till the next page.
+held until the next page.
 .Li
 .CW \.BT
 .I "bottom title" ) (
@@ -1238,6 +1285,7 @@ box invis wid 0.5 fill 0 "BT"
 .in \n[UTPIN]u
 .\}
 .Fe "Top and Bottom Margins"
+.
 .Bh "Headers and Footers"
 .LP
 .ix [troff] formatter, headers~and~footers %key troff formatter, headers and~footers
@@ -1308,21 +1356,22 @@ number output at the proper time\c
 not in the string definition, nor in the macro definition,
 but at the time the title is output.
 .PP
-If you don't like this arrangement, you can simply redefine
-the strings (including redefining them to nothing if you
+If you don't like this arrangement,
+you can redefine the strings
+(including redefining them to nothing if you
 want nothing to be printed).
 As a developer of macros built on top of
 .CW ms ,
 you could, for example, have a chapter heading macro
-automatically set the chapter title into one of these strings.
-(More on this later).
+automatically set the chapter title into one of these strings
+(more on this later).
 .PP
 .ix [ms] macros, redefining header~or footer %key ms macros, redefining header or footer
 Headers and footers are often set in a different type and
 size than the body of the book.
-If you are using a standard macro package, font and size
-changes can simply be embedded in the header or footer
-strings:
+If you are using a standard macro package,
+you can embed font and size changes
+in the header or footer strings:
 .Ps
 \&.ds LH "\\fIAn Introduction to Text Processing\\fP
 .Pe
@@ -1335,7 +1384,7 @@ request:
 .Ps
 \&.tl '\\s-2\\\\*(LF'\\\\*(CF'\\\\*(RF\\s0'
 .Pe
-Another point: it is often desirable to alternate headers
+Another point: convention alternates headers
 and footers on odd and even pages.
 For example, if you want to put a book title at the outside
 upper corner of a left-hand (even) page, and the chapter
@@ -1362,16 +1411,18 @@ page.
 By invoking specific strings, you do lose the generality
 of the mechanism provided by
 .CW ms .
+.
 .Bh "Page Numbers in Three-Part Titles"
 .ix [troff] formatter, three-part~titles %key troff formatter, three-part titles
 .ix page number, in three-part~titles
 .LP
-Inasmuch as the chief application of three-part titles is in
-producing header and footer lines from within page transition
-macros, there is a special syntax for including page numbers.
+Since the chief application of three-part titles
+is to produce header and footer lines
+from within page transition macros,
+there is a special syntax for including page numbers.
 A
 .CW %
-character anywhere in a title will be replaced with the
+character anywhere in a title is replaced with the
 current page number.
 This saves the trouble of having to do a proper number
 register interpolation and makes it easier for unsophisticated
@@ -1385,17 +1436,14 @@ Whenever
 .CW nroff
 or
 .CW troff
-makes use of a character in a special way, you can be sure
-there is a back door that allows you to change that character.
+makes use of a character in a special way,
+there is a method to change that character.
 .ix [.pc] request %key pc request
 .ix [troff] formatter, [.pc] request %key troff formatter, [.pc] request
 The
 .CW \.pc
 .I "page character" ) (
-request allows you to specify that some other character
-than
-.CW %
-should perform this function:
+request specifies the character to use:
 .Ps
 \&.pc ^		\\" Use ^ instead of % to print page # in .tl
 .Pe
@@ -1403,6 +1451,7 @@ This does not change the name of the
 .CW %
 number register, which also contains the page number.
 .page 495
+.
 .Bh "Title Length"
 .ix title length
 .ix [troff] formatter, adjusting title~length %key troff formatter, adjusting title length
@@ -1428,8 +1477,8 @@ The title length is
 .I not
 independent of the page offset, so if you want a title that
 is longer than the line length, yet centered on the page,
-you will need to muck with the page offset as well.
-(Note that this is most likely to occur within a page
+you need to muck with the page offset as well
+(note that this is most likely to occur within a page
 transition macro).
 .Ps
 \&.po 1i					\\" Page Layout Defaults
@@ -1438,31 +1487,34 @@ transition macro).
 \&\0\0\0\0.
 \&\0\0\0\0.
 \&.lt 7i
-\&.tl 'Alcuin User's Guide''%'	\\" Title will extend 1/2 inch
+\&.tl 'Alcuin User's Guide''%'	\\" Title extends 1/2 inch
 \&\0\0\0\0.					\\" past right margin
 \&\0\0\0\0.
 \&\0\0\0\0.
 \&.po -.25i
 \&.lt 7i
-\&.tl 'Alcuin User's Guide''%'	\\" Title will extend 1/4 inch
+\&.tl 'Alcuin User's Guide''%'	\\" Title extends 1/4 inch
 \&.po +.25i				\\" on either side
 .Pe
 An
 .CW \.lt
-request without an argument will restore the previous
+request without an argument restores the previous
 title length.
+.
 .Ah "Some Extensions to the Basic Package"
 .LP
-Thus far, we've looked at what it will take to implement a
+Thus far, we've looked at what it takes to implement a
 small
 .CW ms -like
 macro package.
 Now let's look at some extensions to the basic structure of
-the package that will make it more flexible.
-These extensions could be added to the minimal package shown
-earlier in this chapter, or they could be added to a full
+the package to make it more flexible.
+You can add these extensions to the minimal package
+shown earlier in this chapter,
+or add them to a full
 .CW ms
 package, as we have done at our own site.
+.
 .Bh "Changing Page Size"
 .ix page size
 .ix [troff] formatter, changing page size %key troff formatter, changing page size
@@ -1477,6 +1529,8 @@ In the standard
 .CW ms
 package, all of these values are set up to produce an
 8\(12-by-11 inch page.
+.\" XXX need to accommodate metric pages
+.\" XXX groff uses .../font/outputtype/DESC to specify default paper size
 .PP
 This is fine for
 .CW nroff ,
@@ -1501,7 +1555,7 @@ provides.
 .	\" Note: I think he really means "may work" if your ....
 .	\" It would make more sense, since he goes on to say
 .	\" why it might not work for sheet fed devices.
-This may not work if your output device uses continuous-roll
+This may work if your output device uses continuous-roll
 paper, such as a typesetter.
 However, in
 .CW nroff ,
@@ -1509,26 +1563,26 @@ or when using
 .CW troff
 with a sheet-fed laser printer, this may split your formatted
 output pages across physical sheets of paper.
-(Some devices translate a
+Some devices translate a
 .CW \.bp
 into a page eject code or
 .I formfeed ;
-others simply add blank lines to push text onto the next
-physical page.
-For this reason, it is perhaps preferable to think of
+others add blank lines
+to push text onto the next physical page.
+For this reason, you should think of
 .CW \.pl
 as the
 .I "paper length"
 rather than the
-.I "page length" ).
+.I "page length" .
 .PP
-In addition, when you are printing a small page, it is nice
+In addition, when you print a small page, it is nice
 to print cut marks to show the location of the page
 boundaries.
-If you change the page length, any cut marks you place will
-be off the page that
+If you change the page length, any cut marks you place
+are off the page that
 .CW troff
-knows about, and will not be printed.
+knows about, and are not printed.
 .PP
 For both of these reasons, we took a different approach.
 We modified the
@@ -1538,10 +1592,10 @@ macro so that changing the header and footer margins would
 effectively change the page size, instead of just the margins.
 (In standard
 .CW ms ,
-you can change the size of the top and bottom margins, but
-this doesn't change the page size, because the placement
-of the footers is fixed after the initialization macro
-has been called.
+you can change the size of the top and bottom margins,
+but this doesn't change the page size,
+because the placement of the footers is fixed
+after the initialization macro has been called.
 The trap position for
 .CW FO
 is reset at the top of every page, thus taking into account
@@ -1637,15 +1691,16 @@ macro has been modified as follows:
 \&'ns
 \&..
 .Pe
-By simply setting the
+By setting the
 .CW S
 .I size ) (
-register from the command line, the user can choose from
-one of three different sizes. For example:
+register from the command line,
+you can choose from one of three different sizes.
+For example:
 .Ps
 $ \f[CB]ditroff -Tps -rS1\fP \f[I]textfile\fP \f[CB]| devps | lp\fP
 .Pe
-will choose the 5\(12-by-8\(12 page size.
+selects the 5\(12-by-8\(12 page size.
 .page 498
 .ix %begin [troff] formatter, cut~marks %key troff formatter, cut marks
 .ix %begin cut~marks
@@ -1709,14 +1764,16 @@ Otherwise, the
 .CW \.PT
 macro would be invoked one line lower on a page with cut
 marks than on one without.
+.
 .Bh "Cut Marks"
 .LP
 We've mentioned that if you are producing typeset or
 laser-printed copy on less than an 8\(12 by 11 page,
-it is usually desirable to place marks showing the actual
+you should place marks showing the actual
 page boundary.
 The paper is then cut on these marks in preparation for
 pasteup on camera-ready boards.
+.\" XXX does anyone use boards now? PDF... ?
 .PP
 As you've seen in the preceding discussion, we print the
 cut mark at the top of the page from the
@@ -1729,7 +1786,7 @@ trim height from the bottom of the page.
 As you'll notice, the execution of the cut mark macro is
 conditioned on the presence of the
 .CW S
-register, which indicates that the user has requested a
+register, that indicates the user requested a
 small page.
 .PP
 Here's a simple version of the actual cut mark macro:
@@ -1755,11 +1812,13 @@ the no-break control character
 .CW ' ),
 and the cut marks themselves are printed with
 .CW \.tl ,
-which doesn't cause a break.
-(The other way to avoid breaks is to do all of your page
-transition work in a different environment, but doing
-this uses up one of the environments, which might be
-better used for another purpose).
+that doesn't cause a break.
+Another way to avoid breaks is to do all of your page
+transition work in a different environment.
+.\" obsolete
+.\" , but doing
+.\" this uses up one of the environments, which might be
+.\" better used for another purpose.
 .PP
 We've specified the width of the page in the
 .CW pW
@@ -1767,30 +1826,30 @@ register.
 To center the cut marks around the text, we adjust the page
 offset by the difference between the page width and half
 the line length.
-Then we set the title length to the page width, and actually
-print the cut marks with
+Then we set the title length to the page width,
+and print the cut marks with
 .CW \.tl .
-Then, of course, we reset the original page offset and
-title length.
+Then, of course, we reset the original page offset
+and title length.
 .PP
 In the implementation shown, we use simple plus signs to
 create the cut marks.
-This creates a slight inaccuracy, because the page width will
-be from end to end of the plus signs, and the height from
+This creates a slight inaccuracy, because the page width
+is from end to end of the plus signs, and the height from
 baseline to baseline, rather from the center of the plus
 as we'd like.
 .PP
 There are two ways that we could deal with this.
 One is to fudge the height and the width to account for
 the character widths.
-The other is to use a specially drawn mark that will
-put the actual cut lines at the edge rather than the
-center of the figure.
+The other is to use a specially drawn mark
+that puts the actual cut lines at the edge
+rather than the center of the figure.
 .PP
 A very simple way to do this is to use the box rule, the
 root-en, and the underrule.
 Because the cut marks are no longer symmetrical, though,
-we'll need to give the cut mark macro an argument
+we give the cut mark macro an argument
 to specify whether we're at the top or the bottom of
 the page:
 .Ps
@@ -1807,11 +1866,11 @@ When we invoke
 .CW \.CM
 from within
 .CW \.NP ,
-we'll just have to add the argument
+we add the argument
 .CW T
 to specify we're at the top.
 .PP
-The cut marks will look like this:
+The cut marks look like this:
 .	\" Note: code to simulate the CM macro
 .sp
 .nr UTPPO \n(PO
@@ -1826,9 +1885,10 @@ The cut marks will look like this:
 .lt \n[UTPLT]u
 .	\" end of code to simulate the CM macro
 .page 500
+.
+.Ah "Other Exercises in Page Transition"
 .ix %begin [troff] formatter, footnotes %key troff formatter, footnotes
 .ix %begin footnotes
-.Ah "Other Exercises in Page Transition"
 .LP
 We've looked at the basic mechanism for page transition,
 and shown one way to extend that mechanism to allow the user
@@ -1836,8 +1896,9 @@ to select different page sizes.
 We have not exhausted the topic of page transition,
 however.
 Before we begin to discuss the development of macros that
-prescribe document formats, rather than basic page
-formatting, we will briefly consider these topics:
+prescribe document formats,
+rather than basic page formatting,
+we briefly consider these topics:
 .RS
 .Ls B
 .Li
@@ -1850,17 +1911,20 @@ Page top resets
 Handling widows and orphans
 .Le
 .RE
+.
 .Bh "Footnotes"
 .ix [ms] macros, footnotes %key ms macros, footnotes
 .LP
 Footnotes make page transition an even more complex exercise.
-Anyone who has typed footnotes on a typewriter knows the
-problem.
+.\" obsolete
+.\" Anyone who has typed footnotes on a typewriter knows the
+.\" problem.
 Because the presence of a footnote shortens the space
-available on the page for regular text, you need to know
-the size of the footnote before you know if its reference
-will fit on the bottom of the current page, or will be
-pushed to the top of the next.
+available on the page for regular text,
+you need to know the size of the footnote
+before you know if its reference fits
+on the bottom of the current page,
+or pushed to the top of the next.
 There is always the possibility of a classic Catch-22:
 a footnote whose reference falls at the bottom of the
 page only if the footnote itself isn't printed there.
@@ -1888,23 +1952,24 @@ All we really need to do, on the simplest level, is to save
 footnotes in a diversion, measure them, then move the footer
 trap back up the page by a distance equal to the size of
 the diversion.
+.\" XXX make this a list?
 .PP
 In the new page macro, we initialize (reset to 0) a counter
 (\c
 .CW fC )
-that will tell us if there are any footnotes on the page
-and how many.
-(We want to handle the first footnote differently than
+that tells us if there are any footnotes on the page
+and how many
+(we want to handle the first footnote differently than
 others on that page).
 We also initialize a bottom position for printing footnotes
 (\c
 .CW Fb )
 and initialize it with the value of the standard footer
 margin.
-(This will be the starting point that will be decremented
+(This is the starting point that gets decremented
 as footnotes are encountered).
 Last, we provide a reset that restores the page footer trap
-at the standard footer margin if it has been changed
+at the standard footer margin if it changed
 because of footnotes on a previous page.
 .Ps
 \&.				\\" Add to .NP
@@ -1939,18 +2004,19 @@ and close a diversion:
 \&.el .ch FO -\\\\n(Fb
 \&..
 .Pe
-The footnotes are processed in a separate environment.
-This environment needs to be initialized, perhaps as part
-of the
+The footnotes use a separate environment.
+This environment needs to be initialized,
+perhaps as part of the
 .CW \.IZ
 macro, or as part of the
 .CW \.FS
 macro the very first time it is called.
 The latter method makes it easier for users to change
 settings for this environment.
-It is recommended that you preserve a separate environment
-(either 1 or 2) for footnote processing.
-Here is a sample initialization sequence:
+You should preserve a separate environment
+(named as needed) for footnote processing.
+Here is a sample initialization sequence,
+using environment 1 for footnotes:
 .Ps
 \&.ev 1			\\" Initialize first environment for footnotes
 \&.ps 8
@@ -1978,13 +2044,12 @@ This amount is used to increase
 location of the footer trap further up the page.
 .PP
 Before changing that trap, the footnote end macro has to
-find out if the new footer trap will be placed above or
+find out if the new footer trap is above or
 below the current location.
 If the new trap location is below where we are, all is well;
-the page trap is moved up to that location.
+the page trap moves up to that location.
 However, if the current footnote places the location above
-the current position, there's going to be
-trouble.
+the current position, there's going to be trouble.
 In this case, we need to execute the footer macro immediately.
 .PP
 The
@@ -2004,7 +2069,7 @@ If the footnote won't fit, this code puts the trap one line
 below the current position; otherwise, the footer trap
 location is moved up the page.
 .PP
-Now we'll have to redefine the footer macro to print
+Now we have to redefine the footer macro to print
 the diverted footnotes, if there are any:
 .Ps
 \&.de FO				\\" Redefine FO
@@ -2111,17 +2176,13 @@ In addition, the
 .I "Nroff/Troff User's Manual"
 describes a similar mechanism.
 Our simplified version,
-adequate only for demonstration of this mechanism, will
-borrow from both of these sources.
+adequate only for demonstration of this mechanism,
+borrows from both of these sources.
 (It might be said that a
-\(lq\c
-working\c
-\(rq
+\(lqworking\(rq
 version requires several empirically discovered fudge
 factors or, as Joseph Ossanna called them,
-\(lq\c
-uncertainty corrections\c
-\(rq).
+\(lquncertainty corrections\(rq).
 .PP
 The problem is how to split the footnote overflow if it
 extends beyond where we want the bottom of the page to be.
@@ -2138,16 +2199,13 @@ If you write:
 \&.wh -\\\\n(FMu M1	\\" Place first macro
 \&.wh -\\\\n(FMu M2	\\" Overwrite first macro at this location
 .Pe
-all you will succeed in doing is wiping out the first
-placement with the second.
+all you do is wipe out the first placement with the second.
 .PP
 However, you can
 .I move
 a trap location to an occupied position.
 The second trap
-\(lq\c
-hides\c
-\(rq
+\(lqhides\(rq
 the first and renders it ineffective, but the first is still
 in place and is restored if the second subsequently moves
 off the spot.
@@ -2167,10 +2225,10 @@ The
 .CW \.FX
 (\c
 .I "footnote overflow" )
-macro will be invoked only if the
+macro is invoked only if the
 .CW FO
-trap is moved (as it will be whenever there are footnotes
-on the page).
+trap is moved
+(whenever there are footnotes on the page).
 In
 .CW \.FX ,
 all we do is start another
@@ -2218,9 +2276,9 @@ now looks like this:
 There are several things here that need further explanation.
 The number register
 .CW \.z
-always contains the name of the last completed diversion.
-(Don't ask us how they manage to put a string into a
-number register!)
+always contains the name of the last completed diversion
+(don't ask us how they manage to put a string into a
+number register!).
 If our overflow diversion was this last completed diversion,
 we terminate it:
 .Ps
@@ -2295,6 +2353,7 @@ exercise equivalent to what Alfred Hitchcock called a
 MacGuffin: a hopelessly complicated plot not meant to be
 figured out but that supplies a reason for many entertaining
 scenes.
+.
 .Bh "Multicolumn Processing"
 .ix %begin [ms] macros, multi-column processing %key ms macros, multi-column processing
 .ix %begin [troff] formatter, multi-column processing %key troff formatter, multi-column processing
@@ -2323,9 +2382,9 @@ the current column is the last one.
 .ix [ms] macros, two-column processing %key ms macros, two-column processing
 .PP
 A simple macro to initiate two-column processing might
-look like this*:
+look like this\**:
 .FS
-*Despite similar macro and number register names, this is
+Despite similar macro and number register names, this is
 .I not
 the two-column macro used in
 .CW ms .
@@ -2362,7 +2421,7 @@ redefine
 .CW LL ,
 or else a paragraph macro, or any other macro that calls
 .CW \.RT ,
-will interfere with two-column processing).
+interferes with two-column processing).
 .PP
 The page footer needs to include the following requests:
 .Ps
@@ -2392,11 +2451,11 @@ added:
 \&.if \\\\n(CL .nr CL 0 1	\\" Reset autoincrementing column count
 \&..
 .Pe
-After the
+After creating the
 .CW CL
-register has been created by
+register by
 .CW \.2C ,
-it can also be used as a flag that two-column processing
+you can use it as a flag that two-column processing
 is in effect.
 The page top resets it to 0 to start the first column on
 a new page.
@@ -2412,20 +2471,19 @@ like this:
 \&.bp			\\" Start a new page
 \&..
 .Pe
-The column count register is removed, and the original page
-offset and line length are restored.
-Unfortunately, using this mechanism, you cannot return to
-single-column mode on the same page, without resorting to
-extensive use of diversions.
-If the first column has already gone to the bottom of the
-page, there is no way for a prematurely terminated
-second column to
-\(lq\c
-go back\c
-\(rq
+This macro removes the column count register,
+and restores the original page offset and line length.
+Unfortunately, using this mechanism,
+you cannot return to single-column mode on the same page,
+without resorting to extensive use of diversions.
+If the first column has already gone
+to the bottom of the page,
+there is no way for a prematurely terminated second column to
+\(lqgo back\(rq
 and fit the text into two even-sized columns on the
 same page.
 .page 507
+.
 .Bh "Page Top Resets"
 .ix [troff] formatter, page~top resets %key troff formatter, page top resets
 .ix page~top resets
@@ -2437,21 +2495,29 @@ Like paragraphs, you can rely on their regular occurrence
 and can therefore trap certain conditions.
 .ix change~pages
 .PP
-In particular, you can use them when you want an effect to
-take place for only one page and then stop.
-For example, in our business, we are often required to
+In particular, you can use them when you want an effect
+to take place for only one page and then stop.
+For example, in our business, we often need to
 produce not just complete manuals, but replacement pages
 to be inserted into an existing manual.
-Sometimes the update page will be exactly the same size as
-the original, but often it is longer, and requires additional
-space.
+.ig
+   XXX I remember doing similar things
+   in the late 80s/early 90s, but since then
+   everything has been PDFs. I'm not sure this
+   passage is required now
+   , but I suppose it's
+   still a good exercise. --LK 2026 Oct 30
+..
+Sometimes the replacement page count
+matches the original,
+but often requires additional pages.
 .PP
 To avoid changing the numbering on subsequent pages,
-additional full or partial pages are inserted with a special
-numbering scheme.
+we insert additional full or partial pages
+with a special numbering scheme.
 For example, if a page is numbered 3-4 (section 3, page 4),
 and changes to that page run on to an additional page, the
-new page will be numbered 3-4a.
+new page is numbered 3-4a.
 .PP
 In this situation, we need to temporarily change the way
 page numbers are handled, then change back when the page is
@@ -2475,13 +2541,13 @@ and the page number (\c
 .CW PN ),
 separated by a hyphen, into the string
 .CW NN .
-In this macro, we simply append a letter to that string.
+In this macro, we append a letter to that string.
 By default we add the letter
 .I a ,
 but we give the user the option to specify another letter
 as an argument to the macro, so pages can be numbered
 3-4,3-4a,3-4b, and so on.
-To use the macro, the user simply enters it anywhere on the
+To use the macro, enter it anywhere on the
 update page.
 Voil\o"a\(aa"!
 The page number now has an
@@ -2490,12 +2556,13 @@ on the end.
 .PP
 Notice that the original page number register (\c
 .CW % )
-was first decremented, so that this new page will have the
+was first decremented,
+so that this new page has the
 same number as the previous one.
 More to the point of this discussion, notice that the macro
 sets the
 .CW Un
-number register to 1 as a flag that update numbering is
+number register to 1 as a flag to indicate update numbering is
 in effect.
 .PP
 This flag is tested in the page top macro for the next page,
@@ -2506,12 +2573,12 @@ restored as follows:
 \&.	ds NN \\\\\\\\n(sE-\\\\\\\\n(PN
 \&.	nr Un 0\\}
 .Pe
-(Note that four backslashes are required in the number
+Note that four backslashes are required in the number
 register interpolations used in defining
-.CW NN
-because the string definition will be interpreted twice,
-once when the macro is defined, and once when it
-is executed).
+.CW NN ,
+because the string definition is interpreted twice:
+once when the macro is defined;
+and once when it is executed.
 .page 508
 .PP
 Keep this trick in mind because there are many cases in which
@@ -2519,6 +2586,7 @@ you can use the page bottom or page top macro to reset
 conditions that you don't want to carry across more than
 one page.
 We'll see another in just a moment.
+.
 .Bh "Handling Widows and Orphans"
 .ix widows~and~orphans
 .ix [troff] formatter, widows~and~orphans %key troff formatter, widows and~orphans
@@ -2526,9 +2594,8 @@ We'll see another in just a moment.
 .ix %end [troff] formatter, page~transition %key troff formatter, page transition
 .ix %end page~transition
 .LP
-Widows and orphans are the bane of any markup language\c
-\(em\c
-the one real advantage of current
+Widows and orphans are the bane of any markup language,
+and the one real advantage of current
 .I wysiwyg
 systems.
 A widow is a single or partial line from the end of a
@@ -2538,14 +2605,14 @@ paragraph left alone at the bottom of a page.
 Both of these are considered poor page layout.
 .PP
 As we've discussed, a macro package can take care of orphans
-simply by including an
+by including an
 .ix [.ne] request %key ne request
 .ix [troff] formatter, [.ne] request %key troff formatter, [.ne] request
 .CW \.ne
 request in the paragraph macro.
-Widows are much harder to take care of, because you don't
-know where the end of the paragraph will fall until you
-reach it.
+Widows are much harder to take care of,
+because you don't know where the end of the paragraph is
+until you reach it.
 .ix [ms] macros, changing bottom margin %key ms macros, changing bottom margin
 .ix [troff] formatter, page breaks %key troff formatter, page breaks
 .ix page breaks
@@ -2558,21 +2625,33 @@ the only way you can handle this problem is to process
 each paragraph in a diversion, find out how long it was,
 then go back and break it up if necessary.
 This greatly increases processing time, and is probably
-not worth the effort.
+not worth the effort.\**
+.FS
+Both Heirloom
+.CW troff
+and
+.CW neatroff
+support whole-paragraph text formatting.
+Use the extension
+.CW ".ad pb"
+to turn it on.
+.FE
 .PP
-You could limit the extra work by testing the position on
-the page and only diverting paragraphs that occur within
-range of the page bottom.
-However, even so, this is a difficult problem you may not
-want to attempt.
+You could limit the extra work
+by testing the position on the page
+and only diverting paragraphs
+that occur within range of the page bottom.
+However, even so,
+this is a difficult problem you may not want to attempt.
 .PP
-It may be satisfactory to give users an increased capability
+You could give users an increased capability
 for dealing with widows when they do occur.
-Normally, the solution is to print out the document, find
-any offending widow lines, then go back and manually break
+Normally, the solution is to print out the document,
+find any offending widow lines,
+then go back and manually break
 the pages a line earlier.
-However, sometimes it is inconvenient to break the paragraph
-earlier\c
+However, sometimes it is inconvenient
+to break the paragraph earlier\c
 \(em\c
 it would be better to add the line to the bottom of the
 current page.
@@ -2584,8 +2663,8 @@ the location of the footer trap is reset to
 in the
 .CW \.NP
 macro at the top of every page.
-The user can get extra length on a page just by changing
-the value of
+The user can get extra length on a page
+by changing the value of
 .CW FM
 on the preceding page.
 .PP

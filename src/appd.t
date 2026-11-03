@@ -4,7 +4,7 @@ Ralph Corderoy's $Revision: 1.1 $.
 .
 .\" TROFF source proof read
 .\" by
-.\" Andreas Kähäri <andreas.kahari@unix.net>
+.\" Andreas Kï¿½hï¿½ri <andreas.kahari@unix.net>
 .
 .so utp.mac
 .utp
@@ -49,10 +49,9 @@ file, called
 .CW DESC ,
 and individual font files for the fonts on your system.
 These files exist both in ASCII and binary form.
-The binary files are created from the ASCII versions using a utility
-called
-.CW makedev ,
-and have the suffix
+A utility called
+.CW makedev
+creates the binary files from the ASCII versions, with the suffix
 .CW .out .
 .PP
 On our system, here's what the font directory for the HP LaserJet
@@ -78,12 +77,12 @@ CW	    HB		    R		TY
 CW.out	    HB.out	    R.out	TY.out
 .Pe
 .
-.Ah "The \f(CBDESC\fP File
+.Ah "The \f(CBDESC\fP File"
 .LP
 The
 .CW DESC
 file contains an overall description of the output device, including its
-resolution in dots per inch, the paper size, the fonts that will be
+resolution in dots per inch, the paper size, the fonts
 mounted by default, the available point sizes, and a complete list of
 all the
 .CW troff
@@ -118,9 +117,9 @@ sc gr no is pt es mo
 dd rh lh bs or ci
 lt lb rt rb lk rk bv lf rf lc rc
 .Pe
-The following keywords are used in the
+The
 .CW DESC
-file.
+file uses the following keywords.
 .\" .Rn "Markup problem: This list should be indented.
 .\" Fixed using .RS ... .RE.  /Andreas 2002-10-02
 .RS
@@ -129,7 +128,7 @@ file.
 The number of fonts to be mounted for the device, followed by a list
 of the font names (maximum is ten).
 The user can request other fonts from within a document.
-However, the fonts listed here will be \(lqmounted\(rq (by analogy
+However, the fonts listed here are \(lqmounted\(rq (by analogy
 with the CAT typesetter), and can by referenced by position
 .CW \ef1 , (
 .CW \ef2 ...)
@@ -145,8 +144,7 @@ horizontal direction.
 The minimum number of units of resolution that the device can move in a
 vertical direction.
 .IP "\f(CWunitwidth\fP" \n(iN
-The point size at which character widths are specified in the other
-files.
+Specifies the point size of character widths in the other files.
 .\" .Rn "Suggestion: The maths parts would look better with eqn, e.g. `x'.
 .\" I'm not sure eqn would work very well inline in a place like
 .\" this.  I'm changing the 'x' into "times", hoping everyone's
@@ -165,14 +163,14 @@ The length of the page in units of resolution (e.g., 11 inches times 300
 .IP "\f(CWbiggestfont\fP" \n(iN
 The maximum number of characters in a font.
 .IP "\f(CWcharset\fP" \n(iN
-The list of character names that are supported on this output device.
-The keyword should be on a line by itself;  the list of characters
+The list of character names supported on this output device.
+The keyword should be on a line by itself; the list of characters
 starts on the next line.
 .IP "\f(CW#\fP" \n(iN
 Begins a comment.
 .RE
 .
-.Ah "Font Description Files
+.Ah "Font Description Files"
 .ix %begin [/usr/lib/font], font~description files %key /usr/lib/font, font description files
 .LP
 For each font listed on the
@@ -210,8 +208,8 @@ z     25   0    122
           .
           .
 .Pe
-Four columns, separated by tabs, are listed for each character.
-.
+Each character has its own row in the table.
+Each row has four columns, separated by tabs.
 .ix %end [/usr/lib/font], [DESC] tile %key /usr/lib/font, [DESC] tile
 .page 638
 .
@@ -250,15 +248,15 @@ The third column describes the character type\(emthat is, whether it is
 a descender (1), ascender (2), both (3), or neither (0).
 .PP
 The fourth column contains the typeset code for the character.
-This code is the value that the output device will recognize to generate
+This code is the value that the output device recognizes to generate
 the character.
-This information is obtained from the typesetter or laser printer
-vendor.
+The typesetter or laser printer vendor
+provides this information.
 The code can be in decimal or octal form.
-(Octal is specified by a leading zero.)
+(Use a leading zero to specify octal.)
 .PP
-In general, whomever supplied the driver for the output device will
-provide you with appropriate width tables for the supported fonts.
+In general, whomever supplied the driver for the output device
+provides appropriate width tables for the supported fonts.
 However, you may have access to other public domain fonts for output
 devices that support downloadable raster fonts.
 In this case, you may need to build your own tables.
@@ -268,11 +266,13 @@ slightly if you find that the character spacing is poor.
 Creating a font table from scratch requires a magnifying glass, a
 micrometer, a good eye, and a lot of patience.
 .
-.Ah "Compiling Font Files
+.Ah "Compiling Font Files"
 .ix [troff] formatter, compiling font~files %key troff formatter, compiling font files
 .LP
-After you are satisfied with your width tables, they need to be compiled
+After you are satisfied with your width tables, compile them
 using the
+.\" XXX web search turned up https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/troff/troff.d/makedev.c
+.\" XXX test: is makedev necessary now? -- LK 2026 Oct 30
 .ix [makedev] command %key makedev command
 .CW makedev
 utility:
@@ -283,23 +283,24 @@ Running
 .CW makedev
 on
 .CW DESC
-will compile all of the fonts listed on the
+compiles all of the fonts listed on the
 .CW fonts
 line in that file.
-You can compile a font that is not included in
+You can compile a font that does not appear in
 .CW DESC
 by specifying its name on the command line:
 .Ps
 $ \f(CBmakedev B\fP             \fRCompile the bold font\fP
 .Pe
 .
-.Ah "Font Usage Limitations
+.Ah "Font Usage Limitations"
 .LP
-The user is not restricted to using the \(lqmounted\(rq fonts that have
-been listed in
+You can use fonts other than the \(lqmounted\(rq fonts
+that have been listed in
 .CW DESC .
-Any font supported by the output device, and for which a compiled width
-table exists, can be referred to from within a document.
+You can refer to any font the output device supports
+within a document,
+if a compiled width table exists for that font.
 For example, if you had a Palatino font family named
 .CW PA ,
 .CW PB ,
@@ -313,15 +314,16 @@ there should be files called:
 .Ps
         PA.out    PB.out    PI.out
 .Pe
-One problem that is sometimes encountered is that
+Note that
 .CW troff
-has problems if a font that is used in this way is larger (in absolute
+has problems if you use a font that is larger (in absolute
 file size) than the largest of the mounted fonts specified in
 .CW DESC .
 The
 .CW troff
 formatter only allocates enough memory for the largest font in
 .CW DESC .
+.\" XXX test: is this still true for Plan9/neatroff/Heirloom?
 If you encounter this problem, you can either strip unneeded characters
 out of the font, pad a font in
 .CW DESC ,

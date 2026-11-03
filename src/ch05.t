@@ -153,7 +153,7 @@ or
 and display the output on a terminal screen or graphical preview,
 or print it on a line printer, laser printer, or typesetter.
 .
-.Ah "Formatting a Text File with \f(CBms\fP
+.Ah "Formatting a Text File with \f(CBms\fP"
 .ix [ms] macros, invoking %key ms macros, invoking
 .LP
 If you want to format an
@@ -175,7 +175,7 @@ Be sure to redirect the output to a file
 or pipe it to the printer;
 if you do not, the formatter sends your output to your terminal screen.
 .
-.Bh "Problems in Getting Formatted Output
+.Bh "Problems in Getting Formatted Output"
 .LP
 There are two ways for a program to handle errors.
 One is to have the program terminate and issue an error message.
@@ -213,8 +213,8 @@ to restore certain default values.
 .PP
 Thus, if you forget to reset the point size or indentation,
 you might notice that the problem continues for a while and then stops.
-.
-.Ah "Page Layout
+."
+.Ah "Page Layout"
 .ix page~layout, in~[ms] %key page layout, in~ms
 .ix [ms] macros, page~layout %key ms macros, page layout
 .ix formatting defaults, [ms] %key formatting defaults, ms
@@ -478,7 +478,7 @@ meeting with you towards the end of next week.
 .KE
 .LP 0
 .
-.Bh "Spacing between Paragraphs
+.Bh "Spacing between Paragraphs"
 .ix [ms] macros, spacing~between paragraphs %key ms macros, spacing between paragraphs
 .ix paragraphs, spacing between ([ms]) %key paragraphs, spacing between ms
 .LP
@@ -611,7 +611,7 @@ macro inside a
 .CW .QE
 block to break up paragraphs.
 .
-.Bh "Indented Paragraphs
+.Bh "Indented Paragraphs"
 .ix [ms] macros, indented paragraphs %key ms macros, indented paragraphs
 .ix paragraphs, indented ([ms]) %key paragraphs, indented ms
 .ix hanging indents
@@ -722,7 +722,7 @@ the LOCATE command.
 \&.in 0
 .Pe
 .LP
-will produce:
+produces:
 .sp .7v
 .SS
 .Ps
@@ -799,7 +799,7 @@ One thing you need to watch out for in using the original
 macro is not to include space in the label argument.
 Because of the way the macro is coded, the space may be
 expanded when the finished line is adjusted.
-The first line will not be aligned with the rest.
+The first line is not aligned with the rest.
 For example:
 .Ps
 \&.IP "font name" 10
@@ -903,7 +903,7 @@ requests).
 .ix %end [ms] macros, [.IP] macro %key ms macros, IP macro
 .ix %end [ms] macros, paragraphs %key ms macros, paragraphs
 .
-.Ah "Changing Font and Point Size
+.Ah "Changing Font and Point Size"
 .ix %begin [ms] macros, fonts %key ms macros, fonts
 .LP
 .page 114
@@ -917,7 +917,7 @@ to send your output to a laser printer or typesetter,
 you can specify variations of type, font, and point size
 based on the capabilities of the output devices.
 .
-.Bh "Roman, Italic, and Bold Fonts
+.Bh "Roman, Italic, and Bold Fonts"
 .LP
 Most typefaces have at least three fonts available:
 roman,
@@ -982,7 +982,7 @@ The art of
 \&.B
 calligraphy
 \&.R
-is, quite simply,
+is
 \&.I
 beautiful
 \&.R
@@ -994,7 +994,7 @@ The example produces:
 .SS
 .Ps
 .ft R
-The art of \fBcalligraphy\fP is, quite simply, \fIbeautiful\fP handwriting;\fP
+The art of \fBcalligraphy\fP is \fIbeautiful\fP handwriting;\fP
 .ft CW
 .Pe
 .sp
@@ -1105,7 +1105,7 @@ There is no difference in the output file.
 .ix %end [ms] macros, fonts %key ms macros, fonts
 .ix %end fonts, changing ([ms]) %key fonts, changing (ms)
 .
-.Bh Using Aliases
+.Bh "Using Aliases"
 .ix using aliases
 .ix aliases, using
 .LP
@@ -1178,7 +1178,7 @@ unless you enclose the words in quotes:
 of calligraphy.
 .PE
 .
-.Bh "Changing Point Size
+.Bh "Changing Point Size"
 .ix %begin point~size
 .ix %begin point~size, changing ([ms]) %key point size, changing ms
 .LP
@@ -1542,7 +1542,7 @@ as well as macros for the
 we've already discussed.
 If a floating display doesn't fit on the page,
 the formatter doesn't force a page break.
-Instead, it simply holds the displayed text in reserve
+Instead, it holds the collected text in reserve
 while it fills up
 the remainder of the page with the text following the display.
 It prints the display at the top of the next page,
@@ -1727,8 +1727,8 @@ The result is a heading preceded by a first-level heading number:
 .SE
 .sp .8v
 .LP
-The next time you use this macro
-the heading number will be incremented to 2,
+The next time you use this macro,
+it increments the heading number to 2,
 and after that, to 3.
 .PP
 You can add levels by specifying a numeric argument.
@@ -1823,7 +1823,7 @@ to distinguish headings from body text.
 .ix %end [ms] macros, headings %key ms macros, headings
 .ix %end headings, in [ms] %key headings, in ms
 .
-.Ah "Cover Sheet Macros
+.Ah "Cover Sheet Macros"
 .ix %begin cover sheet macros
 .LP
 In their original incarnation at Bell Laboratories, the
@@ -1865,7 +1865,7 @@ or a letter
 .PP
 Many of these formats are quite useless outside of AT&T, unless you
 customize them heavily for other institutions.
-We prefer simply to ignore them.
+We prefer to ignore them.
 .CW Groff
 supports only the
 .CW \&.TP
@@ -2000,9 +2000,9 @@ Insert a
 if you want a separate cover sheet.
 .ix %end cover sheet macros
 .
-.Ah "Miscellaneous Features
+.Ah "Miscellaneous Features"
 .
-.Bh "Putting Information in a Box
+.Bh "Putting Information in a Box"
 .ix [ms] macros, drawing~a box %key ms macros, drawing a box
 .ix drawing, boxes
 .LP
@@ -2176,7 +2176,7 @@ it continues at the bottom of the next page.
 .ix %end [ms] macros, footnotes %key ms macros, footnotes
 .ix %end footnotes, [ms] macros %key footnotes, ms macros
 .
-.Bh "Two-Column Processing
+.Bh "Two-Column Processing"
 .ix %begin two-column processing, [ms] macros %key two-column processing, ms macros
 .ix %begin [ms] macros, two-column processing %key ms macros, two-column processing
 .LP
@@ -2187,7 +2187,7 @@ multiple columns and format documents,
 such as newsletters or data sheets, that are best suited to a
 multicolumn format.
 .PP
-To switch to two-column mode, simply insert the
+To switch to two-column mode, insert the
 .CW .2C
 .ix %begin [.2C] macro ([ms]) %key 2C macro ms
 macro.
@@ -2224,8 +2224,8 @@ For more than two columns, you can use the
 macro.
 This macro takes two arguments,
 the column width and the gutter width, and
-creates as many columns as will fit in the line length.
-For example, if the line lengths are 7 inches, the request:
+creates as many columns as can fit in the line length.
+For example, if the line length is 7 inches, the request:
 .Ps
 \&.MC 2i .3i
 .Pe
@@ -2242,10 +2242,10 @@ the
 .CW .RC
 macro can be used to break columns.
 If you are in the left column,
-following text will go to the top of the next column.
+following text goes to the top of the next column.
 If you are in the right column,
 .CW .RC
-will start a new page.
+starts a new page.
 .ix %end [.1C] macro ([ms]) %key 1C macro ms
 .ix %end [.2C] macro ([ms]) %key 2C macro ms
 .ix %end [.MC] macro ([ms]) %key MC macro ms
@@ -2328,7 +2328,7 @@ take effect on the same page;
 changes to a header string take
 effect at the top of the next page).
 .
-.Ah "Problems on the First Page
+.Ah "Problems on the First Page"
 .ix problems~on first page ([ms]) %key problems on first page (ms)
 .ix [ms] macros, problems~on first page %key ms macros, problems on first page
 .LP
@@ -2354,8 +2354,8 @@ The trick is to invoke the internal
 .ix [ms] macros, [.NP] macro %key ms macros, [.NP] macro
 .I "new page" )
 macro at the top of your text.
-This will not actually start a new page,
-but will execute the various
+This does not actually start a new page,
+but executes the various
 internal goings-on that normally take place at the top of a page.
 .CW Groff
 and some BSD-based versions of

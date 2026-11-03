@@ -4,7 +4,7 @@ Ralph Corderoy's $Revision: 1.1 $.
 .
 .\" TROFF source proof read
 .\" by
-.\" Andreas Kähäri <andreas.kahari@unix.net>
+.\" Andreas Kï¿½hï¿½ri <andreas.kahari@unix.net>
 .
 .so utp.mac
 .utp
@@ -50,7 +50,7 @@ is not available.
 For more information on the full implementation of these macros, please
 feel free to contact us in care of the publisher.
 .
-.Ah "Summary of the Macros
+.Ah "Summary of the Macros"
 .LP
 The following list summarizes the user-callable macros in the
 .CW format
@@ -78,7 +78,7 @@ Start an interoffice memo.
 .IP "\f(CW.TO\fP
 List of names following
 .CW ".TO """""
-will be placed in separate distribution list.
+are placed in separate distribution list.
 .\" The printed copy of the UTP typesat the above line in
 .\" courier.  This must be a bug in the UTP.
 .\" /Andreas 2002-10-13
@@ -90,10 +90,10 @@ Maximum of five such
 lines.
 .IP "\f(CW.DA\fP \fIdate\fP
 .I date
-is date of the memo; will be included in page footer.
+is the date of the memo, included in the page footer.
 .IP "\f(CW.ND\fP \fIdate\fP
 .I date
-is date of the memo; will be omitted from page footer.
+is the date of the memo, omitted from the page footer.
 .IP "\f(CW.FR\fP \fIname\fP
 .I name
 is sender.
@@ -204,7 +204,7 @@ If width and height are not specified, scale to size of contents.
 .\" .Rn "Book errata: missing full stop after close parenthesis.
 .\" Fixed by inserting full stop.  /Andreas 2002-10-13
 .IP "\f(CW.Tc\fP \fIlevel\fP
-Specify what level of heading will be saved in the table of contents
+Specify what level of heading is saved in the table of contents
 (\f(CWAh\fP to \fPDh\fP).
 .IP "\f(CW.Ti\fP \fItext\fP
 Title\(emgoes in left page footer.

@@ -588,7 +588,7 @@ words
 .CW mark
 and
 .CW lineup ,
-as you will see later.
+as we show later.
 .ix %begin [eqn] preprocessor, subscripts %key eqn preprocessor, subscripts
 .ix %begin [eqn] preprocessor, superscripts %key eqn preprocessor, superscripts
 .
@@ -775,7 +775,7 @@ as a subscript.
 Use braces to make your intent perfectly clear whenever you are
 unsure of how
 .CW eqn
-will treat the equation.
+treats the equation.
 You can also use braces within braces, as in the line:
 .Ps
 #e sup {i sup {k+1}}#
@@ -1245,7 +1245,7 @@ A
 .CW from
 does not necessarily need an accompanying
 .CW to ,
-as you will see in the following example:
+as we show in the following example:
 .Ps
 #lim from {m -> inf} sum from i=0 to m c sup i#
 .Pe

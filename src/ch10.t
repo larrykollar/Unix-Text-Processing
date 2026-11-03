@@ -505,6 +505,7 @@ between the dashes or dots.
 The description
 .CW "dashed .1"
 results in dashes spaced .1 inch apart.
+.
 .Bh "\f[CB]pic\fP's Drawing Motion"
 .ix [pic] preprocessor, drawing~motion %key pic preprocessor, drawing motion
 After you have named an object and determined its size,
@@ -523,7 +524,7 @@ The
 .CW pic
 program, by default, places a single object at the left margin.
 If you name three objects in the same description,
-where will
+where does
 .CW pic
 draw them?
 .page 259
@@ -637,10 +638,10 @@ The next example shows how to draw a line of a specified
 length and how to move a specified distance.
 The
 .CW pic
-program assumes that any value is in inches
-so you can say
+program assumes that any value is in inches,
+so you can use either
 .CW 2i
-or simply
+or
 .CW 2
 to indicate 2 inches.
 .Ps
@@ -1391,8 +1392,8 @@ in the service of new material.
 .
 .Bh "Place and Position Notation"
 .ix [pic] preprocessor, place~and~position notations %key pic preprocessor, place and~position notations
-Can you locate the starting points of the arrows on this
-ellipse?
+Can you locate the starting points
+xof the arrows on this ellipse?
 .PS
 ellipse
 arrow up left from upper left of last ellipse
@@ -1493,8 +1494,8 @@ to the ellipse:
 .Ps
 Elp: ellipse
 .Pe
-then we have either of the following ways to refer to
-specific points:
+then we have either of the following ways
+to refer to specific points:
 .Ps
 arrow up left from upper left of Elp
 arrow up left from Elp.nw
@@ -1560,11 +1561,11 @@ box "A"; box with .se at last box.nw "B"
 box with .sw at last box.ne "C"
 .PE
 .PP
-The next example illustrates again the problem of placing
-text.
+The next example illustrates again
+the problem of placing text.
 .ix [pic] preprocessor, placing text~in~a drawing %key pic preprocessor, placing text in~a drawing
-This time we want to position callouts above and below
-the text.
+This time we want to position callouts
+above and below the text.
 .page 275
 .KS
 .PS
@@ -1577,8 +1578,7 @@ Path: box ht .25 wid 4.5 \
 "\f[C]PATH=.:/bin:/usr/bin:/usr/local/bin:/usr/fred/bin\fP"
      #
      # Describe line down from box and put top of ellipse
-     # at end of last line; label will be printed
-     # in 9-point italic.
+     # at end of last line; print label in 9-point italic.
      #
 line down from 1/3 <Path.sw, Path.s>
 ellipse "\f[I]\s9Current" "Directory\s0\fP" with .t at \
@@ -1600,7 +1600,7 @@ end of last line
 .PE
 .KE
 We position the text inside a long box.
-Because the callout lines will point to the box
+Because the callout lines point to the box
 that surrounds the text rather than to the text itself,
 we try to specify approximately where to draw the lines.
 .Ps
@@ -1614,8 +1614,7 @@ Path: box ht .25 wid 4 \\
 "\\f(CWPATH=.:/bin:/usr/bin:/usr/local/bin:/usr/fred/bin\\fR"
      #
      # Describe line down from box and put top of ellipse
-     # at end of last line; label will be printed
-     # in 9-point italic.
+     # at end of last line; print label in 9-point italic.
      #
 line down from 1/3 <Path.sw, Path.s>
 ellipse "\\fI\\s9Current" "Directory\\s0\\fP" with .t at \\
@@ -1637,20 +1636,22 @@ ellipse "\\fI\\s9Site-Specific" "Programs\\s0\\fP" with .t at \\
 end of last line
 \&.PE
 .Pe
-Admittedly, positioning callouts is guesswork; it took
-several iterations to align the callouts with the
-appropriate text.
+Admittedly, positioning callouts is guesswork;
+it took several iterations
+to align the callouts with the appropriate text.
+.
 .Bh "Defining Object Blocks"
 .ix [pic] preprocessor, defining object~blocks %key pic preprocessor, defining object blocks
-You can describe any sequence of motions or objects as
-a block.
-A block is defined between a pair of brackets (\c
+You can describe any sequence of motions or objects
+as a block.
+Enclose a block in a pair of brackets (\c
 .CW [] ).
-You can also give the block a placename, beginning with an
-uppercase letter.
+You can give the block a placename,
+beginning with an uppercase letter.
 Some of the objects that we have created in this chapter,
-such as a square, triangle, or compass, could be defined as
-blocks and named so that we can refer to each one
+such as a square, triangle, or compass,
+could be defined as blocks
+and named so that we can refer to each one
 as a single object.
 .Ps
 Rtriangle: [
@@ -1690,16 +1691,16 @@ The number 3 is printed at the center of
 .CW Rtriangle
 according to
 .CW pic .
-But in fact its position is the side opposite the right
-angle.
+But in fact its position is the side
+opposite the right angle.
 The
 \(lqcenter\(rq
 of this block is at the center of a box that
 shares the bottom and left sides of the right triangle.
 .page 277
 .PP
-You can also refer to positions for a single block using
-brackets.
+You can also refer to positions for a single block
+using brackets.
 The reference
 .CW [] .\c
 .CW w
@@ -1713,14 +1714,14 @@ This is the variable that
 accesses to determine how long a line should be.
 Shortly, we'll look at all the variables preset by
 .CW pic .
-Generally, what you describe within a block remains local
-to the block.
+Generally, what you describe within a block
+remains local to the block.
 Thus,
 .CW linewid
-would not affect other lines outside the block.
+does not affect other lines outside the block.
 Otherwise, resetting a variable has an effect not only
-on other objects in that drawing but also on other
-drawings in that file.
+on other objects in that drawing,
+but also on other drawings in that file.
 .PP
 The best use of blocks in a drawing is to define
 .ix [pic] preprocessor, use~of object~blocks %key pic preprocessor, use of object~blocks
@@ -1834,7 +1835,8 @@ move right 1 from WALL.e; "Telephone Line"
 move down .5 from MOD.s "Modem"
 .PE
 .KE
-.Bh "Resetting Standard Dimensions
+.
+.Bh "Resetting Standard Dimensions"
 .ix [pic] preprocessor, redefining standard dimensions %key pic preprocessor, redefining standard dimensions
 The
 .CW pic
@@ -1851,7 +1853,7 @@ You can redefine these variables anywhere in a
 description.
 A variable set inside one
 .CW pic
-description will remain in effect for other descriptions
+description remains in effect for other descriptions
 within the same file.
 One exception is a variable defined within a block;
 that definition is local to the block.
@@ -1915,6 +1917,8 @@ linewid = 2
 arrow
 .sp 1v
 .PE
+.\" XXX include differences between pic and gpic
+.
 .Bh "Controlling the Dimensions of a Drawing"
 .ix [pic] preprocessor, controlling~the dimensions~of~a drawing %key pic preprocessor, controlling the dimensions~of~a drawing
 .ig
@@ -1926,6 +1930,11 @@ arrow
 	faithfully between the .Ps/.Pe utp macro pairs,
 	modified code was used to simulate the output.
 	--Michael Hobgood
+
+     .PF is defined in groff_ms (1.23), but it doesn't
+     appear to actually flyback (at least in -ms). It
+     looks like gpic's code actually handles it.
+     -- Larry K, 5 Oct 2026
 ..
 The
 .CW textwid
@@ -1935,10 +1944,10 @@ variables control the width and height respectively, of
 .ix [pic] preprocessor, automatic scaling %key pic preprocessor, automatic scaling
 the area used by
 .CW pic
-on a page.
-(It doesn't refer to the amount of space occupied by an
-item of text).
-These values can also be set as arguments to the
+on a page
+(it doesn't refer to the amount of space
+occupied by an item of text).
+You can also set these values as arguments to the
 .CW .PS
 macro.
 .Ps
@@ -1947,11 +1956,12 @@ macro.
 .page 280
 When you specify the width or height or both,
 .CW pic
-scales the drawing to that size regardless of the
-absolute dimensions that are specified within the drawing.
+scales the drawing to that size,
+regardless of the absolute dimensions
+specified within the drawing.
 The only thing it doesn't scale adequately is text.
 It can be easier to describe a drawing with simple units
-and have them scaled more precisely to fit on the page
+and scale them more precisely to fit on the page
 than to work with exact sizes.
 .PP
 A good example of scaling is turning the rounded box
@@ -1968,15 +1978,15 @@ Although the
 description is made up of 1-inch lines, the actual screen
 produced by
 .CW pic
-will be 4 inches wide and 2 inches high.
+is 4 inches wide and 2 inches high.
 .PP
 Normally, you want
 .CW troff
-to output the regular lines of text on lines that
-follow the
+to output the regular lines of text
+on lines that follow the
 .CW pic
 drawing.
-If the
+If you use the
 .CW .PF
 (\c
 .I F
@@ -1996,13 +2006,14 @@ macro package
 .CW .PF
 as the page footer macro).
 .FE
-macro is used in place of
+macro in place of
 .CW .PE ,
 .CW troff
-will return to the position it held before the
+returns to the position it held before outputting the
 .CW pic
-drawing was output.
-This feature is useful if we want to put formatted text
+drawing.
+This feature is useful
+if we want to put formatted text
 within our large screen.
 .Ps
 \&.PS 2 4
@@ -2033,20 +2044,20 @@ Please login:
 .LP 0
 You have to remember to provide the space after the text
 to push the current position past the end of the screen.
-Otherwise subsequent text will also appear within the box.
+Otherwise subsequent text also appears within the box.
 .
 .Bh "Debugging \f[CB]pic\fP Descriptions"
 .ix debugging, [pic] %key debugging, pic
 .ix [pic] preprocessor, debugging %key pic preprocessor, debugging
 You can invoke the
 .CW pic
-preprocessor on its own to have it check through your file
+preprocessor on its own
+to have it check through your file
 and report any syntax errors.
 This can save a lot of time, especially if your file contains
-other text that will be sent to
+other text sent to
 .CW troff ,
-assuming that you wouldn't want the file processed unless
-the
+assuming that you wouldn't want the file processed unless the
 .CW pic
 descriptions succeeded.
 If you have the file
@@ -2061,42 +2072,45 @@ $ \f[CB]pic circles\fP
 .Pe
 If processing is successful,
 .CW pic
-output will stream past on your terminal screen.
+output streams past on your terminal screen.
 If
 .CW pic
-finds an error in your description, it will print the
-error message.
+finds an error in your description,
+it prints an error message.
 .PP
 If you have several
 .CW pic
-descriptions in a file, or you have regular text surrounding
-a
+descriptions in a file,
+or you have regular text surrounding a
 .CW pic
-description, you can send the output to
+description, send the output to
 .CW /dev/null ,
-and only the error messages will be displayed on your screen.
+and
+.CW pic
+displays only the error messages on your screen.
 .PP
 You may want to invoke
 .CW pic
-on its own simply to look at the output
-.CW pic
-produces.
+on its own
+to look at the output it produces.
 For a discussion of the output that
 .CW pic
 sends to
 .CW troff ,
 read about line drawing in Chapter 14.
+.
 .Ah "From Describing to Programming Drawings"
 .ix [pic] preprocessor, programming drawings %key pic preprocessor, programming drawings
 As we look at more advanced examples of
 .CW pic ,
-you may begin to question the amount of description that
-is required to produce a drawing.
-You may be amazed that drawings that look so simple require
-so many words.
+you may begin to question
+the amount of description
+required to produce a drawing.
+You may be amazed that drawings that look simple
+require many words.
 After you realize that you are approaching the limits of
-what can be described using an English-like syntax, you may
-want to look at
+what can be described using an English-like syntax,
+you may want to look at
 .CW pic
 from another perspective.
 You can view
@@ -2106,37 +2120,47 @@ as a programming language for generating graphics.
 .PP
 Looking at this other side of
 .CW pic ,
-you will find that the descriptions are perhaps more difficult
-to read but much easier to write.
-The purpose of a
-\(lqprogrammed\(rq
+you see the descriptions are perhaps more difficult to read
+but much easier to write.
+The purpose of a \(lqprogrammed\(rq
 .CW pic
-description is not to imitate a verbal description, but to
-minimize user input, to provide structures that can be
-used to produce several kinds of drawings and to make it
-easier to change a drawing.
+description is not to imitate a verbal description,
+but to minimize user input;
+to provide structures you can use
+to produce several kinds of drawings,
+and to make it easier to change a drawing.
 .PP
-The focus of the rest of this chapter will be to introduce
+The rest of this chapter introduces
 many of these special features of
 .CW pic ,
 including variables, expressions, and macros.
-But there are more possibilities than we can attempt to
-describe.
+But there are more possibilities
+than we can attempt to describe.
 The
 .CW pic
-program follows the general UNIX philosophy that any program
-should be able to accept input from any program and
-direct its output to another program,
-.CW troff .
-Thus,
+program follows the general UNIX philosophy
+that any program should be able to accept input from any program
+and direct its output to another program
+(in this case,
+.CW troff ).
+Thus, you can build
 .CW pic
-descriptions can be built by other UNIX utilities.
+descriptions with other UNIX utilities.
 For instance, you might develop an
 .CW awk
 program specifically designed for creating
 flow charts.
+Another example: the
+.CW grap
+program has a language for creating graphs,
+outputting
+.CW pic
+source for typesetting.
+While the original source is not generally available,
+web searches should find several clones.
 .page 282
-.Bh "Locating Objects Using Cartesian Coordinates
+.
+.Bh "Locating Objects Using Cartesian Coordinates"
 .ix [pic] preprocessor, locating~objects~using Cartesian~coordinates %key pic preprocessor, locating objects~using Cartesian~coordinates
 For more exact positioning of objects and text,
 .CW pic
@@ -2169,7 +2193,7 @@ circle "1,1" at 1,1
 circle "1,0" at 1,0
 circle "2,1" at 2,1
 .PE
-The center of the circle is placed at the specified coordinates.
+The center of the circle is at the specified coordinates.
 You could also write:
 .Ps
 circle with .t at 1,1
@@ -2177,16 +2201,16 @@ circle with .t at 1,1
 and it would place the top of the circle at that position.
 A reference to
 .CW "last circle"
-would still locate the center of the circle, but a line
-drawn
+still locates the center of the circle,
+but a line drawn
 .CW "from 1,1"
-would begin at the top of the circle.
+begins at the top of the circle.
 .PP
-Note that the position of 0,0 will not always be the same
-place on the page.
-The first object drawn is the point of reference; movement
-to the left of that point will cause 0,0 to be moved over
-toward the center of the page.
+Note that the position of 0,0 is not always
+the same place on the page.
+The first object drawn is the point of reference;
+movement to the left of that point
+moves 0,0 toward the center of the page.
 .Ps
 box ht 0.3 wid 0.3 "0,0"
 move to 1,0
@@ -2202,23 +2226,24 @@ box "1,0" same
 move to -1,0
 box "-1,0" same
 .PE
-It may be helpful to sketch a drawing on graph paper and
+It may be helpful to sketch a drawing on graph paper
 then translate it into a
 .CW pic
 description.
-Standard graph paper is divided into quarter-inch squares.
+Standard graph paper uses quarter-inch squares.
 When you use
 .page 283
-graph paper, you might find it useful to set the
+graph paper, set the
 .CW scale
 variable to 4.
-All dimensions and positions will be divided by the value of
+This divides all dimensions and positions
+by the value of
 .CW scale ,
 .ix [pic] preprocessor, scaling %key pic preprocessor, scaling
 which is 1 by default.
 .PP
-It is much easier to describe a drawing in full units rather
-than fractions.
+It is much easier to describe a drawing in full units
+rather than fractions.
 Look at the following description:
 .Ps
 scale=4
@@ -2227,10 +2252,10 @@ line from 6,0 to 8,1 then to 8,4 then to 2,4 then to 0,3
 line from 6,3 to 8,4
 .Pe
 The distance between 0 and 1 is normally 1 inch.
-Because we are scaling this drawing by 4, the actual distance
-is \(14 inch.
-It seems easier to describe a point as 2,3 rather than
-0.5,0.75.
+Because we are scaling this drawing by 4,
+the actual distance is \(14 inch.
+It seems easier to describe a point as 2,3
+rather than 0.5,0.75.
 This description produces a two-dimensional box:
 .PS
 scale=4
@@ -2247,23 +2272,25 @@ You can also use
 .CW scale
 to change the basic unit of measurement from inches to any
 other unit.
-For instance, setting
-.CW scale
-to 6 will cause all dimensions and coordinates to be
-interpreted in picas (6 picas to the inch).
+For example, if you are part of
+the vast majority of people around the world
+who prefer metric measurements,
+.CW "scale 2.54"
+specifies all dimensions and coordinates in centimeters.
 .PP
 Splines and arcs are much easier to draw using coordinates.
 .ix [pic] preprocessor, [arc] %key pic preprocessor, [arc]
 .ix [pic] preprocessor, spline %key pic preprocessor, spline
-In the following example, we use a spline to draw a smooth
-curve between several points on a crude graph.
+In the following example,
+we use a spline to draw a smooth curve
+between several points on a crude graph.
 .PS
 scale=4
 line from 0,0 to 0,4
 line from 0,0 to 9,0
 spline from 0,0 to 3,3 then to 5,.25 then to 8,1.5
 .PE
-The graph is produced by the following description:
+The following description produces the graph:
 .Ps
 scale=4
 line from 0,0 to 0,4
@@ -2271,10 +2298,10 @@ line from 0,0 to 9,0
 spline from 0,0 to 3,3 then to 5,.25 then to 8,1.5
 .Pe
 .PP
-You can also specify relative coordinates as an expression
-within parentheses.
-It has the effect of adding or subtracting from the absolute
-coordinates of a particular place.
+You can also specify relative coordinates
+as an expression within parentheses.
+It has the effect of adding or subtracting
+from the absolute coordinates of a particular place.
 .page 284
 .Ps
 circle rad .5
@@ -2290,7 +2317,7 @@ means
 This description produces:
 .	\" Note:
 .	\" need to reset scale to 1 after the above example
-.	\" or display will be to small.
+.	\" or display will be too small.
 .PS
 scale = 1
 circle rad .5
@@ -2301,11 +2328,12 @@ by moving from a compass point:
 .Ps
 box with .sw at last box.ne+(.05,-.05)
 .Pe
+.
 .Bh "Expressions and User-Defined Variables"
 .ix [pic] preprocessor, expressions %key pic preprocessor, expressions
-An expression can be used to supply the dimensions or the
-position of an object.
-Any of the following operators can be used in an expression:
+Use an expression to supply the dimensions
+or the position of an object.
+You can use any of the following operators in an expression:
 .CW  + ,
 .CW  - ,
 .CW  * ,
@@ -2318,15 +2346,14 @@ and
 	--Michael Hobgood
 ..
 (modulo).
-Expressions can be used to manipulate the built-in variables
-as follows:
+Use expressions to manipulate built-in variables:
 .Ps
 circle rad circlerad/2
 .Pe
-This will draw a circle with a radius that is half the size
-of the default radius.
+This draws a circle with a radius
+half the size of the default radius.
 An expression can also refer to the value of placenames.
-The coordinates of any object can be specified as
+You can specify the coordinates of any object as
 .CW .x
 and
 .CW .y .
@@ -2342,9 +2369,9 @@ BoxA.wid#The width of \f[CW]BoxA\fP
 last circle.rad#The radius of the last circle
 .TE
 .RE
-The next description defines a box and then divides the
-specified height and width of that box to produce
-a second box half that size.
+The next description defines a box
+and then divides the specified height and width of that box
+to produce a second box half that size.
 .Ps
 Boxa: box ht 2 wid 3; arrow
 box ht Boxa.ht/2 wid Boxa.wid/2
@@ -2374,14 +2401,14 @@ _
 .TE
 .Te
 .PP
-In giving the size or length of an object, you can name and
-define your own variables.
+In giving the size or length of an object,
+you can name and define your own variables.
 .ix [pic] preprocessor, user-defined variables %key pic preprocessor, user-defined variables
-A variable is any lowercase name that is not reserved as part
-of the
+A variable is any lowercase name that is not reserved
+as part of the
 .CW pic
 language.
-A variable can be defined as a constant or an expression.
+You can define a variable as a constant or an expression.
 .Ps
 a=ellipsewid*3
 b=ellipseht/2
@@ -2393,24 +2420,25 @@ a=ellipsewid*3
 b=ellipseht/2
 ellipse wid a ht b
 .PE
-
+.
 .Bh "Defining Macros"
 .ix %begin [pic] preprocessor, macros %key pic preprocessor, macros
 .ix [pic] preprocessor, defining macros %key pic preprocessor, defining macros
 With macros, you can predefine a series of objects or motions
-that will be included in the description each time you
-refer to the macro by name.
+included in the description
+each time you refer to the macro by name.
 .Ps
 define \f[I]name %
           definition
 	         %\fP
 .Pe
-A percent sign (%) is used here as the delimiter but any
-character not in the definition can be used.
+A percent sign (%) is used here as the delimiter,
+but you can use any
+character not in the definition.
 The format of the
 .CW define
 statement is shown on three lines for readability only;
-a simple macro could be put on a single line.
+you can put a simple macro on a single line.
 The definition can extend across as many lines as necessary.
 .PP
 When you refer to
@@ -2422,12 +2450,11 @@ When you refer to
 ..
 in your description, the
 .CW pic
-program will replace it with the definition.
+program replaces it with the definition.
 .PP
 Macros can also take arguments.
-These arguments are specified in the definition as $1 thru $9.
-They will be replaced by the arguments supplied when the macro
-is invoked.
+Specify these arguments in the definition as $1 thru $9.
+The supplied arguments replace them when invoking the macro.
 .page 286
 .Ps
 name(arg1, arg2, arg3)
@@ -2437,16 +2464,16 @@ A macro does not exist as a place or position as far as
 is concerned.
 The
 .CW pic
-program simply replaces the macro name with the lines defined
-in the macro.
+program replaces the macro name
+with the lines defined in the macro.
 You cannot refer to the macro as you would refer to a block.
 However, you can set positions from within a macro.
 .PP
 In the following example, the
 \(lqtail\(rq
-hanging down from the
-box and the list of items drawn to the right of it were
-produced by a macro.
+hanging down from the box
+and the list of items drawn to the right of it
+were produced by a macro.
 .PS
 # The original printed book has the text in the box
 # boldfaced.  Although not in the example code to
@@ -2469,50 +2496,52 @@ dept(Customer Support)
 .PE
 In the
 .CW pic
-description that produced this drawing, the box is drawn
-explicitly and a short line is started down from the
-bottom of the box.
+description that produced this drawing,
+it draws the box explicitly
+and starts a short line down from
+the bottom of the box.
 Then a macro named
 .CW dept
-is invoked to produce each item on the list.
+produces each item on the list.
 .Ps
 define dept %
               line down .25
             { line right .15; move right .2; "$1" ljust }
             %
 .Pe
-In this macro, after a line down is described, the rest
-of the description is put within braces to reserve the
-starting position for the next macro call.
-A short line is drawn, followed by a move to place the text
+In this macro, after the line down,
+the rest of the description uses braces
+to reserve the starting position
+for the next macro call.
+It draws a short line,
+followed by a move to place the text
 in the correct position.
-Quotation marks are placed around the argument because
-the argument will contain a text label.
+It places quotation marks around the argument
+because the argument contains a text label.
 .PP
-This macro is invoked for the first item as:
+We invoke this macro for the first item as:
 .Ps
 dept(Controller)
 .Pe
 .CW Controller
-is supplied as the first argument, which the macro inserts
+is the first argument, and the macro inserts it
 as a text object.
-Notice that the argument in the definition is quoted (\c
+Remember, in the definition quotes the first argument (\c
 .CW \(dq$1\(dq )
-so that the actual text when specified does not have to be
-quoted.
+so the actual text does not have to be quoted.
 .page 287
 .PP
 The previous drawing was modeled after an example shown in
 .I "Estimating Illustration Costs: A Guide"
 published by the Society for Technical Communication.
 The guide considered this drawing to be of medium difficulty
-and estimated that it would require an hour of an illustrator's
-time.
-It took ten to fifteen minutes to design and execute this
-description for
+and estimated that it would require
+an hour of an illustrator's time.
+It took ten to fifteen minutes
+to design and execute this description for
 .CW pic ,
-including correcting some syntax errors and formatting for
-the laser printer.
+including correcting some syntax errors
+and formatting for the laser printer.
 Here's the complete description of the drawing:
 .Ps
 \&.PS
@@ -2531,26 +2560,27 @@ dept(Customer Support)
 \&.PE
 .Pe
 .PP
-The second example of macro use is probably harder to read
-than it is to write.
+The second example of macro use
+is probably harder to read than it is to write.
 Let's look at it in portions.
-The purpose of the drawing is to represent a network of
-computers.
-We decided to use three types of objects to represent each
-type of computer: a square, a triangle, and small circle.
-These objects will appear in a hierarchy and lines will
-be drawn to connect an object on one level with an object on
-the level below it.
+The purpose of the drawing
+is to represent a network of computers.
+We decided to use three types of objects
+to represent each type of computer:
+a square, a triangle, and small circle.
+These objects appear in a hierarchy,
+and lines connect an object on one level
+with an object on the level below it.
 Before starting to describe it in
 .CW pic
 terms, we prepared a rough sketch of the
 drawing on graph paper.
 This made us realize that we could easily determine the
-coordinate points of objects; thus, all the macros are set
-up to accept coordinate positions.
+coordinate points of objects;
+thus, all the macros are set up
+to accept coordinate positions.
 .PP
-Comments, beginning with #, describe the user-supplied
-arguments.
+Comments, beginning with #, describe the user-supplied arguments.
 Following are the definitions for three macros:
 .CW backbone
 (a box),
@@ -2582,34 +2612,36 @@ define endpt %
          EP$1: last circle.n
          %
 .Pe
-Because each type of object maintained the same height (or
-position on the y-axis), a variable
+Because each type of object maintained the same height
+(or position on the y-axis), we defined a variable
 .CW ycoord
-was set up to supply that position from the
+to supply that position from the
 .CW top
 of the drawing.
 (The top of the drawing is defined by another variable).
 .PP
-Each of these macros requires that you supply an x-axis
-coordinate as the first argument.
-This argument is also used to assign a unique placename that
-is used later when we draw lines between objects.
+Each of these macros requires you
+to supply an x-axis coordinate as the first argument.
+This argument also assigns a unique placename
+that we use later when we draw lines between objects.
 .PP
 The
 .CW backbone
 and
 .CW local
 macros also take a second argument for a label.
-Handling text inside a macro definition is especially
-convenient if you are going to change the font
-and point size.
+Handling text inside a macro definition
+is especially convenient
+if you change the font and point size.
 .PP
-The next task is to connect the backbone systems to the
-local systems and the local systems to endpoints.
-Although we know which types of objects are connected, not
-all objects are connected in the same way.
-We decided that the macros require two arguments to supply
-the x-coordinate for each of the two objects.
+The next task is to connect the backbone systems
+to the local systems,
+and the local systems to endpoints.
+Although we know which types of objects are connected,
+not all objects are connected in the same way.
+We decided that the macros require two arguments
+to supply the x-coordinate
+for each of the two objects.
 .Ps
 define BtoL %
             # $1 = x coord of backbone; $2 = x coord of
@@ -2657,8 +2689,8 @@ line from LO13 to LO17
 "\\s8Personal Computers\\s0" at 13,1
 "\\s12\\fBA Network of Computers\\s0\\fR" ljust at 10,top
 .Pe
-Notice that arguments supplied to a macro are separated by
-commas and that an argument may contain a space.
+Commas separate macro arguments,
+and an argument may contain a space.
 Here's what the description produces:
 .PS
 scale = 4
@@ -2713,67 +2745,61 @@ line from LO13 to LO17
 "\s8Personal Computers\s0" at 13,1
 "\s12\fBA Network of Computers\s0\fP" ljust at 10,top
 .PE
-Twelve objects are specified and eleven lines are drawn between
-the objects.
-One line is explicitly drawn connecting the second triangle
-to the third triangle.
-It didn't make sense to define a macro for this single instance.
+This picture specifies twelve objects,
+and draws eleven lines between the objects.
+One line explicitly connects
+the second triangle to the third triangle.
+It didn't make sense to define a macro for one instance.
 But if you were setting this up for others to use,
 such a macro would be necessary.
 .PP
-Shortly, we will be looking at several relatively new features
-that make
+Shortly, we look at features that make
 .CW pic
 even more powerful for generating pictures.
 In particular, these features allow us to improve our
 effort to generate a diagram of a computer network.
+.
 .Bh "\f[CB]pic\fP's Copy Facility"
 .ix [pic] preprocessor, copy~facility %key pic preprocessor, copy facility
 The
 .CW pic
-program provides an interesting copy facility that has two
-different uses: it allows you to read a
+program provides an interesting copy facility
+that has two different uses: it lets you read a
 .CW pic
-description from a remote file, and it allows you to read
+description from a remote file,
+and lets you read lines of data
 .ix [pic] preprocessor, reading description~from remote file %key pic preprocessor, reading description from remote file
-lines of data and pass them as individual arguments to a macro.
+and pass them as individual arguments to a macro.
 .PP
 If you are going to use
 .CW pic
 regularly, you should think about maintaining a macro library.
-You might define frequently used objects, such as triangles,
+You might define frequently used objects,
+such as triangles, and place them in their own file.
 .ix [pic] preprocessor, library~of frequently~used objects %key pic preprocessor, library of frequently~used objects
-and place
 .page 290
-them in their own file.
-You can include the file in your description with the
-following line:
+You can include the file in your description
+with the following line:
 .Ps
 copy "/usr/lib/macros/pic/triangles"
 .Pe
-Putting the filename in double quotation marks is required.
+You have to put the filename in double quotation marks.
 Any
 .CW .PS /\c
 .CW .PE
-macros that are found in the remote file are ignored.
+macros in the remote file are ignored.
+.\" XXX test: does gpic ignore .PS/.PE macros in a copy operation?
 .PP
-You might also define a set of related macros for a particular
-type of drawing, such as an organizational chart or a flow
-diagram.
-After you have taken the time to create and test a description,
-you should consider structuring it so that the forms can be
-easily used in other drawings.
+You might also define a set of related macros
+for a particular type of drawing,
+such as an organizational chart
+or a flow diagram.
+After taking the time to create and test a description,
+consider structuring it
+so you can easily used it in other drawings.
 .PP
-This copy facility replaces an older construct that allowed
-you to redirect input from another file through the
-.CW .PS
-macro.
-.Ps
-\&.PS < triangles
-.Pe
-.PP
-A second use of the copy facility is to read data through
-a macro.
+A second use of the copy facility
+is to read data through a macro.
 We'll show how the
 .CW endpt
 macro from our last example can be designed to use this facility.
@@ -2794,10 +2820,10 @@ The
 .CW pic
 program reads each line of data up to the
 .CW .PE
-and replaces each argument in the macro definition with the
-corresponding field from each line.
-In this example, the macro is executed seven times, once
-for each line of data.
+and replaces each argument in the macro definition
+with the corresponding field from each line.
+In this example, the macro is executed seven times,
+once for each line of data.
 .PP
 We could put the data in a separate file, named
 .CW endpt.d ,
@@ -2811,7 +2837,7 @@ copy "endpt.d" thru endpt
 The double quotation marks are required.
 Now the
 .CW endpt
-macro will be executed for each line in the file
+macro executes for each line in the file
 .CW endpt.d.
 (The filename suffix
 .CW .d
@@ -2820,19 +2846,19 @@ data for a macro call).
 .PP
 You can specify a string that
 .CW pic
-will recognize in the remote file as a signal to stop
-reading input.
+recognizes in the remote file as a signal
+to stop reading input.
 Used with
 .CW "copy thru" ,
 .CW until
 is followed by the string.
 In the following example, the word
 .I STOP
-is used as the string:
+is the string:
 .Ps
 copy "endpt.d" thru endpt until STOP
 .Pe
-You can also use
+You can use
 .CW until
 when you are taking input from the same file:
 .Ps
@@ -2845,7 +2871,7 @@ STOP
 .Pe
 In both cases,
 .CW pic
-will read lines of data until it comes across the string
+reads lines of data until it comes across the string
 .I STOP .
 .PP
 Another way to use
@@ -2860,12 +2886,12 @@ copy "endpt.d" thru %
          EP$1: last circle.n
                     %
 .Pe
-Although the percent sign is used as the delimiter, any
-character not found in the definition could be used.
-The
+Although this example uses the percent sign as the delimiter,
+you can use any character not found in the definition.
+You can put the
 .CW "copy thru"
-statement with the macro definition can be put on a single
-line, which is helpful for short definitions.
+statement with the macro definition
+on a single line, which is helpful for short definitions.
 .Ps
 copy thru % box at $1,$2 %
 1 1
@@ -2874,8 +2900,9 @@ copy thru % box at $1,$2 %
 1 4
 .Pe
 Because you can get a description down to this level,
-basically consisting of functions, you could have a standard
-description file associated with independent data files.
+basically consisting of functions,
+you can create a standard description file
+associated with independent data files.
 You could write a program to build the data files from
 user input or from some other source.
 .ix %end [pic] preprocessor, macros %key pic preprocessor, macros
@@ -2888,8 +2915,8 @@ using the following syntax:
 .Ps
 sh % \f[I]command\fP %
 .Pe
-Again, the percent sign represents any valid delimiter
-character.
+Again, the percent sign represents
+any valid delimiter character.
 The
 .CW pic
 program submits this command to the shell for execution and
@@ -2929,30 +2956,35 @@ loop allows one or more
 .CW pic
 commands to be executed as long as a condition is met
 .\" Original was 'by .05' giving us like 59 boxes instead of 5
+.\" -- LK 28 Sep 2026
 .Ps
 for i=1 to 3 by 0.5 do %
 box ht i; move
 %
 .Pe
-Each time through the loop, the value of the variable
+Each time through the loop,
+.CW pic
+increments the value of the variable
 .CW i
-is incremented by 0.5, producing five boxes of increasing
-height.
+by 0.5, producing five boxes of increasing height.
 The
 .CW by
-clause specifies the amount that the variable is incremented
+clause specifies the amount to increment the variable
 each time through the loop.
-If the
+If you omit the
 .CW by
-clause is omitted, then the variable is incremented by 1.
+clause, then
+.CW pic
+increments the variable by 1.
 The
 .CW %
-is used as the delimiter marking the commands to
+is the delimiter marking the commands to
 be executed on each pass.
 .PP
 The
 .CW if
-statement evaluates an expression to determine if it is true
+statement evaluates an expression
+to determine if it is true
 .ix [pic] preprocessor, [if] conditional~statements %key pic preprocessor, [if] conditional statements
 or false.
 If true,
@@ -2960,24 +2992,30 @@ If true,
 specified
 .CW pic
 commands are executed.
-If false, the
+If false,
+.CW pic
+ignores the
 .CW then
-clause is not acted upon; instead, an
+clause; instead, it looks for an
 .CW else
-clause, if specified, is read and commands specified inside
-it are executed.
+clause.
+If specified,
+.CW pic
+executes commands inside that clause.
 .Ps
 if x > y then % x = y % else % x = x + 1%
 .Pe
 This conditional statement evaluates the expression
 .CW "x > y" .
 If true,
+.CW pic
+sets
 .CW x
-is set to
+to the value of
 .CW y ;
-if false, the value of
+if false, it increments the value of
 .CW x
-is incremented by 1.
+by 1.
 The
 .CW %
 is a delimiter marking the beginning and end of
@@ -2988,9 +3026,9 @@ and
 clauses.
 The expression inside an
 .CW if
-statement can use any of the relational operators that
+statement can use any of the relational operators
 .ix [pic] preprocessor, relational~operators~for [if]~statements %key pic preprocessor, relational operators~for [if]~statements
-are shown in Table 10-4.
+shown in Table 10-4.
 .Ts "\f[CB]pic\fP Relational Operators"
 .TS
 center box;
@@ -3009,8 +3047,8 @@ _
 .TE
 .Te
 .PP
-In addition to enhancements that add more graphics programming
-features to
+In addition to enhancements
+that add more graphics programming features to
 .CW pic ,
 progress has been made in allowing input to be taken from
 bit-mapped graphic terminals and translated into

@@ -4,7 +4,7 @@ Ralph Corderoy's $Revision: 1.1 $.
 .
 .\" TROFF source proof read
 .\" by
-.\" Andreas Kähäri <andreas.kahari@unix.net>
+.\" Andreas Kï¿½hï¿½ri <andreas.kahari@unix.net>
 .
 .so utp.mac
 .utp
@@ -39,6 +39,7 @@ numbered lists and table of contents generation.
 On the other hand, it is much easier to learn the internals of
 .CW ms ,
 and therefore easier to extend it with your own macros.
+.
 .Ah Paragraphs
 .LP
 The basic paragraph types are block and indented.
@@ -135,7 +136,7 @@ and
 .CW pic
 are available in both packages.
 .
-.Ah "Formatting Lists
+.Ah "Formatting Lists"
 .LP
 The
 .CW mm
@@ -152,7 +153,7 @@ In other words, you can get a numbered list by specifying the number as
 a label to an indented paragraph, but you cannot get an automatically
 numbered list.
 .
-.Ah "Change Font
+.Ah "Change Font"
 .LP
 The
 .CW .B
@@ -168,7 +169,7 @@ font, but
 .CW ms
 is limited to two.
 .
-.Ah "Change Point Size
+.Ah "Change Point Size"
 .LP
 Both packages allow you to change point size.
 In
@@ -192,11 +193,11 @@ macro restores the default point size.
 .
 .page 642
 .
-.Ah "Headers and Footers
+.Ah "Headers and Footers"
 .LP
 The
 .CW mm
-macros provide macros for specifying a delimited string that will appear
+macros provide macros for specifying a delimited string that appears
 left justified, centered, and right justified in a page header or
 footer.
 The
@@ -226,7 +227,7 @@ other strings for the footer are
 and
 .CW RF .
 .
-.Ah "Section Headings
+.Ah "Section Headings"
 .LP
 Numbered and unnumbered section headings are available in both packages.
 The

@@ -3,6 +3,22 @@
 	by
 	Manas Laha <mlaha@aero.iitkgp.ernet.in>
 	Proofed on: 2 Nov 2002
+
+  This chapter needs/ed a few metric tonnes of work
+  to bring it up to modern times, and not all the work
+  is in the text here.
+  Many of the commands described here are either lost
+  (or the source was never released) and I've tried to
+  either link to or create replacements. In some cases
+  (especially with syntax checking), groff provides its
+  own built-in diagnostics (warnings/backtracing). In
+  other cases... well, check out my Writer's ScriptBench
+  archive on GitHub:
+  https://github.com/larrykollar/Writers-ScriptBench
+
+  -- Larry Kollar, 6 Oct 2026
+  (yes, I'm embarrassed that it's taken 24 years to
+  get started on UTP Revisited)
 ..
 .so utp.mac
 .utp
@@ -10,10 +26,10 @@
 .ix	miscellaneous UNIX~commands
 .page 293
 .LP
-In this chapter, we present a miscellany of UNIX programs with
-text-processing applications.
-In addition, we introduce several UNIX utilities for
-communications and for reading and writing to tapes and
+In this chapter, we present miscellaneous UNIX programs
+with text-processing applications.
+In addition, we introduce several UNIX utilities
+for communications and for reading and writing to tapes and
 floppy disks.
 They may be useful for transferring
 text and code from a legacy UNIX system to a modern one,
@@ -23,39 +39,41 @@ to transfer data from one system to another.
 UNIX has many standard programs, as a run-down of the table
 of contents for the
 .I "UNIX Reference Manual"
-will demonstrate.
+demonstrates.
 The challenge of UNIX is knowing which programs are appropriate
 for a specific situation.
-No one learns all the commands, but becoming familiar with a
-great number of them can be helpful.
+No one learns all the commands,
+but becoming familiar with a number of them can be helpful.
 It is rather like those of us who collect far more books on
 our shelves than are \(lqneeded,\(rq knowing the reward of finding
 the right book for the right occasion.
 .PP
-At times, you will be surprised when you discover a program with
-rather unusual or specialized capabilities; at other times,
-you may be frustrated by a demanding program or confused by
-inconsistencies from one program to the next.
-These qualities seem to originate from the open design of UNIX,
-and serve to distinguish this text processing environment from
-the closed systems of most word processors.
+At times, you might discover a program
+with unusual or specialized capabilities;
+at other times, you may be frustrated by a demanding program
+or confused by inconsistencies
+from one program to the next.
+These qualities originate from the open design of UNIX,
+and serve to distinguish this text processing environment
+from the closed systems of most word processors.
 .PP
-In some ways, what we are trying to do in this chapter is to
-address problems that arise in typical documentation projects
-and show how one or more UNIX programs can be applied as
-solutions to these problems.
+In some ways, the purpose of this chapter
+is to address problems that arise in typical documentation projects
+and show how you can apply
+one or more UNIX programs
+as solutions to these problems.
 The emphasis is on the interactive use of these programs,
 although many of them can be used effectively in shell scripts
 or as parts of other programs.
-(In the next chapter, we go into more detail about shell
-scripts).
-The commands are presented in sections, grouped by function.
+In the next chapter, we go into more detail about shell
+scripts.
+We present the commands in sections, grouped by function.
 .
 .Ah "Managing Your Files"
 .LP
-One of the realities of using a computer is that you begin
-to think of a document in terms of files, rather than chapters
-or sections.
+One of the realities of using a computer
+is that you begin to think of a document in terms of files,
+rather than chapters or sections.
 You edit and print files;
 create and copy files;
 delete files accidentally and lose your edits;
@@ -71,12 +89,20 @@ Learning to organize and maintain files is essential to working
 on a computer.
 .
 .Bh "Using the File System to Your Advantage"
-One obvious feature of UNIX that makes it easy to handle
-large numbers of files is the hierarchical file system.
-With carefully named files and directories, the pathname,
-which specifies a file's unique place in the file system
-hierarchy, can tell a lot about not only how to get at the
-file, but its contents as well.
+One obvious feature of UNIX,
+that made it easy to handle
+large numbers of files,
+is the hierarchical file system.
+All modern operating systems
+have a hierarchical file system,
+adopting an obvious advantage for themselves.
+.PP
+With carefully named files and directories,
+the pathname,
+that specifies a file's unique place
+in the file system hierarchy,
+can tell a lot about not only how to get at the file,
+but its contents as well.
 For example, MacOS\~X and most Linux systems
 provide a directory under each user's home directory called
 .CW Documents .
@@ -88,7 +114,7 @@ individual chapters are named consistently,
 .CW ch01_intro ,
 .CW ch02_install ,
 and so on.
-As a result, it is easy both to locate a file (Chapter I
+Thus, it is easy both to locate a file (Chapter I
 of the FORTRAN manual for ABC Corp.
 can predictably be found in
 .CW ~/Documents/abc/fortran/ch01_intro )
@@ -100,7 +126,8 @@ you can create an alias that
 .ix Bash shell
 .ix	[alias] command %key alias command
 provides a shorthand way of entering a command.
-In the following example, the alias allows you to think in
+In the following example,
+the alias lets you think in
 terms of manuals instead of directories.
 .Ps
 % \f[CB]alias fortran "cd ~/Documents/abc/fortran; pwd"\fP
@@ -148,9 +175,9 @@ command, the shell searches for a subdirectory with that name
 under any of the directories in the path, changes to it, and
 prints the full directory name.
 .PP
-The search directories in
+Specify the search directories in
 .CW CDPATH
-are specified between colons.
+between colons.
 Directories listed in
 .CW CDPATH
 are searched in order from left to right.
@@ -173,13 +200,13 @@ and other files.
 .Bh "Shell Filename Metacharacters"
 .ix	files, metacharacters
 .LP
-Even with files organized into directories, you can still
-accumulate a lot of files.
-Developing some consistent naming conventions that take
-advantage of shell metacharacters (wildcards) can save you
-a lot of trouble.
-Most users are familiar with metacharacters but many don't
-make full use of them.
+Even with files organized into directories,
+you can still accumulate a lot of files.
+Developing consistent naming conventions
+that take advantage of shell metacharacters (wildcards)
+can save you a lot of trouble.
+Most users are familiar with metacharacters,
+but many don't make full use of them.
 .PP
 In UNIX, you can match any part of a filename with a wildcard.
 Remember that
@@ -187,7 +214,7 @@ Remember that
 matches
 .I zero
 or more characters.
-This gives you more power to select a specific group of files
+This lets you select a specific group of files
 out of a directory.
 In the following example, assume that you want to delete the files
 .CW lock ,
@@ -207,16 +234,28 @@ lecture
 lock
 lock.release
 stocks.c
+$ \f[CB]ls *lock*\f[CW]
+filelocks
+lock
+lock.release
 $ \f(CBrm *lock*\f(CW
 .Pe
 Because
 .CW *
 can match zero characters,
 .CW *lock*
-will match
+matches
 .CW lock
 as well as
-.CW filelocks .
+.CW filelocks
+and
+.CW lock.release .
+If you use
+.CW ls
+with your metacharacter construct first,
+you can list the files that
+.CW rm
+deletes with the same arguments.
 .PP
 The shell interprets the pattern-matching character
 .CW ?
@@ -225,10 +264,12 @@ and the construct
 .I m-n ] [
 to match a range of consecutive characters.
 .PP
-If you name your files consistently, you can use these
-characters to select groups of files.
-For example, in a directory containing a BASIC manual, you
-might have the following list of files:
+If you name your files consistently,
+you can use these characters
+to select groups of files.
+For example,
+in a directory containing a BASIC manual,
+you might have the following list of files:
 .Ps
 $ \f(CBls\f(CW
 appa
@@ -246,13 +287,13 @@ ch05
 letter.613
 .Pe
 .PP
-As usual in any directory, there are a number of auxiliary
-files.
-Some of these files apply to the work on this project, but
-they are not actually part of the book.
-If you've carefully chosen the names of related files, you
-can use metacharacters to select only the files in a particular
-group.
+As usual,
+any directory can accumulate auxiliary files.
+Some of these files apply to the work on this project,
+but are not actually part of the book.
+If you carefully choose the names of related files,
+you can use metacharacters
+to select only the files in a particular group.
 For example:
 .page 296
 .Ps
@@ -270,20 +311,21 @@ ch03
 ch04
 ch05
 .Pe
-If you had entered
+If you enter
 .CW ch0* ,
-miscellaneous files such as
-.CW ch01.old
-would have been included.
-(Note that whenever you use numbers in filenames, as shown here,
-to consistently name a group of related files, you should begin
-the numbering sequence with 01, 02 .\|.\|. rather than 1, 2 .\|.\|.
-This will cause
+.CW ls
+includes miscellaneous files such as
+.CW ch01.old .
+Whenever you use numbers in filenames, as shown here,
+to consistently name a group of related files,
+begin the numbering sequence with 01, 02 .\|.\|.
+rather than 1, 2 .\|.\|.
+This helps
 .CW ls
 to list the files in proper alphabetical order.
 Otherwise,
 .CW ls
-will list
+lists
 .CW ch1 ,
 then
 .CW ch11 ,
@@ -294,43 +336,43 @@ then
 .CW \&...
 and so on.)
 .PP
-Metacharacters have broader applications than for simply listing
-files.
+Metacharacters have broader applications
+than for listing files.
 Look at this example of running
 .CW spell
+.\" XXX replace with aspell
 .ix	[spell] command %key spell command
 on an entire book:
 .Ps
 $ \f(CBspell ch0? app? > spell.out\f(CW
 .Pe
-(We'll be looking at the
+(We'll look at the
 .CW spell
 command later in the section \(lqProofing Documents.\(rq)
 This command is run on the seven files that match one of the two
 patterns specified on the command line.
+.\" XXX rewrite for aspell
 .PP
-Metacharacters are also useful in moving and copying files from
-one directory to another:
+Metacharacters are also useful
+in moving and copying files
+from one directory to another:
 .Ps
 $ \f(CBcp basic/ch0? /work/backup\f(CW
 .Pe
 .
 .Bh "Locating Files"
 .LP
-Although a hierarchical file system with consistent naming
-conventions helps a lot,
-it is still easy to lose track of files,
-or just to have difficulty specifying the ones
+Although a hierarchical file system
+with consistent naming conventions helps a lot,
+you can still lose track of files,
+or finding the ones
 you want to manipulate.
-The number of files contained on even a small hard disk can be
-enormous, and complex directory hierarchies can be difficult to
-work with.
 .PP
-It is possible to lose a file on the file system when you have
-forgotten in which directory you put it.
+You can lose a file on the file system
+when you forget its directory.
 To look through an
 entire file system or a large directory hierarchy,
-most modern UNIX (or even Windows) systems
+most modern systems
 have an indexed search facility
 that can quickly find any files given a name.
 On Mac\~OS\~X, Spotlight is available from the menu bar
@@ -359,16 +401,18 @@ utility probably wins top honors for having the most
 cumbersome command-line syntax in UNIX.
 It's not that
 .CW find
-is a difficult command; its syntax is simply difficult to recall.
+is a difficult command;
+its syntax is difficult to recall.
 You might expect that all you have to enter is
 .CW find
 and the name of the file that you want to look for.
-This is not the way it works, however, which is a nuisance to
-new users.
+This is not the way it works, however,
+which is a nuisance to new users.
 The
 .CW find
 command requires repeated trips to the
-.I "UNIX Reference Manual"
+.I "UNIX Reference Manual" ,
+or its manual page,
 before you grasp its atypical format.
 .page 297
 .PP
@@ -383,33 +427,35 @@ It is expressed as:
 -name \fIfilename\fP
 .Pe
 To obtain a listing of the pathnames of files that are found,
-you have to specify the
+specify the
 .CW -print
-condition as well (\c
+condition (\c
 .CW -name
 must precede
 .CW -print ).
 .PP
-If you wanted to find any file named
+If you want to find any file named
 .CW notes
 in your
 .CW Documents
-directory, here's the command to enter:
+directory, enter the command:
 .Ps
 $ \f(CBfind ~/Documents -name notes -print\f(CW
 /home/fred/Documents/alcuin/notes
 /home/fred/Documents/textp/ch02/notes
 .Pe
-The output is the pathname (starting with the specified file
-system or directory) of each file that is found.
-More than one pathname can be supplied.
+The output is the pathname
+(starting with the specified file system or directory)
+of each file that it finds.
+You can supply more than one pathname.
 A slash
 .CW / ) (
-represents the root directory and thus is used if you want to
+represents the root directory;
+use it if you want to
 search the entire file system.
-Note that the search can take some time, and that if you do not
-have read permissions to a directory you will get a message
-saying that it cannot be opened.
+Note that the search can take some time,
+and that if you do not have read permissions to a directory,
+you get a message saying it cannot be opened.
 .PP
 In the next example, we add another condition,
 .CW -user ,
@@ -417,17 +463,19 @@ and limit the search to files named
 .CW memo
 that are owned by the user
 .CW fred .
-This is helpful when you are searching for a file that has a
+This is helpful when you are searching
+for a file that has a
 .ix	files, searching~for
 .ix	files, locating
 fairly common name and might exist in several users' accounts.
-Filename metacharacters can be used but they must be protected
-from the shell using backslashes or single quotation marks.
-(If you don't do this, the metacharacters will be interpreted
-by the shell as referring to files in the current directory,
-and will not be passed to the
+You can use filename metacharacters,
+but you must protect them from the shell
+using backslashes or single quotation marks.
+If you don't do this, the shell interprets metacharacters
+as referring to files in the current directory,
+and does not pass them to the
 .CW find
-command.)
+command.
 .Ps
 $ \f(CBfind /work /home -name 'memo*' -user fred -print\f(CW
 /home/fred/Documents/alcuin/memo
@@ -437,7 +485,7 @@ $ \f(CBfind /work /home -name 'memo*' -user fred -print\f(CW
 Two directory hierarchies are searched,
 .CW /work
 and
-.CW /usr .
+.CW /home .
 If you did not specify the
 .CW -name
 condition, this command would locate all the files owned by
@@ -447,11 +495,10 @@ in these two file systems.
 Many
 .CW find
 conditions have uses for other tasks besides locating files.
-For instance, it can be useful to descend a directory hierarchy,
-using
+For instance, you can descend a directory hierarchy, using
 .CW find
-to print the complete pathname of each file, as in the following
-example:
+to print the complete pathname of each file,
+as in the following example:
 .Ps
 $ \f(CBfind /work/alcuin -print\f(CW
 /work/alcuin
@@ -463,9 +510,9 @@ $ \f(CBfind /work/alcuin -print\f(CW
 .Pe
 This usage provides a kind of super
 .CW ls
-that will list all files under a given directory, not just those
-at the current directory level.
-As you'll see, this becomes very useful when it comes time to
+that lists all files under a given directory,
+not just those at the current directory level.
+This becomes very useful when you want to
 back up your files.
 You could also use
 .CW "ls -R" ,
@@ -474,26 +521,28 @@ but
 does not prepend the file names with their paths.
 .page 298
 .PP
-The longer you work with a UNIX system, the more you will come
-to appreciate
+The longer you work with a UNIX system,
+the more you appreciate
 .CW find .
 Don't be put off by its awkward syntax and many options.
-The time you spend studying this command will be well repaid.
+The time you spend studying this command pays off.
 .
 .Bh "File Characteristics"
 .LP
 Most of us are concerned only with the contents of a file.
-However, to look at files from UNIX's point of view, files are
-labeled containers that are retrieved from storage and soon put
-back in the same place.
+However, to look at files from UNIX's point of view,
+files are labeled containers
+that are retrieved from storage
+and soon put back in the same place.
 It might be said that the operating system reads (and writes)
-the label but doesn't really care to look inside the container.
+the label, but doesn't really care to look inside the container.
 The label describes a set of physical or external characteristics
 .ix	files, characteristics
 for each file.
-This information is displayed when the
+The
 .CW ls
-command produces a long listing.
+command displays this information when it
+produces a long listing.
 .Ps
 $ \f(CBls -l /work/textp/ch01\f(CW
 total 20
@@ -521,19 +570,19 @@ of users
 who can be given different permissions from all
 .I other
 users.
-The operating system keeps track of the file
-permissions
+The operating system keeps track of the file permissions
 .ix	files, permissions
 .CW -rw-rw-r-- ) (
 for the owner, group, and other
 users\(emdetermining who
 can read, write, or execute the file.
 .PP
-All of these characteristics can be modified either by use of
-the file or by commands such as
+You can modify all of these characteristics
+either by using the file,
+or by commands such as
 .CW chmod
 .ix	[chmod] command %key chmod command
-(change permissions) and
+(change permissions) or
 .CW chown
 .ix	[chown] command %key chown command
 (change owner).
@@ -544,11 +593,13 @@ characteristics.
 There are some options for
 .CW ls
 that allow you to make use of this information.
-For instance, if you had recently made some changes to a set of
-files, but couldn't remember which ones, you could use the
+For instance, if you recently made some changes
+to a set of files,
+but couldn't remember which ones,
+use the
 .CW -t
-option to sort a list of files with the most recently modified
-files first.
+option to sort a list of files
+with the most recently modified files first.
 The
 .CW -r
 option reverses that order, so that
@@ -558,31 +609,34 @@ produces a list with the oldest files first.
 In addition,
 .CW find
 .ix	%end [find] command %key find command
-has a number of options that make use of external file
-characteristics.
-As we've seen, you can look for files that belong to a
-particular user.
-You can also look for files that are larger than a particular
-size, or have been modified more recently than a certain date.
+has a number of options
+that make use of external file characteristics.
+As we've seen,
+you can look for files
+that belong to a particular user.
+You can also look for files
+that are larger than a particular size,
+or were modified more recently than a certain date.
 .PP
-Don't get stuck thinking that the only handle you can pick a
-file up with is the file's name.
+Don't get stuck thinking
+that the only handle you can pick a file up with
+is the file's name.
 .
 .Ah "Viewing the Contents of a File"
 .LP
-You are probably familiar with a number of UNIX commands that
-let you view the contents of a file.
+You are probably familiar with a number of UNIX commands
+that let you view the contents of a file.
 .ix	files, viewing contents
 The
 .CW cat
 .ix	[cat] command %key cat command
-command streams a file to the screen at a rate that is usually
-too swift.
+command streams a file to the screen
+at a rate that is usually too swift.
 The
 .CW less
 .ix	%begin [less] command %key less command
 command displays a file one page at a time.
-It is frequently used as a
+You can use it as a
 .I filter ,
 .ix	filter
 for instance, to supply paging for
@@ -596,8 +650,9 @@ You can also use
 .CW less
 to examine unformatted files,
 proofing formatting codes as well as text.
-Although these are frequently used commands, not everyone is
-aware that they have interactive subcommands, too.
+Although these are frequently used commands,
+not everyone is aware
+that they have interactive subcommands, too.
 You can search for a pattern;
 execute a UNIX command;
 move to another file specified on the command line;
@@ -684,17 +739,19 @@ resumes paging through the rest of the file.
 Another command used for examining a file is
 .CW pr .
 .ix	[pr] command %key pr command
-Its most common use is to perform minor page formatting for a
-file on the way to a line printer.
-It breaks the input file into
-pages (66 lines to a page) and supplies a header that contains
-the date, the name of the file, and the current page number.
-Top, bottom, and side margins are also added.
+Its most common use is to perform minor page formatting
+for a file on the way to a line printer.
+It breaks the input file into pages
+(66 lines to a page)
+and supplies a header that contains
+the date, the name of the file,
+and the current page number.
+It adds top, bottom, and side margins.
 .PP
 The
 .CW pr
-command also has many options that can be used to perform some
-oddball tasks.
+command also has many options
+that you can be use to perform some oddball tasks.
 For example, the
 .CW -n
 option adds line numbers:
@@ -714,7 +771,7 @@ Jul  4 14:27 1987  test Page 1
 You can adjust the page length using the
 .CW -l
 option.
-If you are printing to a terminal, the
+If you output to a terminal, the
 .CW -p
 option specifies a pause at the beginning of each page.
 You can also display an input file in
@@ -723,8 +780,8 @@ columns.
 .PP
 The
 .CW -m
-option simultaneously merges two or more files and prints
-each of them, one per column:
+option simultaneously merges two or more files
+and prints each of them, one per column:
 .Ps
 $ \f(CBpr -m -t test*\f(CW
 .Pe
@@ -736,9 +793,9 @@ walnuts      walnuts    grapes      chestnuts
 chestnuts
 .Pe
 .PP
-The
+The shell expands the
 .CW test*
-file specification is expanded to four filenames:
+file specification to four filenames:
 .CW test ,
 .CW test1 ,
 .CW test2 ,
@@ -746,8 +803,9 @@ and
 .CW test3 .
 The
 .CW -t
-option suppresses the heading and does not print linefeeds to
-fill a page, which is especially useful when you are sending
+option suppresses the heading
+and does not print linefeeds to fill a page,
+which is especially useful when you are sending
 the output of
 .CW pr
 to a file or the terminal.
@@ -767,25 +825,25 @@ To remove the tabs, we used
 with the
 .CW -e
 option to expand the tabs to their equivalent in blank spaces.
-The following shell script implements this process so that it
-can be invoked as a single command.
+The following shell script implements this process
+so you can invoke it as a single command.
 .Ps
-$ \f(CBnroff -mm -rO0 examples/$1 | -pr -e -t\f(CW
+$ \f(CBnroff -mm -rO0 examples/$1 | pr -e -t\f(CW
 .Pe
 The
 .CW pr
 command works as a filter for
 .CW nroff .
-The
+Use the
 .CW -r
-option is used with
+option with
 .CW nroff
 to set register
 .CW O
 (page offset or left margin) to zero.
 .PP
-Sometimes it can be useful to examine just the beginning or the
-end of a file.
+Sometimes, you want to examine
+the beginning or the end of a file.
 Two commands,
 .CW head
 .ix	[head] command %key head command
@@ -793,10 +851,11 @@ and
 .CW tail ,
 .ix	[tail] command %key tail command
 print the first or last ten lines of a file.
-The
+Use the
 .CW head
-command can be used to look at the initial settings of number
-registers and strings that are often set at the top of a file.
+command to look at the initial settings
+of number registers and strings
+that are often set at the top of a file.
 .Ps
 $ \f(CBhead ch02\f(CW
 \&.nr W 65
@@ -811,23 +870,26 @@ $ \f(CBhead ch02\f(CW
 \&.ds HM 11A
 \&.
 .Pe
-This output could be redirected to a file as a way of starting
+You can redirect this output
+to a file as a way of starting
 .ix	output redirection
 a new chapter.
 The
 .CW tail
-command has the same syntax; it can save time when you want to
+command has the same syntax;
+it can save time when you want to
 check the end of a large file.
 .
 .Ah "Searching for Information in a File"
 .ix	files, searching within
 .LP
-The many benefits provided by
+The
 .CW grep
 .ix	%begin [grep] command %key grep command
-to the user who doesn't
-remember what his or her files contain are well known.
-Even users of non-UNIX systems who make fun of its obscure name
+program provides many benefits
+to users who don't remember what their files contain.
+Even users of non-UNIX systems
+who make fun of its obscure name
 wish they had a utility with its power to search through a set
 .ix	search
 of files for an arbitrary text pattern, known as a
@@ -882,8 +944,9 @@ or
 Another common use is to look for a specific macro in a file.
 In a file coded with
 .CW mm
-macros, the following command will list top-level and
-second-level headings:
+macros, the following command lists
+top-level and second-level headings
+in the first two chapters:
 .Ps
 $ \f(CBgrep "^\\.H[12]" ch0[12]\f(CW
 ch01:.H1 "Introduction"
@@ -896,23 +959,26 @@ ch02:.H1 "What Is Terminal Independence?"
 ch02:.H2 "Termcap"
 ch02:.H2 "Terminfo"
 .Pe
-In effect, it produces a quick outline of the contents of these
-files.
-When more than one file is specified, the name of the file
+In effect, it produces a quick outline
+of the contents of these files.
+When you specify more than one file,
+the name of the file
 appears with each line.
 Note that we use brackets
 .page 302
 as metacharacters both in the regular expression and when
 specifying the filename.
 Because metacharacters (and spaces) have meaning to the shell,
-they will be interpreted as such unless the regular expression
-is placed within quotation marks.
+it interpretes them as such
+unless you place the regular expression
+within quotation marks.
 .PP
-There are several options commonly used with
-.CW grep .
+The
+.CW grep
+program has several common options.
 The
 .CW -i
-option specifies that the search ignore the distinction between
+option ignores the distinction between
 uppercase and lowercase.
 The
 .CW -c
@@ -924,14 +990,14 @@ The
 option returns only the name of the file when
 .CW grep
 finds a match.
-This can be used to prepare a list of files for another command.
+You can use this to prepare a list of files for another command.
 .PP
 The shell construct
 .I command1
 .I command2 ` `
-causes the output of
+uses the output of
 .I command2
-to be used as an argument to
+as an argument to
 .I command1 .
 For example, assume that you wanted to edit any file that has a
 reference to a function call named
@@ -940,7 +1006,7 @@ The command:
 .Ps
 $ \f(CBvi `grep -l getcursor *`\f(CW
 .Pe
-would invoke
+invokes
 .CW vi
 on all of the files in the current directory containing the
 string
@@ -965,9 +1031,8 @@ to supply a list of filenames and
 to search for a pattern in those files.
 For example, consider the following command, which uses
 .CW find
-to
-look for all files in the specified directory hierarchy and
-passes the resulting names to
+to look for all files in the specified directory hierarchy
+and passes the resulting names to
 .CW grep
 to scan for a particular pattern:
 .Ps
@@ -982,7 +1047,7 @@ configuration file "alcuin.ftables."
 .Pe
 The
 .CW -exec
-condition allows you to specify a command that is executed
+condition specifies a command to execute
 upon each file that is found (\c
 .CW {}
 indicates the pathname of the file).
@@ -1011,35 +1076,37 @@ option with
 But more to the point, this is a very inefficient way to do
 the job.
 .PP
-In this case, it would be preferable to write:
+In this case, you can use:
 .Ps
 $ \f(CBgrep "[aA]lcuin" `find /work/docbook -print`\f(CW
 .Pe
 Because
 .CW grep
 .ix	%end [grep] command %key grep command
-is invoked only once, this command will run much faster.
+is invoked only once, this command runs much faster.
 .page 303
 .PP
 There is a potential danger in this approach.
-If the list of files is long, you may exceed the total allowable
-length of a command line.
+If the list of files is long,
+you may exceed the total allowable length of a command line.
 The best approach uses a command we haven't shown yet\(em\c
 .CW xargs .
 .ix	[xargs] command %key xargs command
 This command provides an extended version of the same function
 the shell provides with backquotes.
-It converts its input into
-a form that can be used as an argument list by another command.
-The command to which the argument list is passed is specified
-as the first argument to
+It converts its input into a form
+that you can use as an argument list
+by another command.
+The command to which the argument list is passed
+is specified as the first argument to
 .CW xargs .
 So, you would write:
 .Ps
 $ \f(CBfind /work/docbook -print | xargs grep "[aA]lcuin"\f(CW
 .Pe
-Or you could generalize this useful tool and save it as the
-following shell script, which could be called
+Or you could generalize this useful tool
+and save it as the following shell script,
+which could be called
 .CW mfgrep
 (\c
 .I multifile
@@ -1061,8 +1128,8 @@ The
 .ix	[fgrep] command %key fgrep command
 (\c
 .I fast
-.CW grep )*
-.FS *
+.CW grep )\**
+.FS
 Despite what the documentation says,
 .CW egrep
 .ix	[egrep] command %key egrep command
@@ -1072,12 +1139,13 @@ programs.
 .FE
 command performs the same function as
 .CW grep ,
-except it searches for a fixed string rather than a regular
-expression.
-Because it doesn't interpret metacharacters, it often does a
-search faster than
+except it searches for a fixed string
+rather than a regular expression.
+Because it doesn't interpret metacharacters,
+it often searches faster than
 .CW grep .
-For interactive use, you may not find enough difference to
+For interactive use,
+you may not find enough difference to
 keep this command in your active repertoire.
 However, it may be of more benefit inside shell scripts.
 .PP
@@ -1089,12 +1157,11 @@ one that extends the syntax of regular expressions.
 A
 .CW +
 following a regular expression matches one or more
-occurrences of the regular expression;
-a
+occurrences of the regular expression; a
 .CW ?
 matches zero or one occurrences.
-In addition, regular expressions can be nested within
-parentheses.
+In addition, you can nest regular expressions
+within parentheses.
 .Ps
 $ \f(CBegrep "Lab(oratorie)?s" name.list\f(CW
 AT&T Bell Laboratories
@@ -1117,8 +1184,8 @@ is the vertical bar
 which serves as an
 .I or
 operator between two expressions.
-Lines matching either expression are printed, as in the next
-example:
+Lines matching either expression are printed,
+as in the next example:
 .Ps
 $ \f(CBegrep "stdscr|curscr" ch03\f(CW
 into the stdscr, a character array.
@@ -1129,8 +1196,9 @@ initscr() creates two windows: stdscr
 and curscr.
 .Pe
 .page 304
-Remember to put the expression inside quotation marks to
-protect the vertical bar from being interpreted by the shell
+Remember to put the expression inside quotation marks
+to protect the vertical bar
+from being interpreted by the shell
 as a pipe symbol.
 Look at the next example:
 .Ps
@@ -1159,18 +1227,21 @@ option.
 .
 .Ah "Proofing Documents"
 .LP
-There are no computer tools that completely replace the close
-examination of final printed copy by the human eye.
-However, UNIX does support a number of proofing aids, ranging
-from spelling checkers to optional programs for checking style
-and diction, and even sexist usage.
+There are no computer tools
+that completely replace the close examination
+of final printed copy by the human eye.
+However, UNIX does support a number of proofing aids,
+ranging from spelling checkers
+to optional programs for checking style and diction,
+and even sexist usage.
 .PP
 We'll look at some of these programs in this section.
-Not all of the programs we'll discuss are available on all UNIX
-systems.
+Not all of the programs we discuss
+are available on all UNIX systems.
 Keep in mind, though, that
 .CW grep
-is also a very powerful proofing aid, which you can use to check
+is also a very powerful proofing aid,
+which you can use to check
 for consistent usage of words and phrases.
 .
 .Bh "Looking For Spelling Errors"
@@ -1213,7 +1284,7 @@ Since the original
 utility is not readily available,
 and more powerful replacements are pre-installed
 on most modern UNIX systems,
-we will use
+we use
 .CW aspell
 in the following examples.
 .ig
@@ -1244,8 +1315,8 @@ Press
 (on a line by itself) to end the list.
 The
 .CW aspell
-command will echo back the word(s) in the list that it considers
-to be in error.
+command echos the word(s) in the list
+that it considers to be in error.
 .Ps
 $ \f[CB]aspell list\fP
 misspelling
@@ -1275,7 +1346,7 @@ or it produces garbled output, try:
 .Ps
 $ \f[CB]nroff\fP \fI-macro file\fP | \f[CB]aspell list\fP
 If hyphenation is enabled,
-the output will include words split across two lines.
+the output includes words split across two lines.
 You can fix that by adding the line:
 .Ps
 \&.if n .hy 0
@@ -1442,8 +1513,10 @@ command misses words specified as arguments to
 .CW nroff
 or
 .CW troff
-macros, and, like any spelling checker, can make some errors
-based on incorrect derivation of spellings from the root words
+macros, and, like any spelling checker,
+can make some errors
+based on incorrect derivation of spellings
+from the root words
 contained in its dictionary.
 If you understand how
 .CW aspell
@@ -1460,8 +1533,8 @@ website and invoked with the
 .CW -l
 option to
 .CW aspell .
-These lists
-cannot be read or updated directly.
+You cannot read or update
+these lists directly.
 They are compressed files, compiled from a list of words
 represented as hash codes.
 (Hash-coding is a special technique for quick search of
@@ -1490,8 +1563,11 @@ A few of these manipulations follow:
 -t+ce
 -t+cy
 .Pe
-The new words created as a result of these manipulations will be
-checked once more against the spell table.
+The
+.CW aspell
+program checks these new words,
+created as a result of these manipulations,
+against the spell table.
 .PP
 As
 .CW aspell
@@ -1515,17 +1591,23 @@ script can duplicate its functionality.
 Copy this code into a file called
 .CW hyphen.awk :
 .Ps
-#!/usr/bin/awk -f
-
-broken > 0 {
-    print stem $1
-    broken = 0
+BEGIN {
+  broken = 0 # true if previous line ended with a hyphen
+  stem = ""  # keep the last word on the line if it ends with a hyphen
 }
 
-$NF ~ /-$/ {
-    stem = $NF
-    broken = 1
-    next
+# If previous line had its last word hyphenated,
+# join it and the first word & print.
+broken > 0 {
+  print stem $1
+  broken = 0
+}
+
+# Keep and flag a hyphenated word at end of line.
+# We're looking for "normal" and UTF-8 hyphens.
+$NF ~ /[-‐]$/ {
+  stem = $NF
+  broken = 1
 }
 .Pe
 Now you can check that
@@ -1539,8 +1621,8 @@ indistin-guishable
 ver-sions
 de-scribed
 .Pe
-If you disagree with the hyphenation of a word, you can go
-back into your source file and use either the
+If you disagree with the hyphenation of a word,
+go back into your source file and use either the
 .CW \&.hw
 request to specify hyphenation points or the
 .CW \&.nh
@@ -1549,22 +1631,6 @@ request to inhibit hyphenation of the word
 .CW \e%
 at the beginning of the word to inhibit hyphenation
 only on that instance).
-If you don't have the
-.CW hyphen
-command on your system, you can print the lines ending in hyphens
-using grep:
-.Ps
-$ \f(CBgrep '-$' ch03.out\f(CW
-.Pe
-This will not display the second half of the hyphenated word on
-the following line, but it should give you enough of an idea.
-Alternatively, you could use
-.CW awk
-or
-.CW sed ,
-.page 308
-described in the next chapter, to create a version of this
-command that would print both lines.
 .
 .Bh "Counting Words"
 .LP
@@ -1578,8 +1644,8 @@ $ \f(CBwc ch01\f(CW
 .Pe
 The three numbers printed represent the number of lines, words,
 and characters, respectively.
-(The presence of formatting commands in the input file can
-make this measurement somewhat inaccurate).
+(The presence of formatting commands in the input file
+can make this measurement somewhat inaccurate).
 .
 .Bh "Writer's Workbench"
 .ix	Writer's~Workbench
@@ -1588,14 +1654,14 @@ No book on UNIX text processing can avoid some discussion
 of Writer's Workbench (WWB), a collection of programs for
 the analysis of writing style.
 .PP
-Unfortunately, unlike most of the programs described in this
-book, the Writer's Workbench is not available on all UNIX
-systems.
+Unfortunately,
+like most of the programs described in this chapter,
+the Writer's Workbench is not available.
 It was originally developed for internal use at Bell Labs,
-and was available in early releases of UNIX to the academic
-community.
-But it was made into a separate product when UNIX was
-commercially released.
+and was available in early releases of UNIX
+to the academic community.
+But it was made into a separate product
+when UNIX was commercially released.
 .PP
 The three original programs are
 .CW style ,
@@ -1665,8 +1731,7 @@ sentence beginnings:
         subordinating conjunction (35) conjunction (4) preposition (25)
 .Pe
 Even if you aren't an English teacher and don't know the
-Kincaid algorithm from the Flesch, this report can be very
-useful.
+Kincaid algorithm from the Flesch, this report can be useful.
 The
 .CW -p
 option prints sentences that
@@ -1692,7 +1757,7 @@ would not be successful.
 .PP
 In general, to lower the reading level of a document,
 use shorter sentences and simpler constructions.
-(Incidentally, most writing in newspapers
+Incidentally, most writing in newspapers
 and general circulation magazines
 is at the sixth-grade level.
 But you shouldn't get the impression
@@ -1702,7 +1767,7 @@ Writing can be clear and effective
 at any level of complexity.
 At the same time,
 each of us must recognize,
-and adjust for, the skills of our intended reader.)
+and adjust for, the skills of our intended reader.
 .PP
 The analysis of reading level is only a small part of what
 .CW style
@@ -1710,9 +1775,9 @@ offers.
 The detailed analysis of sentence length and type, word usage,
 and sentence beginnings can give you considerable insight into
 your writing.
-If you take the time to read the report carefully at the same
-time as you reread your text, you will begin to see patterns and
-can make intelligent decisions about editorial changes.
+If you take the time to read the report carefully
+as you reread your text, you can see patterns and
+make intelligent decisions about editorial changes.
 .PP
 As an exercise, run
 .CW style
@@ -1721,18 +1786,18 @@ then rewrite your work based on the report.
 See what difference this makes to the
 .CW style
 report.
-You will eventually get a feel for what the program provides.
+You eventually get a feel for what the program provides.
 .PP
 In some cases,
 .CW diction ,
-the other major program in the Writer's Workbench, can also
-help you find areas to change.
+the other major program in the Writer's Workbench,
+can also help you find areas to change.
 .PP
 The
 .CW diction
 .ix	Writer's~Workbench, search~for poor phrasing ([diction]) %key Writer's Workbench, search~for poor phrasing (diction)
-program relies on a library of frequently misused words and
-phrases.
+program relies on a library
+of frequently misused words and phrases.
 It searches out these words and flags them as
 inappropriate by enclosing them in brackets.
 For example, when run on a previous draft of this section,
@@ -1801,20 +1866,23 @@ For example, you'll notice that it flagged the phrase
 .I "number of"
 several times, though that was exactly what we meant in
 all but one case.
-However, the twenty percent of its recommendations that we agree
-with are worth the effort of running the program.
-.ig
-.\" explain is nowhere to be found
+However, the twenty percent of its recommendations
+that we agree with
+are worth the effort of running the program.
 .PP
 If you don't understand why
 .CW diction
-complains about a phrase, you can use
-.CW explain
+complains about a phrase,
+use the
+.CW -s
+or
+.CW --suggest
+option
 .ix	Writer's~Workbench, explain [diction] errors ([explain]) %key Writer's Workbench, explain diction errors (explain)
 to ask for help.
 For example:
 .Ps
-$ \f(CBexplain\f(CW
+$ \f(CBdiction -s\f(CW
 phrase?
 which
 use "that" when clause is restrictive for "which"
@@ -1837,14 +1905,14 @@ phrase?
 .
 .\" ignore these too, until we run down replacements
 .PP
-The official release of WWB for 3B computers contains improved
+The official release of WWB for 3B computers contained improved
 versions of
 .CW style
 and
 .CW diction ,
 as well as many additional programs.
 .ix	Writer's~Workbench, miscellaneous~programs
-These programs include
+These programs included
 .RS
 .Ls B
 .Li
@@ -1914,10 +1982,10 @@ You can run these programs individually or use one of several
 control programs.
 The
 .CW wwb
-program will run just about everything.
+program runs just about everything.
 The
 .CW proofr
-program will run those programs that help you proofread (such as
+program runs those programs that help you proofread (such as
 .CW spell ,
 .CW double ,
 .CW punct ,
@@ -1925,7 +1993,7 @@ and
 .CW diction ).
 The
 .CW prose
-program will run those that analyze style (such as
+program runs those that analyze style (such as
 .CW style
 and
 .CW sexist ).
@@ -2004,7 +2072,7 @@ walnuts         grapes          chestnuts
 .Pe
 When you run
 .CW diff
-on these files, the following output is produced:
+on these files, it produces the following output:
 .Ps
 $ \f(CBdiff test1 test2\f(CW
 3c3
@@ -2014,22 +2082,23 @@ $ \f(CBdiff test1 test2\f(CW
 .Pe
 The
 .CW diff
-command displays the only line that differs between the two
-files.
+command displays the only line
+that differs between the two files.
 To understand the report, remember that
 .CW diff
-is prescriptive, describing what changes need to made to the
+is prescriptive,
+describing what changes you need to make to the
 first file to make it the same as the second file.
 This report specifies that only the third line is affected,
 exchanging walnuts for grapes.
 This is more apparent if you use the
 .CW -e
-option, which produces an editing script that can be submitted
-to
+option, which produces an editing script
+that can be submitted to
 .CW ed ,
-the UNIX line editor.
-(You must redirect standard output to capture this script in
-a file.)
+the UNIX line editor
+(you must redirect standard output
+to capture this script in a file).
 .Ps
 $ \f(CBdiff -e test1 test2\f(CW
 3c
@@ -2038,15 +2107,15 @@ grapes
 .Pe
 This script, if run on
 .CW test1 ,
-will bring
+brings
 .CW test1
 into agreement with
 .CW test2 .
 (Later in this section, we'll look at how to get
 .CW ed
 to execute this script.)
-If you compare the first and third files, you find more
-differences:
+If you compare the first and third files,
+you find more differences:
 .Ps
 $ \f(CBdiff test1 test3\f(CW
 1d0
@@ -2065,8 +2134,8 @@ append the third line from
 .CW test3
 after the third line in
 .CW test1 .
-Again, this can be seen more clearly in the editing script
-produced by the
+Again, you can see this more clearly
+in the editing script produced by the
 .CW -e
 option.
 Notice that the script specifies editing lines in reverse order;
@@ -2088,11 +2157,11 @@ You can use the
 command to look at differences between three files.
 For each set of differences, it displays a row of equals signs (\c
 .CW ==== )
-followed by l, 2, or 3, indicating which file is different;
+followed by 1, 2, or 3, indicating which file is different;
 if no number is specified, then all three files differ.
 Then, using
 .CW ed -like
-notation, the differences are described for each file.
+notation, it describes the differences for each file.
 .Ps
 $ \f(CBdiff3 test1 test2 test3\f(CW
 ====3
@@ -2112,11 +2181,11 @@ With the output of
 .CW diff3 ,
 it is easy to keep track of which file is which; however, the
 prescription given is a little harder to decipher.
-To bring these files into agreement, you would have to add apples
-at the beginning of the third file;
+To bring these files into agreement,
+you have to add apples at the beginning of the third file;
 change line 3 of the second file to line 3 of the first file;
-and change lines 2 and 3 of the third file, effectively dropping
-the last line.
+and change lines 2 and 3 of the third file,
+effectively dropping the last line.
 .PP
 The
 .CW diff3
@@ -2160,8 +2229,8 @@ and
 .CW diff3 .
 The latter produces an
 .CW ed
-script that ends with the commands that save the edited version
-of the file;
+script that ends with the commands
+that save the edited version of the file;
 .CW diff
 requires that you supply them.)
 Another useful program is
@@ -2173,18 +2242,21 @@ Another useful program is
 .CW diff ).
 Its most straightforward use is to display two files in two
 columns on the screen.
-In a gutter between the two columns, the program displays a
+In a gutter between the two columns,
+the program displays a
 .CW <
 if the line is unique to the first file, a
 .CW >
 if the line is unique to the second file, and a
 .CW |
 if the line is different in both files.
-Because the default line length of this program (130
-characters) is too wide for most terminals, it is best to use
-the
+Because the default line length of this program
+(130 characters) is too wide for most physical terminals,
+you can use the
 .CW -w
 option to specify a smaller width.
+Using a GUI system, you can stretch your terminal window
+to 132 characters instead.
 Here are the results of running
 .CW sdiff
 on two different pairs of files:
@@ -2203,11 +2275,12 @@ The
 .CW -s
 option to the
 .CW sdiff
-command only shows the differences between the two files.
-Identical lines are suppressed.
+command only shows the differences between the two files,
+suppressing identical lines.
 One of the most powerful uses of
 .CW sdiff
-is interactive, building an output file by choosing between
+is interactive,
+building an output file by choosing between
 different versions of two files.
 You have to specify the
 .CW -o
@@ -2217,8 +2290,8 @@ The
 command then displays a
 .CW %
 prompt after each set of differences.
-You can compare the different versions and select the one that
-will be sent to the output file.
+You can compare the different versions
+and select the one to send to the output file.
 Some of the possible responses are
 .CW l
 to choose the left column,
@@ -2243,19 +2316,21 @@ chestnuts
 .ix	%end [sdiff] command %key sdiff command
 .page 316
 Having looked at these commands in simplified examples,
-let's now consider some practical applications for comparing
-documents.
+let's now consider some practical applications
+for comparing documents.
 .PP
-When working on a document, it is not an uncommon practice to
-make a copy of a file and edit the copy rather than the original.
-This might be done, for example, if someone other than the writer
-is inputting edits from a written copy.
-The
+When working on a document, you might
+make a copy of a file
+and edit the copy rather than the original.
+You might do this, for example,
+if you are inputting edits from a written copy
+for another writer.
+Use the
 .CW diff
 .ix	%begin [diff] command %key diff command
-command can be used to compare the two versions of a document.
-A writer could use it to proof an edited copy against the
-original.
+command to compare the two versions of a document.
+You could use it to proof
+your edited copy against the original.
 .Ps
 $ \f(CBdiff brochure brochure.edits\f(CW
 49c43,44
@@ -2281,19 +2356,19 @@ By capturing
 output in a file, you can keep a record of changes made to any
 document.
 .PP
-.\" rewrite as files for a website
+.\" XXX rewrite as files for a website/SSG
 As another example, suppose a company has a number of text files
 that comprise its help facility.
 These files are shipped with the
 product and maintained online by the customer.
-When there is a documentation update, these files also need to
-be updated.
+When there is a documentation update,
+the customer needs to update these files.
 One way to accomplish this is to replace each text file in its
 entirety, but that involves distributing a lot of material that
 remains unchanged.
 Another way is to use
 .CW diff
-and simply send a record of changes between the old and the new.
+to send a record of changes between the old and the new.
 The
 .CW -e
 option creates an editing script for
@@ -2333,20 +2408,22 @@ The following command pipes the editing script to
 .Ps
 $ \f(CB (cat help.chgs; echo 'w') | ed - help.txt\f(CW
 .Pe
-To save the changes, a
+To save the changes, the script submits a
 .CW w
-command is submitted through echo.
-(In fact, if you have any concern about sparing the original file,
+command through
+.CW echo .
+(If you have any concern about sparing the original file,
 you could change the
 .CW w
 to
 .CW 1,$p ,
-which will cause the edited contents to be printed to standard
-output, but not saved in the file.
+which prints the edited contents to standard output,
+instead of saving the changes.
 Redirect standard output to a new file to keep both copies.)
+.\" XXX end rewrite section
 .PP
-As a further example, let's take the instance where two people
-have made copies of a file and made changes to their own copies,
+A second example: two other writers copied of a file
+and made changes to their copies,
 and now you want to compare them both against the original.
 In this example,
 .CW ch01
@@ -2410,29 +2487,29 @@ $ \f(CBdiff3 ch01 ch01.ann ch01.tom\f(CW
   a set of conversion rules.
 .Pe
 .ix	%end [diff3] command %key diff3 command
-You often find that one version has some things right and another
-version has other things right.
+You often find that one version has some things right
+and another version has other things right.
 What if you wanted to compile a single version of this document
 that reflects the changes made to each copy?
-You want to select which version is correct for each set of
-differences.
+You want to select which version is correct
+for each set of differences.
 One effective way to do this would be to use
 .CW sdiff .
 .ix	%begin [sdiff] command %key sdiff command
 .PP
 We'll use the
 .CW -s
-option to suppress the printing of identical lines.
-To make the example fit on the printed page, we specify a
-45-character line length.
+option to suppress printing identical lines.
+To make the example fit on the printed page,
+we specify a 45-character line length.
 (An 80-character line length for the screen
 is a long-standing standard, but modern UNIX systems
 with graphic displays support much wider lines.)
 Because the total line length is limited to 45 characters,
 .CW sdiff
-will be able to display only the first 15 or so characters of
+displays only the first 15 or so characters of
 the line for each file;
-the rest of the line will be truncated.
+it truncates the rest of the line.
 .Ps
 $ \f(CBsdiff -w45 -s -o ch01.new ch01.ann ch01.tom\f(CW
 56a57,103
@@ -2471,8 +2548,10 @@ An initial .@is converted<
 .ix	%end [sdiff] command %key sdiff command
 The file
 .CW ch01.new
-contains the portions of each file that were selected along with
+contains the portions of each file
+that were selected along with
 all the lines that both files have in common.
+.\" XXX candidate for deletion
 .PP
 Another program worth mentioning is
 .CW bdiff
@@ -2488,6 +2567,7 @@ and then passes each one through
 It maintains line numbering as though
 .CW diff
 were operating on one large file.
+.\" XXX end delete candidate
 .
 .Bh "Git"
 .ix Git (source~code~control~system)
@@ -2516,7 +2596,7 @@ are maintained in an online Git server called GitHub.
 .PP
 Suppose your first draft of a manual is stored in Git.
 The second draft, of course,
-Is based on changes to the first draft.
+has changes to the first draft.
 .PP
 When you
 .I commit
@@ -2574,55 +2654,53 @@ manual pages.
 .LP
 The
 .CW make
-program is a UNIX facility for describing dependencies among a
-group of related files, usually ones that are part of the same
-project.
-This facility has enjoyed widespread use in software development
-projects.
+program is a UNIX facility
+for describing dependencies
+among a group of related files,
+usually ones that are part of the same project.
+This facility has enjoyed widespread use
+in software development projects.
 Programmers use
 .CW make
 to describe how to \(lqmake\(rq a program\(emwhat source files
 need to be compiled, what libraries must be included,
 and which object files need to be linked.
 By keeping track of these relationships in a single place,
-individual members of a software development team can make
-changes to a single module, run
+individual members of a software development team
+can make changes to a single module, run
 .CW make ,
-and be assured that the program reflects the latest changes made
-by others on the team.
+and be assured that the program reflects the latest changes
+made by others on the team.
 .PP
 We group
 .CW make
-with the other commands for keeping track of differences
+with other commands for keeping track of differences
 between files only by a leap of the imagination.
-However, although it does not compare two versions of the same
-source file, it can be used to compare versions such as a
-source file and the formatted output.
+It does not compare two versions of the same source file,
+but you can use it to compare versions
+of a source file and the formatted output.
 .PP
-Part of what makes UNIX a productive environment for text
-processing is discovering other uses for standard programs.
+Part of what makes UNIX
+a productive environment for text processing
+is discovering other uses for standard programs.
 The
 .CW make
-utility has many possible applications for a documentation
-project.
-One such use is to maintain up-to-date copies of formatted
-files that make up a single manual and provide users with a
-way of obtaining a printed copy of the entire manual without
-having to know which preprocessors or
+utility has many possible applications
+for a documentation project.
+One such use is to maintain up-to-date copies
+of formatted files that make up a single manual
+and provide users with a way
+of obtaining a printed copy of the entire manual
+without having to know which preprocessors or
 .CW nroff/troff
 options need to be invoked.
 .PP
 The basic operation that
 .CW make
-performs is to compare two sets of files, for example,
-formatted files and unformatted files, and determine if any
-members of one set, the unformatted files, are more recent than
-their counterpart in the other set, the formatted files.
-This is
-accomplished by simply comparing the date or time stamp of pairs
-of files.
-If the unformatted source file has been modified since the
-formatted file was made,
+performs is to compare two sets of files.
+It compares the date or time stamp of pairs of files.
+If the unformatted source file was modified
+since the formatted file was made,
 .CW make
 executes the specified command to \(lqremake\(rq the formatted file.
 .PP
@@ -2634,14 +2712,14 @@ you have to write a description file, usually named
 .CW Makefile ),
 that resides in the working directory for the project.
 The
-.CW makefile
-specifies a hierarchy of dependencies among individual files,
-called
+.CW Makefile
+specifies a hierarchy of dependencies
+among individual files, called
 .I components .
 At the top of this hierarchy is a
 .I target .
-For our purposes, you can think of the target as a printed copy
-of a book;
+For our purposes, think of the target
+as a printed copy of a book;
 the components are formatted files generated by processing an
 unformatted file with
 .CW nroff .
@@ -2662,7 +2740,7 @@ ch03.fmt: ch03a ch03b ch03c
       nroff -mm ch03? > ch03.fmt
 .Pe
 .PP
-This hierarchy can be represented in a diagram:
+You can represent this hierarchy in a diagram:
 .page 321
 .\" fp 4 C
 .PS
@@ -2700,9 +2778,9 @@ line from B6.s - (-0.2i, 0.0i) to B11.n
 .PE
 .\" fp 4 CB
 The target is
-.CW manual
-and it is made up of three formatted files whose names appear
-after the colon.
+.CW manual ,
+and it is made up of three formatted files
+whose names appear after the colon.
 Each of these components has its own dependency line.
 For instance,
 .CW ch01.fmt
@@ -2716,18 +2794,18 @@ begin with a tab.
 .PP
 When you enter the command
 .CW make ,
-the end result is that the three formatted files are spooled to
-the printer.
-However, a sequence of operations is performed before this final
-action.
-The dependency line for each component is evaluated, determining
-if the coded file has been modified since the last time the
-formatted file was made.
-The formatting command will be executed only if the coded file
-is more recent.
-After all the components are made, the
+it spools the three formatted files to the printer.
+However, it performs a sequence of operations
+before this final action.
+It evaluaes the dependency line for each component,
+determining whether the coded file was modified
+since the last time the formatted file was made.
+The formatting command executes only
+if the coded file is more recent.
+After all the components are made,
+it runs the
 .CW lp
-command is executed.
+command.
 .PP
 As an example of this process, we'll assume that all the
 formatted files are up-to-date.
@@ -2736,9 +2814,9 @@ Then by editing the source file
 we change the modification time.
 When you execute the
 .CW make
-command, any output files dependent on
-.CW ch03a
-are reformatted.
+command, it runs commands to reformat
+any output files dependent on
+.CW ch03a .
 .Ps
 $ \f(CBmake\f(CW
   nroff -mm ch03? > ch03.fmt
@@ -2747,26 +2825,27 @@ $ \f(CBmake\f(CW
 Only
 .CW ch03.fmt
 needs to be remade.
-As soon as that formatting command finishes, the command
-underneath the target
+As soon as that formatting command finishes,
+the command underneath the target
 .CW manual
 is executed, spooling the files to the printer.
 .PP
-Although this example has actually made only limited use of
+Although this example shows limited use of
 .CW make 's
 facilities, we hope it suggests more ways to use
 .CW make
 in a documentation project.
 You can keep your
 .CW makefiles
-just this simple, or you can go on to learn additional notation,
-such as internal macros and suffixes, in an effort to generalize
-the description file for increased usefulness.
+this simple, or you can go on to learn additional notation,
+such as internal macros and suffixes,
+to generalize the description file for increased usefulness.
 We'll return to
 .CW make
 in Chapter 18.
 .ix	%end [make] command %key make command
 .page 322
+.
 .Ah "Manipulating Data"
 .
 .Bh "Removing Formatting Codes"
@@ -2896,8 +2975,8 @@ command eliminates duplicate lines in a file.
 The
 .CW sort
 command works on each line of a text file.
-Normally, it is used to order the contents of files containing
-data such as names, addresses, and phone numbers.
+Normally, you use it to order the contents of files
+containing data such as names, addresses, and phone numbers.
 In the following example, we use
 .CW grep
 to search for index entries, coded with the macro
@@ -2911,7 +2990,7 @@ $ \f(CBgrep ".X[XN]" ch04 | sort -df\f(CW
 \&.XX "ASSIGNMENT statement"
 \&.XX "BASIC statements, ABORT"
 \&.XX "BASIC statements, ASSIGNMENT"
-\&.XX "BASIC statements,  BEGIN CASE"
+\&.XX "BASIC statements, BEGIN CASE"
 .Pe
 The
 .CW -f
@@ -3056,23 +3135,21 @@ $ \f(CBderoff -w ch03 | wordlist | sort -fd | uniq -c\f(CW
    1 active
    2 actual
    5 actually
-   2 Add
-   7 add
+   9 add
 \&...
   68 you
-   3 Your
 .page 325
-  13 your
+  16 your
    2 zero
 .Pe
 .PP
-In the next example, we repeat the previous command, this time
-adding another sort
+In the next example, we repeat the previous command,
+this time adding another sort
 at the end to order the words by frequency.
 The
 .CW -r
-option is used to
-.I reverse
+option
+.I reverses
 the comparison, putting the greatest
 number first.
 .Ps
@@ -3092,7 +3169,7 @@ $ \f(CBderoff ch03 | wordlist | sort -fd | uniq -c | sort -rfd\f(CW
     1 aborted
     1 abort
 .Pe
-You will find other examples of
+We show other examples of
 .CW sort
 .ix	[sort] command %key sort command
 in the next section, where we look at sorting particular fields.
@@ -3108,9 +3185,9 @@ and experiment using different options.
 The
 .CW join
 .ix	%begin [join] command %key join command
-command compares lines contained in separate files and joins
-lines that have the same key.
-(When you use
+command compares lines contained in separate files
+and joins lines that have the same key.
+When you use
 .CW sort
 or
 .CW join ,
@@ -3123,10 +3200,9 @@ Normally, the first field is the key field, on which the
 or
 .CW join
 is performed.
-However, there are options that allow you to change the key
-field.)
-The file must be sorted in ascending ASCII sequence before being
-processed by
+You can use options to change the key field.
+You must sort the file in ascending ASCII sequence
+before sending it to
 .CW join.
 .Ps
 $ \f(CBcat 85\f(CW
@@ -3181,16 +3257,15 @@ dec 18 12
 $
 .Pe
 .ix	%end [join] command %key join command
-After the data is joined in this manner, it can be sorted by
-field.
-Fields are separated by blank spaces or tabs.
-The sort can be performed on specific fields, using
+After joining the data, you can sort it by field.
+White space (blank spaces or tabs) separate fields.
+You can sort on specific fields, using
 .CW +
 to indicate
 the first sort field and
 .CW -
 to indicate the last sort field.
-The first field is
+The default first field is
 .CW +0 .
 To sort on the second field, use
 .CW +1 .
@@ -3273,15 +3348,16 @@ apropos
 .Pe
 .page 328
 .LP
-Commands found only on systems running Berkeley 4.2 are in the
-left-hand column, and those found only on AT&T System V.2 are
-in the center column.
-Commands found in both versions are listed in the right-hand
-column.
+Commands found only on systems running Berkeley 4.2
+are in the left-hand column,
+and those found only on AT&T System V.2
+are in the center column.
+Commands found in both versions
+are in the right-hand column.
 .PP
-You can also suppress the display of one or more columns.
-For instance, if you wanted to display only the commands that
-were found on both systems, you'd enter.
+You can suppress the display of one or more columns.
+For instance, if you wanted to display only the commands
+found on both systems, you'd enter:
 .Ps
 $ \f(CBcomm -l2 bsd4.2 attV.2\f(CW
 .Pe
@@ -3290,8 +3366,10 @@ Only the third column would be shown.
 By specifying
 .CW -
 instead of a filename, you can also use standard input.
-In the next example, we produce a listing of filenames from two
-directories on the system, sort them, and compare them against
+In the next example,
+we produce a listing of filenames from two
+directories on the system,
+sort them, and compare them against
 the commands named in the
 .CW bsd4.2
 file.
@@ -3312,12 +3390,12 @@ asa
            at
                       awk
 .Pe
-Parentheses are used to group a series of commands, combining
-their output into a single stream;
-we want a list of command names without pathnames from
-several directories.
-Because a new shell is created to execute these commands,
-notice that we do not change our current working directory
+Use parentheses to group a series of commands,
+combining their output into a single stream;
+we want a list of command names without pathnames
+from several directories.
+Because UNIX creates a new shell to execute these commands,
+we do not change our current working directory
 when the commands in parentheses have finished executing.
 .ix	%end [comm] command %key comm command
 .
@@ -3337,10 +3415,11 @@ You can extract specific columns of data using
 and join them horizontally using
 .CW paste .
 .PP
-For our examples, we'll make use of a portion of a table of
-ASCII characters that specifies their decimal and hexadecimal
-values.
-(This example is probably unnecessarily complex; you can use
+For our examples, we'll make use of
+a portion of a table of ASCII characters
+that specifies their decimal and hexadecimal values.
+(This example is probably unnecessarily complex;
+you can use
 .CW cut
 and
 .CW paste
@@ -3370,9 +3449,9 @@ Decimal     Hexadecimal  ASCII
 Each column is separated by a tab.
 A tab is the default field delimiter for
 .CW cut ;
-the
+use the
 .CW -d
-option can be used to change it.
+option to change it.
 The
 .CW -c
 option allows you to specify character positions or ranges.
@@ -3380,17 +3459,18 @@ The command
 .CW "cut -c6-80"
 would print characters beginning at position 6 through 80,
 truncating the first five characters.
-The
+Use the
 .CW -f
-option is used to specify one or more fields that are passed
+option to specify one or more fields to pass
 to standard output.
-(Given the name of the command, one might reasonably think
-you'd specify the fields or column position you wanted
+(Given the name of the command,
+one might reasonably think you'd specify
+the fields or column position you wanted
 .I cut
 out, but ...)
 .PP
-In the next example we extract the third field, which contains
-the ASCII names.
+In the next example we extract the third field,
+which contains the ASCII names.
 .Ps
 $ \f(CBcut -f3 -s appc\f(CW
 ASCII
@@ -3414,10 +3494,10 @@ constructs from the output.
 Normally,
 .CW cut
 passes lines without delimiters straight through, and that
-is what we really want for our next feat.
-We are going to reorder the table so that it can be referenced
+is what we really want for our next example.
+We are going to reorder the table to reference it
 by the ASCII name rather than by decimal number.
-All of this can be done from the command line, with only a
+We do all of this from the command line, with only a
 brief entry into the editor at the end.
 .PP
 We'll look at this in stages.
@@ -3448,18 +3528,18 @@ The
 .CW paste
 command reads one or more files or standard input (the
 .CW -
-option) and replaces the newline with a tab in all but the last
-file.
+option) and replaces the newline with a tab
+in all but the last file.
 This gives us four columns.
 (Yes, it doubled the
 .CW tbl
 specifications, but we have an editor.)
-Now, all we have to do is extract the first three columns from
-the output.
-Only
+Now, all we have to do
+is extract the first three columns from the output.
+We add
 .CW "cut -f1,2,3"
-has been added to the previous command, and the output is
-redirected to a file.
+to the previous command,
+and redirect the output to a file.
 .Ps
 $ \f(CBcut -f3 appc | paste - appc | cut -f1,2,3 > ascii.table\f(CW
 $ \f(CBcat ascii.table\f(CW
@@ -3512,10 +3592,10 @@ SO    001   01
 STX   002   02
 \&.TE
 .Pe
-The
+You can use the
 .CW paste
 .ix	[paste] command %key paste command
-command can be used in several interesting ways.
+command in several interesting ways.
 Normally, in order to merge two files,
 .CW paste
 replaces the newline in the first file with a tab.
@@ -3550,12 +3630,15 @@ Decimal     Hexadecimal  ASCII  =
 .Pe
 The
 .CW -s
-option is used when only a single file is specified.
+option is used for a single file.
 It tells
 .CW paste
-to merge subsequent lines in the same file rather than to merge
-one line at a time from several files.
-In this example, the first line's newline is replaced by a tab
+to merge subsequent lines in the same file
+rather than to merge one line at a time
+from several files.
+In this example,
+.CW paste
+replaces the first line's newline by a tab,
 while the second line retains the newline.
 To get nine columns out of three-column input, you'd specify
 .CW -d"\\\\t\\\\t\\\\n" .
@@ -3569,9 +3652,9 @@ command from within
 .CW vi
 so that it only affects the data portion.
 .PP
-You would probably want to go to this much trouble for a large
-table (or many small tables) rather than the small examples
-shown here.
+You would probably want to go to this much trouble
+for a large table (or many small tables)
+rather than the small examples shown here.
 A more practical example that uses
 .CW paste
 alone would be to construct a multi-column table from a single
@@ -3586,9 +3669,10 @@ together side by side.
 .LP
 The
 .CW tr
-command is a character translation filter, reading standard input
-and either deleting specific characters or substituting one
-character for another.
+command is a character translation filter,
+reading standard input
+and either deleting specific characters
+or substituting one character for another.
 .PP
 The most common use of
 .CW tr
@@ -3601,24 +3685,27 @@ For example, the command:
 .Ps
 $ \f(CBtr "A-Z" "a-z" < \fIfile\fP\f(CW
 .Pe
-will convert all uppercase characters in
+converts all uppercase characters in
 .I file
-to the equivalent lowercase characters.
-The result is printed on standard output.
+to the equivalent lowercase characters,
+printing the result on standard output.
 .PP
-As described in Chapter 7, this translation (and the reverse)
+As described in Chapter 7,
+this translation (and the reverse)
 can be useful from within
 .CW vi
 for changing the case of a string.
 You can also delete specific characters.
 The
 .CW -d
-option deletes from the input each occurrence of one or more
-characters specified in a string (special characters should be
-placed within quotation marks to protect them from the shell).
-For instance, the following command passes to standard output
-the contents of
+option deletes from the input each occurrence
+of one or more characters specified in a string
+(special characters should be placed within quotation marks
+to protect them from the shell).
+For instance, the following command
+passes the contents of
 .I file
+to standard output
 with all punctuation deleted:
 .Ps
 $ \f(CBcat \fIfile\fP | tr -d ",.!?;:"\f(CW
@@ -3633,19 +3720,19 @@ For example, the command:
 .Ps
 $ \f(CBtr -s " " < \fIfile\fP\f(CW
 .Pe
-will print on standard output a copy of
+prints on standard output a copy of
 .I file
 in which multiple spaces in sequence have been replaced with a
 single space.
 .PP
 We've also found
 .CW tr
-useful when converting documents created on other systems for
-use under UNIX.
+useful when converting documents
+created on other systems for use under UNIX.
 For example, one of our writers created some files using an
 IBM PC word processor.
-When we uploaded the files to our system, and tried to edit
-them with
+When we uploaded the files to our system,
+and tried to edit them with
 .CW vi ,
 we got the message:
 .Ps
@@ -3655,14 +3742,15 @@ and a blank screen.
 The
 .CW vi
 editor could not read the file.
-However, using a programming utility that lists the actual binary
-values that make up the contents of a file (\c
+However, using a programming utility
+that lists the actual binary values
+that make up the contents of a file (\c
 .CW od ,
 or
 .I "octal dump" ),
-we were able to determine that the word processor used nulls
-(octal 000) instead of newlines (octal 012) to terminate each
-line.
+we determined that the word processor used nulls
+(octal 000) instead of newlines (octal 012)
+to terminate each line.
 .\" Make it produce hex: od -A x -t x1z -v
 .PP
 The
@@ -3672,12 +3760,13 @@ preceding the value with a backslash, so the command:
 .Ps
 $ \f(CBtr '\\000'  '\\012'\f(CW
 .Pe
-was what we needed to convert the file into a form that could be
-edited with
+converted the file into a form
+that we could edit with
 .CW vi .
 .page 333
 .
 .Bh "Splitting Large Files"
+.\" XXX rewrite, focusing on csplit
 .LP
 Splitting a single large file into smaller files can be done out
 of necessity\[em]when you come across a program that can't handle
@@ -3741,8 +3830,8 @@ breaking a file into manageable, but complete, sections.
 .PP
 The
 .CW csplit
-command offers an alternative, allowing you to break a file in
-context.
+command offers an alternative,
+breaking a file in context.
 There are two ways to use it.
 The first is to supply one or more line numbers.
 You could enter the following command:
@@ -3855,10 +3944,10 @@ We reduce this number by 1 and surround it with braces:
 $ \f(CBcsplit -s -f ch04. ch04 "/.Rh 0/" {42}\f(CW
 .Pe
 .ix	%end [csplit] command %key csplit command
-The pattern is enclosed within double quotation marks because it
-contains a space.
-(If you use the C shell, you must protect the braces from being
-interpreted by placing them in double quotation marks as well.)
+The pattern is enclosed within double quotation marks
+because it contains a space.
+If you use the C shell, you must protect the braces from being
+interpreted by placing them in double quotation marks as well.
 This command creates 43 files:
 .Ps
 $ \f(CBls ch04*\f(CW
@@ -3897,66 +3986,368 @@ filenames.
 .
 .Bh "Analyzing for Reuse and Inconsistencies"
 .LP
-.\" xxx write out this section
-csplit broke up a chapter into its component sections & subsections
-when you're editing a 4000-line file, it's easy to get lost
-introduce reuse (cable modem, CM + tel, CM + wifi, CM + tel + wifi)
-reuse prep: deroff -ms -s [file] | pandoc -f markdown -t plain --wrap=none
-(yes, we know there's no Markdown in it, but both use blank lines for paras)
-reuse uses fuzzy matching, so Analyzing lots of files can take a while
+When you're editing a large document,
+it's easy to lose track of how you introduce
+elements like lists or examples.
+Over time, especially if multiple writers
+work on a document,
+inconsistencies creep in.
+Without a strict editing process,
+and dedicated editors are an endangered species
+in modern technical writing groups,
+different people often have different ways
+of saying the same thing.
+.PP
+One (related, as we soon show)
+reason to break up a large file,
+using a program like
+.CW csplit ,
+into component segments (or
+.I topics )
+is to
+.I reuse
+those topics in other documents.
+.PP
+In this example, we describe a set of documents
+for a related set of products:
+.Ls B
+.Li
+a cable modem\** (call it CB32)
+.FS
+Cable system equipment suppliers largely prefer
+to provide printed or PDF documentation
+to its customers, rather than distributing everything online,
+making
+.CW troff
+a perfect match for those companies.
+.FE
+.Li
+a cable modem with a Wi-Fi\[tm] router (CR32)
+.Li
+a cable modem with a telephone jack (CT32)
+.Li
+a cable modem with both Wi-Fi and telephone (CTR32)
+.Le
+A table can better illustrate
+the features of each model:
+.KS
+.\" first time I ever used space as a tab in tbl...
+.\" let's see what happens. --LK, 9 Oct 2026
+.TS
+allbox center tab( );
+cb cb cb cb
+l  c  c  c .
+Model CM Wi-Fi Tel
+_
+CB32 X
+CR32 X X   
+CT32 X  X
+CTR32 X X X
+.TE
+.KE
+.LP
+Let's assume that whoever
+was responsible for the initial documentation
+did their best to keep things consistent
+between the four manuals;
+but did not try reusing content
+other than cutting and pasting
+sections in a word processor.
+Other writers may have made changes
+based on bug reports or customer feedback,
+without considering how changing one product
+might not affect others.
+So, over time,
+each product's content might
+.I drift
+away from the others.
+.PP
+Looking at the table above,
+you can see that all four products
+use the cable modem content;
+two use Wi-Fi content,
+and two use telephone content.
+So, in reuse terms, the cable modem content is the
+.I base
+for all four manuals.
+You want that content to be consistent.
+Likewise, you want the Wi-Fi content
+and the telephone content
+to be consistent across the manuals that use them.
+.PP
+We can use a technique called
+.I "fuzzy matching"
+to compare blocks of text.
+Instead of a binary \[lq]0=false; 1=true\[rq]
+kind of match, a fuzzy match returns
+a floating point value between 0 and 1.0,
+where 0 is no match at all
+and 1.0 is an exact match.
+Most match attempts fall somewhere in between,
+and a value of 0.9 or greater
+often suggests the two blocks
+should be identical.
+So a fuzzy match can both
+identify inconsistencies
+and suggest candidates for reuse.
+.PP
+You can download a simple fuzzy-match script from the
+.pdfhref W -D https://github.com/larrykollar/reuse_analyzer \
+Reuse analyzer repository.
+This is an
+.CW awk
+script that compares blocks (paragraphs, list items, and the like)
+to produce a report showing close matches.
+Newlines separate blocks,
+meaning each block is one (long) line.
+This requires some special processing,
+because you wouldn't want to join
+thousands of individual lines
+when another utility,
+.CW Pandoc ,
+can do it for you.\**
+.FS
+Download Pandoc from the
+.pdfhref W -D https://pandoc.org Pandoc site.
+Pre-compiled packages are available for
+Linux, MacOS\~X, BSD, and Windows.
+.PP
+Now that we have our utilities,
+we can prepare the document files for analysis.
+For
+.CW -mm
+files, use a for-loop in the shell like this:
+.Ps
+$ for i in *.mm
+> do
+>   f=`basename $i .mm`
+>   deroff -mm -s $i | pandoc -f markdown -t plain --wrap=none -o $f.txt
+> done
+.Pe
+(We know that
+.CW deroff
+does not output Markdown,
+but Pandoc defaults to Markdown input
+and both
+.CW deroff
+output and Markdown put blank lines between blocks.)
+.PP
+We now have plain-text files
+for each of the
+.CW -mm
+files in the directory.
+For this example, we'll look only at
+a group of simplified installation chapters.
+.Ps
+awk -f analyzer.awk -v minratio=0.9 \
+cb32install.txt cr32install.txt ct32install.txt ctr32install.txt
+
+Matches for ctr32install.txt block 11:
+3.  Connect a coaxial cable between the Phone Router and the coaxial cable outlet. If a set‐top box or other devic
+e is already connected, use a splitter.
+        cr32install.txt block 11 (ratio 0.987097):
+        3.  Connect a coaxial cable between the Cable Router and the coaxial cable outlet. If a set‐top box or oth
+er device is already connected, use a splitter.
+        cb32install.txt block 11 (ratio 0.97411):
+        3.  Connect a coaxial cable between the Cable Modem and the coaxial cable outlet. If a set‐top box or othe
+r device is already connected, use a splitter.
+        ct32install.txt block 11 (ratio 0.987055):
+        3.  Connect a coaxial cable between the Phone Modem and the coaxial cable outlet. If a set‐top box or othe
+r device is already connected, use a splitter.
+
+\&. . .
+.Pe
+For brevity, we show the first set of matches.
+The actual list runs on for some length,
+showing the differences between each file,
+and the full listing has some duplication.
+We can see that the primary difference in this step
+is the name of each product.
+If we replaced the product names with a string variable,
+and a few conditional statements,
+we could use the same file for all four products.
+Now, if Marketing decides to change the product names,
+we need only change a few variables and run
+.CW make .
+.PP
+Note that fuzzy matching is processor-intensive,
+so analyzing lots of files can take a while.
+The README page says,
+.QP
+A small to mid-size document set
+(about 2200 paragraphs)
+takes just under 5 minutes to analyze on a late-2013 iMac.
+You can compile the script, using
+.I awka ,
+for a performance boost
+(the same document set takes 1-1/2 minutes
+with the compiled version).
+.LP
+After adding string registers
+and defining conditionals by feature,
+the unified installation chapter looks like:
+.Ps
+\&.H 1 "Installing the \\*[Model] \\*[ProdName]"
+\&.P
+Use these instructions to install your new \\*[ProdName].
+\&.AL
+\&.LI
+Find the location where you want to install
+the \\*[ProdName].
+\&.SP 0.5v
+\&.ie r Phone \\{\\
+The location should be close to
+a coaxial cable outlet, a power outlet,
+and a telephone jack.
+.\\}
+\&.el \\{\\
+The location should be close to
+a coaxial cable outlet and a power outlet.
+\&.\\}
+\&.LI
+Orient the \\*[ProdName]
+horizontally or vertically,
+leaving at least 6 inches (16cm)
+of space on the side with the vents.
+\&.LI
+Connect a coaxial cable
+between the \\*[ProdName]
+and the coaxial cable outlet.
+\&.SP 0.5v
+If a set-top box or other device
+is already connected, use a splitter.
+\&.LI
+\&.if r Router (optional)
+Connect the supplied Ethernet cable
+between the \\*[ProdName] and
+either your computer's Ethernet jack
+or your home router's Network jack.
+\&.if r Phone \\{\\
+\&.LI
+Connect a telephone cable
+between the Phone Modem and
+a nearby telephone jack.
+\&.\\}
+\&.LI
+Connect the supplied power cable
+to your \\*[ProdName], then the power outlet.
+\&.SP 0.5v
+The \\*[ProdName] displays its startup sequence
+on the front panel LEDs.
+\&.LI
+Proceed to Chapter 2, \\[lq]Configuration.\\[rq]
+.LE
+.Pe
+We can use a separate file to define
+string variables and number registers,
+and include it in each book file
+(or define them in the Makefile and use one book file
+for all four manuals).
+For the CTR32, we might use:
+.Ps
+\&.ds Model CTR32
+\&.ds ProdName Phone Router
+\&.nr Phone 1
+\&.nr Router 1
+.Pe
+And for the CT32:
+\&.Ps
+\&.ds Model CT32
+\&.ds ProdName Phone Modem
+\&.nr Phone 1
+.Pe
+Note that the CT32 definitions do not include the
+.CW Router
+register.
+The construct
+.CW "\&.if d Router"
+is true if the
+.CW Router
+register was defined, regardless of its value.
+The CB32 definition file
+would define neither the
+.CW Phone
+nor
+.CW Router
+registers.
+.PP
+The time spent analyzing your source
+and implementing reuse
+can pay off in faster turnaround
+and more consistent documentation.
 .
 .Bh Encryption
 .LP
-The cloak-and-dagger set and the security conscious will find
-uses for the encryption facilities of UNIX.
-(These facilities are not available on UNIX systems sold
-outside the United States.)
-.\" xxx is the parenthetical still true?
-The
+The cloak-and-dagger set and the security conscious have
+uses for UNIX encryption utilities.
+In the past, US regulations
+prohibited general export of encryption utilities,
+and many of those regulations still apply
+to encryption software developed in the US.
+For software developed elsewhere,
+the picture is murkier.
+If you live outside the US,
+and want to use encryption software,
+try downloading it.
+.PP
+The long-obsolete
 .CW crypt
 .ix	[crypt] command %key crypt command
-command reads a file from standard input, asks you to supply
-a key for encoding the file, and passes to standard output an
-encrypted version of the file.
-You should redirect standard output to a new file because the
-encrypted file is not readable text.
+command read a file from standard input,
+asked you to supply a key for encoding the file,
+and output an encrypted version of the file.
+Although the old version is still available,
+consider using the modern replacements
+.CW ccrypt ,
+.CW mcrypt ,
+or
+.CW gpg
+(GNU Privacy Guard).
+All are generally available for Linux and BSD.
 .Ps
-$ \f(CBcat message | crypt > encrypted.msg\f(CW
+$ \f(CBcat message | ccenrypt > encrypted.msg\f(CW
 
-Enter key:\f[CB]alabaster\fP
+Enter encryption key:\f[CB]alabaster\fP
+Enter encryption key: (repeat) \f[CB]alabaster\fP
 .Pe
-Just as when you enter a password, the key does not appear on
+Just as when you enter a password,
+the key does not appear on
 the screen as you enter it.
-If you prefer, you can enter the key as an argument to
-.CW crypt .
-To decode an encrypted file, you simply
-.CW cat
-the file to
-.CW crypt
-and supply the key.
+You can enter the key on the command line using the
+.CW -K
+option, but other users could see the key
+by using the
+.CW ps
+command at the right moment.
+To decode an encrypted file,
+.CW ccat
+the file and supply the key.
 .PP
-The UNIX editors
+The original UNIX editors
 .CW ed ,
 .CW ex ,
 and
 .CW vi ,
-can be invoked with the
+could be invoked with the
 .CW -x
 option to read or edit an encrypted file.
-(Some versions of these programs recognize this option but do
-not support the encryption feature.)
 Of course, you have to supply the correct key.
+Some modern versions of these programs
+recognize this option but do
+not support the encryption feature;
+others do not recognize it at all.
 .page 336
 .
 .Ah "Cleaning Up and Backing Up"
 .ix	%begin backing~up files
 .LP
-In this section, we show some procedures for backing up active
-files to some other medium such as a USB flash drive.
+In this section, 
+we show some procedures for backing up
+active or older files.
 .\" xxx USB flash drives, internet, etc
 At many sites, backups are the responsibility of one person,
 who performs these tasks on a regular basis to ensure that
-users can recover much of their data in case there is a serious
+users can recover their data in case there is a serious
 system crash.
 If you are using Github or some other
 source control service,
@@ -3971,18 +4362,21 @@ a local hard drive or to a cloud server.
 Whoever does it must ensure that backups of important files
 are made periodically.
 .PP
-A second reason for learning a backup procedure is to enable
-you to store files on an off-line medium.
-All modern computers have either hard
-disks or solid state drives (SSDs) as the primary storage medium.
-No matter how large a disk drive is, sooner or later, users
-will fill it to capacity.
+A second reason for learning a backup procedure
+is to enable you to store files on an off-line medium.
+All modern computers have
+either hard disks or solid state drives (SSDs)
+as the primary storage medium.
+No matter how large a disk drive is, sooner or later,
+users will obey Franklin's Law and fill it to capacity.
 Frequently, there are useless files that can be deleted.
-Other inactive files, such as an early draft of a document,
-might be removed from the system after you have made a copy
+You can remove inactive files,
+such as an early draft of a document,
+after you have made a copy
 to a flash drive or a cloud server.
-After a project is finished, you probably want to make several
-copies of all important files.
+After a project is finished,
+you probably want to make several copies
+of all important files.
 At a later time, should you need files that have been stored
 off-line, you can easily restore them to the system.
 .PP
@@ -4002,11 +4396,11 @@ At your site, you may even have simpler shell scripts that
 prevent you from having to deal with
 .CW cpio
 directly.
-Ask an expert user at your site about backup procedures and go
-through it once or twice.
+Ask an expert user at your site about backup procedures
+and go through it once or twice.
 Apart from learning about
 .CW cpio ,
-you will need:
+you need:
 .RS
 .Ls
 .Li
@@ -4019,6 +4413,7 @@ command.
 Familiarity with operating the device, such as being able to
 load a tape in the tape drive and knowing how to format a
 floppy disk prior to use.
+.\" XXX Sooooo obsolete
 .Le
 .RE
 You can use
@@ -4040,7 +4435,7 @@ Unlike many of the commands we've looked at,
 .CW cpio
 depends exclusively on reading a list of filenames from
 standard input.
-This list identifies the files that will be backed up.
+This list identifies the files to back up.
 For practical purposes, this involves doing an
 .CW ls
 command on the directory you want backed up and piping the
@@ -4053,9 +4448,9 @@ results to
 You need to know the UNIX filename for the backup device.
 This name is site specific, so you need to check with a
 knowledgeable user.
-At our site, we have a floppy  disk  drive  named
+At our site, we have a floppy disk drive named
 .CW /dev/rfp021 .
-A  tape  drive  might  be  named
+A tape drive might be named
 .CW /dev/mt0 .
 .\" xxx Also drag and drop an entire directory from GUI
 .PP
@@ -4219,101 +4614,93 @@ it prompts you first to approve the command for each file.
 .ix	%end backing~up files
 .
 .Ah "Compressing Files"
-You can conserve the amount of disk space that text files take
-up by storing some of your files in a compressed form.
-The
-.\" xxx replace with gzip, also point out that tar can gzip its files
-.CW pack
-.ix	[pack] command %key pack command
-command can be used to compress a file.
-It generally reduces a text file by 25 to 40 percent.
+You can conserve the amount of disk space
+that text files take up
+by storing some of your files
+in a compressed form.
+Use the
+.CW gzip
+.ix	[gzip] command %key gzip command
+command to compress a file.
+It generally reduces a text file by 70 to 90 percent.
 .Ps
-$ \f(CBls -l ch04/sect1\f(CW
--rw-rw-rw-   1 fred   doc   29350 Jun 10 15:22 ch04/sect1
-$ \f(CBpack ch04/sect1\f(CW
-pack: ch04/sect1: 39.9% Compression
+$ \f(CBls -l ch04.t\f(CW
+-rw-rw-rw-   1 fred   doc  124878 Jun 10 15:22 ch04.t
+$ \f(CBgzip -v ch04.t\f(CW
+ch04.t:  68.3% -- replaced with ch04.t.gz
 .Pe
-The original file is replaced by a packed file with a
-.CW \&.z
+The original file is replaced by a compressed file with a
+.CW \&.gz
 appended to the original filename.
 .Ps
-$ \f(CBls -l ch04/sect1.z\f(CW
--rw-rw-rw-   1 fred   doc   17648 Jun 10 15:29 ch04/sect1.z
+$ \f(CBls -l ch04.t.gz\f(CW
+-rw-rw-rw-   1 fred   doc   39653 Jun 10 15:29 ch04.t.gz
 .Pe
 The
-.CW pack
-command reduced the size of this file from 29K to 17K bytes.
-If used system-wide, it could save a significant amount of
-disk space, although the amount of compression will vary from
-file to file.
+.CW gzip
+command reduced the size of this file
+from nearly 125K to less than 40K bytes.
+If used system-wide,
+it could save a significant amount
+of disk space,
+although the amount of compression
+varies from file to file.
 Obviously, there is less benefit in packing small files.
 .PP
-To expand a packed file, use the
-.\" xxx gunzip
-.CW unpack
-.ix	[unpack] command %key unpack command
+To expand a compressed file, use the
+.CW gunzip
+.ix	[gunzip] command %key gunzip command
 command.
 You can specify the name of the file with or without the
-.CW \&.z
+.CW \&.gz
 suffix.
 .Ps
-$ \f(CBunpack ch04/sect1\f(CW
-unpack:  ch04/sect1: unpacked
+$ \f[CB]gunzip ch04.t\f(CW
 .Pe
 .page 339
-Another way to temporarily
-unpack
-a file is to use a special version of
-.CW cat
-for packed files, called
-.CW pcat .
-.ix	[pcat] command %key pcat command
-Use this command to view a packed file (pipe it through
-.CW less )
-or send it as input to another command, as in the following
-example:
+To work with a compressed file,
+without decompressing it,
+use the
+.CW "gunzip -c"
+option.
+This decompresses a file to standard output
+(pipe it through
+.CW less
+or send it as input to another command),
+as in the following example:
 .Ps
-$ \f(CBpcat ch04/sect1 | nroff -mm\f(CW
+$ \f(CBgunzip -c ch04.t | nroff -mm\f(CW
 .Pe
 .
 .Ah Communications
-.\" xxx internet, ssh
 .LP
-More and more, we find that our projects require us to work on
-several different computer systems, some of them UNIX systems,
-some not.
-Given this situation, the ability to work remotely on other
-systems and to transfer files has been essential.
+Despite well-publicized
+Return To Office (RTO) initiatives,
+A great deal of writing work
+still happens over the Internet.
 Fortunately, a number of useful communications programs are
 part of the standard UNIX shipment.
 .PP
-Two basic types of connections between computer systems are a
-.I dial-up
-.ix	dial-up line
-line, using a modem to communicate across phone lines, and a
-.ix	modem
-.I direct
-line, when two computer systems are in close proximity and can
-be connected by a single cable.
-The
-.CW uucp
-.ix	[uucp] command %key uucp command
-and
-.CW cu
-.ix	[cu] command %key cu command
-commands establish communication links using both types of
-connections.
-The
-.CW cu
-command (Berkeley's version is called
-.CW tip )
-.ix	[tip] command %key tip command
-is a UNIX program for conducting a login session on a remote
-computer system.
-UUCP (UNIX-to-UNIX copy) is a series of related programs for
-transforming files between UNIX systems.
-Its main program is called
-.CW uucp .
+Two basic types of connections
+between computer systems are a
+.I LAN
+.ix	LAN
+.ix local area network
+(Local Area Network),
+connecting closely-located computers, and a
+.I WAN
+.ix WAN
+.ix wide area network
+(Wide Area Network),
+otherwise known as an Internet connection.
+Internet
+.I protocols ,
+the rules that govern data routing and transmission,
+control nearly everything related to communicating
+with another computer:
+website access, email, file servers, chat,
+remote login, source code control servers, and more.
+These apply to connections over both LANs and WANs.
 .PP
 We cannot provide full descriptions of these facilities here.
 A good way to learn is to ask an expert user to help you
@@ -4321,166 +4708,88 @@ transfer files or begin a remote login session.
 Keep notes on the procedure and when following it, if things
 don't work as expected, get more help.
 .PP
-The UUCP programs are quite straightforward and easy to use
-after you are accustomed to the conventions.
-Each system on the UUCP network has a file that describes the
-other systems linked to it and what types of links are available.
-This file is created by the system administrator of each system.
-You can find out the names of these remote systems by entering
-the
-.CW uuname
-.ix	[uuname] command %key uuname command
-command.
-If your system is properly configured and you have a login on a
-remote system, such as
-.CW boston ,
-you can begin a remote session by entering:
-.Ps
-$ \f(CBcu boston\f(CW
-.Pe
-After you are connected to the remote system, you should get
-a login message.
-To quit a remote session, log out and then enter
-.CW ~.
-(tilde dot) to return to your own machine.
-.PP
-There are a number of commands you can enter while under the
-control of
-.CW cu ,
-permitting, for instance, the execution of commands on the
-local system while you are still logged in to the remote system.
-Check the reference page in your UNIX documentation.
-.PP
-You can also
-.I "dial direct"
-to a non-UNIX system by specifying a
-telephone number on the command line (providing, of course,
-that the files accessed by these communications programs have
-been properly configured by the system administrator).
-.page 340
-.PP
-You can send mail to users on these remote systems and transfer
-files.
-.\" xxx email over the net
-.ix	files, transferring~to other systems
-Generally, file transfers take place between
-.I "public directories"
-.ix	directories, public
-on both systems, usually
-.CW /usr/spool/uucppublic .
-File transfers between other directories will contend with file
-and directory access permissions as well as
-.CW uucp
-permissions set by the system administrator.
-The character
-.CW ~
-serves as a shorthand for the public directory.
-.PP
-For instance, when working on site for a client, we often create
-files that we want to send to our own system.
-If we are logged in on their system, we can send the file
-.CW outline
-to our system named
-.CW ora
-by entering:
-.Ps
-$ \f(CBuucp -m outline ora!~/fred/\f(CW
-.Pe
-The UUCP facility is batch oriented, accepting requests and
-acting upon them in the order in which they are received.
-Although it may execute your request immediately, if
-it is busy or encounters difficulty making the connection, UUCP
-will carry out the request at a later time.
-.PP
-The
-.CW -m
-option is used so that we are sent mail when the copy is
-actually completed.
-The system name is followed by an exclamation mark (if you use
-the C shell, escape ! with a backslash).
-Then you specify a tilde (~) followed by the user's name.
-Putting a slash after the user name (\c
-.CW fred )
-ensures that the user name will be interpreted as a directory
-(or a directory will be created if one does not exist).
-.PP
-Occasionally, you will need to transfer a large number of files
-or, perhaps, an entire directory hierarchy.
-There are some simple tricks you can use to combine multiple
-files into a single file, making it easier to transmit to
-another system.
-They are especially helpful when you transfer between public
-directories.
-.PP
-You must first create a list of the files to be included.
-(You can do this either manually or with a command like
-.CW ls
+Often,
+.I "client software"
+handles not only the communications
+with a server, but all the steps that come after.
+For example, on Linux systems,
+you may find yourself using a utility called
+.CW dpkg
 or
-.CW find .)
-Then use
-.CW cpio
-.ix	[cpio] command %key cpio command
-to create what we can call a file
-.I archive
-on standard output rather than on a backup device.
-Redirect standard output to a file, then use UUCP to send the
-archive.
-Use the same backup program on the target system to restore the
-archive.
-For example, if you had a book made up of files
-.CW ch01 ,
-.CW ch02 ,
-etc., you could \(lqpackage\(rq that book for transfer to another
-system using
-.CW cpio.
+.CW rpm ,
+depending on what distribution you use.
+These utilities handle all the issues
+related to installing a new software package
+on your computer:
+.Ls B
+.Li
+Locating and downloading not only
+the correct package file,
+but any other packages required
+to use the software.
+.Li
+Installing packages in the correct order.
+.Le
+.LP
+When downloading a software source package,
+the package is often a gzip'ped
+.CW tar
+file, often called a
+.I tarball .
+To unpack a tarball,
+find its location
+(usually
+.CW Downloads
+on most modern operating systems),
+move to the directory where you want to unpack it
+(you could create a
+.CW Software
+or
+.CW Projects
+sub-directory under your home directory),
+then unpack it.
+Assuming the tarball is in your
+.CW Downloads
+directory:
 .Ps
-boston$ \f[CB]cd /usr/proj/book\fP
-boston$ \f[CB]find . -name 'ch0?' -print | cpio -oc > book.archive\fP
+$ tar zxf ~/Downloads/duzitall-1.4.tar.gz
 .Pe
-or using a manually generated list of filenames:
+In most cases, this creates a sub-directory
+.CW duzitall-1.4
+under your current directory.
+Some older packages,
+including some relevant to this book,
+expect you to create the directory.
+If you have any doubt, try
 .Ps
-boston$ \f[CB]ls ch0? > filelist\fP
-boston$ \f[CB]cpio -oc < filelist > book.archive\fP
+$ tar ztvf ~/Downloads/duzitall-1.4.tar.gz
 .Pe
-Then, after transferring
-.CW book.archive
-(instead of numerous individual files) to the
-remote system with UUCP, a user can restore the archive:
-.Ps
-calif$ \f[CB]mkdir /usr/proj/book\fP
-calif$ \f[CB]mv /usr/spool/uucppublic/book.archive /usr/proj/book\fP
-calif$ \f[CB]cd /usr/proj/book\fP
-calif$ \f[CB]cpio -icd < book.archive\fP
-.Pe
-(The
-.CW -c
-option of
-.CW cpio
-writes header information in ASCII for portability;
-.CW -d
-tells
-.CW cpio
-to create directories if needed when doing the restore.)
-.page 341
+to verify whether the tarball
+creates its own directory or not.
 .PP
-(On Berkeley UNIX systems, you can do something similar with
-.CW tar .
-.ix	[tar] command %key tar command
-See your UNIX manual for details.)
+Other clients, like
+.CW git ,
+provide connections to source code control.
+Instead of manually downloading or uploading files
+to the server,
+.CW git
+keeps track of which server
+each project uses,
+what has changed, and merges your changes.
 .
 .Ah "Scripts of UNIX Sessions"
 .LP
-Throughout this chapter, we have provided examples of UNIX
-commands.
+Throughout this chapter,
+we provided examples of UNIX commands.
 These examples were made using a command called
 .CW script
 .ix	[script] command %key script command
 (which is installed or available on Linux systems).
 The
 .CW script
-command allows you to make a file copy of a UNIX session.
-Without this facility, we'd have to simulate the examples by
-hand.
+command makes a file copy of a UNIX session.
+Without this facility,
+we'd have to simulate the examples by hand.
 .PP
 After you invoke
 .CW script ,
@@ -4506,10 +4815,10 @@ hello
 $
 script done on Thu Jul 10 12:50:11 1987
 .Pe
-After we make a script, we simply read the file into our text
-using
+After we make a script,
+we read the file into our text using
 .CW vi .
 .PP
-Keeping a script of a procedure is also a good start for
-building a shell script that performs a routine task
-automatically.
+Keeping a script of a procedure
+is also a good start for building a shell script
+that performs a routine task automatically.

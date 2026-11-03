@@ -434,7 +434,7 @@ turn off notifications,
 and start entering text.
 .FE
 there are applications at which they excel,
-as we will see in Chapters 7 and 12.
+as we learn in Chapters 7 and 12.
 .PP
 The most common screen editor in UNIX is
 .CW vi ,
@@ -457,7 +457,8 @@ Learning
 or some other suitable screen editor
 is the first step in mastering the
 UNIX text-processing environment.
-You will spend most of your time using the editor.
+Most of the time,
+you use the editor.
 .PP
 UNIX screen editors such as
 .CW vi

@@ -7,7 +7,7 @@
 .\"
 .\" TROFF source proof read
 .\" by
-.\" Andreas Kähäri <andreas.kahari@unix.net>
+.\" Andreas Kï¿½hï¿½ri <andreas.kahari@unix.net>
 .\"
 .\" Here we include the UTP macros
 .so utp.mac
@@ -35,7 +35,7 @@
 .\" instead of an unbroken line.  /Andreas 2002-09-28
 .\" Looks OK now. -LK
 .LP
-This appendix is divided into ten subsections,
+This appendix consists of ten subsections,
 each covering a different facet of the
 \f(CWnroff/troff\fP formatting system.
 These sections are:
@@ -64,11 +64,12 @@ the \f(CWeqn\fP preprocessor
 the \f(CWpic\fP preprocessor
 .Le
 .PP
-In the following sections, italics are used for values
+In the following sections, italics represent values
 that you supply.
-Optional
-arguments to requests or macros are enclosed in brackets.
+Brackets enclose optional
+arguments to requests or macros.
 .\" _page 594
+.
 .Ah "\f(CBnroff/troff\fP Command-Line Syntax"
 .ix	[nroff] formatter, command~line options %key nroff formatter, command line options
 nroff [\fIoptions\fP] [\fIfiles\fP]
@@ -88,7 +89,7 @@ space character.
 .IP "\f(CW-h\fP" \n(iN
 Use tabs in large spaces.
 .IP "\f(CW-i\fP" \n(iN
-Read standard input after \fIfiles\fP are processed.
+Read standard input after processing all \fIfiles\fP.
 .IP "\f(CW-k\fP\fIname\fP" \n(iN
 Compact macros and output to [\f(CWdt\fP].\fIname\fP
 (old versions of
@@ -101,8 +102,8 @@ to \fIfiles\fP.
 Number first page \fIn\fP.
 .IP "\f(CW-o\fP\fIlist\fP" \n(iN
 Print only pages contained in \fIlist\fP.
-Individual pages in \fIlist\fP should
-be separated by commas; a page range is specified by \fIn-m\fP;
+Separate individual pages in \fIlist\fP
+by commas; specify a page range using \fIn-m\fP;
 \fIn-\fP indicates from page \fIn\fP to the end.
 .IP "\f(CW-q\fP" \n(iN
 Invoke simultaneous input/output of \f(CW.rd\fP requests.
@@ -140,7 +141,8 @@ _
 \f(CWX\fP:EBCDIC line printer
 .TE
 .\" _page 595
-.Bh "\f(CBtroff\fP Options
+.
+.Bh "\f(CBtroff\fP Options"
 .ix	%begin [troff] formatter, summary~of requests %key troff formatter, summary of requests
 .LP
 troff [\fIoptions\fP] [\fIfiles\fP]
@@ -150,8 +152,8 @@ troff [\fIoptions\fP] [\fIfiles\fP]
 .IP "\f(CW-a\fP" \n(iN
 Send printable ASCII approximation to standard output.
 \f(CWotroff\fP sends its output directly to a connected typesetter
-unless the \f(CW-t\fP or \f(CW-a\fP option is specified,
-in which case it is sent to standard output.
+unless you specify the \f(CW-t\fP or \f(CW-a\fP option,
+in which case output goes to the standard output.
 \f(CWditroff\fP always writes to standard output.
 .IP "\f(CW-b\fP" \n(iN
 Report phototypesetter status (\f(CWotroff\fP only).
@@ -175,9 +177,8 @@ Prepend \f(CW/usr/lib/tmac/tmac.\fP\fIname\fP to \fIfiles\fP.
 Number first page \fIn\fP.
 .IP "\f(CW-o\fP\fIlist\fP" \n(iN
 Print only pages contained in \fIlist\fP.
-Individual pages in \fIlist\fP should
-be separated by commas.
-A page range is specified by \fIn-m\fP;
+Separate individual pages in \fIlist\fP by commas.
+Specify a page range by \fIn-m\fP;
 \fIn\(mi\fP indicates from page \fIn\fP to the end.
 .IP "\f(CW-p\fP\fIn\fP" \n(iN
 Print all characters in point size \fIn\fP, but retain motions for sizes
@@ -198,12 +199,13 @@ only).
 .IP "\f(CW-w\fP" \n(iN
 If the phototypesetter is busy, wait until it is free (\f(CWotroff\fP only).
 .poE
+.
 .Ah "\f(CBnroff/troff\fP Requests"
 .poS
 .IP "\f(CW.ab\fP [\fItext\fP]" \n(iN
 Abort and print \fItext\fP as message.
-If \fItext\fP is not specified,
-the message \fIUser Abort\fP is printed.
+If you do not specify \fItext\fP,
+prints the message \fIUser Abort\fP.
 .IP "\f(CW.ad\fP [\fIc\fP]" \n(iN
 Adjust one or both margins if filling is in effect (see \f(CW.fi\fP).
 \fIc\fP can be
@@ -341,8 +343,8 @@ Set input line count trap to invoke macro \fIxx\fP after \fIn\fP lines
 of input text have been read.
 .IP "\f(CW.lc\fP \fIc\fP" \n(iN
 Set leader repetition character to \fIc\fP.
-(See \f(CW.tc\fP.) Leaders
-are invoked by \f(CW\\a\fP.
+(See \f(CW.tc\fP.)
+\f(CW\\a\fP invokes leaders.
 .IP "\f(CW.lg\fP \fIn\fP" \n(iN
 Turn ligature mode on if \fIn\fP is absent or nonzero.
 .IP "\f(CW.ll\fP [\(+-][\fIn\fP]" \n(iN
@@ -451,8 +453,8 @@ given, tab is left adjusting; if \fIt\fP is:
 \f(CWC\fP	Center
 .DE
 .IP "\f(CW.tc\fP \fIc\fP" \n(iN
-Define tab character as \fIc\fP (e.g., \f(CW.tc .\fP will draw a string
-of dots to tab position).
+Define tab character as \fIc\fP (e.g., \f(CW.tc .\fP draws a string
+of dots to the tab position).
 .IP "\f(CW.ti\fP [\(+-][\fIn\fP]" \n(iN
 Indent next output line \fIn\fP spaces, or increment the current indent
 by \(+-\fIn\fP for the next output line.
@@ -474,11 +476,12 @@ Set vertical line spacing to \fIn\fP.
 If no argument, restore previous
 spacing (default 1/6 inch in \f(CWnroff\fP, 12 points in \fItroff\fP).
 .IP "\f(CW.wh\fP \fIn xx\fP" \n(iN
-When position \fIn\fP is reached, execute macro \fIxx\fP; negative
-values of \fIn\fP are with respect to page bottom.
+At vertical position \fIn\fP, execute macro \fIxx\fP; negative
+values of \fIn\fP represent the distance above the page bottom.
 .poE
 .ix	%end [nroff] formatter, summary~of requests %key nroff formatter, summary of requests
 .ix	%end [troff] formatter, summary~of requests %key troff formatter, summary of requests
+.
 .Ah "Escape sequences"
 .ix	%begin [troff] formatter, escape sequences %key troff formatter, escape sequences
 .poS
@@ -622,8 +625,10 @@ Concealed (ignored) newline.
 .poE
 .ix	%end [troff] formatter, escape sequences %key troff formatter, escape sequences
 .\" _page 601
+.
 .Ah "Predefined Number Registers"
 .ix	%begin [troff] formatter, predefined number~register names %key troff formatter, predefined number register names
+.
 .Bh "Read-Only Registers"
 .ix	[troff] formatter, read-only number~registers %key troff formatter, read-only number registers
 .poS
@@ -632,12 +637,12 @@ Number of arguments available at the current macro level.
 .IP \f(CW.$$\fP \n(iN
 Process \s-1ID\s0 of \f(CWtroff\fP process (\f(CWditroff\fP only).
 .IP \f(CW.A\fP \n(iN
-Set to 1 in \f(CWtroff\fP, if \f(CW-a\fP option is used;
+Set to 1 in \f(CWtroff\fP, if using the \f(CW-a\fP option;
 always 1 in \f(CWnroff\fP.
 .IP \f(CW.H\fP \n(iN
 Available horizontal resolution in basic units.
 .IP \f(CW.T\fP \n(iN
-In \f(CWnroff\fP, set to 1 if \f(CW-T\fP option is used;
+In \f(CWnroff\fP, set to 1 if using the \f(CW-T\fP option;
 in \f(CWtroff\fP, always 0;
 in \f(CWditroff\fP, you can print the value of \f(CW-T\fP with the
 string \f(CW\e*(.T\fP.
@@ -687,6 +692,7 @@ Reserved version-dependent register.
 .IP \f(CW.z\fP \n(iN
 Name of current diversion.
 .poE
+.
 .Bh "Read/Write Registers"
 .poS
 .IP \f(CW%\fP \n(iN
@@ -718,8 +724,10 @@ Height of string below baseline (generated by \f(CWwidth\fP function).
 Last two digits of current year.
 .poE
 .ix	%end [troff] formatter, predefined number~register names %key troff formatter, predefined number register names
+.
 .Ah "Special Characters"
 .ix	%begin [troff] formatter, special characters %key troff formatter, special characters
+.
 .Bh "On the Standard Fonts"
 .LP
 The following special characters are usually found on the standard
@@ -742,13 +750,15 @@ c:lfCW:l:c:lfCW:l.
 \(34:\e(34:3/4:
 .TE
 .poE
+.
 .Bh "On the Special Font"
 .LP
-The following characters are usually found on the special font except
-for the uppercase Greek letter names followed by \(dg which are mapped
-into uppercase English letters in whatever font is mounted on font
+The following characters are part of the special font,
+except for the uppercase Greek letter names followed by \(dg;
+they use uppercase English letters in the font mounted on font
 position one (default is Times Roman).
 .\" _page 603
+.
 .Ch "Miscellaneous Characters"
 .poS
 .TS
@@ -787,6 +797,7 @@ c:lfCW:l:c:lfCW:l.
 \(+-:\e(+-:plus-minus:
 .TE
 .poE
+.
 .Ch "Bracket Building Symbols"
 .ix	[troff] formatter, bracket-building characters %key troff formatter, bracket-building characters
 .ix	bracket-building characters
@@ -811,6 +822,7 @@ c:lfCW:l.
 .TE
 .poE
 .\" _page 604
+.
 .Ch "Greek Characters"
 .ix	Greek characters
 .ix	[troff] formatter, Greek characters %key troff formatter, Greek characters
@@ -846,8 +858,10 @@ c:lfCW:l:c:lfCW:l.
 .TE
 .poE
 .ix	%end [troff] formatter, special characters %key troff formatter, special characters
+.
 .Ah "The \f(CBms\fP macros"
 .ix	%begin [ms] macros, summary~of macros %key ms macros, summary of macros
+.
 .Bh "Summary of \f(CBms\fP macros"
 .poS
 .IP "\f(CW.1C\fP" \n(iN
@@ -936,7 +950,7 @@ Decrease type size by two points (\f(CWtroff\fP only).
 Title line.
 .IP "\f(CW.TS\fP [\f(CWH\fP]" \n(iN
 Start table.
-\f(CWH\fP will put table header on all pages.
+\f(CWH\fP puts a table header on all pages.
 Use this option with following \f(CW.TH\fP.
 .IP "\f(CW.TH\fP" \n(iN
 Table header ends.
@@ -947,6 +961,7 @@ End table.
 Underline following text, even in \f(CWtroff\fP.
 .poE
 .\" _page 606
+.
 .Bh "Internal Macros Worth Knowing About"
 .ix	[ms] macros, internal macros %key ms macros, internal macros
 .ix	[ms] macros, internal number~register names %key ms macros, internal number register names
@@ -984,6 +999,7 @@ Footer.
 The bottom of the text on the page.
 Invoked by trap at \f(CW\en(FMu\fP.
 .poE
+.
 .Bh "Number Registers Containing Page Layout Defaults"
 .ix	[ms] number~registers, page~layout %key ms number registers, page layout
 .poS
@@ -1014,6 +1030,7 @@ Point size (default 10 points).
 Vertical line spacing (default 12 points).
 .poE
 .\" _page 607
+.
 .Bh "Predefined and User-Definable Strings"
 .ix	[ms] macros, predefined~and~user-definable strings %key ms macros, predefined and~user-definable strings
 .poS
@@ -1050,9 +1067,10 @@ Right footer, printed by
 in \f(CWBT\fP macro.
 Null unless user-defined.
 .poE
+.
 .Bh "Reserved Macro and String Names"
 .ix	[ms] macros, reserved macro~and~string names %key ms macros, reserved macro and~string names
-The following macro and string names are used by the \f(CWms\fP package.
+The \f(CWms\fP package uses the following macro and string names.
 Avoid using these names for compatibility with the existing macros.
 An italicized \fIn\fP means that the name contains a numeral
 (generally the interpolated value of a number register).
@@ -1080,7 +1098,7 @@ AU%\ \ \ CT%\ \ \ FK%\ \ \ KF%\ \ \ NP%\ \ \ RS%\ \ \ TQ%\ \ \ \fP
 .TE
 .poE
 .PP
-The following number register names are used by the \f(CWms\fP package.
+The \f(CWms\fP package uses the following number register names.
 An italicized \fIn\fP means that the name contains a numeral (generally
 the interpolated value of another number register).
 .\" _page 608
@@ -1107,6 +1125,7 @@ number register, macro, or string names contain lowercase letters,
 so lowercase or mixed case names are a safe bet when you're writing your
 own macros.
 .ix	%end [ms] macros, summary~of macros %key ms macros, summary of macros
+.
 .Ah "The \f(CBmm\fP Macros"
 .ix	%begin [mm] macros, summary~of macros %key mm macros, summary of macros
 .Bh "Summary of \f(CBmm\fP Macros"
@@ -1128,12 +1147,12 @@ Begin with \f(CW.AS\fP.
 .IP "\f(CW.AF\fP [\fIcompany name\fP]" \n(iN
 Alternate format for first page.
 Change first page ``Subject/Date/From'' format.
-If argument is given, other headings are not affected.
+If you specify an argument, affects no other headings.
 No argument suppresses company name and headings.
 .IP "\f(CW.AL\fP [\fIx\fP] [\fIn\fP]" \n(iN
 Start list type \fIx\fP (1, A, a, I or i), indent \fIn\fP spaces.
 If third argument is 1, don't put a blank line between items.
-Default is numbered listing, indented 5 spaces.
+Default is a number list, indented 5 spaces.
 .IP "\f(CW.AT\fP \fItitle\fP" \n(iN
 Author's \fItitle\fP follows.
 .IP "\f(CW.AU\fP \fIname\fP" \n(iN
@@ -1266,11 +1285,11 @@ It takes the following arguments:
 \fIpad\fP \(em Padding associated with mark.
 .br
 \fItype\fP \(em If 0, use the specified \fImark\fP.
-If non-zero, and \fImark\fP is 1, A, a, I, i, list will be
+If non-zero, and \fImark\fP is 1, A, a, I, i, list is
 automatically numbered or alphabetically numbered or alphabetically
 sequenced.
-In this case, \fItype\fP controls how the \fImark\fP will be displayed.
-For example, if \fImark\fP is 1, \fItype\fP will have the following
+In this case, \fItype\fP controls how the \fImark\fP displays.
+For example, if \fImark\fP is 1, \fItype\fP has the following
 results:
 .in +0.3i
 .TS
@@ -1285,11 +1304,10 @@ c:c.
 6:{1}
 .TE
 .in -0.3i
-\fImark\fP \(em The symbol or text that will be used to start each list
-entry.
+\fImark\fP \(em The symbol or text used to start each list entry.
 \fImark\fP can be null (creates hanging indent), a text string,
 or 1, A, a, I, or i to create an automatically numbered or lettered list.
-Format of the \fImark\fP will be affected by \fItype\fP.
+The \fItype\fP affects the format of the \fImark\fP.
 .br
 \f(CWLI\fP-\fIspace\fP \(em The number of blank lines to be output between
 each following \f(CW.LI\fP macro (default 1).
@@ -1318,7 +1336,7 @@ Specify memorandum \fItype\fP and \fItitle\fP.
 \f(CW3\fP = Engineer's notes
 \f(CW4\fP = Released paper
 \f(CW5\fP = External letter
-\fIstring\fP = \fIstring\fP is printed.
+\fIstring\fP = prints \fIstring\fP.
 .DE
 \fItitle\fP is user-supplied text prefixed to page number.
 .IP "\f(CW.ND\fP \fIdate\fP" \n(iN
@@ -1421,9 +1439,10 @@ Use \fIname\fP for signature line.
 .IP "\f(CW.SK\fP \fIn\fP" \n(iN
 Skip \fIn\fP pages.
 .IP "\f(CW.SM\fP \fIx\fP[\fIy\fP][\fIz\fP]\fP" \n(iN
-Reduce string \fIx\fP by one point.
-If strings \fIx\fP, \fIy\fP, and \fIz\fP are specified, \fIy\fP is
-reduced by one point.
+Reduces string \fIx\fP by one point.
+If you specify strings \fIx\fP, \fIy\fP, and \fIz\fP,
+reduces \fIy\fP by one point,
+leaving \fIx\fP and \fIz\fP unchanged.
 .IP "\f(CW.SP\fP [\fIn\fP]" \n(iN
 Leave \fIn\fP blank vertical spaces.
 .IP "\f(CW.TB\fP [\fItitle\fP] [\fIn\fP] [\fIf\fP]" \n(iN
@@ -1435,8 +1454,8 @@ prefix to number; if \fIf\fP=1, \fIn\fP is a suffix; if \fIn\fP=2,
 \fIn\fP replaces number.
 .IP "\f(CW.TS\fP [\f(CWH\fP]" \n(iN
 Start table.
-\f(CWH\fP will put table header on all pages.
-Use this option with following \f(CW.TH\fP.
+\f(CWH\fP puts a table header on all pages.
+Use this option with a following \f(CW.TH\fP.
 .IP "\f(CW.TH\fP \fIN\fP" \n(iN
 Table header ends.
 Must be used with \f(CW.TS H\fP.
@@ -1478,6 +1497,7 @@ Change column or footnote width to \fIx\fP.
 \f(CW-WF\fP		Turn off \f(CWWF\fP mode
 .DE
 .poE
+.
 .Bh "Predefined String Names"
 .ix	[mm] macros, predefined string~names %key mm macros, predefined string names
 .poS
@@ -1515,6 +1535,7 @@ Title for references.
 Trademark listing.
 Place the letters \fITM\fP one-half line above the text that it follows.
 .poE
+.
 .Bh "Number Registers Used in \f(CBmm\fP"
 .ix	[mm] macros, number~registers %key mm macros, number~registers
 A dagger (\(dg) next to a register name indicates that the register can
@@ -1543,8 +1564,8 @@ Otherwise, they start on a new page.
 (Default is 1.)
 .IP \f(CWD\(dg\fP \n(iN
 If set to 1, sets debug mode (default 0).
-If set, \f(CWmm\fP will
-continue even when it encounters normally fatal errors.
+If set, \f(CWmm\fP continues
+even when it encounters normally fatal errors.
 .IP \f(CWDe\fP \n(iN
 If set to 1, ejects page after each floating display.
 (Default is 0.)
@@ -1646,10 +1667,12 @@ For \f(CWnroff\fP, this value is an unscaled number representing
 character positions.
 .\" Removed '(7.5i)' from default. --LK
 Default is 9.
-For \f(CWtroff\fP, this value is scaled.
+For \f(CWtroff\fP, the
 .\" Interesting: my XENIX book says the default is 0.75i for troff.
 .\" We'll leave it alone; the XENIX version might be different. --LK
-Default is .5i.
+.\" Followup: https://github.com/n-t-roff/DWB3.3/blob/master/doc/mm/mm.02
+.\" says default for \nO is 1i. Since that's official... -- LK 2026 Nov 1
+default is 1i.
 .IP \f(CWOc\fP \n(iN
 Table of contents page numbering style.
 0=lower case roman; 1=arabic.
@@ -1671,7 +1694,9 @@ Amount of spacing between paragraphs.
 .\" I think this is supposed to be *0.3v* not *3v*, also in ch06.
 .\" Both XENIX & groff mm use 1 (aka 1v) for the default.
 .\" See the \n(PD register in the ms macros. --LK
-(Default is 3v.)
+.\" In: https://github.com/n-t-roff/DWB3.3/blob/master/doc/mm/mm.04
+.\" the default is 1 (1v). -- LK 2026 Nov 1
+(Default is 1v.)
 .IP \f(CWPt\fP \n(iN
 Paragraph type.
 Legal values are: 0 left justified, 1 indented,
@@ -1707,6 +1732,7 @@ Width of page (line and title length).
 (Default is 6i.)
 .poE
 .\" _page 616
+.
 .Bh "Other Reserved Macro and String Names"
 .ix	[mm] macros, reserved macro~and~string~names %key mm macros, reserved macro and~string~names
 In \f(CWmm\fP, the only macro and string names you can safely use are
@@ -1715,6 +1741,7 @@ first character is a lowercase letter and whose second character is
 \fIanything but\fP a lowercase letter.
 Of these, \f(CWc2\fP and \f(CWnP\fP are already used.
 .ix	%end [mm] macros, summary~of macros %key mm macros, summary of macros
+.
 .Ah "\f(CBtbl\fP Command Characters and Words"
 .ix	%begin [tbl] preprocessor, summary~of commands %key tbl preprocessor, summary of commands
 .poS
@@ -1723,14 +1750,15 @@ Start table.
 .IP \f(CW.TE\fP \n(iN
 End table.
 .IP "\f(CW.TS H\fP" \n(iN
-Used when the table will continue onto more than one page.
-Used with \f(CW.TH\fP to define a header that will print on
-every page.
+Used when the table continues onto more than one page.
+Used with \f(CW.TH\fP to define a header that prints on
+every page of a multi-page table.
 .IP \f(CW.TH\fP \n(iN
 With \f(CW.TS H\fP, ends the header portion of the table.
 .IP \f(CW.T&\fP \n(iN
 Continue table after changing format line.
 .poE
+.
 .Bh "Options"
 .ix	[tbl] preprocessor, global format~options %key tbl preprocessor, global format options
 Options affect the entire table.
@@ -1757,6 +1785,7 @@ Set lines or rules (e.g., from box) to \fIn\fP point type.
 Recognize \fIx\fP and \fIy\fP as the \f(CWeqn\fP delimiters.
 .poE
 .\" _page 617
+.
 .Bh Format
 .ix	[tbl] preprocessor, column format~options %key tbl preprocessor, column format options
 The format line affects the layout of individual columns and rows of the
@@ -1767,6 +1796,7 @@ must be terminated by a period.
 Each line of format corresponds to one line of the table, except for the
 last, which corresponds to all following lines up to the next
 \&\f(CW.T&\fP, if any.
+.
 .Ch "Key letters"
 .poS
 .TS
@@ -1785,6 +1815,7 @@ row.
 T}
 .TE
 .poE
+.
 .Ch "Other choices \fR(must follow a key letter)\fP"
 .\" Right parenthasis of w(n) below is \fP in original book,
 .\" while left one is \f(CW.  This was corrected to \f(CW for
@@ -1828,6 +1859,7 @@ T}
 .TE
 .poE
 .\" _page 618
+.
 .Ch Data
 .ix	[tbl] preprocessor, data %key tbl preprocessor, data
 The data portion includes both the heading and text of the table.
@@ -1873,6 +1905,7 @@ End text block.
 T}
 .TE
 .ix	%end [tbl] preprocessor, summary~of commands %key tbl preprocessor, summary of commands
+.
 .Ah "\f(CBeqn\fP Command Characters"
 .ix	%begin [eqn] preprocessor, summary~of command~characters %key eqn preprocessor, summary of command~characters
 .EQ
@@ -1886,9 +1919,11 @@ l:l.
 \f(CW.EN\fP:End typesetting mathematics
 .TE
 .poE
+.
 .Bh "Character Translations"
-The following character sequences are recognized and translated as
-shown.
+.CW Eqn
+recognizes and translates
+the following character sequences as shown.
 .\" _page 619
 .poS
 .TS
@@ -1911,7 +1946,7 @@ l:l:l:l:l.
 .poE
 .LP
 Digits, parentheses, brackets, punctuation marks, and the following words
-are converted to roman when encountered:
+print as roman when encountered:
 .nf
 .poS
 \f(CWsin cos tan sinh cosh tanh arc
@@ -1921,7 +1956,7 @@ Re Im and if for det\fP
 .fi
 .PP
 Greek letters can be printed in uppercase or lowercase.
-To obtain Greek letters, simply spell them out in the case you want:
+To obtain Greek letters, spell them out in the case you want:
 .poS
 .TS
 tab(:);
@@ -1962,6 +1997,7 @@ l:l:l:l:l.
 .EQ
 delim off
 .EN
+.
 .Bh "Words Recognized By \f(CBeqn\fP"
 .poS
 .IP "\f(CWabove\fP" \n(iN
@@ -2040,7 +2076,7 @@ Start a subscript.
 .IP "\f(CWsup\fP" \n(iN
 Start a superscript.
 .IP "\f(CWtdefine\fP" \n(iN
-Make a definition that will apply only for \f(CWeqn\fP.
+Make a definition that applies only for \f(CWeqn\fP.
 .IP "\f(CWto\fP" \n(iN
 Used in summations, integrals, and other similar constructions to signify
 the upper limit.
@@ -2054,9 +2090,10 @@ Force \f(CWeqn\fP to treat an element as a unit.
 String within quotation marks is not subject to alteration by
 \f(CWeqn\fP.
 .poE
+.
 .Bh "Precedence"
 .ix	[eqn] preprocessor, precedence~of operations %key eqn preprocessor, precedence of operations
-If you don't use braces, \f(CWeqn\fP will do operations in the order
+If you don't use braces, \f(CWeqn\fP performs operations in the order
 shown in the following list.
 .poS
 .nf
@@ -2075,6 +2112,7 @@ These operations group to the left:
 .poE
 All others group to the right.
 .ix	%end [eqn] preprocessor, summary~of command~characters %key eqn preprocessor, summary of command~characters
+.
 .Ah "The \f(CBpic\fP Preprocessor"
 .ix	%begin [pic] preprocessor, summary~of command~characters %key pic preprocessor, summary of command~characters
 In \f(CWpic\fP there are often dozens of ways to draw a picture, not only
@@ -2090,16 +2128,18 @@ A single primitive description can be continued on the next line,
 however, by ending the first with a backslash character (\f(CW\e\fP).
 Comments may be placed on lines beginning with \f(CW#\fP.
 .\" _page 622
+.
 .Bh "\f(CWpic\fP Macros"
-The following macros are used to delimit \f(CWpic\fP input from the body
+The following macros delimit \f(CWpic\fP input from the body
 of the source file.
-Only text within these macros will be processed by \f(CWpic\fP.
+.CW Pic
+processes only text within these macros.
 .poS
 .IP "\f(CW.PS\fP [\fIh\fP[\fIw\fP]]" \n(iN
 Start \f(CWpic\fP description.
 \fIh\fP and \fIw\fP, if specified, are the desired height and width of
 the picture;
-the full picture will expand or contract to fill this space.
+the full picture expands or contracts to fill this space.
 .IP "\f(CW.PS <\fP\fIfile\fP" \n(iN
 Read contents of \fIfile\fP in place of current line.
 .IP "\f(CW.PE\fP" \n(iN
@@ -2108,6 +2148,7 @@ End \f(CWpic\fP description.
 End \f(CWpic\fP description and return to vertical position before
 matching \f(CWPS\fP.
 .poE
+.
 .Bh "Declarations"
 .ix	[pic] preprocessor, declarations %key pic preprocessor, declarations
 At the beginning of a \f(CWpic\fP description, you may declare a new
@@ -2126,10 +2167,11 @@ the top of the description:
 \f(CWa = \fP\fIn\fP
 .DE
 You may then write \f(CWline right a\fP.
+.
 .Bh Primitives
 .ix	[pic] preprocessor, summary~of graphics~primitives %key pic preprocessor, summary of graphics~primitives
-Primitives may be followed by relevant options.
-Options are discussed later in this section.
+Primitives may be followed by relevant options,
+discussed later in this section.
 .poS
 .IP "\f(CWarc\fP [\f(CWcw\fP] [\fIoptions\fP] [\f(CW``\fP\fItext\fP\f(CW''\fP]" \n(iN
 A fraction of a circle.
@@ -2157,6 +2199,7 @@ change in direction.
 .IP "\f(CW``\fP\fItext\fP\f(CW''\fP" \n(iN
 Text at the current point.
 .poE
+.
 .Bh Options
 .poS
 .TS
@@ -2221,8 +2264,7 @@ T}
 :
 \f(CWchop\fP \fIn m\fP:T{
 Chop off \fIn\fP from beginning of primitive, and \fIm\fP from end.
-With only one argument, the same value will be chopped off from both
-ends.
+With only one argument, chops off the same value from both ends.
 T}
 .\" _page 624
 :
@@ -2241,6 +2283,7 @@ Relevant only to lines, splines, moves, and arrows.
 T}
 .TE
 .poE
+.
 .Bh Text
 Place text within quotation marks.
 To break the line, break into two (or more) sets of quotation marks.
@@ -2256,6 +2299,7 @@ l:l.
 \f(CWbelow\fP	:Text appears below the center.
 .TE
 .poE
+.
 .Bh "Object Blocks"
 .ix	[pic] preprocessor, defining object~blocks %key pic preprocessor, defining object blocks
 .ix	[pic] preprocessor, labeling objects %key pic preprocessor, labeling objects
@@ -2272,9 +2316,10 @@ as a block:
   ]
 .fi
 .poE
-Brackets are used as delimiters.
-Note that the object is declared as a proper noun, hence it should begin
+Brackets are delimiters.
+Note that the object is declared as a proper noun, so it should begin
 with a capital letter.
+.
 .Bh Macros
 .ix	[pic] preprocessor, defining macros %key pic preprocessor, defining macros
 The same sequence of commands can be repeated by using macros.
@@ -2298,12 +2343,14 @@ Macros can take variables, expressed in the definition as ``$1'' through
 ``$9''.
 Invoke the macro with the syntax: \fIsequence\fP(\fIvalue1,
 value2\fP,...)
+.
 .Bh Positioning
 .ix	[pic] preprocessor, positioning object~blocks %key pic preprocessor, positioning object blocks
-In a \f(CWpic\fP description, the first action will begin at (0,0),
+In a \f(CWpic\fP description, the first action begins at (0,0),
 unless otherwise specified with coordinates.
-Thus, the point (0,0) will move down and right on the drawing, as
-objects are placed above and to the left of the first object.
+Thus, the point (0,0) moves down and right on the drawing,
+as the picture places objects
+above and to the left of the first object.
 .PP
 All points are ultimately translated by the formatter into x- and
 y-coordinates.
@@ -2313,7 +2360,7 @@ incrementing or decrementing the coordinates, i.e., \f(CW2nd ellipse -
 .PP
 You may refer to the x- and y-coordinates of an object by placing
 \&\f(CW.x\fP or \f(CW.y\fP at the end.
-For example, \f(CWlast box.x\fP will refer to the x-coordinate of the
+For example, \f(CWlast box.x\fP refers to the x-coordinate of the
 most recent box drawn.
 Some of the physical attributes of the object may
 also be referred to similarly, as follows:
@@ -2327,11 +2374,12 @@ also be referred to similarly, as follows:
 .fi
 .poE
 .PP
-Unless otherwise positioned, each object will begin at the point where
+Unless otherwise positioned, each object begins at the point where
 the last object left off.
 If a command (or a sequence of commands) is set off by braces
-(\f(CW{}\fP), however, \f(CWpic\fP will then return to the point before
+(\f(CW{}\fP), however, \f(CWpic\fP returns to the point before
 the first brace.
+.
 .Ch "Positioning between Objects"
 When referring to a previous object, you must use proper names.
 This can be done two ways:
@@ -2350,8 +2398,9 @@ same object, you may write:\|\fIfraction\fP \f(CWof the way between\fP
 \fIfirst.position\fP \f(CWand\fP \fIsecond.position\fP or (abbreviated)
 \fIfraction\fP<\fIfirst.position\f(CW,\fP second.position\fP>.
 .\" _page 626
+.
 .Ch Corners
-When you refer to a previous object, \f(CWpic\fP will assume that you
+When you refer to a previous object, \f(CWpic\fP assumes that you
 mean the \fIcenter\fP of the object, unless you use a \fIcorner\fP to
 specify a particular point on the object.
 The syntax is:
@@ -2386,6 +2435,7 @@ These corners may be:
 .poE
 You may also refer to the \f(CWupper right\fP, \fPupper left\fP, \fPlower right\fP,
 and \f(CWlower left\fP of an object.
+.
 .Bh "Numerical Operators"
 .ix	numerical operators, in [pic] %key numerical operators, in pic
 Several operators are functional in \f(CWpic\fP.
@@ -2400,6 +2450,7 @@ These are:
 .fi
 .poE
 .\" _page 627
+.
 .Bh "Default Values"
 .poS
 .TS

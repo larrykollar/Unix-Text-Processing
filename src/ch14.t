@@ -30,8 +30,8 @@ and
 .CW troff \(em\c
 you cannot escape them if you want to make serious use
 of the formatter.
-Precisely because macros are so essential, many users
-never learn to fully use them.
+Precisely because macros are so essential,
+many users never learn to fully use them.
 The most obviously useful macros are already included in
 the existing macro packages, whose complex internal control
 structures make them difficult to understand and modify.
@@ -51,6 +51,7 @@ special effects (such as pictures) with your macros,
 and Chapters 16 through 18 discuss how to go beyond
 writing individual macros and how to develop or extend
 an entire macro package.
+.
 .Ah "Comments"
 .ix [troff] formatter, comments %key troff formatter, comments
 .ix comments, in~[troff] %key comments, in troff
@@ -58,18 +59,16 @@ Before we start, we'll introduce the syntax for inserting
 comments into your macro definitions.
 Macros can get quite confusing, so we advise you to put
 in comments that explain what you are doing.
-This will help immensely when you go back weeks or
+This helps when you go back weeks or
 months later to modify a macro you have written.
 .page 413
 .LP
-A line beginning with the sequence
+The formatter ignores a line beginning with the sequence
 .Ps
-\&.\\"
-.Pe
-will not be interpreted or printed by the formatter.
+\&.\\" .
 Any part of a line following the sequence:
 .CW \e\(dq
-will be treated the same way.
+is treated the same way.
 For example:
 .Ps
 \&.\\" O'Reilly & Associates, Inc. custom macro set
@@ -87,20 +86,21 @@ and:
 .Ps
 \\" A partial line comment
 .Pe
-If you simply start the sequence
+If you start the sequence
 .CW \e\(dq
-at the margin, the formatter will insert a blank line
+at the margin, the formatter inserts a blank line
 into the output, because this sequence by itself does
 not suppress newline generation.
 .PP
 (Note that comments can be used at any time, not just in
 macros.
-You can write notes to yourself in your input file and they
-will never appear in the output.
+You can write notes to yourself in your input file
+and they never appear in the output.
 But if you accidentally type the sequence
 .CW \e\(dq
 in your file, the remainder of the line on which it
-appears will disappear from the output).
+appears disappears from the output).
+.
 .Ah "Defining Macros"
 .ix [.de] request %key de request
 As we've already discussed, use the
@@ -130,7 +130,7 @@ request removes a macro:
 .Pe
 You may sometimes want to define a macro for local use, and
 remove it when you are done.
-In general, though, this is an advanced request you will
+In general, though, this is an advanced request you do
 not use often.
 .PP
 .ix [.am] request %key am request
@@ -148,14 +148,15 @@ but does not overwrite the existing contents:
 .Pe
 At first, you may think that this request has only limited
 usefulness.
-However, as you work more with macros, you will find
-unexpected uses for it.
+However, as you work more with macros,
+you should find unexpected uses for it.
 We'll mention a few of these in later chapters.
 .page 414
+.
 .Ah "Macro Names"
 .ix [troff] formatter, macro names %key troff formatter, macro names
-A macro name can be one or two characters, and can consist
-of any character(s) not just alphanumeric characters.
+A macro name can consist of any character(s),
+not just alphanumeric characters.
 .ix macros, naming conventions
 For example:
 .Ps
@@ -173,24 +174,40 @@ and
 .CW .Gm
 can all be used without conflict.
 .PP
-If you are starting from scratch, you can use whatever macro
-or number register names you like except for the names of
-existing formatter requests.
+If you are starting from scratch,
+you can use whatever macro or number register names you like
+except for the names of existing formatter requests.
 .ix [troff] formatter, names~of existing macros %key troff formatter, names of existing macros
 However, if you are adding macros to an existing package,
-you have to work around the existing names, because creating
-a new macro with the same name as an old one will discard
-the previously read-in definition.
+you have to work around the existing names\[em]creating
+a new macro with the same name as an old one
+discards the previously read-in definition.
 .PP
-This is not as easy as it sounds, because macro packages
-include internal macro, string, and number register
-definitions that are not visible to the casual user.
-You may be surprised when your new macro makes some other
-part of the package go haywire.
+This is not as easy as it sounds,
+because macro packages include
+internal macro, string, and number register definitions
+that a casual user never sees.
+You may be surprised when your new macro
+makes some other part of the package go haywire.
 (In an attempt to forestall this problem, most macro
 developers give odd, unmnemonic names to internally
 called macros.
 However, collisions still can and do occur).
+.PP
+Fortunately, starting with
+.CW groff \**,
+.FS
+Actually,
+.CW sqtroff
+had long macro, string, and register names first.
+But it has disappeared, along with a long list
+of other proprietary packages.
+.FE
+then other formatters,
+the two-character limit no longer applies.
+You can use short names for frequently-used macros,
+and arbitrarily long names for internal macros.
+.
 .Bh "Finding the Names of Existing Macros"
 .ix macros, listing existing names
 Before you start adding macros to an existing package,
@@ -201,26 +218,27 @@ There are two ways to do this.
 .ix [troff] formatter, [.pm] request %key troff formatter, [.pm] request
 The
 .CW .pm
-request will print (in blocks of 128 characters) the names
-and sizes of all macros defined in a given run of the
-formatter.
-So, for example, creating a file containing the single
-request:
-.Ps
+request prints (in blocks of 128 characters)
+.\" XXX test: does groff do 128-character blocks for .pm ?
+.\" XXX test: do non-groff formatters print .pm to stderr?
+the names and sizes of all macros defined
+in a given run of the formatter.
+So, for example, creating a file containing the single request:
+.Pst
 \&.pm
 .Pe
 and formatting it like this:
 .Ps
 $ \f[CB]nroff -ms pmfile\fP
 .Pe
-will print on the screen a list of all the macros defined
-in the
+prints a list of all the macros defined in the
 .CW ms
 macro package.
 (The output could also be redirected to a file or printer).
 .PP
-However, macro names are drawn from the same pool as string
-names (see the next example), so it might be better to
+However, macro names and string names use the same namespace
+(see the next example),
+so it might be better to
 search for macro or string definitions using
 .CW grep
 .I "et al" ,
@@ -230,27 +248,29 @@ $\f[CB]grep '^\\.d[esia]'\fP \f[I]macrofiles\fP\f[CB] | cut -f1,2 -d' ' | sort |
 .Pe
 (\c
 .CW grep
-will select all lines beginning with either
+selects all lines beginning with either
 .CW .de,
 .CW .ds,
 .CW .di,
 or
 .CW .da;
 .CW cut
-will select only the first two space-separated fields on
+selects only the first two space-separated fields on
 each of those lines;
 .CW sort
 and
 .CW uniq
-together will produce a sorted list consisting of only one
+together produce a sorted list consisting of only one
 copy of each line.
-Note that for
+Note that for non-\c
+.CW groff
+versions of
 .CW -mm ,
-which does not use a space before the macro name, you would
-need to specify
+which does not use a space before the macro name,
+you need to specify
 .CW "cut -f1"
 only.
-You will also need to substitute for
+You also need to substitute for
 .I macrofiles
 the actual filenames containing the macros of interest).
 .page 415
@@ -261,39 +281,47 @@ You should do the same for number registers:
 .Ps
 $ \f[CB]sed -n -e 's/.*.nr *\\(..\\).*/\\1/p'\fP \f[I]macrofile\fP\f[CB] | sort | uniq\fP
 .Pe
-here, because we can't rely on number registers being set
+We can't rely on number registers being set
 at the start of a line, as we can with macro definitions.
-The one-line
+So the one-line
 .CW sed
-script included here saves the first two nonspace
-characters (\c
+script saves the first two nonspace characters (\c
 .CW .. )
 following the string
 .CW .nr ,
-and substitutes them for the rest of the line (i.e.,it
-throws away the rest of the line).
+and substitutes them for the rest of the line
+(i.e., it throws away the rest of the line).
 .PP
 You could also just
 .CW grep
 for an individual macro, string, or number register name
 before you use it!
 Or you could take the easy way, and check Appendix B, where
-we've listed all the names in each of the packages.
+we've listed all the names in each of the packages.\**
+.FS
+This only applies to Plan9 derivatives;
+.CW groff
+macro packages are ground-up rewrites
+and use long names for both internal
+and (extended) external macros.
+.FE
 .PP
-In addition to looking for conflicting names, you many also
-need to look for conflicting usage, or to understand in
-detail the operation of a macro you are intending to call
+In addition to looking for conflicting names,
+you many also need to look for conflicting usage,
+or to understand in detail the operation of a macro
+you intend to call
 within a new macro you are writing.
 .PP
-To do this, you can simply read in the entire macro
+To do this, you can read in the entire macro
 definition file with the editor and search for what you want.
 However, to make things easier, we use the
 .CW getmac
-shell script described in Chapter 12 to print out
+shell script described in Chapter\~12 to print out
 the definition of the desired macro.
-The script prints the result on standard output, which
-can easily be redirected into a file, where it can become
-the basis for your own redefinition.
+The script prints the result on standard output,
+which can easily be redirected into a file,
+where it can become the basis for your own redefinition.
+.
 .Bh "Renaming a Macro"
 .ix macros, renaming
 .ix [troff] formatter, renaming macros %key troff formatter, renaming macros
@@ -307,7 +335,7 @@ macro renames an existing macro:
 .Ps
 \&.rn ^( H1  \\" Rename ^( to H1; easier to remember
 .Pe
-The old name will no longer work.
+The old name no longer works.
 You must use the new name to invoke the macro.
 .PP
 A good trick that you can
@@ -340,7 +368,19 @@ Remember it, though, because this trick may come in handy
 if you don't want to (or can't) directly modify a macro
 in one of the existing packages, but do want a slightly
 different effect.
+.PP
+With long names, you can easily modify
+the behavior of a macro both before and after:
+.Ps
+\&.rn XX XX-old
+.de XX
+\&.\" things you want to do before
+\&.XX-old
+\&.\" things you want to do after
+\&..
+.Pe
 .page 416
+.
 .Ah "Macro Arguments"
 .ix [troff] formatter, macro arguments %key troff formatter, macro arguments
 .ix macros, arguments
@@ -349,25 +389,26 @@ starting with a
 .CW .de
 request and ending with the two dots (\c
 .CW .. )
-at the beginning
-of a line.
+at the beginning of a line.
 .PP
 However, as you've seen when you've used
 .CW mm
 and
 .CW ms ,
 .ix arguments, in~macros
-macros can take arguments, and can act differently depending
+macros can take arguments,
+and can act differently depending
 on various conditions.
-It's also possible for a macro to save information and pass
-it to other macros to affect their operation.
-An understanding of how to do these things is essential if
-you plan any serious macro design.
+It's also possible for a macro to save information
+and pass it to other macros
+to affect their operation.
+An understanding of how to do these things
+is essential if you plan any serious macro design.
 .PP
-A macro can take up to nine arguments and can use them in
-any way.
-Arguments are described positionally by the character
-sequences
+A macro can take up to nine arguments,
+and can use them in any way.
+Arguments are described positionally
+by the character sequences
 .CW \e\e$1
 through
 .CW \e\e$9 *.
@@ -377,8 +418,8 @@ through
 through
 .CW \e$9 ,
 with only a single backslash.
-But for reasons to be described shortly, you always need
-at least two backslashes.
+But for reasons to be described shortly,
+you always need at least two backslashes.
 .FE
 .PP
 For example, we could define a very simple
@@ -389,8 +430,9 @@ macro to boldface a single argument:
 \\fB\\\\$1\\fP
 \&..
 .Pe
-Or, we could write a simple paragraph macro that, instead
-of having a fixed indent, might take a numeric argument
+Or, we could write a simple paragraph macro that,
+instead of having a fixed indent,
+takes a numeric argument
 to specify the depth of the indent:
 .Ps
 \&.de PI		\\" Simple paragraph macro
@@ -399,14 +441,15 @@ to specify the depth of the indent:
 \&.ti \\\\$1	\\" Indent to the depth specified by first
 \&..		\\" argument
 .Pe
-As you can see in the first example, you can print an
-argument in your text.
-Or, shown in the second example, you can use it inside the
-macro as an argument to one or more of the requests that
-make up the macro.
+As you can see in the first example,
+you can print an argument in your text.
+Or, shown in the second example,
+you can use it inside the macro as an argument
+to one or more of the requests
+that make up the macro.
 .PP
-Notice that there is nothing intrinsic about a macro that
-causes a break.
+Notice that there is nothing intrinsic
+about a macro that causes a break.
 The
 .CW .B
 macro, for instance, can be placed in the input file as in
@@ -416,8 +459,8 @@ There are a number of ways to
 \&.B embolden
 text.
 .Pe
-As long as filling is in effect, it will produce exactly
-the same output as:
+As long as filling is in effect,
+it produces exactly the same output as:
 .Ps
 There are a number of ways to \\fBembolden\\fP text.
 .Pe
@@ -440,10 +483,10 @@ word,
 as the second argument, and so on.
 This wouldn't cause a program error\(emthere is no
 requirement that arguments to a macro be used
-by that macro\(embut the unused arguments would simply
+by that macro\(embut the unused arguments would
 disappear from the output.
-As shown here, the entire phrase is treated as a
-single argument.
+When quoted, the formatter treats the entire phrase
+as a single argument.
 .PP
 To actually print a quotation mark inside a macro argument,
 double it.
@@ -451,18 +494,20 @@ For example:
 .Ps
 \&.B "The Quote ("") Character"
 .Pe
-will produce:
+produces:
 .sp .7v
 .SS
 \h'2n'\fBThe Quote (") Character\fP
 .SE
+.\" XXX test: still true? \[dq] is a substitute?
 .sp .8v
 .LP
-You've probably recognized that the syntax for specifying
-arguments by position is very similar to that used with
-shell scripts.
-You might wonder, though, about backslashes, which are used
-in the shell to prevent interpretation of a special character.
+You've probably recognized that the syntax
+for specifying arguments by position
+is very similar to that used with shell scripts.
+You might wonder, though, about backslashes,
+which prevent interpretation of a special character
+in the shell.
 In fact, they serve the same function in
 .CW troff .
 .PP
@@ -471,44 +516,45 @@ The
 and
 .CW troff
 formatters always read a macro at least twice:
-once when they read the definition (and store it away for
-later use), and once when they encounter it in the text.
+once when they read the definition
+(and store it away for later use),
+and once when they encounter it in the text.
 At the time the macro is defined,
 .I "there are no arguments" ,
 so it is essential to prevent the formatter from doing
 any argument substitution.
 .ix [troff] formatter, copy mode %key troff formatter, copy mode
 .PP
-When the macro definition is read, the formatter operates
-in what is referred to (in the
+When the formatter reads the macro definition,
+it operates in what is referred to (in the
 .I "Nroff/Troff User's Manual" )
 as
 .ix copy mode
 .ix macros, copy mode~in
 .I "copy mode" .
-That is, none of the requests are executed; they are simply
-copied (in this case, presumably into memory) without
-interpretation.
-The exception is that various escape sequences that may
-have a different value at macro definition time than at
-macro execution time (most notably
+That is, none of the requests are executed;
+they are copied (in this case, presumably into memory)
+without interpretation.
+The exception is that various escape sequences
+that may have a different value at macro definition time
+than at macro execution time (most notably
 .CW \en ,
 for interpolating number registers,
 .CW \e* ,
 for interpolating strings, and
 .CW \e$ ,
-for interpolating arguments) are executed, unless you
-suppress interpretation with a preceding backslash.
-(Other escape sequences are also interpreted, but because
-they have fixed values, this makes no difference to the
-action of the macro).
+for interpolating arguments) are executed,
+unless you suppress interpretation with a preceding backslash.
+Other escape sequences are also interpreted,
+but because they have fixed values,
+this makes no difference to the action of the macro).
 .PP
-A backslash prevents interpretation of the character that
-follows it by sacrificing itself.
+A backslash prevents interpretation of the character
+that follows it by sacrificing itself.
 The backslash tells the formatter:
 \(lqTake me but let the next guy go.\(rq
-Each time the character sequence is read, the backslash is
-stripped off\(emthat is,
+Each time the character sequence is read,
+the backslash is stripped off\(emthat is,
 .CW \e\e
 is actually stored as
 .CW \e .
@@ -516,8 +562,9 @@ is actually stored as
 .CW \e
 as saying
 \(lqI really mean ....\(rq
-So in the shell, for example, if you want to use an asterisk
-literally, rather than as a filename expansion metacharacter,
+So in the shell, for example,
+if you want to use an asterisk literally,
+rather than as a filename expansion metacharacter,
 you write
 .CW \e* \c
 \(emthat is,
@@ -527,27 +574,28 @@ In a similar way,
 says
 \(lqI really mean backslash.\(rq)
 .PP
-When macro definitions are nested inside one another, you
-will need to add additional backslashes to get what you
-want.
+When macro definitions are nested inside one another,
+you need to add additional backslashes
+to get what you want.
 The true argument interpolation escape sequence is
 .CW \e$ \c
 .I n ,
 rather than
 .CW \e\e$ \c
 .I n ;
-the extra backslash is needed because the first one is
-stripped when the macro is interpreted in copy mode.
-The same rule applies when you want to interpolate the
-value of a number register or a string in a macro
-definition.
-Think through the number of times the definition will be
-read before it is executed, and
+the extra backslash is needed
+because the first one is stripped
+when the macro is interpreted in copy mode.
+The same rule applies when you want to interpolate
+the value of a number register or a string
+in a macro definition.
+Think through the number of times
+the definition is read before it is executed, and
 .page 418
-specify the appropriate
-number of backslashes, so that you get the actual value
+specify the appropriate number of backslashes,
+so you get the actual value
 used at the point where you need it.
-A failure to understand this will cause more frustration
+A failure to understand this causes more frustration
 than almost any other error when you are writing macros.
 .PP
 In the example of the
@@ -558,12 +606,13 @@ and
 .CW \efP
 did not need to be escaped, because
 .CW troff
-could just as easily interpret them at the time the macro
-is defined.
+could just as easily interpret them
+during the macro definition.
 However, the macro would also work if they were specified
 with double backslashes\(emit is just that the
 interpretation of the codes would take
 place when the macro was used.
+.
 .Ah "Nested Macro Definitions"
 .ix [troff] formatter, nested macros %key troff formatter, nested macros
 We said previously that a macro definition begins with a
@@ -600,18 +649,20 @@ For example, a group of related macros for producing a
 certain type of document might be nested inside a
 \(lqmaster\(rq
 macro.
-A user would have to invoke the master macro, indicating
-document type, to make the other macros available for use.
+A user would have to invoke the master macro,
+indicating document type,
+to make the other macros available for use.
 Nested macros could be used to provide alternate versions
 of the same set of macros within a single macro package.
+.
 .Ah "Conditional Execution"
 .ix %begin conditional execution, in [troff] %key conditional execution, in troff
 One of the most powerful features of
 .CW nroff
 and
 .CW troff 's
-macro programming language is its facility for conditional
-execution.
+macro programming language is its facility for
+conditional execution.
 .ix [troff] formatter, conditional~execution %key troff formatter, conditional execution
 .ix %begin [troff] formatter, [.el] request %key troff formatter, [.el] request
 .ix %begin [troff] formatter, [.ie] request %key troff formatter, [.ie] request
@@ -628,8 +679,8 @@ The
 .CW .if
 request is used for a single condition.
 (\c
-\(lqIf the condition is met, do this; otherwise, simply go to
-the next line.\(rq\c
+\(lqIf the condition is met, do this;
+otherwise, go to the next line.\(rq\c
 )
 .ix %begin [.ie] request %key ie request
 The
@@ -643,16 +694,17 @@ performing either one action or the other.
 \(lqIf the condition is met, do this; otherwise, do that.\(rq\c
 )
 .page 419
+.
 .Bh "Predefined Conditions"
 .ix [troff] formatter, predefined conditions %key troff formatter, predefined conditions
-There are a number of different conditions that can be
-tested with
+There are a number of different conditions
+that can be tested with
 .CW .if
 and
 .CW .ie .
-The simplest looks to see if a predefined condition is
-true or false.
-There are four predefined conditions, as listed in
+The simplest looks to see if a predefined condition
+is true or false.
+There are several predefined conditions, as listed in
 Table 14-1.
 .ix predefined conditions, in~[troff] %key predefined conditions, in troff
 .ix %begin [troff] formatter, number~registers %key troff formatter, number registers
@@ -667,11 +719,34 @@ Condition#True if
 _
 o#Current page number is odd
 e#Current page number is even
-n#The file is being formatted by \f[C]nroff\fP
-t#The file is being formatted by \f[C]troff\fP
+n#The file is being formatted by \f[C]nroff\fP\[dg]
+t#The file is being formatted by \f[C]troff\fP\[dg]
+g#The file is being formatted by \f[C]groff\fP
+v#The file is being formatted by \f[C]vtroff\fP (obsolete)
+d \fIname\fP#The macro, string, diversion, or request \fIname\P exists*
+r \fIname\fP#The number register \fIname\P exists*
+c \fIname\fP#The character \fIname\fP exists*
+F \fIname\fP#The font \fIname\fP exists*
+m \fIname\fP#The color \fIname\fP exists*
+S \fIname\fP#The abstract style \fIname\fI exists*
 .TE
+\[dg]Or by
+.CW groff ;
+one of these are true
+depending on the output device.
+.LP
+*\f[C]groff\fP extension.
+Heirloom
+.CW troff
+supports all but
+.CW S
+.I name .
+Other non-\c
+.CW groff
+formatters always return false
+if encountering one of the extended conditions.
 .Te
-.PP
+.LP
 For example, in a page bottom macro, to print the page
 number in the outside corner, you might write:
 .Ps
@@ -685,8 +760,8 @@ right of the page.
 And, within this request, the
 .CW %
 character always prints the current page number.
-We'll explain these two items in detail later, when we look
-at how to write a complete page transition macro.
+We'll explain these two items in detail later,
+when we look at how to write a complete page transition macro.
 For right now, we just want to understand how the
 conditions themselves work).
 .PP
@@ -696,21 +771,22 @@ are mutually exclusive, you could also write:
 \&.ie o .tl '''%'	\\" If odd, put page number in right corner
 \&.el .tl '%'''		\\" Otherwise, put it in left corner
 .Pe
-Notice that you do not specify a condition to be tested in
-the
+Notice that you do not specify a condition
+to be tested in the
 .CW .el
 request.
+.
 .Bh "Arithmetic and Logical Expressions"
 .ix [troff] formatter, arithmetic expressions %key troff formatter, arithmetic expressions
 .ix arithmetic expressions, in~[troff] %key arithmetic expressions, in troff
-A closely related condition simply tests for a nonzero
+A closely related condition tests for a nonzero
 number or a true arithmetic expression.
-This is generally used with number registers, but it could
-also be used to test the value of numeric arguments to
-a macro.
+This is generally used with number registers,
+but you could also use it to test
+the value of numeric arguments to a macro.
 For example, we could write a paragraph macro that was
-either indented or flush left, depending on the value of
-its argument:
+either indented or flush left,
+depending on the value of its argument:
 .Ps
 \&.de P
 \&.sp
@@ -719,14 +795,14 @@ its argument:
 \&..
 .Pe
 .page 420
-That is, if there is a nonzero numeric argument, do a
-temporary indent to the distance specified by the value
-of the argument.
+That is, if there is a nonzero numeric argument,
+do a temporary indent
+to the distance specified by the value of the argument.
 .PP
-Rather than using the simple presence of a numeric argument
+Rather than using the presence of a numeric argument
 to satisfy the condition, you could also use an arithmetic
 expression to test for a value.
-Used in this way, the argument can simply be a
+Used in this way, the argument can be a
 .I flag
 telling the macro what to do.
 .Ps
@@ -740,6 +816,7 @@ The operators shown in Table 14-2 can be used
 in constructing an expression.
 .ix [troff] formatter, expression operators %key troff formatter, expression operators
 .ix expression operators, in~[troff] %key expression operators, in troff
+.
 .Ts "Expression Operators"
 .TS
 center box tab (#);
@@ -756,11 +833,12 @@ _
 :#OR
 .TE
 .Te
-Expressions are evaluated from left to right, except where
-indicated otherwise by the presence of parentheses.
+Expressions are evaluated from left to right,
+except where indicated otherwise
+by the presence of parentheses.
 There is no precedence of operators.
 .PP
-Frequently, you will see numeric conditions involving
+Frequently, you see numeric conditions involving
 number registers.
 Here are a few simple examples:
 .Ps
@@ -772,8 +850,8 @@ Here are a few simple examples:
 (Be sure to note the double backslash before each number
 register invocation: we are assuming that these requests are
 made within a macro definition.
-If they were made outside a macro, you would use only a
-single backslash).
+If they were made outside a macro,
+you would use only a single backslash.)
 The first of these conditions is commonly used in the
 existing macro packages.
 It takes a little getting used to\(emit is not always
@@ -782,7 +860,7 @@ in an expression like:
 .Ps
 \&.if \e\enb
 .Pe
-A condition of this form simply tests that the specified
+A condition of this form tests that the specified
 expression (the number register
 .CW b
 in this case) has a value greater than 0.
@@ -792,22 +870,23 @@ might be:
 \&.if \\\\nb-1
 .Pe
 .page 421
+.
 .Bh "Comparing Strings"
 .ix [troff] formatter, comparing strings %key troff formatter, comparing strings
 .ix strings, comparing
-Another frequent test that you can use as the basis of a
-condition is whether or not two strings are equal\(emfor
-example, whether an argument contains a particular
-string.
-The syntax is simply:
+Another frequent test that you can use
+as the basis of a condition
+is whether or not two strings are equal\(emfor example,
+whether an argument contains a particular string.
+The syntax is:
 .Ps
 \&.if "\f[I]string1\fP"\f[I]string2\fP"
 .Pe
-(Note that there are a total of three quotation
-marks\(emeither single or double will do\(emand no equals
+Note that there are a total of three quotation
+marks\(emeither single or double\(emand no equals
 sign.
 A frequent error among beginners is to use an equals sign
-to compare string arguments, which will not work).
+to compare string arguments, which does not work.
 .PP
 For example, suppose you are writing a macro to center
 the output if the second argument is the letter
@@ -820,16 +899,19 @@ You can also test for a null argument in this way:
 .Ps
 \&.if "\\\\$1"" \f[I]do something\fP
 .Pe
-Use of this condition or its inverse, the test for a non-null
-argument (described in the next section), allows the user
-to skip over an argument by supplying a null string (\c
+Use of this condition or its inverse,
+the test for a non-null argument (described in the next section),
+allows the user to skip over an argument
+by supplying a null string (\c
 .CW \(dq\(dq ).
+.
 .Bh "Executing Multiple Requests as a Result of a Condition"
 .ix [troff] formatter, multiline conditions %key troff formatter, multiline conditions
-All of the examples we've shown so far consist of a single
-request executed on the basis of a condition.
-But often you'll want to execute more than one command when
-a condition is met.
+All of the examples we've shown so far
+consist of a single request
+executed on the basis of a condition.
+But often you'll want to execute more than one command
+when a condition is met.
 To do so, you enclose the sequence to be executed in
 backslashes and braces, as in this example:
 .Ps
@@ -837,8 +919,8 @@ backslashes and braces, as in this example:
 \&.po +.25i
 \&.tl '''%'\\}
 .Pe
-The initial sequence is terminated with an additional
-backslash to
+The initial sequence is terminated
+with an additional backslash to
 \(lqhide the newline.\(rq
 You could also type:
 .Ps
@@ -895,9 +977,9 @@ to separate the initial request control character (\c
 .CW .
 or
 .CW ' )
-from the body of the request with a tab.
-This greatly enhances readability, and can be used to show
-nesting of conditions:
+from the body of the request with a tab or spaces.
+This greatly enhances readability,
+by showing nesting of conditions:
 .Ps
 \&.if o \\{\\
 \&.	po +.25i
@@ -927,6 +1009,13 @@ You might put the following requests in the page bottom macro:
 	occurs several more times in this chapter.
 	--Michael Hobgood
 ..
+.B Note :
+In this and further examples,
+comments in the listings may violate
+our earlier warnings about placement.
+We include them to help explain the coding\[u2026]
+do what we say, not what we do here.
+.PP
 You might think to achieve the same result with
 the following requests:
 .Ps
@@ -934,25 +1023,24 @@ the following requests:
 \&.if \\\\n%>1&e .tl '%'''	\\"If pageno > 1 and even
 \&.if \\\\n%=1 .tl ''%''	\\"If pageno = 1
 .Pe
-Unfortunately, however, this example will not work.
+Unfortunately, however, this example does not work.
 The
 .CW &
 and
 .CW :
-operators can only be used to construct
-arithmetic expressions.
+operators only work with arithmetic expressions.
 For example, in the case of:
 .Ps
 \&.if \\\\nX&\\\\nY \f[I]do something\fP
 .Pe
 .I something
-will be done only if both register X and register Y
-are non-zero.
-(Notice that there are no spaces surrounding the
+happens only if both register X and register Y
+are non-zero
+(note that there are no spaces surrounding the
 .CW &
 operator).
 .PP
-You can construct an else if clause by following an
+You can construct an \[lq]else if\[rq] clause by following an
 .CW .el
 with another
 .CW .if ,
@@ -962,12 +1050,12 @@ and then the request to be executed if the condition is met.
 \&.el .if condition	\f[I]do something else if\fP
 .Pe
 .page 423
+.
 .Bh "Inverse Conditions"
 .ix [troff] formatter, inverse conditions %key troff formatter, inverse conditions
 .ix inverse conditions
-The meaning of any of the condition types described can be
-reversed by proceeding them with an exclamation
-point (\c
+You can reverse the meaning of any condition type
+by proceeding them with an exclamation point (\c
 .CW ! ).
 For example:
 .Ps
@@ -975,11 +1063,11 @@ For example:
 \&.if !\\\\nc=1	\\" If the number register c is not equal to 1
 \&.if !"\\\\$1""	\\" If the first argument is non-null
 .Pe
-It may not be immediately obvious what this adds to
-your repertoire.
-However, we will encounter many cases in which it is
-easier to detect when a condition is not met than
-when it is.
+You may not immediately see the utility
+of inverse conditions.
+However, in many cases,
+it is easier to detect when a condition is not met
+than when it is.
 In particular, negative conditions can be more comprehensive
 than equivalent positive conditions.
 For example, the condition:
@@ -988,8 +1076,9 @@ For example, the condition:
 .Pe
 tests not only for the cases in which number register
 .CW c
-has been set to some number larger than 0, or explicitly
-to 0, but the case in which it has never been set at all.
+has been set to some number larger than 0,
+or explicitly to 0,
+but the case in which it was never set at all.
 .PP
 The test for a non-null argument is also useful.
 For example, in the sequence:
@@ -998,17 +1087,15 @@ For example, in the sequence:
 \&.ce			\\" center it
 \&\\\\$3\\}
 .Pe
-you only want the
+you only want to execute the
 .CW .ce
-request to be executed if there is an argument to
-be centered.
-Otherwise, the request will cause unexpected results,
+request if there is an argument to be centered.
+Otherwise, the request causes unexpected results,
 perhaps centering the line of text following the macro.
 Saying
-\(lqIf the third argument is non-null, then it
-exists\(rq
-may be the inverse of the way you think, and will
-take some getting used to.
+\(lqIf the third argument is non-null, then it exists\(rq
+may be the inverse of the way you think,
+and takes some getting used to.
 .PP
 If you are reading through the definitions for the
 .CW ms
@@ -1020,29 +1107,32 @@ macros, you may also encounter a construct like this:
 .Pe
 The
 .CW .$
-is a special predefined number register (more on this
-topic in a moment) that contains the number of
-arguments that have been given to a macro.
-If there are two or fewer arguments, the value of the
-conditional expression shown will be 0.
-However, it will evaluate true if there are more than
-two arguments.
+is a special predefined number register
+(more on this topic in a moment)
+that contains the number of arguments
+given to a macro.
+If there are two or fewer arguments,
+the value of the conditional expression shown is 0.
+However, this construct evaluates to true
+if there are more than two arguments.
 It is used in
 .CW mm 's
 .CW .SM
-macro because a different action is taken on the second
-argument if there are three arguments instead of two.
+macro because it takes a different action
+on the second argument
+if there are three arguments instead of two.
 .Ps
 \&.if \\\\n(.$-3 \\\\$1\\s-2\\\\$2\\s+2\\\\$3
 \&.if \\\\n(.$-2 \\s-2\\\\$1\\s+2\\\\$2
 .Pe
+.
 .Ah "Interrupted Lines"
 .ix [troff] formatter, interrupted lines %key troff formatter, interrupted lines
 .ix interrupted lines (in~[troff]) %key interrupted lines (in troff)
-Occasionly, when writing a complex macro\(emespecially
-one with multiple conditions\(emyou may find yourself
-writing a request that is too
-long to fit on a single 80-character line.
+Occasionally, when writing a complex macro\[em]especially
+one with multiple conditions\[em]you may find yourself
+writing a request that is too long
+to fit on a single 80-character line.
 .ix %end [.el] request %key el request
 .ix %end [.ie] request %key ie request
 .ix %end [.if] request %key if request
@@ -1051,23 +1141,23 @@ long to fit on a single 80-character line.
 .ix %end [troff] formatter, [.if] request %key troff formatter, [.if] request
 .ix %end conditional execution, in [troff] %key conditional execution, in troff
 .PP
-You could simply let the line wrap on you screen
-\(em
+You could let the line wrap on your screen\[em]\c
 UNIX recognizes lines much longer than the 80 columns
 usually available on a terminal screen.
-However, you need
+However,
 .page 424
-not do this.
-Simply putting a backslash at the end of a line will
-\(lqhide the newline\(rq
-and cause the next line to be interpreted
+putting a backslash at the end of a line
+\(lqhides the newline\(rq
+and causes the next line to be interpreted
 as a continuation of the first.
+.
 .Ah "Number Registers"
 .ix [troff] formatter, [.nr] request %key troff formatter, [.nr] request
-To set a number register, you use the
+To set a number register, use the
 .CW .nr
 .ix number~registers, naming
-request. Like macros, number registers can have either
+request.
+Like macros, number registers can have either
 one- or two-character names consisting of any character(s),
 not just alphanumeric characters.
 For example:
@@ -1077,47 +1167,53 @@ For example:
 sets a number register called
 .CW ^(
 to 1.
-Number register names are stored separately from macro
-names, so there is no conflict in having a number register
-with the same name as a macro.
-Thus, you can create mnemonic number register names, which
-helps to make macros that use those number registers
+Number register names
+have a separate namespace from macro and string names,
+so there is no conflict in having a number register
+with the same name as a macro or string.
+Thus, you can create mnemonic number register names,
+which helps to make macros that use those number registers
 more readable.
 .PP
-(If you are writing your own macro package, you can name
-registers from scratch.
-If you are adding to an existing package, check the number
-registers used by that package).
+If you are writing your own macro package,
+you can name registers from scratch.
+If you are adding to an existing package,
+check the number registers used by that package.
 .PP
-To use the value stored in a number register, use the escape
-sequence
+To use the value stored in a number register,
+use the escape sequence
 .CW \en \c
 .I x
-for a one-character number register name, and
+for a one-character number register name,
 .CW \en( \c
 .I xx
-for a two-character name.
+for a two-character name, and
+.CW \en[\c
+.I name \c
+.CW ]
+for a longer name.
 .ix number~registers, interpolating
-(In the standard
+In the standard
 .CW nroff
 and
 .CW troff
 documentation, this is referred to as
 \(lqinterpolating\(rq
-the value of the number register).
-The point made previously, about using backslashes to
-delay the interpretation of an argument, applies equally
-to number registers.
-In macros, you will usually see the invocation of number
-registers preceded by a double backslash, because you
-don't want to interpolate the value until the macro
-is executed.
+the value of the number register.
+The point made previously,
+about using backslashes
+to delay the interpretation of an argument,
+applies equally to number registers.
+In macros, you see the invocation of number registers
+preceded by a double backslash,
+because you don't want to interpolate the value
+until the macro executes.
 .PP
 The values stored in number registers can be literal
 numeric values (with or without scaling indicators), values
 from other number registers (whose value can be
 interpolated at a later time), or expressions.
-You can also increment or decrement the value placed in a
+You can increment or decrement the value placed in a
 number register by preceding the value with a plus
 or a minus sign.
 For example:
@@ -1158,7 +1254,7 @@ For example, the construct:
 \&.nr IN 1i
 \&.in \\\\n(IN
 .Pe
-will produce unexpected results.
+produces unexpected results.
 What you are really writing is:
 .Ps
 \&.in 300m
@@ -1169,12 +1265,13 @@ The proper usage is:
 .Ps
 \&.in \\\\n(INu
 .Pe
+.
 .Bh "Number Registers as Global Variables"
 .ix number~registers, as~global variables
 .ix number~registers, used~to~generalize macros
-Number registers can be used in different ways.
-First, and probably most important, they can generalize
-a macro package.
+You can use number registers in different ways.
+First, and probably most important,
+they can generalize a macro package.
 For example, in
 .CW ms ,
 the default line length is stored in a number register
@@ -1193,20 +1290,20 @@ or
 \&.ll \\\\n(LLu \\" Double backslash within a macro definition
 .Pe
 Because the line length is not
-\(lqhard coded\(rq
+\(lqhard-coded\(rq
 in the document,
-users can change the line length throughout simply by
+users can change the line length throughout by
 changing the default value stored in the number register.
 .PP
 You might wonder why this is necessary.
-After all, you can simply set an initial line length, and
-then increment it or decrement it as necessary.
-And many macros take this approach.
-But there are other cases where the line length is a factor
-in another calculation.
+After all, you can set an initial line length,
+and then increment it or decrement it as necessary.
+Many macros take this approach.
+But there are other cases where the line length
+is a factor in another calculation.
 .PP
 For example, the output text can be centered horizontally
-on the physical page regardless of the line length if the
+on the physical page, regardless of the line length, if the
 page offset is set not absolutely, but in terms of the
 line length:
 .Ps
@@ -1223,6 +1320,7 @@ and
 .CW troff.
 When we look at the overall design of a macro package in
 Chapter 16, we'll return to this subject in more detail.
+.
 .Bh "Number Registers as Flags"
 .ix number~registers, used~as~flags
 In the chapters on the existing macro packages, you've
@@ -1233,7 +1331,7 @@ For example, in
 paragraphs are flush left by default, but if the user sets
 the
 .CW Pt
-number register to 1, all paragraphs will be indented.
+number register to 1, all paragraphs are indented.
 .ix %end number~registers
 .ix %end [troff] formatter, number~registers %key troff formatter, number registers
 .page 426
@@ -1251,32 +1349,34 @@ is set to 1, the macro indents by the value stored in
 another register,
 .CW Pi .
 .PP
-One-character number register names can also be set from
-the command line, with
+You can set number register names
+from the command line, with
 .CW nroff
 or
 .CW troff 's
 .CW -r
 option.
-This gives you the ability to construct macros that
-will act differently depending on command-line options.
+This lets you construct macros that
+act differently depending on command-line options.
 We'll show some examples of this in Chapter 16,
 when we discuss how to print a document on either an
-8\(12-by-11 inch or a 6-by-9 inch page, simply by
-specifying a single command-line switch.
+8\(12-by-11 inch or a 6-by-9 inch page,
+by specifying a single command-line switch.
+.
 .Bh "Predefined Number Register Names"
 .ix [troff] formatter, predefined number~register names %key troff formatter, predefined number register names
 .ix number~registers, predefined
-In addition to number registers set by the various macro
-packages, or set by macros you write, there are quite a few
-number registers whose usage is predefined by the formatter.
+In addition to number registers
+set by various macro packages,
+or set by macros you write,
+the formatter defines several number registers.
 You've already seen one of these\(em\c
 .CW % ,
 which always contains the current page number.
 Table 14-3 (and Table 14-4) list some of the most important
 preset registers, and Appendix B includes a complete
 listing.
-Not all of these registers will be meaningful at this
+Not all of these registers are meaningful at this
 point, but we'll tell you more about them as we go on.
 .\" Note: table 14-3 moved. Now on page 427's markup.
 .PP
@@ -1286,15 +1386,15 @@ number to 1, you can type:
 .Ps
 \&.nr % 1
 .Pe
-The formatter will keep incrementing the register on each
-new page, but will count from the new baseline.
-(You might want to do this, for example, if you are
+The formatter keeps incrementing the register on each
+new page, but counts from the new baseline.
+You might want to do this, for example, if you are
 following the convention used in many technical manuals,
 which number pages on a chapter-by-chapter basis, with
 a number made up of both the chapter number and the
 page number.
 In this case, the page number is reset to 1 at the start
-of each new chapter).
+of each new chapter.
 .page 427
 .PP
 Note that
@@ -1308,9 +1408,9 @@ request confuse you.
 In
 .CW .tl ,
 .CW %
-alone will interpolate the current page number;
-however, in any other place, you must specify the full
-number register interpolation
+alone interpolates the current page number;
+however, in any other place,
+you must specify the full number register interpolation
 .CW \en% .
 .PP
 The set of registers in Table 14-4 cannot be modified.
@@ -1330,22 +1430,54 @@ l c
 cf(CW) lw (3i).
 Register#Contents
 _
+$$#Process ID*
 %#Current page number
+c.#Input line number*
+ct#Union of character types of each glyph rendered into dummy environment by \ew*
 dl#Width (maximum) of the last completed diversion
 dn#Height (vertical size) of the last completed diversion
 dw#Current day of the week (1 to 7)
 dy#Current day of the month (1 to 31)
+hours#Count of hours elapsed since midnight (0-23)*
 hp#Current horizontal place on the \f[I]input\fP line
+llx#Lower-left x coordinate (in PostScript units) of PostScript image; see .psbb*
+.\" XXX test: should lly be lower-right???
+lly#Lower-left y coordinate (in PostScript units) of PostScript image; see .psbb*
 ln#Output line number
+lsn#Count of leading spaces on input line*
+lss#Amount of horizontal space corresponding to leading spaces on input line*
+minutes#Count of minutes elapsed in the hour (0-59)*
 mo#Current month (1 to 12)
 nl#Vertical position of the last printed text baseline
+opmaxx#These four registers mark the top-left and*
+opmaxy#bottom-right corners of a rectangle*
+opminx#encompassing all formatted output on a page.*
+opminy#They are reset to -1 by \\O0 or \\O1.*
+rsb#As register \f[C]sb\fP, adding maximum glyph height to measurement*
+rst#As register \f[C]st\fP, adding maximum glyph depth to measurement*
+sb#Maximum displacement of text baseline below its original position
+#after rendering into dummy environment by \ew*
+seconds#Count of seconds elapsed in the minute (0-60)*
+skw#Skew of last glyph rendered into dummy environment by \ew*
+slimit#The maximum depth of troff’s internal input stack.
+#If ≤0, there is no limit: recursion can continue until available
+#memory is exhausted. The default is 1,000.*
+ssc#Subscript correction of last glyph rendered into dummy environment by \ew*
+st#Maximum displacement of text baseline above its original position
+#after rendering into dummy environment by \ew*
+systat#Return value of system(3); see .sy*
+urx#Upper-right x coordinate (in PostScript units) of PostScript image; see .psbb*
+ury#Upper-right y coordinate (in PostScript units) of PostScript image; see .psbb*
+year#Gregorian year (four digits)*
 yr#Last two digits of the current year
 .TE
+*\f[C]groff\fP extension
 .Te
 .KE
 .KF
 .ix [troff] formatter, read-only number~registers %key troff formatter, read-only number registers
 .ix number~registers, read-only
+.
 .Ts "Read-Only Number Registers"
 .TS
 center box tab (#);
@@ -1354,33 +1486,166 @@ cf(CW) lw (3.1i).
 Register#Contents
 _
 \&.$#Number of arguments available in the current macro
+\&.a#Amount of extra post‐vertical line space; see \x*
+\&.A#Approximate output is being formatted (Boolean-valued);
+#see troff -a option*
+\&.b#Font emboldening offset; see .bd*
+\&.br#The normal control character was used to call
+#the currently interpolated macro (Boolean-valued)*
 \&.c#Number of lines read from the current input file
-\&.d#T{
-Current vertical place in current diversion; equal to
-\f[CW]nl\fP if no diversion
+\&.C#T{
+Compatibility mode is enabled (Boolean-valued); see .cp.
+Always false when processing .do; see register .cp*
 T}
-\&.f#Current font position (1 to 4 in \f[CW]otroff\fP)
+\&.cdp#T{
+Depth of last glyph formatted in the environment;
+positive if glyph extends below the baseline*
+T}
+\&.ce#Count of output lines remaining to be centered*
+\&.cht#T{
+Height of last glyph formatted in the environment;
+positive if glyph extends above the baseline*
+T}
+\&.color#Color output is enabled (Boolean-valued)*
+\&.cp#T{
+Within .do, the saved value of compatibility mode; see register .C*
+T}
+\&.csk#Skew of the last glyph formatted in the environment; see register skw*
+\&.d#T{
+Current vertical place in current diversion;
+equal to \f[C]nl\fP if no diversion
+T}
+\&.ev#String-valued name of current environment*
+\&.f#T{
+Current font position
+(1 to 4 in \f[CW]otroff\fP);
+.CW groff
+supports arbitrary positions
+T}
+\&.F#Name of input file (string-valued); see .lf*
+\&.fam#Name of default font family (string-valued)*
+\&.fn#Resolved name of selected font (string-valued); see .ft and \f*
+\&.fp#Next non-zero free font mounting position index*
+\&.g#Always true in GNU troff (Boolean-valued)*
+\&.h#Text baseline high-water mark on page or in diversion*
 \&.H#Available horizontal resolution in machine units
+\&.height#Font height; see \H*
+\&.hla#Hyphenation language in environment (string-valued)*
+\&.hlc#T{
+Count of immediately preceding
+consecutive hyphenated lines in environment.
+T}
+\&.hlm#Maximum quantity of consecutive hyphenated lines allowed in environment.
+\&.hy#Automatic hyphenation mode in environment.
+\&.hydefault#Hyphenation mode default in environment.
+\&.hym#Hyphenation margin in environment.
+\&.hys#Hyphenation space adjustment threshold in environment.
 \&.i#Current indent
+\&.in#Indentation amount applicable to the pending output line; see .ti*
+\&.int#T{
+Previous output line was “interrupted”
+or continued with \ec (Boolean-valued)*
+T}
+\&.itc#T{
+The pending input trap honors output line continuation \ec (Boolean-valued)*
+T}
+\&.itm#T{
+Name of the macro associated with the pending input trap (string-valued)*
+T}     
 \&.j#T{
 .nf
 Current adjustment mode (0 = \f[CW].ad l\fP or \f[CW].na\fP;
 1 = \f[CW].ad b\fP; 3 = \f[CW].ad c\fP; 5 = \f[CW].ad r\fP)
 .fi
 T}
+\&.k#Horizontal drawing position relative to indentation*
+\&.kern#Pairwise kerning is enabled (Boolean-valued)*
 \&.L#Line spacing set with \f[CW].ls\fP
 \&.l#Current line length
+\&.lg#Ligature mode*
+\&.linetabs#Line-tabs mode is enabled (Boolean-valued)*
+\&.ll#Line length applicable to the pending output line*
+\&.lt#Title length*
+\&.m#T{
+Stroke color (string-valued); see .gcolor and \em.
+The default stroke color is named “default”*
+T}
+\&.M#T{
+Fill color (string-valued); see .fcolor and \eM.
+The default fill color is named “default”*
+T}
 \&.n#Length of text on previous line
+\&.ne#T{
+Amount of vertical space required by last .ne
+that caused a trap to be sprung; see register .trunc*
+T}
+\&.nm#Output line numbering is enabled (Boolean-valued)*
+\&.nn#Count of output lines remaining to have numbering suppressed*
+\&.ns#No-space mode is enabled (Boolean-valued)*
 \&.o#Current page offset
+\&.O#Output suppression nesting level; see \eO*
 \&.p#Current page length
+\&.P#The page is selected for output (Boolean-valued); see troff -o option*
+\&.pe#Page ejection is in progress (Boolean-valued)*
+\&.pn#Number of the next page*
+\&.ps#Type size in scaled points*
+\&.psr#Most recently requested type size in scaled points; see .ps and \es*
+\&.pvs#Post-vertical line spacing*
+\&.R#Count of available unused registers; always 10,000 in GNU troff*
+\&.rj#Count of lines remaining to be right-aligned*
 \&.s#Current point size
+\&.slant#Slant of font in degrees; see \eS*
+\&.sr#T{
+Most recently requested type size in points
+as a decimal fraction (string-valued); see .ps and \es*
+T}
+\&.ss#T{
+Size of minimal inter-word space in twelfths of the space width
+of the selected font*
+T}
+\&.sss#T{
+Size of additional inter-sentence space
+in twelfths of the space width of the selected font*
+T}
+\&.sty#Selected abstract style (string-valued); see .ft and \f*
 \&.t#Distance to the next trap (usually the page bottom)
+\&.T#T{
+An output device was explicitly selected (Boolean-valued);
+see troff -T option*
+T}
+\&.tabs#T{
+Representation of tab settings
+suitable for use as argument to .ta (string-valued)*
+T}
+\&.trap#T{
+Name of the next vertical position trap to be sprung
+(string-valued); see .wh, .ch, and .dt*
+T}
+\&.trunc#T{
+Amount of vertical space truncated
+by the most recently sprung vertical position trap,
+or, if the trap was sprung by an .ne,
+minus the amount of vertical motion produced by .ne;
+also see register .ne*
+T}
 \&.u#Equal to 1 in fill mode and 0 in no-fill mode
+\&.U#Unsafe mode is enabled (Boolean-valued); see troff -U option*
 \&.V#Available vertical resolution in machine units
 \&.v#Current vertical line spacing
+\&.vpt#Vertical position traps are enabled (Boolean-valued)*
 \&.w#Width of previous character
+\&.warn#Sum of the numeric codes of enabled warning categories*
+\&.x#Major version number of the running troff formatter*
+\&.y#Minor version number of the running troff formatter*
+\&.Y#Revision number of the running troff formatter*
 \&.z#Name of current diversion
+\&.zoom#T{
+Zoom multiplier of current font
+(in thousandths; zero if no magnification); see .fzoom
+T}
 .TE
+*\f[C]groff\fP extension;
+other formatters may copy one or more.
 .Te
 .KE
 .PP
@@ -1401,7 +1666,7 @@ your page bottom macro:
 \&.ft \\\\n(FT
 .Pe
 .page 428
-This is safer than simply using the
+This is safer than using the
 .CW .ft
 request without an argument to restore the previous font,
 which can create havoc if a user makes a font change
@@ -1418,6 +1683,7 @@ As described previously, this means you should append a
 .CW u
 whenever you want to use the contents of one of these
 registers as an argument to a request.
+.
 .Bh "Autoincrementing Registers"
 .ix [troff] formatter, autoincrementing number~registers %key troff formatter, autoincrementing number registers
 .ix autoincrementing number~registers
@@ -1447,32 +1713,37 @@ For example:
 Then, when you interpolate the contents of the register,
 instead of using the standard
 .CW \en \c
-.I x
-or
-.CW \en \c
+.I x ,
+.CW \en( \c
 .I xx ,
+or
+.CW \en[ \c
+.I xxx \c
+.CW ] ,
 specify a plus or a minus after the
 .CW \en
 and before the register name.
-The value that is interpolated will be the original
-contents of the number register plus (or minus) the
-increment (or decrement) value.
-At the same time, the value in the register will be
-updated by the increment value.
-For example, assuming the initial definitions in the
-previous example:
+The value that is interpolated is
+the original value of the number register
+plus (or minus) the increment (or decrement) value.
+At the same time, the formatter updates
+the value in the register
+by the increment value.
+For example, assuming the initial definitions
+in the previous example:
 .Ps
 \\n+(TE \\" Increment TE by 1, and interpolate the new value
 \\n-(ST \\" Decrement ST by 3, and interpolate the new value
 .Pe
-Number register interpolations of the normal sort can still
-be used and will, as always, simply give you the value
+You can still use number register interpolations
+of the normal sort, and they give you the value
 currently stored in the register.
+.
 .Bh "Altering the Output Format"
 .ix number~registers, altering output format
-As we've seen, sometimes number registers are simply used
-to supply values to requests, or to pass information
-between macros.
+As we've seen, sometimes number registers
+supply values to requests,
+or to pass information between macros.
 But there are many cases in which the value of a number
 register is actually interpolated into the formatter output
 and printed.
@@ -1485,16 +1756,17 @@ in macros, it is usually printed as well.
 The
 .CW .af
 .I "alter format" ) (
-request allows you to specify the format in which to
-express the value of a number register.
-This request takes two arguments, the name of the
-register to be affected and the format:
+request specifies the output format
+of a number register.
+This request takes two arguments:
+the name of the register to be affected,
+and the format.
 .Ps
 \&.af \f[I]register format\fP
 .Pe
-The
+Table 14-5 lists the
 .I format
-codes are given in Table 14-5.
+codes.
 .page 429
 .KS
 .Ts "Format Codes"
@@ -1516,15 +1788,15 @@ A#Uppercase alphabetic#0,A,B,C,...Z,AA,AB,...ZZ,AAA,...
 .PP
 In addition to the numbering sequences in Table 14-5, an
 arabic format having additional digits (e.g., 001)
-will result in a numbering sequence with at least that
+results in a numbering sequence with at least that
 many digits (e.g., 001,002,003,...).
 .PP
 For example, to change to lowercase roman page numbering
-in the front matter of a book, you could write:
+in the front matter of a book, write:
 .Ps
 \&.af % i
 .Pe
-(Note that, depending on exactly how a macro package
+Note that, depending on exactly how a macro package
 implements page numbering, this may or may not work
 exactly as shown.
 Some macro packages interpolate
@@ -1535,20 +1807,21 @@ For example,
 stores the page number in the register
 .CW PN
 and the request would be
-.CW ".af PN i" ).
+.CW ".af PN i" .
 .PP
 Alphabetic formats are generally used in macros for
 automatically numbered (or lettered) lists.
 We'll take a close look at some of these macros in
 Chapter 17.
+.
 .Bh "Removing Registers"
 .ix [troff] formatter, removing number~registers %key troff formatter, removing number registers
 .ix number~registers, removing
 With the very large number of possible register names
 (nearly 10,000 names are possible, given all one- and
 two-character combinations of the printing character
-set), it is unlikely that you will run out of number
-register names.
+set), plus a much larger number with long name support,
+you should not run out of number register names.
 .PP
 However, if your macros create a very large number of
 registers, the formatter can run out of internal storage
@@ -1562,6 +1835,7 @@ For example:
 .Ps
 \&.rr TE		\\" Remove register TE
 .Pe
+.
 .Ah "Defining Strings"
 .ix [troff] formatter, defining strings %key troff formatter, defining strings
 .ix strings, defining
@@ -1569,11 +1843,11 @@ In addition to macros and number registers,
 .CW nroff
 and
 .CW troff
-allow you to define character strings that will be stored
-and can be re-invoked at will.
-This is not intended as a general-purpose abbreviation
-function, although in certain cases it can be used that
-way.
+support defined character strings,
+stored and re-invoked at will.
+This is not intended as
+a general-purpose abbreviation function,
+although in certain cases it can be used that way.
 Rather, it is designed to allow you to store global string
 variables for use throughout a package, in much the same
 way that number registers provide numeric variables.
@@ -1589,12 +1863,12 @@ For example, in both
 .CW ms
 and
 .CW mm ,
-you can define headers, footers, or both that will be
-printed on every page.
+you can define headers, footers, or both
+to print on every page.
 To do this, the header or footer macro contains a
 reference to a predefined string.
-All the user has to do is give the string a value.
-The user doesn't have to modify the macro itself.
+Assign each string a value,
+and headers and footers are done.
 .PP
 As we've already seen, to define a string, use the
 .CW .ds
@@ -1606,28 +1880,33 @@ For example:
 .Pe
 .ix strings, naming
 String names, like macro and number register names, can
-have either one or two characters.
-However, unlike number registers, string names are drawn
-from the same pool as macro and request names, so you have
-to be careful not to conflict with existing names.
+have one or more characters.
+However, unlike number registers,
+strings use the same namespace
+as macro and request names,
+so you have to avoid conflicts with existing names.
 .PP
 .ix strings, interpolating
 To interpolate the value of a string, use the escape
 sequence
 .CW \e* \c
 .I x
-for a one-character name, or
+for a one-character name,
 .CW \e*( \c
 .I xx
-for a two-character name.
+for a two-character name, or
+.CW \e*[ \c
+.I xxx \c
+.CW ]
+for longer names.
 For example, our page top macro might include the lines:
 .Ps
 \&.if o .tl '\\\\*(RH''%'	\\" Print header string then page #
 \&.if e .tl '%''\\\\(*RH'	\\" Print page # then header string
 .Pe
-Another good example of how to use this request (as well as
-how to use predefined number registers) is given by the
-technique used in
+Another good example of using this request
+(as well as using predefined number registers)
+is given by the technique used in
 .CW ms
 and
 .CW mm
@@ -1635,8 +1914,8 @@ to build a date string.
 .PP
 The
 .CW troff
-program reads in the date from the system clock into the
-predefined number registers
+program reads in the date from the system clock
+into the predefined number registers
 .CW mo
 .I month ), (
 .CW dy
@@ -1660,7 +1939,7 @@ in our macro package:
 \&.if \\n(mo=10 .ds MO October
 \&.if \\n(mo=11 .ds MO November
 \&.if \\n(mo=12 .ds MO December
-\&.ds DY \\*(MO \\n(dy, 19\\n(yr
+\&.ds DY \\*(MO \\n(dy, \\n[year]
 .Pe
 (Note that these requests do not need to be executed from
 within a macro.
@@ -1677,23 +1956,22 @@ additional backslash).
 Another request,
 .CW .as
 .I "append [to] string" ), (
-also allows you to add to the contents of an existing
-string.
-The last line of the previous sequence could also have
-been written:
+also allows you to add to the contents
+of an existing string.
+You could write the last line of the previous sequence:
 .Ps
 .page 431
-\&.as MO \\n(dy, 19\\n(yr
+\&.as MO \\n(dy, \\n[year]
 .Pe
 to append the day and year to whatever value had been
 stored into
 .CW MO .
-Here, this is a little contrived\(emit is better to
-maintain the month and the date as a
-whole in separate strings.
+Here, this is a little contrived\[em]you should
+maintain the month and the date in separate strings.
 However, the technique of appending to a string is used
 appropriately in the definition of a macro to produce
 numbered section headers, as we'll see in Chapter 17.
+.
 .Ah "Diversions"
 .ix diversions
 So far, we have discussed macros that you define in advance
@@ -1702,8 +1980,8 @@ There is also another class of macros that are created
 by a process called
 .I diversion .
 .PP
-A diversion consists of temporary storage of text into a
-macro,
+A diversion consists of temporary storage of text
+into a macro,
 which can be saved and output at a later time.
 In reading the chapters on
 .CW ms
@@ -1720,13 +1998,15 @@ filling the current page with text that comes later
 in the input file.
 .PP
 .ix [troff] formatter, keeping~text~block~together %key troff formatter, keeping text~block~together
-The answer is simple: the formatter stores the text (or
-other output) in a macro created by diversion.
-(Such a macro is often called simply a diversion).
-The size of the diversion is stored into number registers
-that you (your macros, that is) can test to see if
-the diversion will fit on the current page, and how much
-space you need to allocate for it.
+The formatter stores the text (or other output)
+in a macro created by diversion
+(such a macro is called a
+.I diversion ).
+The size (that is, the height and width)
+of the diversion is stored into number registers
+that your macros can test to see
+if the diversion fits on the current page,
+and how much space you need to allocate for it.
 The macro package can then make decisions about how and
 where to place the contents of the diversion.
 .PP
@@ -1737,30 +2017,31 @@ To create a diversion, use the
 .CW .di
 .I divert ) (
 request.
-This request takes as an argument the name of a macro.
-All subsequent text, requests, etc., will be processed
-normally, but instead of being output, they will be stored
-into the named macro.
+This request takes the name of a macro as its argument.
+All subsequent text, requests, etc.,
+are processed normally, but instead of being output,
+they are stored into the named macro.
 .ix diversions, closing
 A
 .CW .di
 request without an argument ends the diversion.
 .PP
-The output that has been stored in the diversion can now
-be output wherever you like, simply by invoking the
-macro named in the initial
+You can output the diversion
+wherever you like,
+by invoking the macro named in the initial
 .CW .di
 request.
-For many purposes, this invocation will be performed
-automatically by a page transition macro.
-We will look at this in more detail in succeeding chapters,
-but just to get the idea, let's look at a simple
-definition for a pair of keep macros.
+In many cases, a page transition macro
+invokes the diversion.
+We show this in more detail in succeeding chapters;
+but just to get the idea,
+let's look at a simple definition
+for a pair of keep macros.
 .PP
-(In general, diversions are handled by pairs of macros\(emone
+In general, diversions are handled by pairs of macros\(emone
 to start the diversion, the other to end it.
-However, there are other cases in which we will see that
-this is not necessary).
+However, there are other cases where that
+this is not necessary.
 .PP
 Both
 .CW ms
@@ -1770,18 +2051,19 @@ use diversions in their display macros.
 .ix keep~and~release
 In
 .CW ms ,
-the display macros handle text positioning, and call
-lower-level macros called keep macros to make sure
-the text in the display stays on the same page.
+the display macros handle text positioning,
+and call lower-level macros called
+.I "keep macros"
+to make sure the text in the display stays on the same page.
 .PP
-The purpose of the keep macros, in case you are not
-familiar with this concept from earlier chapters, is to
-make sure that a block of text is not split across two
-pages.
+The purpose of the keep macros,
+in case you are not familiar with this concept
+from earlier chapters,
+is to make sure a block of text
+is not split across two pages.
 A typical example of a block that should not be split
 is a figure\(emwhether it is reserved space for a
-figure, or an actual
-picture created with
+figure, or an actual picture created with
 .CW pic
 or some other graphics tool.
 .PP
@@ -1810,30 +2092,30 @@ A simple macro to end a keep might look like this:
 .ix breaks, importance~of
 In both macros, the
 .CW .br
-requests are extremely important; they flush any partial
-lines that have not yet been output.
+requests are extremely important;
+they flush any partial lines
+that have not yet been output.
 In the
 .CW .KS
-macro, the break makes sure that the keep begins with the
-text following the macro; in
+macro, the break makes sure that
+the keep begins with the text following the macro; in
 .CW .KE ,
-it makes sure that the last partial line is included
-in the diversion.
+it makes sure that the last partial line
+is included in the diversion.
 .PP
-It is also important to output the diversion in no-fill
-mode.
-If you don't, the text contained in the diversion will
-be filled and adjusted a second time, with unpredictable
-results.
-(Consider, for example, when the diversion includes an
-already formatted table.
-The table would be scrambled by a second pass).
+It is also important to output the diversion in no-fill mode.
+If you don't, the formatter fills and adjusts
+the text contained in the diversion a second time,
+with unpredictable results
+(for example, when the diversion includes an
+already formatted table, a second pass
+would scramble the table).
 .PP
-You can't just switch back to fill mode after you output
-the diversion, though.
-What if the body of the text was meant to be in no-fill
-mode?
-To get around this problem, you should save the value of
+You can't just switch back to fill mode
+after you output the diversion, though.
+What if the body of the text
+was meant to be in no-fill mode?
+To get around this problem, save the value of
 .CW troff 's
 read-only register
 .CW .u ,
@@ -1843,34 +2125,35 @@ should be restored.
 There are a few times when you might not want to follow
 this rule.
 For example, what should you do if there is a chance that
-the diversion will be output on a page where the line
+the diversion outputs on a page where the line
 length is different?
 You still want to avoid processing the text twice.
 You can put the text into the diversion in no-fill mode,
 and can embed any formatting requests into the diversion
 by preceding them with a backslash (e.g.,
 .CW "\e.in 5n" ).
-Any requests treated in this way will be acted on when
+Any requests treated in this way are acted on when
 the diversion is output.
 .PP
-As always, it is important to specify the correct units.
+As always, you must specify the correct units.
 In the previous example, the value in
 .CW dn
-is stored using basic device units (as is the case with all
+is stored using basic device units
+(as is the case with all
 scaled values stored in a number register), so you
 .I must
 add a
 .CW u
 on the end of the interpolation.
-For example, on a 300 dpi device, after a diversion 2
-inches high,
+For example, on a 300 dpi device,
+after a diversion 2 inches high,
 .CW dn
-will contain the value 600.
+contains the value 600.
 The request:
 .Ps
 \&.ne \\\\n(dn
 .Pe
-will always result in a page break because (in this
+always causes a page break because (in this
 example) what you are really writing is:
 .Ps
 \&.ne 600
@@ -1881,25 +2164,24 @@ What you want to write is:
 \&.ne \\\\n(dnu
 .Pe
 .PP
-Any text and requests that are issued between the initial
+Any text and requests issued between the initial
 .CW .KS
 and the terminating
 .CW .KE
-will be stored in the macro called
+are stored in the macro called
 .CW .KK .
 The height of the last-completed diversion is always stored
 in the number register
 .CW dn .
-We can simply say that we need (\c
+We can say that we need (\c
 .CW .ne )
 at least that much space.
 If the size of the diversion is greater than the
-distance to the bottom of the page, we simply start a
-new page.
+distance to the bottom of the page, start a new page.
 Otherwise, we output the text and continue as if the
-diversion had never happened.
+diversion never happened.
 .PP
-The case of a floating keep, in which text that follows
+A floating keep, where text that follows
 the keep in the source file floats ahead of it in the
 output, and fills up the current page, is more difficult
 to handle than the simple example just shown.
@@ -1916,26 +2198,27 @@ There is also a
 request that adds output to an existing diversion.
 (A second
 .CW .di
-given the same macro name as the first will overwrite the
+given the same macro name as the first overwrites the
 diversion's previous contents, but
 .CW .da
-will add the new material to the end).
+adds the new material to the end).
 .PP
 The
 .CW .da
 request has numerous applications.
 For example, consider footnotes.
-To calculate where to place the first footnote, you need
-to calculate the size of all the footnotes you want to
-put on the page.
-That's easy\(emjust append them to the same diversion.
+To calculate where to place the first footnote,
+you need to calculate the size of all the footnotes
+you want to put on the page.
+That's easy\[em]append them to the same diversion.
 .PP
 However, there are other far less obvious applications
 for appended diversions.
 For example, you can divert and append section headings
-or index entries to macros that will be processed at the
-end of the file to produce a table of contents
-or an index.
+or index entries to macros
+processed at the end of the file
+to produce a table of contents or an index.
+.
 .Ah "Environment Switching"
 .ix [troff] formatter, environment switching %key troff formatter, environment switching
 .ix [troff] formatter, [.ev] request %key troff formatter, [.ev] request
@@ -1963,15 +2246,28 @@ and
 .CW troff
 provide a mechanism called
 .I "environment switching" .
-By default, text processing takes place in what is
-considered to be environment 0.
+By default, text processing takes place in environment 0.
 The
 .CW .ev
-request allows you to switch to either of two additional
-environments, referred to as environment 1 and
-environment 2.
+request allows you to switch to additional environments.
+The original
+.CW troff
+supported only environment 1 and environment 2.
+All modern versions support arbitrary names
+for environments, such as
+.CW footer
+or
+.CW exampleCode .
+Legacy macro packages
+recognize only the original three environments, but
+.CW groff
+rewrote both the
+.CW ms
+and
+.CW mm
+packages from scratch, using the longer names.
 .PP
-For example, to change to environment 2, you would enter:
+To change to environment 2, enter:
 .ig
 	Added a colon on the above line for consistency.
 	--Michael Hobgood
@@ -1979,17 +2275,19 @@ For example, to change to environment 2, you would enter:
 .Ps
 \&.ev 2
 .Pe
-To restore a previous environment, you simply issue an
+To restore a previous environment, use an
 .CW .ev
 request without an argument.
 Environments are stored in a
 \(lqpush down stack.\(rq
-So if you are using multiple environment switches, a
-sequence of
+So if you are using multiple environment switches,
+a sequence of
 .CW .ev
 requests without arguments won't toggle you between
-two environments, but will actually backtrack the specified
-number of environment switches. That is:
+two environments,
+but backtrack the specified
+number of environment switches.
+That is:
 .page 434
 .Ps
 \&.ev 1
@@ -2002,32 +2300,32 @@ number of environment switches. That is:
 .PP
 If you use
 .CW .ev
-with an argument, you will not pop the stack.
+with an argument, you do not pop the stack.
 For example, the requests:
 .Ps
 \&.ev 2
 \&.ev 0
 .Pe
-will leave both environments on the stack.
-You might get away with this on one occasion, but if you
-do this in a macro that is used with any frequency, your
-stack will keep getting deeper until it overflows and the
-formatter fails with the message
+leave both environments on the stack.
+You might get away with this on one occasion,
+but if you do this in a macro that is used with any frequency,
+your stack gets deeper until it overflows,
+and the formatter fails with the message
 \(lqCannot do ev.\(rq
 .PP
-Within each environment, settings made with the following
-requests are remembered separately:
+Each environment remembers the values of
+the following requests:
 .Ps
 \&.c2 .cc .ce .cu .fi .ft .hc .hy .in .it .lc .ll .ls .lt
 \&.mc .nf .nh .nm .nn .ps .sp .ss .ta .tc .ti .ul .vs
 .Pe
-Number registers, macros, and strings are common to all
-environments.
-However, any partially collected lines are part of a
-given environment.
-If you switch environments without causing a break, these
-partial lines will be held till the environment
-that contains them is restored.
+Number registers, macros, and strings
+are common to all environments.
+However, any partially collected lines
+are part of a given environment.
+If you switch environments without breaking first,
+the formatter holds partial lines
+until the environment that contains them is restored.
 .PP
 What this means is best shown by example:
 .Ps
@@ -2039,7 +2337,7 @@ What this means is best shown by example:
 \&.in +10n
 \&.ad l
 \&.ev		\\" Restore previous environment (ev 0)
-This text will be formatted using the parameters for
+This text is formatted using the parameters for
 environment 0. Notice that part of the last input
 line appears to be lost when we switch environments.
 It reappears when the environment is restored.
@@ -2047,14 +2345,14 @@ It reappears when the environment is restored.
 \&.sp		\\" The break caused by this request is in ev 1
 Now we've switched to environment 1. Notice how the text
 is now formatted using the parameters for environment 1.
-Also notice that this time, we're going to issue an .sp
+Also notice that this time, we issue an .sp
 request after this sentence to cause a break and make sure
 the last partial line is output before we leave this
 environment.
 \&.sp
 .page 435
 \&.ev		\\" Back once more to environment 0
-This sentence will be preceded by the remainder of input
+This sentence is preceded by the remainder of input
 left over from the last time we were in this environment.
 .Pe
 Here's the resulting output (from
@@ -2062,10 +2360,10 @@ Here's the resulting output (from
 .sp .7v
 .SS
 .Ps
-This  text  will  be  formatted   using   the
-parameters  for environment 0.  You'll notice
-that part of the last input line  appears  to
-be lost  when  we  switch  environments.   It
+This  text  is formatted using the parameters
+for environment 0. You'll notice that part of
+the last input line  appears to be lost  when
+we  switch  environments.  It
 .sp
          Now we've switched to environment 1.  Notice
          how the text is now formatted using the
@@ -2076,37 +2374,40 @@ be lost  when  we  switch  environments.   It
          before we leave this environment.
 .sp
 reappears when the environment  is  restored.
-This   sentence   will  be  preceded  by  the
-remainder of the input  left  over  from  the
-last time we were in this environment.
+This sentence is preceded by the remainder of
+the input  left  over  from  the last time we
+were in this environment.
 .sp
 .Pe
 .SE
 .sp .8v
 .PP
 Environments are very powerful and versatile.
-The example given previously could have been handled more
-appropriately with a macro.
-However, as you will find, there are tasks that are best
-handled by an environment switch.
+The previous example could have been handled
+more appropriately with a macro.
+However,
+there are tasks that are best handled
+by an environment switch.
 .PP
 Printing footnotes is a primary example.
-Footnotes are usually collected in a diversion, which must
-be output at the bottom of the page without causing a break
+Footnotes are usually collected in a diversion,
+output at the bottom of the page without causing a break
 or other interference with the text.
 .PP
-Unfortunately, you must use environment switching with caution
+Unfortunately, you must use environment switching
+with caution
 if you are working within one of the existing macro packages,
-because they may use different environments internally, and
-changing parameters in an environment may affect the operation
-of the package.
-For example, it was necessary to process the preceding example
+because they may use different environments internally,
+and changing parameters in an environment
+may affect the operation of the package.
+For example, we had to process the preceding example
 independently with
 .CW nroff ,
 and then read the resulting output into the source file,
 because the use of environments by the macro package that
 produced this book was incompatible with what we were
 trying to show.
+.
 .Ah "Redefining Control and Escape Characters"
 .ix [.c2] request %key c2 request
 .ix [.cc] request %key cc request
@@ -2132,8 +2433,8 @@ and the escape character:
 \&.cc #	\\" Change control character from . to #
 \&.c2 ^	\\" Change no-break control character from ' to ^
 .Pe
-As far as we can tell by experiment, turning the escape
-character off entirely with
+As far as we can tell by experiment,
+turning the escape character off entirely with
 .CW .eo
 does not affect the comment sequence
 .CW \e" ;
@@ -2141,9 +2442,10 @@ however, if you change the escape character with
 .CW .ec ,
 comments must be introduced by the new escape character.
 .PP
-We have not found a significant use for these requests in our
-own work, or in macros we've studied, although there are no
-doubt cases where they are precisely what is needed.
+We have not found a significant use for these requests
+in our own work, or in macros we've studied,
+although there are no doubt cases
+where they are precisely what is needed.
 .PP
 One application that immediately suggests itself is the
 representation of control and escape characters in the
@@ -2151,20 +2453,24 @@ examples shown in this book.
 However, in practice there are many problems.
 .PP
 For example, if you use these requests in a pair of macros
-to frame examples, the closing macro must be invoked with
-the appropriate control character, creating inconsistencies
-for the user.
-Even more seriously, if control character translations are in
-effect during a page transition (something that is difficult
-to control) or other macro invoked by a trap, they will render
-that macro inoperable, unless it has been designed with
+to frame examples, you must invoke the closing macro
+with the appropriate control character,
+creating inconsistencies.
+Even more seriously,
+if control character translations are in effect
+during a page transition
+(something that is difficult to control)
+or other macro invoked by a trap,
+they render that macro inoperable,
+unless it has been designed with
 the same control and escape characters.
 .PP
 .ix [troff] formatter, [.tr] request %key troff formatter, [.tr] request 
 .ix [.tr] request %key tr request
 Our preferred solution to this problem is to use the
 .CW .tr
-request, which is discussed in the next chapter.
+request, discussed in the next chapter.
+.
 .Ah "Debugging Your Macros"
 .ix %begin [troff] formatter, debugging %key troff formatter, debugging
 .ix %begin debugging, in [troff] %key debugging, in troff
@@ -2172,81 +2478,90 @@ When using a markup language as complex as that provided by
 .CW nroff
 and
 .CW troff ,
-it is easy to make mistakes, particularly when you are
+it is easy to make mistakes,
+particularly when you are
 designing complex macros.
 .PP
-To limit the number of mistakes you make, you can take lessons
-from programmers in more general-purpose languages:
+To limit the number of mistakes you make,
+you can take lessons from programmers
+in more general-purpose languages:
 .RS
 .Ls B
 .Li
 Start by writing and testing small pieces of a complex macro.
 Then, after you know the pieces work, put them together.
-It is much easier to find a problem in a simple macro than
-in one that is already very complex.
+It is much easier to find a problem in a simple macro
+than in one that is already very complex.
 .Li
 Be aware of interactions between the macro you are writing
 and other macros in the package.
-Initialize variables (number registers and strings) that might
-also be used by other macros.
+Initialize variables (number registers and strings)
+that might be used by other macros.
 .Li
-Include extensive comments, so you can reconstruct what you
-were trying to do when you go back to the macro later.
-(Errors often arise unexpectedly after the macro has been
-in use for a while, and you have a chance to exercise it
-fully.
-Be sure you can follow what you originally wrote).
+Include extensive comments,
+to remind you what you were trying to do
+when you go back to the macro later.
+Errors often arise unexpectedly
+after the macro has been in use for a while,
+and you have a chance to exercise it fully.
+Be sure you can follow what you originally wrote.
 .Li
 Test each macro thoroughly before you put it into general use.
 .Le
 .RE
 .page 437
-However, even with the best of intentions, you are likely to
-make mistakes.
-This short section is intended to give you a few pointers on
+However, even with the best of intentions,
+you are likely to make mistakes.
+This short section gives you a few pointers on
 how to track them down.
 .PP
-The term debugging is familiar even to nonprogrammers.
-In general, it refers to the process of finding errors in
-programs.
-I would like to suggest an alternate definition that may give
-you better insight into how to go about this process:
+The term
+.I debugging
+is familiar even to non-programmers.
+In general,
+it refers to the process of finding errors in programs.
+I would like to suggest an alternate definition
+that may give you better insight
+into how to go about this process:
 .I "Debugging is the process of finding out what your macro really \
-does, instead of what you though it should do".*
+does, instead of what you thought it should do".\**
 .FS
-*I am indebted to Andrew Singer of Think Technologies for this
-definition. Andrew used similar words in describing to me
-the debugging philosophy of his company's innovative Pascal
-compiler for the Macintosh, Lightspeed Pascal.
+I am indebted to Andrew Singer of Think Technologies
+for this definition.
+Andrew used similar words in describing to me
+the debugging philosophy of his company's
+innovative Pascal compiler for the Macintosh, Lightspeed Pascal.
 .FE
 .PP
-When you write a program or a macro, you have an idea in your
-mind of what you want to accomplish.
+When you write a program or a macro,
+you have an idea in your mind
+of what you want to accomplish.
 When it doesn't do what you expect, you consider it an error.
 .PP
 But as we all know, computers are very literal.
-They generally do just what they are told.
-(The exception being when there is an error in some underlying
+They generally do just what they are told
+(the exception being when there is an error in some underlying
 layer of software that causes problems on a higher layer).
-Therefore, the essence of debugging is to compare, on a
-step-by-step basis, exactly what the program or macro is
-actually doing with what you expect it to do.
+Therefore, the essence of debugging is to compare,
+on a step-by-step basis,
+exactly what the program or macro is actually doing
+with what you expect it to do.
 .PP
 There are several tools that you can use in debugging macros.
-First, and most obviously, you can look carefully at the
-output.
-Try to reconstruct the sequence of instructions and text that
-have been executed to produce the (presumably) undesirable
-result.
-Often, this will be all you need to do\(emthink
-like a text formatter, and go through the requests that
-have been executed, in the order that they are executed.
+First, and most obviously,
+you can look carefully at the output.
+Try to reconstruct the sequence of instructions and text
+that was executed
+to produce the (presumably) undesirable result.
+Often, this is all you need to do\(emthink
+like a text formatter,
+and go through the requests that have been executed,
+in the order that they are executed.
 .PP
-You will often find that problems are due to an incorrect
-understanding of the action of one of the requests or
-escape sequences, so it may be advisable to consult the
-bible of macro programming, Joseph Osanna's extraordinarily
-dense but thorough
+Many problems stem from an incorrect understanding
+of the action of one of the requests or escape sequences,
+so you should consult the bible of macro programming,
+Joseph Osanna's extraordinarily dense but thorough
 .I "Nroff/Troff User's Guide" .
 .PP
 .ix [troff] formatter, interactive~use %key troff formatter, interactive use
@@ -2255,7 +2570,7 @@ Secondly, you can use
 or
 .CW troff
 interactively.
-If you simply type:
+If you type:
 .Ps
 $ \f[CB]nroff\fP
 .Pe
@@ -2263,31 +2578,31 @@ or:
 .Ps
 $ \f[CB]troff -a\fP
 .Pe
-the program will take standard input from the keyboard and
-send its results to standard output (the screen).
+the program takes standard input from the keyboard
+and sends its results to standard output (the screen).
 The
 .CW "troff -a"
 command creates an ASCII approximation of what the
 .CW troff
 output would be; if you are using
 .CW ditroff ,
-you can also save the normal output in a file and look
-directly at the output.
-However, this output is in an obscure format and takes
-considerable time to learn.
+you can also save its normal output in a file
+and look directly at the output.
+However, this output is in an obscure format
+and takes considerable time to learn.
 .PP
 With
 .CW "troff -a" ,
 special characters (such as underlines) are represented by
 their special character names.
-For example, underlining will show up as a sequence of
+For example, underlining shows up as a sequence of
 .CW \e(ul s.
 Because proportional type is considerably more compact than
-the characters that appear on a terminal screen, lines will
-appear too long, and will wrap around on the screen.
+the characters that appear on a terminal screen,
+lines appear too long, and wrap around on the screen.
 However, what you see does represent how
 .CW troff
-will break the lines.
+breaks the lines.
 .page 438
 .PP
 .ix [.so] request %key so request
@@ -2298,18 +2613,19 @@ Now, by typing in your macros
 request),
 you can reproduce the environment of the formatter,
 and watch the results as you type in text.
-As each line is completed in the input buffer, the formatted
-result will be output.
+As each line is completed in the input buffer,
+the formatter outputs the formatted result.
 .ix [.fl] request %key fl request
 .ix [troff] formatter, flushing output~buffer %key troff formatter, flushing output buffer
 .ix [troff] formatter, [.fl] request %key troff formatter, [.fl] request
 You can force output of a partially completed line with the
 .CW .fl
 .I flush ) (
-request, which was designed for this purpose.
+request, that was designed for this purpose.
 .PP
-This method has definite limits, but has just as definite
-a place in pinning down what the commands you type are doing.
+This method has definite limits,
+but has just as definite a place
+in pinning down what the commands you type are doing.
 .PP
 .ix [troff] formatter, ignoring input %key troff formatter, ignoring input
 .ix [.ig] request %key ig request
@@ -2318,8 +2634,8 @@ Another debugging tool that you may find useful is the
 .CW .ig
 .I ignore ) (
 request.
-It tells the formatter to ignore subsequent input, up to a
-specified terminator (\c
+It tells the formatter to ignore subsequent input,
+up to a specified terminator (\c
 .CW ..
 by default).
 The
@@ -2327,9 +2643,9 @@ The
 request acts like
 .CW .de ,
 only the input is discarded.
-(The only exception to this is that autoincremented registers
-whose values are interpolated within the ignored block will
-still be incremented or decremented).
+The only exception to this is that autoincremented registers
+whose values are interpolated within the ignored block are
+still incremented or decremented.
 .PP
 This request is useful when you are trying to pin down exactly
 where in an input file (or a long macro definition) a fatal
@@ -2341,12 +2657,11 @@ you can locate the problem more closely.
 .PP
 This request is also useful for
 \(lqcommenting out\(rq
-extensive
-blocks of macro definition or input text that you don't want
-in your output.
-It is much easier to bracket a large block of input in this
-way than it is to insert comment characters at the
-beginning of each line.
+extensive blocks of macro definition or input text
+that you don't want in your output.
+It is much easier to bracket a large block of input
+in this way than it is to insert comment characters
+at the beginning of each line.
 .PP
 Because you may want to
 \(lqignore\(rq
@@ -2357,13 +2672,13 @@ delimiter for the
 request, so that the
 \(lqignore\(rq is not accidentally terminated by
 the end of the first macro definition.
-This will also make it much easier to find the end of the
+This makes it much easier to find the end of the
 ignored section.
 For example, if you insert the line:
 .Ps
 \&.ig ++
 .Pe
-anywhere in your input, the formatter will ignore the input
+anywhere in your input, the formatter ignores all input
 until it sees the request:
 .Ps
 \&.++
@@ -2375,43 +2690,45 @@ until it sees the request:
 The final tool provided for debugging is the
 .CW .tm
 .I "terminal message" ) (
-request, which prints a message on standard error.
+request, that prints a message on standard error.
 This is particularly useful for tracking down errors
 involving number registers.
-For example, if you have set a condition based on the
-value of a number register, and the condition never seems
-to be satisfied, you might want to insert
+For example, if you have set a condition
+based on the value of a number register,
+and the condition never seems to be satisfied, insert
 .CW .tm
-messages to print out the value of the number register at
-certain points in your file.
+messages to print out the value of the number register
+at certain points in your file.
 For example:
 .Ps
 \&.tm Before calling B1, the value of BC is \\n(BC
 \&.B1
 \&.tm After calling B1, the value of BC is \\n(BC
 .Pe
-(Note that there are no double backslashes before the
-number register interpolations, because these requests are not
+Note that there are no double backslashes before the
+number register interpolations,
+because these requests are not
 made while you're inside a macro definition.
-From inside a macro, be sure to double the backslashes, or
-you will get the value of the number register at the
+From inside a macro,
+double the backslashes, or
+you get the value of the number register at the
 time the macro was defined).
 .ix %end [troff] formatter, debugging %key troff formatter, debugging
 .ix %end debugging, in [troff] %key debugging, in troff
 .PP
 A read-only number register that is useful in this regard is
 .CW .c ,
-which contains the number of lines read from the current
+that contains the number of lines read from the current
 input file.
 This allows you to create messages
 .page 439
-that will help you (or the user of your macros) find out
+that help you (or the user of your macros) find out
 where in the input file an error (or other event) occurs:
 .Ps
 \&.tm On input line \\\\n(.c, the value of BC was \\\\n(BC
 .Pe
-(Here, there are double backslashes, because this example
-is intended to be inside a macro definition).
+Here, there are double backslashes, because this example
+is intended to be inside a macro definition.
 Sometimes it is helpful to follow just how far the formatter
 has gotten in a file.
 The most difficult errors to track are those that cause the
@@ -2420,26 +2737,27 @@ A series of messages of the form:
 .Ps
 \&.tm At top of page \\\\n%, I've processed \\\\n(.c input lines
 .Pe
-inserted into the page top macro will help you determine how
-far the formatter has gotten, and can thus help locate an error.
-If the formatter is processing standard input rather than an
-individual file, the
+inserted into the page top macro
+helps you determine how far the formatter has gotten,
+and can thus help locate an error.
+If the formatter is processing standard input
+rather than an individual file, the
 .CW .c
-register will be empty.
+register is empty.
 .PP
-Another register that you may find useful in printing error
-messages is
+Another register that you may find useful
+in printing error messages is
 .CW .F ,
-which contains the name of the current file.
-(Yes, the filename is a string, even though it's stored in
-a number register).
+containing the name of the current file
+(yes, the filename is a string,
+even though it's stored in a number register).
 .PP
 The
 .CW .R
-register is also useful.
-It contains the number of free number registers.
-You can print its value to see if you are running out of
-number registers or coming close to the limit. (\c
+register contains the number of free number registers.
+You can print its value
+to see if you are running out of number registers
+or coming close to the limit. (\c
 .CW tbl
 and
 .CW eqn
@@ -2464,10 +2782,11 @@ At least one version of
 does support a
 .I trace
 facility.
-.ix SQ[troff] %key SQtroff
-Users of SoftQuad's
-.CW SQtroff
-can enable a trace mode to show the invocation of each
+.ix g[troff] %key groff
+Users of
+.CW groff
+can enable a trace mode
+to show the invocation of each
 request, diversion, trap, and macro call.
 For instance, suppose that a macro tests the value of a
 number register to determine whether a request should be
@@ -2477,15 +2796,29 @@ In trace mode, you can see at what point the
 request was invoked, whether it was evaluated as true or false,
 and determine the actual value of the number register at
 that point.
-SoftQuad has also taken another step to make debugging easier
+.CW Groff
+has also taken another step to make debugging easier
 by improving
 .CW troff 's
 obscure error messages.
-In general, SoftQuad has enhanced standard
+In general,
+.CW groff
+has enhanced standard
 .CW troff
 in other ways that aid the process of macro writing and
-debugging, such as allowing longer names (up to 14 characters)
+debugging, such as allowing longer names
 for macros, requests, strings, registers, and fonts.
+.PP
+In addition,
+.CW groff 's
+macro packages include extensive diagnostics
+to help you pinpoint errors.
+To turn on backtracing and warnings, use the
+.CW "-b -ww"
+options on the
+.CW groff
+command line to enable the diagnostics.
+.
 .Ah "Error Handling"
 .ix [troff] formatter, error handling %key troff formatter, error handling
 .ix errors, in [troff]~macros %key errors, in troff macros
@@ -2497,20 +2830,20 @@ The three most common classes we have encountered are:
 .RS
 .Ls B
 .Li
-A user fails to properly understand the action of the
+Users fail to properly understand the action of the
 formatter itself.
-For example, he or she begins a text line with a single quote
-or period, or defines a special character (such as %) as an
+For example, they begin a text line with a single quote
+or period, or define a special character (such as %) as an
 .CW eqn
 delimiter.
-This problem becomes more pronounced as users try out more
+This problem becomes more pronounced as they try out more
 advanced capabilities without really understanding them.
 .Li
-A user fails to properly understand the macro package.
-For example, he or she gives the wrong argument to a macro
-or specifies the wrong units.
+Users fail to properly understand the macro package.
+For example, they give the wrong argument to a macro
+or specify the wrong units.
 .Li
-A user temporarily resets some condition, either directly
+Users temporarily reset some condition, either directly
 or by failing to close a set of paired macros.
 This causes undesirable effects to propagate through the
 document.
@@ -2518,18 +2851,18 @@ document.
 .RE
 The
 .CW mm
-macros attempt to solve the first problem by creating so
-comprehensive a macro package that users never need use
+macros attempt to solve the first problem
+by creating so comprehensive a macro package
+that users never need use
 many low-level formatter requests.
-However, in doing so, its developers have created an
-environment that is in may ways more complex than the raw
-formatter environment itself.
+However, in doing so, its developers
+created an environment that is in may ways
+more complex than the raw formatter environment itself.
 And in our opinion, no macro package is comprehensive
 enough to meet all user needs.
 Over time, users come up with formatting problems that they
 need to know how to solve on their own.
-There is no solution to this problem except better user
-education.
+There is no solution to this problem except better education.
 .PP
 To some extent, you can compensate for the second problem
 by testing for arguments and printing error messages if
@@ -2540,11 +2873,13 @@ printing a message if the user fails to supply it:
 \&.if "\\\\$1"" .tm Line \\\\n(.c: .Se requires section \\
 number as first argument
 .Pe
-Of course, by the time the user sees the error message, he
-or she has already formatted the document, and it is too late
-to do anything else but repair the damage and reprint.
-However, messages can sometimes make it easier for users to
-find errors and can give them warning to look more closely
+Of course, by the time users see the error message,
+they have already formatted the document,
+and it is too late to do anything else
+but repair the damage and reprint.
+However, messages can sometimes make it easier
+for users to find errors
+and can give them warning to look more closely
 at their printout.
 .PP
 .ix [.ab] request %key ab request
@@ -2567,16 +2902,17 @@ request prints its argument as an error message, just like
 .ix [troff] formatter, [.tm] request %key troff formatter, [.tm] request
 .ix [.tm] request %key tm request
 .CW .tm .
-It just takes the further, definite step of quitting on the
-spot.
+It just takes the further, definite step of quitting on the spot.
 .PP
-Probably more suitable, though, is a separate tool for checking
-macro syntax.
+Probably more suitable, though,
+is a separate tool for checking macro syntax.
 Such a tool exists for
 .CW mm
 in the
 .CW mmcheck
 program.
+.\" XXX replaced by warning/backtrace
+.\" XXX "the best *roff processor is *roff"
 A program like this checks the syntax of macros and requests
 used in a document and reports possible errors.
 .PP
@@ -2584,11 +2920,12 @@ This kind of approach is especially suitable for the third
 kind of error\(emthe failure to close a set
 of paired macros.
 .page 441
+.
 .Ah "Macro Style"
 .ix [troff] formatter, macro style %key troff formatter, macro style
 .ix macros, style
-As you develop more of your own macros, you might begin
-thinking about overall macro style.
+As you develop more of your own macros,
+you might begin thinking about overall macro style.
 Developing macros that behave in a consistent, reliable way
 becomes all the more important as the number of new macros
 you have increases along with the number of people using them.
@@ -2621,8 +2958,8 @@ An
 user is expected to set up various number registers that affect
 the operation of many different macros.
 .PP
-In writing your own macros (especially ones that will be
-integrated with one of the existing packages), you should take
+In writing your own macros (especially ones
+integrated with one of the existing packages), take
 some time to think about style, and how you want users to
 interact with your macros.
 This is most easily shown by comparing several different
@@ -2640,6 +2977,7 @@ paragraph macros:
 \&.RT
 \&.ne 1.1
 \&.sp \\\\n(PDu
+.\" XXX why would a flush-left para need a .ti request?
 \&.ti \\\\n(.iu
 \&..
 .Pe
@@ -2654,7 +2992,7 @@ paragraph macros:
 .Pe
 .ne 7
 .Ps
-\&.deP			\\" An mm style variable paragraph
+\&.de P			\\" An mm style variable paragraph
 \&.br			\\" Note that this is much
 \&.sp (\\\\n(Ps*.5)u	\\" simplified from true mm code
 \&.ne 1.5v
@@ -2693,9 +3031,9 @@ register.
 .PP
 Although you many not want to go as far as
 .CW mm
-in giving different ways to affect the action of a macro, it
-is good to realize that all of these options are available and
-to draw on them as necessary.
+in giving different ways to affect the action of a macro,
+know that all of these options are available and
+you can draw on them as necessary.
 .PP
 However, it does make sense to be consistent in the
 mechanisms you use.
@@ -2709,14 +3047,15 @@ As much as possible, a user should be able to infer the
 action of a macro from its name, and should be able to
 guess at its arguments by analogy to other, similar macros
 in the same package.
-If you are capricious in your design, other users will have
-a much greater burden to shoulder when it comes time for
-them to learn your macros.
+If you are capricious in your design,
+users have
+a much greater burden to shoulder
+when it comes time for them to learn your macros.
 Even if you are the only user of macros you develop,
-consistency will help you keep out of trouble as you
+consistency helps you stay out of trouble as you
 gradually extend your package.
 .PP
 The issue of macro style really comes up as you begin to
-develop your own custom macro package, as you will see
+develop your own custom macro package, as we show
 when we examine the elements of a macro package in
 Chapters 16 and 17.

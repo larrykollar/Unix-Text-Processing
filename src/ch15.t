@@ -508,6 +508,7 @@ It also dissects some of the most complex macros we've seen
 so far, so it should advance your knowledge of how to write
 macros as well as your knowledge of its explicit subject
 matter.
+.
 .Ah "Formatter Escape Sequences"
 Preprocessors like
 .CW tbl
@@ -524,15 +525,16 @@ special effects with text characters.
 .PP
 The escape sequences are listed in Table 15-1.
 As you can see, there are quite a few!
-Fortunately, many of these need not be learned by the
-average user.
+Fortunately, the average user
+can ignore many of these.
 The various preprocessors often allow a user to achieve the
 same effect more easily.
 Although
 .CW tbl
 or
 .CW eqn
-might seem difficult to learn, they are far simpler than
+might seem difficult to learn,
+they are far simpler than
 the formatter commands they replace.
 For example, an
 .CW eqn
@@ -544,20 +546,19 @@ construct like:
 .Ps
 10\\s-3\\v'-3p'5\\v'3p'\\s0
 .Pe
-When it comes to drawing lines and figures, things get
-even more complex.
+When it comes to drawing lines and figures,
+things get even more complex.
 .PP
 For this reason, many of the escape sequences we are about
 to discuss are not often used by the average person
 trying to achieve special effects.
-However, they are extremely useful to a developer
-of macros.
+However, they are extremely useful to macro developers.
 .PP
-In this chapter, we'll cover the sequences for local
+In this chapter, we cover the sequences for local
 vertical and horizontal motions and line drawing,
 because these requests are most commonly used in macros.
-In addition, we will show several large macros that do
-line drawing in order to demonstrate both the use of
+In addition, we show several large macros
+that do line drawing, to demonstrate both the use of
 escape sequences and techniques for writing complex
 macros.
 .page 444
@@ -575,14 +576,14 @@ T{
 T}	T{
 Move \f[I]distance\fP vertically down the page.
 Precede \f[I]distance\fP with a minus sign to
-move back up the page.
+move up the page.
 T}
 T{
 \\h\fP'\f[I]distance\fP'
 T}	T{
-Move \f[I]distance\fP horizontally to the
-right. Precede \f[I]distance\fP with a minus
-sign to move back to the left.
+Move \f[I]distance\fP horizontally to the right.
+Precede \f[I]distance\fP with a minus sign
+to move to the left.
 T}
 .sp 1v
 T{
@@ -624,15 +625,14 @@ T}
 T{
 \\x'\f[I]distance\fP'
 T}	T{
-Add extra line space for oversize
-characters.
+Add extra line space for oversize characters.
 T}
 .sp 1v
 T{
 \\(\f[R]space\fP)
 T}	T{
-Move right one space (distance
-determined by \f[C].ss\fP).
+Move right one space
+(distance determined by \f[C].ss\fP).
 T}
 T{
 \\0
@@ -748,8 +748,8 @@ T{
 \\S'\f[I]n\fP'
 T}	T{
 Slant output \f[I]n\fP degrees to the right.
-Negative values slant to the left. A
-value of zero turns off slanting
+Negative values slant to the left.
+A value of zero turns off slanting
 (\f[C]ditroff\fP only).
 T}
 .TE
@@ -764,18 +764,20 @@ The delimiter character is most often
 or \f[CW]^\fP\f[I]G\fP
 .I CTRL-G  ), (
 but it can be any character.
-The first character following the escape sequence will be
-taken as the delimiter, and the argument list will be
-terminated when that same character is encountered a
+The first character following the escape sequence
+is the delimiter, and the argument list
+terminates when the same character appears a
 second time.
 .ix %end escape sequences, in~[troff] %key escape sequences, in troff
+.
 .Ah "Local Vertical Motions"
 .ix [troff] formatter, local vertical~motions %key troff formatter, local vertical motions
 .ix local vertical~motions
 There are a number of escape sequences for
 .I local
-vertical motions. They are so called because they take
-place within a line, without causing a break or otherwise
+vertical motions.
+They are so called because they take place within a line,
+without causing a break or otherwise
 interrupting the filling and justification process.
 .PP
 However, this is not to say that the motions they cause
@@ -786,9 +788,9 @@ the vertical motion escape sequence to move anywhere on
 the page, just as you can with the
 .CW .sp
 request.
-However, the remainder of the line that has
-been collected in the formatter's internal buffers will
-be output in the new location just as if the motion had
+However, the remainder of the line
+collected in the formatter's internal buffers
+prints in the new location just as if the motion had
 never taken place.
 .PP
 To make this point clearer, let's look at three examples
@@ -854,7 +856,7 @@ The
 escape sequence, on the other hand, did the trick
 nicely.
 Since it does not change the current baseline spacing,
-it will not trigger a trap.
+it does not trigger a trap.
 .PP
 Long-winded examples aside, that is why
 .CW \ev
@@ -879,7 +881,7 @@ like this:
 \\\\$1\\s-2\\v'-3p'\\\\$2\\v'3p'\\s0\\\\$3
 \&..
 .Pe
-This macro
+This macro:
 .RS
 .Ls B
 .Li
@@ -899,24 +901,22 @@ restores the original size;
 prints an optional third argument immediately following.
 (This allows punctuation to be introduced immediately
 following the superscript, rather than on the next line.
-If no third argument is supplied, this argument
-interpolation will be ignored).
+If no third argument is supplied, it is ignored).
 .Le
 .RE
-This macro could also be implemented using the
+You could implement this macro using the
 .CW \eu
 .I up ) (
 and
 .CW \ed
 .I down ) (
-escape sequences,
-which use a fixed
+escape sequences, which use a fixed
 .Fraction 1 2
 \h'-3p'-em distance.
-If you did this\(emor if you specified the distance for the
+If you do this\[em]or if you specify the distance for the
 .CW \ev
 escape sequence in a relative unit like ems, instead of a
-fixed unit like points\(emit would be essential to have both
+fixed unit like points\[em]place both
 of the vertical motions either inside or outside the font
 size change.
 For example, assuming that the current font size was 10
@@ -926,8 +926,8 @@ points:
 \\\\$1\\u\\s-2\\\\$2\\d\\s0\\\\$3
 \&..
 .Pe
-would produce an unbalanced effect, because the upward
-motion would be 5 points (\^\c
+produces an unbalanced effect, because the upward
+motion is 5 points (\^\c
 .Fraction 1 2
 em at 10 points), while the
 downward motion would be only 4 points (\^\c
@@ -936,6 +936,7 @@ em at 8
 points).
 This caution holds true whenever you mix font and size
 changes with local motions.
+.
 .Ah "Local Horizontal Motions"
 .ix [troff] formatter, local horizontal~motions %key troff formatter, local horizontal motions
 .ix local horizontal~motions
@@ -960,17 +961,17 @@ space on a line. For example,
 produced by
 .CW >\eh'-1p'>\fP
 looks better than
-.CW >>  .
+.CW >> .
 .PP
 In addition to
-.CW \eh  ,
+.CW \eh ,
 there are a number of escape sequences
 that affect horizontal motion in specific ways.
 .PP
 For example,
 .CW \e\0 \(rq \(lq
 (it's quoted so you can see the blank
-space following the backslash) will space over to the
+space following the backslash) spaces to the
 right by
 .I exactly
 one space.
@@ -990,9 +991,9 @@ The
 escape
 sequence makes sure that you get exactly one space.
 This is generally thought of as the unpaddable space
-character and is used when you want to keep two words
+character, used when you want to keep two words
 together.
-However, it can also be used simply as a horizontal motion
+However, you can use it as a horizontal motion
 sequence.
 .PP
 Another useful sequence is
@@ -1017,9 +1018,9 @@ respectively, a
 em and
 .Fraction 1 12
 em space, are useful when
-you want to create just a little bit of fixed space
+you want to create a small amount of fixed space
 between two characters.
-(The normal space size created by an actual space character
+The normal space size created by an actual space character
 is
 .Fraction 1 3
 em, so these two characters give you, respectively,
@@ -1030,6 +1031,7 @@ in Chapter 12 to create
 a little bit of space before and after the em dashes we
 were introducing into our files with
 .CW sed .
+.
 .Ah "Absolute Motions"
 .ix [troff] formatter, absolute motions %key troff formatter, absolute motions
 .ix absolute motions
@@ -1048,11 +1050,11 @@ This is not as simple as it first appears.
 For vertical motions, you pretty much get what you expect.
 For example,
 .CW "\&.sp |2i" ,
-.CW \ev'|2i'
-will move you to a position 2 inches from the top of the
-page.
+or
+.CW \ev'|2i' ,
+moves to a position 2 inches from the top of the page.
 Depending on where you are on the page before you
-issue the command, the generated motion will be either
+issue the command, the generated motion is either
 positive or negative.
 .PP
 For horizontal motions, things are a little more ambiguous.
@@ -1086,7 +1088,7 @@ the absolute position indicator is the
 .I distance
 from the current position on the input line to the
 specified position.
-Even though it looks the same, the argument will have a
+Even though it looks the same, the argument has a
 different value, depending on the length of the input
 line.
 And again, as with vertical motions, the actual movement
@@ -1096,8 +1098,9 @@ and the absolute position specified.
 .PP
 It may appear odd to have these motions relative to the input
 line.
-However, as we will see (especially in line drawing),
+However, as we demonstrate in the next section,
 there is a method to the madness.
+.
 .Ah "Line Drawing"
 .ix %begin [troff] formatter, drawing %key troff formatter, drawing
 .ix [troff] formatter, line~drawing %key troff formatter, line drawing
@@ -1136,17 +1139,17 @@ right, or a vertical line downward (depending on whether
 or
 .CW \eL
 is used).
-A negative value means to draw a line back to the left,
-or back up the page.
+A negative value means to draw a line to the left,
+or up the page.
 .PP
-When you draw a line back to the left, either by explicitly
+When you draw a line to the left, either by explicitly
 specifying a negative value, or by specifying an
 absolute value (such as
 .CW |0  )
 that results in a negative
 movement,
 .CW troff
-first moves back to the specified position,
+first moves to the specified position,
 then draws the line from left to right.
 It is as if the line is drawn
 .I from
@@ -1168,11 +1171,11 @@ lf(CW)w (.5i) l.
 The optional second argument is the character with which
 to draw the line.
 By default, a horizontal line is drawn with the baseline
-rule\(ema horizontal line that is aligned with
+rule\[em]a horizontal line aligned with
 the bottom of the other characters on a line.
 .ix %begin [troff] formatter, underlining %key troff formatter, underlining
 .ix %begin underlining, in~[troff] %key underlining, in troff
-However, if you want to underline text, be sure to use
+However, if you want to underline text, use
 the underscore, which is printed in the space allotted
 for characters that descend below the line:
 .KF
@@ -1194,12 +1197,13 @@ sequence
 .ix %end [troff] formatter, underlining %key troff formatter, underlining
 .ix %end underlining, in~[troff] %key underlining, in troff
 .PP
-Vertical lines are drawn by default with a character
-called the box rule (which can be generated by the
+Vertical lines, by default, use a character
+called the box rule
+(generated by the
 .CW \e(br
 escape sequence or the vertical bar character on most
 keyboards).
-The box rule is a zero-width character\(emthat is, when
+The box rule is a zero-width character\[em]that is, when
 .CW troff
 draws the box rule, it does not space over as it does with
 other characters.
@@ -1207,15 +1211,14 @@ This allows
 .CW troff
 to form exact corners with horizontal lines drawn with
 underrules.
-However, as you will see, it may therefore require you to
+However, you may need to
 manually specify additional space to keep it from
 crowding previous or succeeding characters.
 .PP
 Except in the case where you draw a line to the left, as
 described previously, the current position at which text
-output will continue is changed to the endpoint of the
-line.
-In drawing a box, you will naturally find yourself
+output continues is changed to the endpoint of the line.
+In drawing a box, you naturally find yourself
 returning to the starting point.
 However, if you are drawing a single line, you may need
 to use
@@ -1236,15 +1239,15 @@ might look like this:
 .Pe
 This example prints its argument, backs up a distance
 equal to the length of the argument
-.I "on the input line"  ,
+.I "on the input line" ,
 then draws a line from that point to the current position.
-The optional second argument allows you to specify
+The optional second argument lets you specify
 punctuation without separating it with the space that is
 required if it were entered on the next input line.
 (This reverse motion is implicit in the negative value
 generated by the absolute position request
 .CW |0
-\(emthat is,
+\[em]that is,
 the distance from the end of the word to the beginning
 of the line.
 Lines drawn with
@@ -1273,15 +1276,15 @@ produces:
 ,
 .ch15@end
 .LP
-(In
+In
 .CW nroff  ,
-you can underline simply by using an italic
+you can underline by using an italic
 font switch, or the
 .CW \&.ul
 request, because italics
 are represented in
 .CW nroff
-by underlines).
+by underlines.
 .page 451
 .PP
 A macro to enclose a word (like the name of a key) in a box
@@ -1297,7 +1300,7 @@ Press the
 \&.BX RETURN
 key.
 .Pe
-will produce the line:
+produces the line:
 .LP
 .ch15@start
 .in 5n
@@ -1311,11 +1314,10 @@ This macro prints a single box rule
 spaces over
 .Fraction 1 6
 em
-.CW \e|  ), (
+.CW \e| ), (
 prints the argument, spaces over another
 .Fraction 1 6
-em
-space, and prints a concluding box rule.
+em space, and prints a concluding box rule.
 Then it draws two lines back to 0 (the beginning of the
 input line\(emthat is, the width of the argument
 plus the two requested
@@ -1340,6 +1342,7 @@ horizontal motions because, as we have already noted,
 horizontal lines drawn backwards actually generate a reverse
 horizontal motion followed by a line drawn back to the
 current position.
+.\" XXX test: is this true for groff?
 .PP
 The macro concludes with an additional
 .Fraction 1 12
@@ -1410,10 +1413,10 @@ Note also how the predefined read-only registers
 .CW dn
 and
 .CW dl
-are used to measure the height and width of the diversion
+measure the height and width of the diversion
 and therefore set the dimensions of the box.
 (The contents of these registers are not used directly when
-the lines are drawn because the registers are read-only,
+the lines are drawn, because the registers are read-only,
 and the width needs to be adjusted to account for a small
 amount of spacing between the box rule and the text
 contained in the box).
@@ -1426,37 +1429,36 @@ We get around this problem by using names that combine
 lowercase and uppercase letters.
 This is entirely a matter of convention, but one that we
 find preferable to
-.CW mm  's
+.CW mm 's
 use of completely obscure internal
 register names like
-.CW ;p  .
+.CW ;p .
 .PP
 Third, there is the actual line drawing\(emthe
 point of this presentation.
 Let's look at this aspect of these macros in detail.
 .PP
-As we've discussed,
+As we've discussed, we set
 .CW bH
 and
 .CW bW
-have been set to the height
-and width, respectively, of the diversion.
-Because the box rule is a zero-width character, however, the
-macro needs to allow a small amount of space between the
-sides of the box and the text it encloses.
+to the height and width, respectively, of the diversion.
+Because the box rule is a zero-width character, however,
+the macro needs to allow a small amount of space
+between the sides of the box and the text it encloses.
 It does this by specifying a 1-en indent (which is added to
 any existing indent, in case the box occurs in a block of
 text that is already indented).
-When the diversion is output, it will thus be indented 1 en.
+When the diversion is output, it is indented 1 en.
 .PP
 After the diversion is output, the indent is reset to its
 previous value.
 However, twice the value of the indent is added to the box
 width.
-The box will thus be drawn 2 ens wider than the text it
+The box is thus drawn 2 ens wider than the text it
 encloses.
-The text will start in 1 en; the right side of the box
-will be drawn 1 en beyond the right margin.
+The text starts in 1 en; the right side of the box
+is drawn 1 en beyond the right margin.
 .PP
 The actual line to draw the box:
 .ig
@@ -1475,10 +1477,10 @@ the distance specified by
 .I "box width"  ), (
 which, as we have
 seen, now includes a small extra margin.
-It then draws a line back up the page to the height specified
-by
+It then draws a line up the page
+to the height specified by
 .CW bH  ,
-and back across the page to the left margin again.
+and across the page to the left margin again.
 .page 453
 .PP
 At this point, even though we have drawn the bottom, right,
@@ -1509,10 +1511,10 @@ spacing or paragraph request.
 By default, the box is drawn just long enough to surround
 the text it contains.
 (The number register
-.CW dl  ,
+.CW dl ,
 which is used to set the box width,
 contains the width of the text in the diversion).
-For short lines in no-fill mode, the box will also be shorter:
+For short lines in no-fill mode, the box is also shorter:
 .ch15@start
 .nf
 .ch15@451@allstart
@@ -1522,7 +1524,7 @@ Let's see how they come out.
 .ch15@end
 This raises the idea that it might be nice to center a box
 that is shorter.
-A more complete set of box macros will do this, as well as
+A more complete set of box macros could do this, as well as
 let the user change the default box indent (the distance
 between the text and the edge of the box):
 .br
@@ -1608,11 +1610,13 @@ macro sets number register
 to 1 as a signal, or flag, to
 .CW BE
 to do the centering.
-(Note that
+Note that
+.CW BS
+sets
 .CW bC
-is first zeroed, to make sure that centering
+to zero, to make sure that centering
 is not propagated into the current environment from a
-previous invocation of the box macros).
+previous invocation of the box macros.
 .PP
 Likewise,
 .CW fI
@@ -1633,17 +1637,18 @@ in effect, so the lines:
 \&	.
 \&.if \\\\n(fI .fi
 .Pe
-will execute the
+executes the
 .CW .fi
 request only if justification was
 previously in effect.
+.
 .Bh "Changing Line Weight"
 .ix [troff] formatter, line~weight %key troff formatter, line weight
 .ix drawing, changing line~weight
-You may occasionally want to change the weight of a line you
-are drawing.
-The way to do this is simple: change the point size with
-either the
+You may occasionally want to change the weight of a line
+you are drawing.
+The way to do this is simple:
+change the point size with either the
 .CW .ps
 request or the
 .CW \es
@@ -1653,7 +1658,7 @@ For example:
 .Ps
 \\l'3i'
 .Pe
-will produce:
+produces:
 .Ps
 \l'3i'
 .Pe
@@ -1661,16 +1666,16 @@ and:
 .Ps
 \\s20\\l'3i'\\s0
 .Pe
-will produce:
+produces:
 .Ps
 \s20\l'3i'\s0
 .Pe
 .page 455
-(This trick only works with
+This trick only works with
 .CW \el
 and
 .CW \eL  .
-It will not change the weight of lines drawn
+It does not change the weight of lines drawn
 with any of the
 .CW \eD
 escape sequences).
@@ -1684,14 +1689,14 @@ by specifying the font-switch codes as part of the argument:
 .Ps
 \&.BX "\\s-2RETURN\\s0"
 .Pe
-or by modifying the macro so that they are built right in:
+or by modifying the macro so the size adjustment is built in:
 .Ps
 \&.de BX
 \\(br\\|\\s-2\\\\$1\\s0\\|(br\\l'|0\\(rn'\\l'|0(ul'\\^\\\\$2
 \&..
 .Pe
-If either of these things were done, our earlier example would
-look like this, which is even better:
+In either case, our earlier example
+would look like this, which is even better:
 .ch15@start
 .sp 6p
 Press the
@@ -1700,6 +1705,7 @@ key.
 .sp 6p
 .ch15@end
 .ix %end [troff] formatter, drawing %key troff formatter, drawing
+.
 .Bh "Drawing Curves"
 .ix drawing, curves
 .ix drawing, sample figures
@@ -1708,24 +1714,24 @@ The previous line drawing escape sequences work in
 and
 .CW otroff
 as well as
+.CW ditroff .
+There are also additional drawing sequences
+that only work in
 .CW ditroff  .
-There are also additional drawing sequences that only work
-in
-.CW ditroff  .
-These escape sequences allow you to draw circles, arcs,
+These escape sequences draw circles, arcs,
 ellipses, splines (curved lines between a series of
 coordinates), and straight lines.
 .PP
 Table 15-2 summarizes these sequences.
-The syntax of the escape sequences is familiar\(eman initial
-escape code is followed by a series of arguments enclosed in
+The syntax of the escape sequences is familiar\[em]an initial
+escape code, followed by a series of arguments enclosed in
 single quotation marks or some other user-supplied delimiter.
-In this case, though, all of the escape sequences begin with
-the same code\(em
+In this case, all of the escape sequences begin with
+the same code\[em]
 .CW \eD
-\(emwith the type of item to be drawn (circle,
-arc, ellipse, spline, or straight line) given by the
-first argument.
+\[em]with the type of item to be drawn
+(circle, arc, ellipse, spline, or straight line)
+given by the first argument.
 .br
 .ne 10
 .Ts "\f[CB]ditroff\fP  Escape Sequences for Drawing"
@@ -1771,8 +1777,8 @@ T}
 .Te
 .page 456
 .PP
-Learning the geometry used by these escape sequences is best
-accomplished by example.
+Learning the geometry used by these escape sequences
+is best accomplished by example.
 Although we have shown the arguments to the line, arc, and
 spline sequences as if they were
 .I x,y
@@ -1796,7 +1802,7 @@ You can get very confused if you treat them as a true
 coordinate system.
 .PP
 Let's start simple, with individual fixed-size figures.
-The following will produce the output shown in Figure 15-1:
+The following lines produce the output shown in Figure 15-1:
 .Ps
 \&.sp 1i
 \&.in .5i
@@ -1819,8 +1825,9 @@ figures to construct.
 Instinct cries out for the ability to draw an arc between
 two endpoints with the current position as the center of
 the arc.
-Instead, for consistency with the other figures, drawing
-begins at the current position, and the first set of values
+Instead, for consistency with the other figures,
+drawing begins at the current position,
+and the first set of values
 specify the center of the arc.
 This takes a little getting used to.
 .PP
@@ -1829,27 +1836,26 @@ and relative to the previous position, rather than to the
 initial position.
 Our familiarity with
 .I x,y
-coordinate systems leads us to
-think that the spline should be produced by a request like
-this:
+coordinate systems leads us to think
+that the spline should be produced by a request like this:
 .Ps
 \\D'~ .5i -.5i 1i 0 1.5i .5i 2i 0'
 .Pe
 (in which the
 .I x
 value increases relative to the origin rather
-than to the previous point) instead of by the request
-shown previously.
+than to the previous point)
+instead of by the request shown previously.
 .PP
-You may also have noticed something rather odd. Text
-continues right after the endpoint of the figure, yet
-the
+You may also have noticed something rather odd.
+Text continues after the endpoint of the figure,
+yet the
 .CW ".sp 1i"
 requests seem to give us 1 inch of space from
 the original baseline, regardless of the endpoint of
 the figure.
-This is most obvious with the line, which clearly moves back
-up the page.
+This is most obvious with the line,
+that clearly moves back up the page.
 Yet the next figure is also spaced down 1 inch.
 This fact becomes even more obvious if we do this:
 .Ps
@@ -1899,7 +1905,7 @@ corners similar to the one done with
 in Chapter 10.
 The box is drawn starting with the lower left corner
 (so it can be drawn after the text it encloses is
-output) and will look like this:
+output) and looks like this:
 .ig
 	The .ne request makes sure that you go to a new page
 	if this gets to close to the bottom of the page.
@@ -1921,8 +1927,8 @@ To make them draw continuously, we need to add the
 escape sequence to the end of each line.
 This escape sequence joins succeeding lines as if the line
 feed were not there.
-Warning: using fill mode will not achieve the same result,
-because the formatter will introduce spaces between each
+Warning: using fill mode does not achieve the same result,
+because the formatter introduces spaces between each
 drawing command as if it were a separate word.
 .page 459
 .RS
@@ -2083,8 +2089,8 @@ starting point for drawing low enough so that the box is
 not drawn back over the text that precedes the
 invocation of
 .CW \&.SS  .
-(If you don't understand why this was done, delete this line
-from the macro, and watch the results).
+If you don't understand why this was done, delete this line
+from the macro, and watch the results.
 .PP
 We've also centered the screen by default, and added a
 half-line vertical spacing above and below the box.
@@ -2092,6 +2098,7 @@ half-line vertical spacing above and below the box.
 .CW .BX
 macro to produce a key-cap
 with curved corners).
+.
 .Ah "Talking Directly to the Printer"
 Depending on the output device and postprocessor you are
 .ix [troff] formatter, postprocessors %key troff formatter, postprocessors
@@ -2112,7 +2119,7 @@ commands to print grey screens over your text.
 These capabilities are provided by the two requests
 .CW \e!
 and
-.CW .cf  ,
+.CW .cf ,
 .I "copy filename [to standard output]"
 .ix [.cf] request %key cf request
 .ix [troff] formatter, [.cf] request %key troff formatter, [.cf] request
@@ -2128,9 +2135,9 @@ indicator.
 Any text following this escape sequence on a line is placed
 directly into the output stream, without any processing
 by
-.CW troff  .
-This makes is possible to insert control lines that will
-be interpreted by a postprocessor or an output device.
+.CW troff .
+This makes it possible to insert control lines
+that are interpreted by a postprocessor or an output device.
 (As mentioned in the last chapter, transparent output
 is also useful for embedding control lines in a diversion,
 to be executed when the text in the diversion is output).
@@ -2153,6 +2160,7 @@ output into PostScript.
 If the postprocessor mucks with the data you send out,
 all bets are off.
 .PP
+.\" XXX this is soooo obsolete. Use \X etc
 As of this writing, TranScript, Adobe Systems' own
 .CW troff
 -Postscript converter, does not allow you to use
@@ -2178,6 +2186,8 @@ must learn PostScript as well as
 Experiment with your printer and postprocessor, or ask
 around to see if other users have solutions you can
 adapt to your situation.
+.\" XXX end obsolete section
+.
 .Ah "Marking a Vertical Position"
 .ix [troff] formatter, marking~a vertical position %key troff formatter, marking a vertical position
 .ix marking~a position, in~[troff] %key marking a position, in~troff
@@ -2189,8 +2199,7 @@ The
 .CW \&.mk
 .ix [.mk] request %key mk request
 .ix [troff] formatter, [.mk] request %key troff formatter, [.mk] request
-request marks the current vertical position on the
-page;
+request marks the current vertical position on the page;
 .CW \&.rt
 .ix [.rt] request %key rt request
 .ix [troff] formatter, [.rt] request %key troff formatter, [.rt] request
@@ -2237,8 +2246,9 @@ If this had not been done, subsequent text would overprint the last
 line of the first column.
 .PP
 .ix [troff] formatter, multi-column processing %key troff formatter, multi-column processing
-Proper two-column processing for an entire document requires a much more
-complex setup, which must be in part handled by the page bottom macro.
+Proper two-column processing for an entire document
+requires a much more complex setup,
+which must be in part handled by the page bottom macro.
 We'll look at that in detail in Chapter 16, but this example should
 be enough to give you the idea.
 .PP
@@ -2273,10 +2283,11 @@ That is:
 .Ps
 \&.rt 3i
 .Pe
-will return to a point 3 inches from the top of the page.
+returns to a point 3 inches from the top of the page.
 The
 .CW \&.mk
 request need not be used in this case.
+.
 .Ah "Overstriking Words or Characters"
 .ix [troff] formatter, overstriking %key troff formatter, overstriking
 .ix overstriking
@@ -2298,6 +2309,7 @@ stacking characters vertically.
 .Le
 .RE
 .page 463
+.
 .Bh "Boldfacing a Font by Overstriking"
 .ix [.bd] request %key bd request
 .ix [troff] formatter, [.bd] request %key troff formatter, [.bd] request
@@ -2308,14 +2320,14 @@ The
 .CW \&.bd
 request specifies that a font should be
 artificially boldfaced by overstriking.
-The request has two forms, one for ordinary fonts and one
-for the special font.
+The request has two forms, one for ordinary fonts
+and one for the special font.
 .PP
 A request of the form:
 .Ps
 \&.bd \f[I]font offset\fP
 .Pe
-will overstrike all characters printed in
+overstrikes all characters printed in
 .I font
 by overprinting them, with the second strike
 offset from the first by
@@ -2325,8 +2337,7 @@ The following:
 .Ps
 \&.bs S \f[I]font offset\fP
 .Pe
-will overstrike characters printed in the special font,
-while
+overstrikes characters printed in the special font, while
 .I font
 is in effect.
 And:
@@ -2334,14 +2345,16 @@ And:
 \&.bd \f[I]font\fP
 \&.bd S \f[I]font\fP
 .Pe
-will restore the normal treatment of the font.
+restores the normal treatment of the font.
 .PP
-This request is particularly useful when you are boldfacing
-headings and want to account for special characters or
-italics in arguments supplied by the user.
-(This assumes that you don't have an explicit bold italic
+This request is particularly useful
+when you are boldfacing headings
+and want to account for special characters or
+italics in arguments supplied by the user
+(this assumes that you don't have an explicit bold italic
 font).
-Especially at sizes larger than 10 points, the stroke weights
+Especially at sizes larger than 10 points,
+the stroke weights
 of bold and italic fonts can be quite different.
 .PP
 For example, assume that you had a macro that produced
@@ -2388,12 +2401,12 @@ the output would look like this:
 .ch15@464@1 "3-1" "Special Uses for \(sr in \f[I]troff\fP
 .ch15@end
 .LP
-Another example is provide by the constant-width (CW) font
+Another example is provided by the constant-width (CW) font
 used in this book.
-Because the font is optimized for the LaserWriter, where
-the ink bleeds slightly into the
-paper, the font is very light on the typesetter.
-Throughout this book, we have emboldened this font slightly,
+Because the font is optimized for the LaserWriter,
+where the ink bleeds slightly into the paper,
+the font is very light on the typesetter.
+Throughout this book, we emboldened this font
 with the requests:
 .Ps
 \&.bd CW 4
@@ -2402,20 +2415,21 @@ with the requests:
 This sentence shows how the
 .CW "constant width"
 font looks without these requests.
+.
 .Bh "Marking and Returning to a Horizontal Position"
 .ix [troff] formatter, marking~a horizontal~position %key troff formatter, marking a horizontal~position
 .ix [troff] formatter, returning to~a horizontal~position %key troff formatter, returning to a horizontal~position
 .ix marking~a horizontal~position
 .ix returning~to~a horizontal~position
-Just as you can mark a vertical position, you can also
-mark and move to a specific horizontal position.
+Just as you can mark a vertical position,
+you can also mark and move to a specific horizontal position.
 This is chiefly useful for overstriking characters.
 .PP
 Just as you use a value stored into a register with the
 .CW \&.mk
 request to indicate a fixed vertical location
 on the page, you mark a horizontal location with
-.CW \ek  .
+.CW \ek .
 .ix [troff] formatter, absolute motions %key troff formatter, absolute motions
 .ix absolute motions
 Then, you can use the absolute position indicator
@@ -2428,11 +2442,11 @@ To borrow an example from Kernighan's
 .Ps
 \\kx\f[I]word\fP\\h'|\\nxu+2u'\f[I]word\fP
 .Pe
-will artificially embolden
+artificially emboldens
 .I word
 by backing up almost
 to its beginning, and then overprinting it.
-(At the start of
+At the start of
 .I word  ,
 .CW \ek
 stores the current horizontal position in register
@@ -2444,17 +2458,20 @@ position, plus 2 units\(ema very small offset.
 When
 .I word
 is printed a second time, an overstriking
-effect is created).
+effect is created.
 .PP
 This sequence might be useful if you were using a font
-that had no bold equivalent, and in circumstances where
-the
+that had no bold equivalent,
+and in circumstances where the
 .CW \&.bd
-request could not be used because the special
-effect was not desired for all instances of that font
+request could not be used
+because the special effect
+was not desired for all instances of that font
 on the same line.
-And, to be really useful, the sequence should probably be
+And, to be really useful,
+the sequence should probably be
 saved into a macro.
+.
 .Bh "The Width Function"
 .ix width function
 .ix [troff] formatter, width function %key troff formatter, width function
@@ -2466,21 +2483,21 @@ For example:
 .Ps
 \\w'Hi there'
 .Pe
-will tell you the length of the string
+tells you the length of the string
 .I "Hi there".
 .page 465
 .PP
-This sequence returned by
+You can use the sequence returned by
 .CW \ew
-can be used as an argument with
+as an argument with
 .CW \eh
-or with any horizontally
-oriented request (such as
-.CW \&.in  ).
+or with any horizontally oriented request
+(such as
+.CW \&.in ).
 This has many uses, which we'll introduce as we need them.
 .PP
 To give you an idea of how to use
-.CW \ew  ,
+.CW \ew ,
 though, we can rewrite the example used with
 .CW \ek
 as follows, to produce the same effect:
@@ -2492,8 +2509,9 @@ as follows, to produce the same effect:
 \\\\$1\\h'-\\w'\\\\$1'-2u'\\\\$1
 \&..
 .Pe
-This macro prints its first argument, then backs up the
-width of that argument, less two units.
+This macro prints its first argument,
+then backs up the width of that argument,
+less two units.
 Then it prints the argument a second time\(emat a
 two-unit offset from the first.
 Hint: to avoid awkward constructions involving nested
@@ -2507,9 +2525,10 @@ rewritten like this:
 \\\\$1\\h'-\\\\n(WIu'\\\\$1
 \&..
 .Pe
-In this case, the difference isn't so great; however, at
-other times the sequence can become too
+In this case, the difference isn't so great;
+however, at other times the sequence can become too
 confusing to read easily.
+.
 .Bh "Overstriking Single Characters"
 .ix [troff] formatter, overstriking %key troff formatter, overstriking
 .ix overstriking
@@ -2534,25 +2553,26 @@ combinations, although you may need to tinker with the
 output to get it to look right.
 For example, we once tried to simulate a checkmark in a
 box with the sequence:
-.CW \eo'\e(sq\e(sr'  .
-(Note that the special character escape sequences
+.CW \eo'\e(sq\e(sr'
+(note that the special character escape sequences
 are treated as single characters for the purpose
 of overstriking).
 This example produced the following output:
 .ch15@start
 .ch15@465@1
 .ch15@end
-The square root symbol is too low in the box, so we tried
-to introduce some local motions to improve the effect,
-like this:
+The square root symbol is too low in the box,
+so we tried to introduce some local motions
+to improve the effect, like this:
 .Ps
 \\o'\\(sq\\v'-4p'\\(sr\\v'4p''
 .Pe
 Unfortunately, this didn't work.
-Although you can nest most escape sequences inside each
-other (as long as you use the correct number and order
-of delimiting quotation marks), local motions do not
-work with
+Although you can nest most escape sequences
+inside each other
+(as long as you use the correct number and order
+of delimiting quotation marks),
+local motions do not work with
 .CW \eo  .
 However, there was a solution.
 .PP
@@ -2565,15 +2585,15 @@ sequence knows the width of each character,
 and centers them on top of each other.
 The
 .CW \ez
-sequence simply outputs the following character,
+sequence outputs the following character,
 .I "but does not space over it".
 That means the current position after printing the
 character is the same as it was before
 .page 466
 the character was printed.
-A subsequent character will have its left edge at the same
-point as the character immediately following the escape
-sequence.
+A subsequent character has its left edge
+at the same point as the character immediately following
+the escape sequence.
 Because
 .CW \ez
 does allow you to mix vertical motions
@@ -2584,15 +2604,16 @@ type, we defined the checkmark in a box as a string:
 .Ps
 \&.ds CK \\z\\(sq\\\\v'-4p'\\(sr\\\\v'4p'
 .Pe
-After we did that, simply typing
+After we did that, typing
 .CW \e*(CK
-will produce
+produces
 \z\(sq\(sr.
+.
 .Bh "Stacking up Characters"
 .ix [troff] formatter, stacking~up characters %key troff formatter, stacking up characters
 The
 .CW \eb
-sequence also does a kind of overstriking\(emit stacks
+sequence also does a kind of overstriking\[em]it stacks
 the characters in the following string.
 It was designed for use with
 .CW eqn  .
@@ -2635,17 +2656,17 @@ which produces:
 \b'\(lt\(lk\(lb'
 .sp 1.5v
 .ch15@end
-When you're creating a tall construct like this, you need
-to allow space so that it
+When you're creating a tall construct like this,
+you need to allow space so that it
 doesn't overprint preceding lines.
 You can create space above or below the line with
 .CW \&.sp
 requests.
-However, this will cause breaks.
+However, this causes breaks.
 Although
 .CW \&'sp
 might do the trick, it is sometimes
-hard to predict just where the break will fall.
+hard to predict just where the break falls.
 .PP
 The
 .CW troff
@@ -2656,12 +2677,12 @@ The
 .CW \ex
 request allows you to associate extra
 interline spacing with a word.
-A positive value specifies space above the line; a
-negative value specifies space below the line.
+A positive value specifies space above the line;
+a negative value specifies space below the line.
 So, when illustrating the previous
 .page 467
-bracket-building function, we could have shown the results
-inline, like this
+bracket-building function,
+we could have shown the results inline, like this
 \b'\(lt\(lk\(lb'\x'9p'\x'-9p',
 rather than in an example broken out by blank lines.
 Typing the sequence:
@@ -2675,9 +2696,9 @@ The
 sequence is also useful when you want to allow
 extra space for an oversized letter at the start
 of a paragraph.
-(You've probably seen this technique used in some
+You've probably seen this technique used in some
 books on the first paragraph of a new chapter.
-It was commonly used in illuminated manuscripts).
+It was commonly used in illuminated manuscripts.
 .PP
 An application of
 .CW \eb
@@ -2685,8 +2706,8 @@ that you might find useful is
 to create vertically stacked labels.
 .ix [troff] formatter, vertically~stacked labels %key troff formatter, vertically stacked labels
 .ix vertically~stacked labels
-For example, consider the following macro, which will
-put such a label in the outside margin of a book:
+For example, consider the following macro, which
+puts such a label in the outside margin of a book:
 .Ps
 \&.de SL
 \&.mk		\\" Mark current vertical position
@@ -2694,7 +2715,7 @@ put such a label in the outside margin of a book:
 \&.cs B 24	\\" We'll explain this later
 \&.po -.25i	\\" Shorten the page offset by 1/4 inch
 \&.lt +.5i	\\" Extend the title length used by .tl
-\&.		\\" This request will be explained later
+\&.		\\" We explain this request later
 \&.if e .tl '\\b:\\\\$1:'''	\\" Use .tl to put stacked label
 \&.if o .tl '''\\b:\\\\$1:'	\\" in the margins
 \&.lt -.5i	\\" Restore original title length
@@ -2708,7 +2729,7 @@ So, for example:
 .Ps
 \&.SL "Clever Trick!"
 .Pe
-will produce the effect shown in the margin.
+produces the effect shown in the margin.
 .ig
 	A few words of explanation.
 	This is falling on an even page and is getting
@@ -2725,16 +2746,17 @@ will produce the effect shown in the margin.
 	--Michael Hobgood
 ..
 .ch15@467@1 "Clever`Trick!"
+.
 .Ah "Tabs, Leaders, and Fields"
 .ix [.ta] request %key ta request
 .ix [troff] formatter, [.ta] request %key troff formatter, [.ta] request
 .ix [troff] formatter, tabs~and~leaders %key troff formatter, tabs and~leaders
 .ix tabs (in~[troff]) %key tabs (in troff)
 We discussed tabs in Chapter 4.
-However, there are a couple of additional points that need
-to be covered.
-When you enter a tab on a typewriter, the typing position
-shifts over to a predefined
+However, there are a couple of additional points
+that need to be covered.
+When you enter a tab on a typewriter,
+the typing position shifts over to a predefined
 .I position  ,
 or tab stop.
 In
@@ -2747,13 +2769,13 @@ from the current position
 .I "on the input line"
 to the next tab stop.
 .PP
-What this means is best illustrated by an example that
-will
+What this means is best illustrated by an example that does
 .I not
 work.
-Suppose you want to create a table of contents in which
-one entry (the page number) is all the way over to the
-right margin, and the other (the heading) is indented
+Suppose you want to create a table of contents
+where one entry (the page number)
+is all the way over to the right margin,
+and the other (the heading) is indented
 from the left, like this:
 .page 468
 .ch15@start
@@ -2769,27 +2791,28 @@ Getting Started|\(em\(em\(em|1-1
 Turning On the Power|\(em\(em\(em|1-2
 Inserting Diskettes|\(em\(em\(em|1-3
 .Pe
-This will not work.
+This does not work.
 Indents cannot be combined with tabs.
 A tab character generates the distance from the current
 position of the input line to the tab stop.
-Therefore, the page number will be indented an additional
+Therefore, the page number is indented an additional
 half-inch\(emextending out into the right
 margin\(eminstead of staying where you put it.
 .PP
-The way to achieve this effect (in no-fill mode) is to
-use either spaces or tabs to manually indent the first
-text string.
+The way to achieve this effect (in no-fill mode)
+is to use either spaces or tabs
+to manually indent the first text string.
 .PP
-When you use right or center-adjusted tabs, the text
-to be aligned on the tab is the entire string
-(including spaces) from one tab to the next, or from
-the tab to the end of the line.
+When you use right or center-adjusted tabs,
+the text to be aligned on the tab is the entire string
+(including spaces) from one tab to the next,
+or from the tab to the end of the line.
 Text is aligned on a right-adjusted tab stop by
 subtracting the length of the text from the distance
 to the next tab stop; text is aligned on a center-adjusted
 tab stop by subtracting half the length of the text from
 the distance.
+.
 .Bh "Using Leaders"
 .ix %begin [troff] formatter, leaders %key troff formatter, leaders
 .ix %begin leaders
@@ -2816,10 +2839,10 @@ into your file where you would
 normally insert a tab (incidentally, the tab itself is
 equivalent to
 .I ^I  ,
-and will show up as such if
+and shows up as such if
 you display a line with
 .CW "ex's :1"
-command), you will generate a string of dots.
+command), it generates a string of dots.
 For example:
 .Ps
 \&.nf
@@ -2827,7 +2850,7 @@ For example:
 |\(em\(em\(em|First^ASecond^AThird
 \&.fi
 .Pe
-will produce:
+produces:
 .br
 .ne 4
 .ch15@start
@@ -2851,7 +2874,7 @@ Signature:|\(em\(em\(em|^A
 Date:|\(em\(em\(em|^A
 \&.fi
 .Pe
-This example would produce the following in
+This example produces the following in
 .CW troff  :
 .LP
 .ch15@start
@@ -2869,7 +2892,7 @@ of the tab character with
 This request works just like
 .CW \&.lc  ,
 only it redefines
-what will be output in response to a tab  character.
+what is output in response to a tab character.
 For example, if you issue the request:
 .Ps
 \&.tc .
@@ -2878,23 +2901,24 @@ a tab character
 .I ^I  ) (
 generates a string of repeated dots, just like a leader
 .I ^A  ). (
-However, you will then lose the ability to intermix tabs
+However, you then lose the ability to intermix tabs
 and leaders on the same line, as in the previous example.
 .PP
 Issuing a
 .CW \&.tc
-request without an argument will restore
+request without an argument restores
 the default value, which generates motion only.
 (Incidentally, the same is true of
 .CW \&.lc
 \(emthat is,
 .CW \&.lc
-without an argument will cause leaders to generate motion
+without an argument causes leaders to generate motion
 only, just like tabs.
 To reset the leader character to its default value, you
 need to request \f[CW].lc\fP\|\f[CW].\fP).
 .ix %end [troff] formatter, leaders %key troff formatter, leaders
 .ix %end leaders
+.
 .Bh "Using Fields"
 .ix [troff] formatter, fields %key troff formatter, fields
 .ix fields, in [troff] %key fields, in troff
@@ -2913,8 +2937,8 @@ The
 .ix [.fc] request %key fc request
 .ix [troff] formatter, [.fc] request %key troff formatter, [.fc] request
 request allows you to specify a delimiter
-that indicates the boundaries of the field, and a second
-character (called the
+that indicates the boundaries of the field,
+and a second character (called the
 .I pad
 character) that divides
 the contents of the field into subfields.
@@ -2923,8 +2947,8 @@ The
 .CW \&.fc
 request without any argument turns off the
 field mechanism.
-This request is a little difficult to explain, but easy to
-illustrate.
+This request is a little difficult to explain,
+but easy to illustrate.
 The requests:
 .Ps
 \&.nf
@@ -2936,7 +2960,7 @@ The requests:
 \&.fi
 .Pe
 .page 470
-will produce the following output:
+produces the following output:
 .br
 .ne 5
 .ch15@start
@@ -2958,7 +2982,7 @@ For example, if we modify the input like this:
 |\(em\(em\(em|#Hi^how are^you#
 \&.fc
 .Pe
-we'll get this result:
+we get this result:
 .ch15@start
 .ch15@470@2
 .ch15@end
@@ -2978,39 +3002,42 @@ example, the construction:
 \&.lc .
 \&.fi
 .Pe
-would produce the following output:
+produces the following output:
 .ch15@start
 .ch15@470@3
 .ch15@end
 You should also know that
-.CW .fc  ,
+.CW .fc ,
 like many other advanced formatter requests, is used by the
 .CW tbl
 preprocessor to create complex tables.
-It is wise to avoid using it inside a table.
+Avoid using it inside a table.
+.
 .Bh "Using Tabs and Leaders in Macros"
 .ix [troff] formatter, tabs~in macros %key troff formatter, tabs in macros
 .ix macros, tabs~and~leaders~in
-Within a macro definition, tabs and leader characters are
-not interpreted.
-They will take effect when the macro is used, not when
-it is defined.
+Within a macro definition,
+tabs and leader characters are not interpreted.
+They take effect when the macro is used,
+not when it is defined.
 Within a macro definition, you can also specify tabs and
 leaders with the escape sequences
 .CW \et
 and
-.CW \ea  .
+.CW \ea .
 These
 .page 471
-sequences are also not interpreted until the macro is
-used, and can be substituted for the actual tab or
+sequences are also not interpreted
+until the macro is used,
+and can be substituted for the actual tab or
 leader characters whenever interpretation is to be
 delayed.
+.
 .Ah "Constant Spacing"
 .ix [troff] formatter, constant spacing %key troff formatter, constant spacing
 .ix constant spacing
-One font that you may frequently encounter, especially in
-the
+One font that you may frequently encounter,
+especially in the
 .CW ditroff
 environment, is called
 .CW CW
@@ -3021,13 +3048,13 @@ It has become something of a convention in computer books
 to print all \(lqcomputer voice\(rq examples\(eminput from the
 keyboard, the contents of a file, or the output on the
 screen\(emin a constant-width font.
-(This convention is based on the fact that in many
-computer languages, precise indentation is syntactically
-or at least semantically significant, and the
-variable-width typesetting fonts cannot preserve
-the alignment of the original text).
-When you use a constant-width font, you are essentially
-asking
+In many computer languages,
+precise indentation is syntactically
+or at least semantically significant,
+and the variable-width typesetting fonts
+cannot preserve the alignment of the original text.
+When you use a constant-width font,
+you are essentially asking
 .CW troff
 to act like
 .CW nroff \c
@@ -3035,21 +3062,22 @@ to act like
 spaces, are of identical width.
 .PP
 To use the constant-width font in
-.CW ditroff  ,
+.CW ditroff ,
 request it like any other font, using either the request
 .CW \&.ft
 .CW CW
 or the escape sequence
-.CW \ef(CW  .
+.CW \ef(CW .
 In
-.CW otroff  ,
+.CW otroff ,
 depending on the output device, you could
 use constant width by using a preprocessor called
-.CW cw  ,
+.CW cw ,
 which got around the four font
 .CW troff
-limit by handling the constant-width font in a separate
-pass.
+limit by handling the constant-width font
+in a separate pass.
+.\" XXX obsolete stuff follows...
 See the description of
 .CW cw
 in your
@@ -3078,6 +3106,7 @@ and
 requests to give
 .CW troff
 the correct spacing).
+.\" XXX end obsolete passage
 .PP
 There is also a request that allows you to simulate the
 effect of a constant-width font even when you are using
@@ -3114,7 +3143,7 @@ For example:
 .Ps
 \&.cs B
 .Pe
-will return control of spacing for the bold font to
+returns spacing control for the bold font to
 .CW troff 's
 width tables.
 .PP
@@ -3169,22 +3198,23 @@ which produces:
 .PP
 The
 .CW \&.ss
-request is a closely related request that
-sets the space size.
+request is a closely related request
+that sets the space size.
 .ix [troff] formatter, space~size %key troff formatter, space size
 The default size of an interword space in
 .CW troff
-is 12/36 of an em; for true constant-width effects, you
-should set it to the same size as the font spacing you
+is 12/36 of an em; for true constant-width effects,
+set it to the same size as the font spacing you
 have set with
 .CW \&.cs  .
 .ix %end [.ss] request %key ss request
 .ix %end [troff] formatter, [.ss] request %key troff formatter, [.ss] request
 .page 473
+.
 .Ah "Pseudo-Fonts"
 Using the
 .CW \&.bd
-request to create a bold italic in not
+request to create a bold effect is not
 the only way to simulate a nonstandard font, at least in
 .CW ditroff  .
 In
@@ -3204,7 +3234,7 @@ For example:
 .Ps
 \\S'15'
 .Pe
-will slant characters 15 degrees to the right.
+slants characters 15 degrees to the right.
 This can be used to create a pseudo-italic font.
 The
 .CW \eS
@@ -3219,15 +3249,16 @@ the construct:
 .Ps
 \\H'12'
 .Pe
-will create characters that are 12 points high, but only
+creates characters that are 12 points high, but only
 10 points wide (assuming you are at the default 10-point
 size).
 A height value of 0 turns off the function.
 .PP
-These escape sequences will only work on certain output
+These escape sequences only work on certain output
 devices.
-You'll have to experiment to find whether or not they'll
+You'll have to experiment to find whether or not they
 work in the setup you're using.
+.
 .Ah "Character Output Translations"
 .ix [troff] formatter, character output translations %key troff formatter, character output translations
 \(lqGarbage in, garbage out\(rq
@@ -3249,15 +3280,16 @@ different widths.
 Even so, when two narrow characters are printed together,
 such as a pair of
 .I f \/'s
-.	\" above line uses new groff construct for spacing.
+.	\" above line uses groff construct for spacing.
 or an
 .I f
 and an
 .I i ,
 there is excess space between the characters.
 .PP
-To get around this problem, there are special characters
-called ligatures,
+To get around this problem,
+there are special characters called
+.I ligatures ,
 .ix [troff] formatter, ligatures %key troff formatter, ligatures
 .ix ligatures
 .ix [troff] formatter, ligatures %key troff formatter, ligatures
@@ -3268,8 +3300,8 @@ narrow characters.
 .CW troff 's
 character set).
 .PP
-The ligature characters and the equivalent individual
-characters are:
+The ligature characters
+and the equivalent individual characters are:
 .br
 .ig
 	The ligatures below are close, but not exact.
@@ -3302,6 +3334,8 @@ and
 are the only ones in
 the standard PostScript fonts).
 .ix PostScript
+.\" XXX Heirloom and neatroff use OpenType
+.\" XXX features to extend ligatures far beyond what's described here
 You can turn this conversion off with the request:
 .ix %begin [.lg] request %key lg request
 .ix %begin [troff] formatter, [.lg] request %key troff formatter, [.lg] request
@@ -3312,9 +3346,9 @@ and restore it with:
 .Ps
 \&.lg
 .Pe
-Normally, you won't need to do this, but there are special
-cases in which it may hang you up, and you'll need to know
-what to do.
+Normally, you won't need to do this,
+but there are special cases in which it may hang you up,
+and you'll need to know what to do.
 We'll get to one of them in a moment.
 .ix %end [.lg] request %key lg request
 .ix %end [troff] formatter, [.lg] request %key troff formatter, [.lg] request
@@ -3330,24 +3364,24 @@ conversions.
 It takes one or more pairs of characters as an argument.
 After such a translation list has been defined,
 .CW troff
-will always substitute the second character in each pair
+always substitutes the second character in each pair
 for the first, whenever it appears in the input.
 .PP
 Let's look at some examples.
 First, consider the case encountered throughout this book,
-in which we illustrate the syntax of various requests
+where we illustrate the syntax of various requests
 without actually executing them.
 For example, we want to show a period at the start of a
 line or the backslash that starts an escape sequence,
 without actually having them executed.
 .PP
-We could simply insulate the special characters from execution.
+We can insulate the special characters from execution.
 For example, we can put the zero-width character
 .CW \e&
 in front of a period that begins a request, and we
 can double all backslashes (
 .CW \e\e
-will appear as
+appears as
 .CW \e
 in the output) or use the
 .CW \ee
@@ -3370,7 +3404,7 @@ appears in the output, and whenever
 appears in the input,
 .CW \e
 appears in the output.
-So, in our examples, we can actually type:
+So, in our examples, we can type:
 .Ps
 #sp 1i		%" Space down one inch
 .Pe
@@ -3379,8 +3413,8 @@ But what appears on the page of this book is:
 \&.sp 1i		\\" Space down one inch
 .Pe
 The translations are built into the example start and end
-macros.
-(The end macro resets the characters to their normal
+macros
+(the end macro resets the characters to their normal
 values).
 .PP
 If you translate characters with
@@ -3395,7 +3429,7 @@ values, the request is:
 In addition, the translation must be in effect at the time
 the line is output.
 If you translate characters without first causing a break,
-any partially filled line will be affected by the
+any partially filled line is affected by the
 translation.
 .PP
 It is also possible (and recommended in some of the
@@ -3412,15 +3446,15 @@ This creates an equivalent to the unpaddable space.
 .Ps
 \&.tr \(ap
 .Pe
-This will allow you to type single characters for
-unpaddable spaces; your input text will be more
-readable and will line up properly on the screen.
+This lets you type single characters for
+unpaddable spaces; your input text is more
+readable and lines up properly on the screen.
 .PP
 Yet another application of
 .CW \&.tr  ,
-and one that you will
-find useful in designing macros for chapter headings and
-so on, is to translate lowercase input into uppercase,
+and one that is useful
+in designing macros for chapter headings and so on,
+is to translate lowercase input into uppercase,
 and then back again:
 .Ps
 \&.de UC	\\" Translate input to uppercase
@@ -3475,13 +3509,13 @@ for the duration of the translation.
 .	\"	 at the end. Groffed with 1.18 on an i86, this thing
 .	\"  works and gives a very good reproduction.
 .nr LL 4.85i
+.
 .Ah "Output Line Numbering"
 .ix [troff] formatter, output line~numbering %key troff formatter, output line numbering
 .br
 Do you remember the treatment of the
 .CW proof
-shell
-script in Chapter 12?
+shell script in Chapter 12?
 It was such a long example that it required line numbers
 that could be referred to later in the text.
 The
@@ -3497,16 +3531,15 @@ The
 .I number  ) (
 .ix [.nm] request %key nm request
 .ix [troff] formatter, [.nm] request %key troff formatter, [.nm] request
-request turns numbering
-on or off.
+request turns numbering on or off.
 The request:
 .Ps
 \&.nm [\(+-]\f[I]N\fP
 .Pe
-will turn numbering on, with the next line numbered
-.I N  .
+turns numbering on, with the next line numbered
+.I N .
 For example, the next paragraph is numbered with
-.CW ".nm 1"  .
+.CW ".nm 1" .
 .sp
 .nm 1
 .ti +.3i
@@ -3515,14 +3548,14 @@ A 3-digit arabic number followed by a space is placed at the start of each line.
 not changed, so this results in a protruding right column, as in this paragraph. You may
 need to decrease the line length (by \f[C]\\w'000 'u\fP ) if you are numbering filled text
 rather than an example in no-fill mode. (Be sure to notice the space following the three
-zeros). We'll do that from now on, so only the current paragraph will protrude.
+zeros). We'll do that from now on, so only the current paragraph protrudes.
 .ti +.3i
 .nr pN \w'000 'u
 .ll \n(.lu-\n(pNu
 .nm 1 2
 There are several optional arguments as well: a step value,
 the separation between the number and the beginning of the
-line, and an indent that will be added to the line.
+line, and an indent added to the line.
 By default, the step value is 1, the separation is 1,
 and the indent is 0.
 For example, if you specified:
@@ -3547,23 +3580,26 @@ The \f[C].nn\fP
 .I "not numbered" ) (
 request allows you to
 temporarily suspend numbering for a specified number of lines,
-as was done for this paragraph using the request \f[C].nn 4\fP .
-The specified number of lines is not counted. This could be
-useful if you were interspersing numbered lines of code with
-a textual discussion.
+as was done for this paragraph using the request \f[C].nn 4\fP.
+The specified number of lines is not counted.
+This could be useful
+if you were interspersing numbered lines of code
+with a textual discussion.
 .br
 .po \n(.ou-\n(pNu-4p
 .ti +.3i
-To turn numbering off entirely, use \f[C].nm\fP  without any
-arguments. We'll do that now.
+To turn numbering off entirely, use \f[C].nm\fP without any
+arguments.
+We'll do that now.
 .br
 .ll \n(.lu+\n(pNu
 .nm
 .ti +.3i
-The last line number used by \f[C].nm\fP  is saved in the
-register \f[C]ln\fP , and it is possible to restart numbering
+The last line number used by \f[C].nm\fP is saved in the
+register \f[C]ln\fP, and it is possible to restart numbering
 relative to that number by preceding the initial line
-number you give to \f[C].nm\fP  with a + or a -. For example,
+number you give to \f[C].nm\fP  with a + or a -.
+For example,
 to restart numbering at exactly the point it was turned
 off, you can use this request:
 .sp .5v
@@ -3571,20 +3607,23 @@ off, you can use this request:
 .sp .5v
 .ll \n(.lu-\n(pNu
 .nm +0
-Let's do that now. As you can see, numbering resumes just where it left off, with
-the same step value and indent, as if no intervening lines had been present. After
-this line, we'll turn numbering off entirely.
+Let's do that now.
+As you can see, numbering resumes just where it left off, with
+the same step value and indent,
+as if no intervening lines had been present.
+After this line, we'll turn numbering off entirely.
 .sp .5v
 .nm
 .rr ln
 .ll \n(.lu+\n(pNu
 .ti +.3i
-When using \f[C].nm\fP  in fill mode, you have to watch for
+When using \f[C].nm\fP in fill mode, you have to watch for
 breaks.
-Because \f[C].nm\fP  itself does not cause a break, it may
+Because \f[C].nm\fP itself does not cause a break, it may
 take effect on the output line above where you expect it.
 You may need to force an explicit break before \f[C].nm\fP
 to make sure numbering starts on the next line.
+.
 .Ah "Change Bars"
 .ix change bars
 .ix [troff] formatter, change~bars %key troff formatter, change bars
@@ -3652,15 +3691,15 @@ in
 and
 .CW 1m
 in
-.CW troff  .
+.CW troff .
 .page 477
 .ti +.3i
-Incidentally, on many UNIX systems, there is a version of
-.CW diff  ,
+Incidentally, on many Linux systems, there is a version of
+.CW diff ,
 called
-.CW diffmk  ,
-that will compare two
-versions of a file, and produce a third file containing
+.CW gdiffmk ,
+that compares two versions of a file,
+and produce a third file containing
 .CW .mc
 requests to mark the differences.
 Additions and changes are marked with a bar in the margin,
@@ -3669,8 +3708,8 @@ Deletions are marked with an asterisk.
 .ti +.3i
 In our business, we find this very useful for producing
 interim drafts of technical manuals.
-We archive the first draft of the manual, as it was turned
-in to our client.
+We archive the first draft of the manual,
+as it was turned in to our client.
 Then, after review changes have been incorporated, we use
 .CW diffmk
 .ix [diffmk] command %key diffmk command
@@ -3689,13 +3728,33 @@ do the dirty work?
 .	\" Thus ends the two special sections where the line
 .	\" length was set to 4.85i to get the original effects.
 .nr LL 6i
+.PP
+If you are using source control (such as Git),
+you can compare your current version
+to an older version stored in the source control system
+using the standard input:
+.Ps
+git cat-file -p \fIcommit\fP:ch01.mm | gdiffmk - ch01.mm >ch01.cb.mm
+.Pe
+In this example,
+.I commit
+is the hash of the Git commit
+that marks the commit that you want to start with
+to compare with your working copy.
+To find the commit, use
+.Ps
+git log -- \fIfile\fP
+.Pe
+This shows the history of commits that affected
+the specified file.
 .LP 0
+.
 .Ah "Form Letters"
 .ix [troff] formatter, form~letters %key troff formatter, form letters
 .ix form letters
-No formatter would be complete without the ability to create
-form letters that merge existing text with externally supplied
-data.
+No formatter would be complete
+without the ability to create form letters
+that merge existing text with externally supplied data.
 The
 .CW nroff
 and
@@ -3754,7 +3813,7 @@ Note that a colon is appended to the prompt, and that the
 key must be pressed twice after each response.
 If no prompt is specified,
 .CW \&.rd
-will ring the
+rings the
 terminal bell when it expects input.
 .PP
 In addition, the input need not come from the keyboard.
@@ -3780,7 +3839,7 @@ The
 request tells the formatter to quit.
 .PP
 You can put the requests together with
-.CW \&.rd  .
+.CW \&.rd .
 First, create a list of variable data (like names and
 addresses) either in a file or as the output of a database
 program.
@@ -3818,19 +3877,21 @@ request, and address block, in the data
 file, that are each separated by pairs of newlines, you can
 generate an endless sequence of letters.
 .PP
-However, be warned that formatting will continue in an
-endless loop, even when the standard input has run out
-of data, unless you terminate processing.
+However, be warned that formatting continues
+in an endless loop,
+even when the standard input runs out of data,
+unless you terminate processing.
 This is where
 .CW \&.ex
 comes in.
-By putting it at the end of the list of names coming from
-standard input, you tell the formatter to quit when all
+By putting it at the end of the list of names\
+coming from standard input,
+you tell the formatter to quit when all
 the data has been used.
 .page 479
 .PP
-The command line to produce this marvel (assuming a form
-letter in a file called
+The command line to produce this marvel
+(assuming a form letter in a file called
 .CW letter
 and a list of names
 followed by an
@@ -3849,28 +3910,30 @@ It is possible to imagine a more extensive data entry facility,
 in which a variety of blank forms are constructed using
 .CW troff  ,
 and filled in with the help of a data entry
-front end.*
+front end.\**
 .FS
-*For this idea, I am indebted to a posting on
+For this idea, I am indebted to a posting on
 Usenet, the UNIX bulletin board network, by Mark Wallen
 of the Institute for Cognitive Science at UC San Diego
 (Usenet Message-ID: <203@sdics.UUCP>, dated June 13, 1986)
 .FE
-To generalize the facility, you could associate the various
-fields on the form with number register or string names, and
-then interpolate the number or string registers to actually
-fill in the form.
+To generalize the facility,
+you could associate the various fields on the form
+with number register or string names,
+and then interpolate the number or string registers
+to actually fill in the form.
 .PP
-This approach would allow you to reuse repeated data items
+This approach allows you to reuse repeated data items
 without having to query for them again.
-Even more to the point, it would allow you to construct the
+Even more to the point, it allows you to construct the
 data entry facility with a program other than
 .CW troff
 (which would allow features such as data entry validation
 and editing, as well as increased speed).
-The data entry front end would simply need to create as
+The data entry front end needs to create as
 output a data file containing string and number register
 definitions.
+.
 .Ah "Reading in Other Files or Program Output"
 In addition to
 .CW \&.nx
@@ -3906,7 +3969,7 @@ requests:
 \&	.
 .Pe
 the job of reorganization is trivial\(emall you need
-to do is change the filenames and realphabetize the list.
+to do is change the filenames and re-alphabetize the list.
 .page 480
 .PP
 The only caution, which was mentioned previously in
@@ -3917,18 +3980,26 @@ handled by a preprocessor, such as tables and equations.
 .ix [tbl] preprocessor, problems~with [.so] request %key tbl preprocessor, problems with [.so] request
 A quick look at the command line:
 .Ps
-$ \f[CB]tbl\fP \f[I]file\fP  \f[CB]| nroff\fP
+$ \f[CB]tbl\fP \f[I]file\fP \f[CB]| nroff\fP
 .Pe
-will show you that the preprocessor is done with the file
+shows you that the preprocessor is done with the file
 before the formatter ever has a chance to read in the files
 called for by the
 .CW \&.so
 request.
-Some systems have a command called
+Both
+.CW groff
+and Heirloom Troff include a command called
+.CW soelim ,
+that recursively reads in the files called for by
+.CW \&.so .
+Using
+.CW groff ,
+you can automatically include
 .CW soelim
-that reads
-in the files called for by
-.CW \&.so  .
+in the pipeline by specifying the
+.CW -s
+option.
 If you use
 .CW soelim
 .ix [soelim] command %key soelim command
@@ -3952,9 +4023,14 @@ rather than
 to read in the file.
 The
 .CW soelim
-command will ignore the
+command ignores the
 .CW \&'so
 request.
+The
+.CW groff
+version also ignores requests
+with spaces between the leading dot and the
+.CW so .
 .PP
 Another interesting request is
 .CW \&.sy .
@@ -3976,4 +4052,10 @@ if you want it processed by
 .CW troff
 instead of sent
 directly to the output stream).
+.PP
+Note that
+.CW groff
+requires the
+.CW -U
+(unsafe) option for this request to work.
 .ix %end [troff] formatter %key troff formatter

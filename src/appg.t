@@ -4,7 +4,7 @@ Ralph Corderoy's $Revision: 1.1 $.
 .
 .\" TROFF source proof read
 .\" by
-.\" Andreas Kähäri <andreas.kahari@unix.net>
+.\" Andreas Kï¿½hï¿½ri <andreas.kahari@unix.net>
 .
 .so utp.mac
 .utp
@@ -16,8 +16,8 @@ Ralph Corderoy's $Revision: 1.1 $.
 The following books may be helpful either when you're starting out, or
 when you're ready to go on to more advanced topics.
 .
+.Ah "Introductory UNIX Texts"
 .ix recommended readings
-.Ah "Introductory UNIX Texts
 .XP
 Kochan, Steven G. and Patrick H. Wood.
 .I "Exploring the UNIX System" ,
@@ -32,7 +32,7 @@ A brief introduction to essential UNIX skills, designed to be read and
 mastered in one or two sessions.
 (73 pp.)
 .
-.Ah "Advanced Topics
+.Ah "Advanced Topics"
 .XP
 Kernighan, Brian and Rob Pike.
 .I "The UNIX Programming Environment" ,

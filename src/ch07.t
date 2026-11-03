@@ -79,7 +79,7 @@ and access them with a single keystroke.
 Seeing how
 .CW ex
 works when it is invoked directly
-will help take some of the \(lqmystery\(rq
+helps to take some of the \(lqmystery\(rq
 out of line editors
 and make it more apparent to you how many
 .CW ex
@@ -111,14 +111,14 @@ command to print one or more lines.
 All
 .CW ex
 commands consist of a line address,
-which can simply be a line number,
+which can be a line number,
 and a command.
 You complete the command with a carriage return.
 A line number by itself
 is equivalent to a print command for that line.
 So, for example,
 if you type the numeral 1 at the prompt,
-you will see the first line of the file:
+you see the first line of the file:
 .Ps
 :1
 Sometimes, to advance,
@@ -248,7 +248,7 @@ If you specify an
 .I address ,
 such as a range of line numbers,
 .ix [ex] editor, range~of lines %key ex editor, range of lines
-then the command will affect the lines that you specify:
+then the command affects the lines that you specify:
 .Ps
     :1,20s/Alcuin/ALCUIN/
     ALCUIN is named after an English scholar
@@ -295,7 +295,7 @@ command by first typing a
 (colon).
 .ix [ex] editor, executing from [vi] %key ex editor, executing from [vi]
 The colon appears on the bottom of the screen
-and what you type will be echoed there.
+and what you type is echoed there.
 Enter an
 .CW ex
 command and press
@@ -320,7 +320,7 @@ to delete a single word or line is easier than using the
 command in
 .CW ex .
 However, when you want to make changes that affect numerous lines,
-you will find that the
+you find the
 .CW ex
 commands are very useful.
 They allow you to modify large blocks of text
@@ -369,7 +369,7 @@ they can be seen as an integrated part of
 Examples of these capabilities
 are commands for editing multiple files
 and executing UNIX commands.
-We will look at these after we look at pattern-matching
+We look at these after we look at pattern-matching
 and global replacements.
 .ix %end [ex] editor, substitute command %key ex editor, substitute command
 .
@@ -414,8 +414,7 @@ may strike you as difficult to learn,
 especially when we introduce pattern matching.
 Try to keep in mind that this is a very powerful tool,
 one that can save you a lot of drudgery.
-Besides, you will congratulate yourself when you succeed,
-and everyone else will think you are very clever.
+Besides, success brings satisfaction.
 .
 .Bh "Searching Text Blocks"
 .ix [ex] editor, line addressing~in %key ex editor, line addressing in
@@ -423,7 +422,7 @@ and everyone else will think you are very clever.
 To define a search area,
 you need to be more familiar with how line addressing works in
 .CW ex .
-A line address simply indicates which line
+A line address indicates which line
 or range of lines an
 .CW ex
 command operates on.
@@ -498,7 +497,7 @@ T}
 It is important to note
 that the action takes place
 on the entire line containing the pattern,
-not simply the text up to the pattern.
+not just the text up to the pattern.
 .
 .Bh "Search and Replace"
 .LP
@@ -591,7 +590,7 @@ where the string has been located
 	The original book has ^^^ in Roman font. This is wrong.
 	Fixed by: Heinz-Jürgen Oertel
 ..
-and the string itself will be marked by a series of carets (\c
+and the string itself is marked by a series of carets (\c
 .CW ^^^ ).
 .Ps
 copyists at his school
@@ -841,7 +840,7 @@ and
 .I m .
 For example,
 .CW A\e{2,3\e}
-will match either
+matches either
 .I AA
 .ig
 	The original book has ) at the wrong place.
@@ -851,7 +850,7 @@ will match either
 .I AARDVARK )
 or
 .I AAA
-but will not match
+but does not match
 the single letter
 .I A .
 T}
@@ -1116,7 +1115,7 @@ but want to change the name
 .I box
 to
 .I square ,
-either of the following replacement commands will do the trick:
+either of the following replacement commands does the trick:
 .Ps
 .ig
 	The original printed book had the following line as:
@@ -1739,7 +1738,7 @@ As a very simple example:
 :r !date
 .Pe
 .LP
-This will read in the system's date information
+This reads in the system's date information
 into the text of your file.
 .PP
 Suppose that you are editing a file,
@@ -1789,7 +1788,7 @@ reenter your file, and search for your place.
 Or, you could do the task in fewer steps.
 The command
 .CW :!ls
-will display a list of files in the directory.
+displays a list of files in the directory.
 Note the correct filename.
 Press
 .I RETURN
@@ -1834,7 +1833,7 @@ called
 the list of names in the preceding example
 was already contained in the current file, on lines 96 to 99.
 .PP
-You simply type the addresses of the lines you want affected,
+Type the addresses of the lines you want affected,
 followed by an exclamation mark
 and the UNIX command line to be executed.
 For example, the command:
@@ -1861,7 +1860,7 @@ For example:
 !)\fIcommand\fP
 .Pe
 .LP
-will pass the next sentence through
+passes the next sentence through
 .I command .
 .PP
 There are some unusual features about how
@@ -1929,7 +1928,7 @@ You could process that portion with the
 command.
 In these examples,
 the second sentence is the block of text
-that will be filtered to the command.
+that is filtered to the command.
 An exclamation mark appears on the last line
 to prompt you for the UNIX command:
 .sp .7v
@@ -2218,7 +2217,7 @@ by typing the command
 .PP
 If you have not first saved the current file,
 .CW vi
-will not allow you to switch files with
+does not allow you to switch files with
 .CW :e
 or
 .CW :n
@@ -2314,7 +2313,7 @@ Open the file
 .CW note
 with
 .CW :e\ note ,
-and move the cursor to where the copied text will be placed.
+and move the cursor to where the copied text should be placed.
 .ig
 	The original book has wrong text in the right window.
 	Fixed by: Heinz-Jürgen Oertel
@@ -2369,10 +2368,10 @@ Where
 is an abbreviation for the specified
 .I phrase .
 The sequence of characters that make up the abbreviation
-will be expanded in insert mode
+is expanded in insert mode
 only if you type it as a full word;
 .I abbr
-will not be expanded within a word.
+is not be expanded within a word.
 .PP
 Suppose that in the file
 .CW letter
@@ -2540,7 +2539,7 @@ command cannot be used to replace entire lines
 yanked in the same mapping.
 If you try to yank and then put back a deleted line within a
 .CW map ,
-you will get the error message:
+you get the error message:
 .Ps
 Cannot put inside global macro.
 .Pe
@@ -2673,7 +2672,7 @@ You can
 usually set up these keys
 to print whatever character or characters you want
 using a special setup mode on the terminal.
-But this will limit you to a particular terminal,
+But this limits you to a particular terminal,
 and may limit the actions of programs
 that want to set up those function keys themselves.
 .PP
@@ -2821,7 +2820,7 @@ In your file, enter this key sequence:
 cw\efIgadfly\efR^V\fIESC\fP
 .Pe
 .LP
-This will appear on your screen as:
+This appears on your screen as:
 .Ps
 cw\efIgadfly\efR^[
 .Pe
@@ -2833,7 +2832,7 @@ by typing
 Now, whenever you place the cursor at the beginning of a word
 and type
 .CW @g ,
-that word in your text will be changed to
+that word in your text is changed to
 .I gadfly .
 Because
 .CW @

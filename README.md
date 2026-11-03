@@ -36,7 +36,7 @@ began transcribing the book and recreating the source code.
 It took a little over a year of manic activity,
 punctuated by long naps,
 and we released "UTP Revival" in 2004.
-We still hope to modernize the book ("UTP Revisited").
+Modernizing the book ("UTP Revisited") is now under way.
 Whether you want to use GNU Troff,
 or Plan 9 or one of its derivatives (Heirloom Troff and Neatroff),
 UTP is still an excellent guide to the nuts and bolts of print publishing.
@@ -44,7 +44,7 @@ UTP is still an excellent guide to the nuts and bolts of print publishing.
 The current (main) branch is UTP 1.1,
 which provides a clickable index, TOC, and cross-references within the PDF
 (thanks to Deri James).
-You will need *groff* 1.22 or newer to format it,
+You need *groff* 1.22 or newer to format it,
 as it uses the -Tpdf driver.
 If you have an older *groff*, switch to the 1.0 branch.
 
@@ -72,7 +72,7 @@ Patches for Heirloom or Neatroff (if needed) are welcome!
 
 ------------------------------------------------------------------------
 
-## Acknowledgements
+## Acknowledgements (UTP Revival)
 
 -   First, a big thanks to the original authors
     for making the book available in the first place.

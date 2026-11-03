@@ -37,7 +37,7 @@ When you use a
 .I wysiwyg
 program like most word processors,
 you use commands to lay out the text on the screen
-as it will be laid out on the page.
+as it is laid out on the page.
 With a markup language, like that used by
 .CW nroff
 and
@@ -46,8 +46,7 @@ you enter commands into the text
 that tell the formatting program what to do.
 .PP
 Our purpose in this chapter is twofold.
-We want to introduce basic formatting codes
-that you will find useful.
+We want to introduce useful basic formatting codes.
 But at the same time,
 we want to present them
 in the context of what the formatter is doing and how it works.
@@ -172,7 +171,7 @@ However, especially when it comes to a typesetting program like
 .CW troff ,
 there are ramifications to the process of line adjustment
 that are not obvious.
-Having a clear idea of what is going on will be useful later,
+Having a clear idea of what is going is useful later,
 so we'll examine the process in detail.
 .
 .Bh "Line Adjustment"
@@ -218,7 +217,7 @@ question mark, or exclamation point.
 .ix justification, definition~of
 Justification is a closely related feature
 that should not be confused with filling.
-Filling simply tries to keep lines approximately the same length;
+Filling tries to keep lines approximately the same length;
 justification adjusts the space between words
 so the ends of the lines match exactly.
 .PP
@@ -297,7 +296,7 @@ It is for this reason that we usually say that text is
 .I right
 or
 .I "left justified" ,
-rather than simply
+rather than
 .I "justified" .
 .PP
 When it is difficult to perform filling or justification or both
@@ -725,7 +724,7 @@ changed the name of the original
 .CW troff
 to
 .CW otroff ,
-and simply call
+and call
 .CW ditroff
 by the original name,
 .CW troff .
@@ -872,7 +871,7 @@ itself has nothing to do with the actual drawing of characters or images
 on the printed page.
 Instead,
 .CW troff
-simply formats the page,
+formats the page,
 using tables describing the widths of
 the characters used by the printer,
 and generates instructions about page layout, spacing, and so on.
@@ -930,7 +929,7 @@ without making extensive changes to your files.
 you have to specify a printer name as an option to the
 .CW lp
 command.
-In our generic example, we simply use
+In our generic example, we use
 .CW lp
 without any options,
 assuming that the appropriate printer is connected as the
@@ -1002,9 +1001,9 @@ However, you can submit a document coded for
 to
 .CW nroff
 with entirely reasonable results.
-For the most part, formatting requests that cannot be handled by
+For the most part,
 .CW nroff
-are simply ignored.
+ignores formatting requests that it cannot handle.
 And you can submit documents coded for
 .CW nroff
 to
@@ -1605,7 +1604,7 @@ hyphenate badly.
 .PP
 To use
 .CW \.hw ,
-simply specify the word or words
+specify the word or words
 that constitute the exception list,
 typing a hyphen at the point or points in the word
 where you would want it hyphenated.
@@ -1628,7 +1627,7 @@ at each acceptable hyphenation point,
 or at the front of the word
 if you don't want the word to be hyphenated at all:
 .Ps
-\e%acknowledge     \fRthe word\fP \f[I]acknowledge\fP \fRwill not be hyphenated\fP
+\e%acknowledge     \fRthe word\fP \f[I]acknowledge\fP \fRis not hyphenated\fP
 ac\e%know\e%ledge   \fRthe word\fP \f[I]acknowledge\fP \fRcan be hyphenated only\fP
                   \fRat the specified points\fP
 .Pe
@@ -1679,7 +1678,7 @@ If your system doesn't have the
 command, download a working copy
 from the
 .pdfhref W -D https://github.com/larrykollar/Writers-ScriptBench \
-Writer's ScriptBench site.
+Writer's ScriptBench repository.
 .
 .Bh "Turning Hyphenation Off and On"
 .LP
@@ -2034,17 +2033,17 @@ like this:
 .Ps
 \&.ll 7i/2u
 .Pe
-You could easily divide 7 by 2 yourself and simply specify 3.5i.
+You could easily divide 7 by 2 yourself and specify 3.5i.
 The point of this example
 is that when you are doing arithmetic\c
 \(em\c
 usually with values stored
 in variables called number registers
-(more on these later)\c
-\(em\c
+(more on these later)\(em\c
 you need to pay attention
-to the interactionv between units.
-For example, because fractional device units are always rounded down,
+to the interactions between units.
+For example, because
+the formatter always rounds down fractional device units,
 avoid expressions like
 .CW 7i/2.5u
 because this is equivalent to
@@ -2238,8 +2237,8 @@ materials that you sent me.
 .SE
 .sp .8v
 .LP
-All succeeding paragraphs will continue to be indented, until the indent
-is reset.
+All succeeding paragraphs are indented,
+until the indent is reset.
 The default indent (the value at the left margin) is 0.
 .PP
 These two indent requests can be combined to give a \(lqhanging
@@ -2261,8 +2260,8 @@ understanding of the product.  I confess to being amazed by
 Alcuin...
 .Pe
 .page 80
-The first line will start at the margin, and subsequent lines will be
-indented:
+The first line starts at the margin,
+and subsequent lines are indented:
 .sp .7v
 .SS
 .Ps
@@ -2302,6 +2301,7 @@ is about where you expect a 5-character indent to be from familiarity
 with a typewriter.
 .ix %end hanging indents
 .ix %end indents
+.
 .Bh "Centering Output Lines"
 .LP
 Centering is another useful layout tool.
@@ -2312,7 +2312,7 @@ request:
 .ix %begin [troff] formatter, [.ce] request %key troff formatter, [.ce] request
 .Ps
 \&.ce
-This line will be centered.
+This line is centered.
 .Pe
 Here's the result:
 .sp .7v
@@ -2320,7 +2320,7 @@ Here's the result:
 .Ps
 .fi
 .ce
-This line will be centered.
+This line is centered.
 .nf
 .Pe
 .sp
@@ -2331,7 +2331,7 @@ Centering takes into account any indents that are in effect.
 That is, if you have used
 .CW \.in
 to specify an indent of 1 inch, and the line length is 5 inches,
-text will be centered within the 4-inch span following the indent.
+text is centered within the 4-inch span following the indent.
 .PP
 To center multiple lines, specify a number as an argument to the
 request:
@@ -2444,6 +2444,7 @@ c c s.
 .TE
 .ix %end [.ce] request %key ce request
 .ix %end [troff] formatter, [.ce] request %key troff formatter, [.ce] request
+.
 .Bh "Setting Tabs"
 .ix %begin tabs (in [troff]) %key tabs (in troff)
 .LP
@@ -2471,8 +2472,8 @@ and
 but the settings are likely to be different, and the results on the
 screen definitely unaesthetic.
 .PP
-However, after you get used to the fact that tabs will not line up on
-the screen in the same way as they will on the printed page, you can use
+Once you get used to the fact that tabs do not line up on
+the screen in the same way as they do on the printed page, you can use
 tabs quite effectively.
 .PP
 By default, tab stops are set every .8 inches in
@@ -2492,7 +2493,7 @@ For example:
 .Ps
 \&.ta 1i 2.5i 3i
 .Pe
-will set three tab stops, at 1 inch, 2\(12 inches, and 3 inches,
+sets three tab stops, at 1 inch, 2\(12 inches, and 3 inches,
 respectively.
 Any previous or default settings are now no longer in effect.
 .PP
@@ -2501,7 +2502,7 @@ The request:
 .Ps
 \&.ta 1i +1.5i +.5i
 .Pe
-will set tabs at the same positions as the previous example.
+sets tabs at the same positions as the previous example.
 Values preceded with a plus sign are added to the value of the last tab
 stop.
 .PP
@@ -2524,7 +2525,7 @@ by the symbol
 |\(em\(em|First|\(em\(em|Second|\(em\(em|Third
 \&.fi
 .Pe
-will produce the following output:
+produces the following output:
 .page 83
 .sp .7v
 .SS
@@ -2543,7 +2544,7 @@ But:
 |\(em\(em|First|\(em\(em|Second|\(em\(em|Third
 \&.fi
 .Pe
-will produce:
+produces:
 .sp .7v
 .SS
 .Ps
@@ -2564,7 +2565,7 @@ If the numbers you want to align have an uneven number of decimal
 positions, you can manually force right adjustment of numeric data using
 the special escape sequence
 .CW \e0 ,
-which will produce a blank space exactly the same width as a digit.
+which produces a blank space exactly the same width as a digit.
 For example:
 .Ps
 \&.ta 1iR
@@ -2572,7 +2573,7 @@ For example:
 |\(em\(em|125.35
 |\(em\(em|50.\e0\e0
 .Pe
-will produce:
+produces:
 .sp .7v
 .SS
 .Ps
@@ -2589,14 +2590,14 @@ will produce:
 .PP
 As on a typewriter, if you have already spaced past a tab position
 (either by printing characters, or with an indent or other horizontal
-motion), a tab in the input will push text over to the next available
+motion), a tab in the input pushes text over to the next available
 tab stop.
-If you have passed the last tab stop, any tabs present in the input will
-be ignored.
+If you have passed the last tab stop, any tabs present in the input
+are ignored.
 .PP
 .ix no-fill mode
 You must be in no-fill mode for tabs to work correctly.
-This is not just because filling will override the effect of the tabs.
+This is not just because filling overrides the effect of the tabs.
 Using
 .CW \.nf
 when specifying tabs is an important rule of thumb; we'll look at the
@@ -2604,6 +2605,7 @@ reasoning behind it in Chapter 15.
 .ix %end [.ta] request %key ta request
 .ix %end [troff] formatter, [.ta] request %key troff formatter, [.ta] request
 .ix %end tabs (in [troff]) %key tabs (in troff)
+.
 .Bh "Underlining"
 .LP
 We haven't yet described how to underline text, a primary type of
@@ -2669,6 +2671,7 @@ until Chapter 15).
 .ix %end [troff] formatter, [.cu] request %key troff formatter, [.cu] request
 .ix %end [.ul] request %key ul request
 .ix %end [troff] formatter, [.ul] request %key troff formatter, [.ul] request
+.
 .Bh "Inserting Vertical Space"
 .ix [troff] formatter, vertical spacing %key troff formatter, vertical spacing
 .ix vertical spacing
@@ -2738,7 +2741,7 @@ The output would probably look better if there was a smaller amount of
 space between the lines.
 If we replace the line between the paragraphs with the request
 .CW "\.sp .5" ,
-here is what we will get:
+here is what we get:
 .page 85
 .sp .7v
 .SS
@@ -2766,15 +2769,15 @@ One person, a student of calligraphy, was really impressed.
 .SE
 .sp .8v
 .LP
-Although it may not yet be apparent how this will be useful, you can
-also space to an absolute position on the page, by inserting a vertical
-bar before the distance.
+Although it may not yet be apparent how this is useful,
+you can also space to an absolute position on the page,
+by inserting a vertical bar before the distance.
 .ix [troff] formatter, spacing~to~an absolute position %key troff formatter, spacing to~an absolute position
 The following:
 .Ps
 \&.sp |3i
 .Pe
-will space down to a position 3 inches from the top of the page, rather
+spaces down to a position 3 inches from the top of the page, rather
 than 3 inches from the current position.
 .PP
 You can also use negative values with ordinary relative spacing
@@ -2784,7 +2787,7 @@ For example:
 .Ps
 \&.sp -3
 .Pe
-will move back up the page three lines.
+moves back up the page three lines.
 Of course, when you use any of these requests, you have to know what you
 are doing.
 If you tell
@@ -2800,7 +2803,7 @@ This is the second line.
 \&.br
 This is the third line.
 .Pe
-will result in:
+results in:
 .sp .7v
 .SS
 .Ps
@@ -2839,10 +2842,11 @@ These kind of vertical motions are generally used for line drawing
 (e.g., for drawing boxes around tables), in which all of the text is
 output, and the formatter then goes back up the page to draw in the
 lines.
-At this stage, it is unlikely that you will find an immediate use for
+At this stage, you may not find an immediate use for
 this capability.
-Nonetheless, we are sure that a creative person, knowing that it is
-there, will find it just the right tool for a job.
+Nonetheless, we are sure that a creative person,
+knowing that it is there,
+finds the right tool for a job.
 (We'll show a few creative uses of our own later).
 .PP
 You probably aren't surprised that a typesetter can go back up the page.
@@ -2858,8 +2862,8 @@ preprocessors), you must pass the
 .CW nroff
 output through a special filter program called
 .CW col
-to get all of the motions sorted out beforehand, so that the page will
-be printed in the desired order:
+to get all of the motions sorted out beforehand,
+so the page is printed in the desired order:
 .Ps
 $ \f[CB]nroff\fP \f[I]files\fP \f[CB]| col | lp\fP
 .Pe
@@ -2867,6 +2871,7 @@ $ \f[CB]nroff\fP \f[I]files\fP \f[CB]| col | lp\fP
 .ix [eqn] preprocessor %key eqn preprocessor
 .ix %end [.sp] request %key sp request
 .ix %end [troff] formatter, [.sp] request %key troff formatter, [.sp] request
+.
 .Bh "Double or Triple Spacing"
 .ix [troff] formatter, double~or~triple spacing %key troff formatter, double or~triple spacing
 .ix [.ls] request %key ls request
@@ -2884,6 +2889,7 @@ For example:
 .Pe
 Putting this at the top of the file produces double-spaced lines.
 An argument of 3 specifies triple-spaced lines.
+.
 .Ah "Page Transitions"
 .ix %begin [troff] formatter, page~transition %key troff formatter, page transition
 .LP
@@ -2917,8 +2923,9 @@ The
 .ix [.bp] request %key bp request
 .ix [troff] formatter, [.bp] request %key troff formatter, [.bp] request
 request allows you to force a page break.
-If you do this, the remainder of the current page will be filled with
-blank lines, and output will start again at the top of the second page.
+If you do this,
+the remainder of the current page is filled with blank lines,
+and output starts again at the top of the second page.
 If you care to test this, insert a
 .CW \.bp
 anywhere in the text of our sample letter, then process the letter with
@@ -2928,7 +2935,7 @@ If you save the resulting output in a file:
 $ \f[CB]nroff letter > letter.out\fP
 .Pe
 .page 87
-you will find that the text following the
+you find that the text following the
 .CW \.bp
 begins on line 67 (11 inches at 6 lines per inch equals 66 lines per
 page).
@@ -2948,7 +2955,7 @@ and
 parlance, this request sets a
 .I trap \c
 \(em\c
-a position on the page at which a given macro will be executed.
+a position on the page at which to execute the specified macro.
 .ix [troff] formatter, traps %key troff formatter, traps
 .PP
 You'll notice that we said
@@ -2963,15 +2970,15 @@ you need to know how to define a macro.
 It doesn't work with single requests.
 .PP
 There's not all that much to defining macros, though.
-A macro is simply a sequence of stored requests that can be executed all
-at once with a single command.
+A macro is a sequence of stored requests
+that can be executed all at once with a single command.
 We'll come back to this later, after we've looked at the process of
 macro definition.
 .PP
 For the moment, let's assume that we've defined two macros, one
-containing the commands that will handle the top margin, and another for
+containing the commands that handle the top margin, and another for
 the bottom margin.
-The first macro will be called
+The first macro is called
 .CW \.TM ,
 and the second
 .CW \.BM .
@@ -2984,7 +2991,7 @@ requests.
 However, this is a convention only, and one that is not always
 followed).
 .PP
-To set traps that will execute these macros, we would use the
+To set traps that execute these macros, we would use the
 .CW \.wh
 request as follows:
 .Ps
@@ -3099,13 +3106,14 @@ complexities in page transition (and other advanced formatting
 problems), and provide many capabilities that would take considerable
 time and effort to design yourself.
 .PP
-Of course, it is quite possible to design your own macro package, and we
-will go into all of the details later.
+Of course, it is quite possible to design your own macro package,
+and we examine all of the details later.
 (In fact, this book is coded with neither of the standard macro
 packages, but with one developed by Steve Kochan and Pat Wood of
 Pipeline Associates, the consulting editors of this series, for use
 specifically with the Hayden UNIX library).
 .ix %end [troff] formatter, page~transition %key troff formatter, page transition
+.
 .Bh "Page Length Revisited"
 .ix [troff] formatter, page~length %key troff formatter, page length
 .LP
@@ -3114,7 +3122,7 @@ few more points about page length, page breaks, and the like.
 .PP
 Assuming that some provision has been made for handling page
 transitions, there are several wrinkles to the requests we have already
-introduced, plus several new requests that you will probably find
+introduced, plus several new requests that you should find
 useful.
 .PP
 First, let's talk about page length.
@@ -3165,8 +3173,9 @@ and with
 as before, containing
 .CW \.bp .
 .PP
-There is more to say about traps, but it will make more sense later, so
+There is more to say about traps, but it makes more sense later, so
 we'll leave the subject for now.
+.
 .Bh "Page Breaks without Line Breaks"
 .ix page breaks, without line~breaks
 .ix [troff] formatter, page~breaks~without~line~breaks %key troff formatter, page breaks~without~line~breaks
@@ -3176,18 +3185,18 @@ Page breaks\c
 we've talked about their use in page transition traps,
 .ix traps
 but they also have a common use on their own.
-Often, you will want to break a page before it would normally end.
+Often, you want to break a page before it would normally end.
 For example, if the page breaks right after the first line of a
-paragraph, you will probably want to force the line onto the next page,
+paragraph, you want to force the line onto the next page,
 rather than leaving an \(lqorphaned\(rq line.
 Or you might want to leave blank space at the bottom of a page for an
 illustration.
-To do this, simply enter a
+To do this, enter a
 .CW \.bp
 at the desired point.
 .ix %begin [.bp] request %key bp request
 .ix %begin [troff] formatter, [.bp] request %key troff formatter, [.bp] request
-A new page will be started immediately.
+This immediately starts a new page.
 .PP
 However, consider the case in which you need to force a break in the
 middle of a paragraph to prevent a \(lqwidowed\(rq line at the top of
@@ -3204,7 +3213,7 @@ are anonymous.
 .Pe
 the
 .CW \.bp
-request will also cause a line break, and the text will not be filled
+request causes a line break, and the text is not filled
 properly:
 .sp .7v
 .SS
@@ -3225,7 +3234,7 @@ anonymous.
 .LP
 Fortunately, there is a way around this problem.
 If you begin a request with an apostrophe instead of a period, the
-request will not cause a break.
+request does not cause a break.
 .page 90
 .Ps
 The medieval masters of calligraphy and illumination
@@ -3290,16 +3299,17 @@ It is often better to use
 .CW \.ne
 instead of
 .CW \.bp ,
-unless you're absolutely sure that you will
+unless you're absolutely sure that you
 .I always
 want a page break at a particular point.
 If, in the course of editing, an
 .CW \.ne
-request moves away from the bottom of the page, it will have no effect.
+request moves away from the bottom of the page, it has no effect.
 But a
 .CW \.bp
-will always start a new page, sometimes leaving a page nearly blank when
-the text in a file has been changed significantly.
+always starts a new page,
+sometimes leaving a page nearly blank
+when the text in a file has been changed significantly.
 .PP
 There are other special spacing requests that can be used for this
 purpose.
@@ -3356,21 +3366,23 @@ As a result, if you issue a request like:
 .Ps
 \&.sp 3i
 .Pe
-with 1 inch remaining before the bottom of the page, you will not get 1
-inch at the bottom, plus 2 inches at the top of the next page, but only
+with 1 inch remaining before the bottom of the page,
+you do not get 1 inch at the bottom,
+plus 2 inches at the top of the next page, but only
 whatever remains at the bottom.
-The next page will start right at the top.
+The next page starts right at the top.
 However, both macro packages also include an
 .CW \.os
 request in their page top macro, so if you truly want 3 inches, use
 .CW "\.sv 3i" ,
-and you will get the expected result.
+and you get the expected result.
 .PP
 However, if you use
 .CW \.sv ,
-you will also have another unexpected result: text following the spacing
-request will \(lqfloat\(rq ahead of it to fill up the remainder of the
-current page.
+you have another unexpected result:
+text following the spacing request
+\(lqfloats\(rq ahead of it
+to fill up the remainder of the current page.
 .PP
 We'll talk more about this later.
 We introduced it now to prevent confusion when spacing requests don't
@@ -3412,7 +3424,7 @@ You can also artificially set the number for the
 .I next
 page whenever you issue a
 .CW \.bp
-request, simply by adding a numeric argument:
+request, by adding a numeric argument:
 .RS
 .TS
 tab (#);
@@ -3435,10 +3447,10 @@ This means (at least in the existing macro packages), that the sequence:
 \&.bp
 \&.bp
 .Pe
-will not result in a blank page being output.
-You will get the same effect as if you had specified only a simple
+does not output a blank page.
+You get the same effect as if you had specified only a simple
 .CW \.bp .
-Instead, you should specify:
+Instead, specify:
 .Ps
 \&.bp +1
 .Pe
@@ -3452,7 +3464,7 @@ For example:
 .Ps
 $ \f[CB]nroff -ms -n10\fP \f[I]file\fP
 .Pe
-will start numbering
+starts numbering
 .I file
 at page number 10.
 In addition, there is a command-line option to print only selected pages
@@ -3471,8 +3483,9 @@ For example:
 .Ps
 $ \f[CB]nroff -ms -o1,5,7-9,13-\fP \f[I]file\fP
 .Pe
-will output pages 1, 5, 7 through 9, and from 13 to the end of the file.
+outputs pages 1, 5, 7 through 9, and from 13 to the end of the file.
 There should be no spaces anywhere in the list.
+.
 .Ah "Changing Fonts"
 .ix %begin fonts, changing
 .ix %begin [troff] formatter, fonts %key troff formatter, fonts
@@ -3527,10 +3540,9 @@ device.
 See
 .pdfhref L -D AppendixD -- Appendix D
 for details.
-The font that is mounted in position 1 will be used for the body type of
-the text\c
-\(em\c
-it is the font that will be used if no other specification
+The font that is mounted in position 1 is the body type of
+the text\(em\c
+it is the font to use if no other specification
 is given.
 The special font is also used without any intervention on your part when
 a character not in the normal character set is requested.
@@ -3545,21 +3557,21 @@ request, or the inline font-switch escape sequence
 For example:
 .Ps
 \&.ft B
-This line will be set in bold type.
+This line is set in bold type.
 \&.br
 \&.ft R
-This line will again be set in roman type.
+This line is set in roman type.
 .Pe
-will produce:
+produces:
 .page 93
 .sp .7v
 .SS
 .Ps
 .ft B
-This line will be set in bold type.
+This line is set in bold type.
 .ft P
 .ft R
-This line will again be set in roman type.
+This line is set in roman type.
 .ft P
 .Pe
 .sp
@@ -3631,13 +3643,21 @@ are for fonts that are commonly used with the C/A/T typesetter.
 If you are using a different device, they may be of no use to you.
 .ft P
 .PP
-The point is that if you are using a different typesetting device, you
-will need to get information about the font names for your system from
+The point is that if you are using a different typesetting device,
+you need to get information about the font names for your system from
 whoever set up the equipment to work with
 .CW troff .
-The contents of
+The contents of your font directory (\c
 .CW /usr/lib/font
-will vary from installation to installation, depending on what fonts are
+in Plan9-based
+.CW troff ,
+or
+.CW /usr/local/share/groff/ \c
+.I version \c
+.CW /font
+for
+.CW groff )
+varies from installation to installation, depending on what fonts are
 supported.
 .PP
 For
@@ -3758,7 +3778,7 @@ or:
 .Pe
 .ix [.ft] request %key ft request
 .ix [troff] formatter, [.ft] request %key troff formatter, [.ft] request
-You will need to make a set of global replacements throughout your file.
+You need to make a set of global replacements throughout your file.
 To insulate yourself in a broader way from overall font change
 decisions,
 .CW troff
@@ -3813,6 +3833,7 @@ See
 for details.
 .ix %end fonts, changing
 .ix %end [troff] formatter, fonts %key troff formatter, fonts
+.
 .Bh "Special Characters"
 .ix [troff] formatter, special characters %key troff formatter, special characters
 .LP
@@ -3904,6 +3925,7 @@ character combinations, such as a checkmark in a box, with overstriking.
 .PP
 The point is to add these symbols to your repertoire, where they can
 wait until need and imagination provide a use for them.
+.
 .Bh "Type Size Specification"
 .ix %begin [troff] formatter, point~size %key troff formatter, point size
 .ix %begin point~size
@@ -3949,7 +3971,7 @@ designation.
 ..
 For example, 12-point type is not always 1/6 inch high, nor is 72-point
 type 1 inch high.
-The precise size will vary with the typeface).
+The precise size varies with the typeface).
 .PP
 As with font changes, there are two ways to make size changes: with a
 request and with an inline escape sequence.
@@ -4007,15 +4029,18 @@ Only certain sizes may be available on the typesetter.
 are 6, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 28, and 36.
 Legal point sizes in
 .CW ditroff
-depend upon the output device, but there will generally be more sizes
-available).
+depend upon the output device,
+but generally there are more sizes available).
 If you request a point size between two legal sizes,
 .CW otroff
-will round up to the next legal point size;
+rounds up to the next legal point size;
 .CW ditroff
-will round to the nearest available size.
+rounds to the nearest available size.
+.CW Groff
+recognizes and supports fractional point sizes.
 .ix %end [troff] formatter, point~size %key troff formatter, point size
 .ix %end point~size
+.
 .Bh "Vertical Spacing"
 .ix [troff] formatter, vertical spacing %key troff formatter, vertical spacing
 .ix vertical spacing
@@ -4040,7 +4065,7 @@ A typewriter or typewriter-style printer usually spaces vertically in
 A typesetter usually adjusts the space according to the point size.
 For example, the type samples shown previously were all set with 20
 points of vertical space.
-More typically, the vertical space will vary along with the type size,
+More typically, the vertical space varies along with the type size,
 like this:
 .sp .7v
 .SS
@@ -4077,8 +4102,9 @@ Typically, the body of a book is set with a single size of type (usually
 respectively).
 Larger sizes are used occasionally for emphasis, for example, in chapter
 or section headings.
-When the type size is changed, the vertical spacing needs to be changed
-too, or the type will overrun the previous line, as follows, where
+When the type size is changed,
+you need to changed the vertical spacing as well,
+or the type overruns the previous line, as follows, where
 14-point type is shown with only 10-point spacing.
 .sp
 .SS
@@ -4100,8 +4126,7 @@ Vertical spacing is changed with the
 request.
 .ix %begin [.vs] request %key vs request
 .ix %begin [troff] formatter, [.vs] request %key troff formatter, [.vs] request
-A vertical space request will typically be paired with a point size
-request:
+A vertical space request is typically paired with a point size request:
 .ix [troff] formatter, [.ps] request %key troff formatter, [.ps] request
 .ix [.ps] request %key ps request
 .Ps
@@ -4118,15 +4143,15 @@ For example, if you enter
 .CW "\.vs 12" ,
 the request
 .CW \.sp
-will space down 12 points; the request:
+spaces down 12 points; the request:
 .Ps
 \&.sp 0.5v
 .Pe
-will space down 6 points, or half the current vertical line spacing.
+spaces down 6 points, or half the current vertical line spacing.
 However, if you change the baseline vertical spacing to 16, the
 .CW \.sp
-request will space down 16 points.
-Spacing specified in any other units will be unaffected.
+request spaces down 16 points.
+Spacing specified in any other units are unaffected.
 What all this adds up to is the commonsense observation that a blank
 line takes up the same amount of space as one containing text.
 .PP
@@ -4134,7 +4159,7 @@ When you use double and triple spacing, it applies a multiplication
 factor to the baseline spacing.
 The request
 .CW "\.ls 2"
-will double the baseline spacing.
+doubles the baseline spacing.
 .ix [.ls] request %key ls request
 .ix [troff] formatter, [.ls] request %key troff formatter, [.ls] request
 You can specify any multiplication factor you like, though 2 and 3 are
@@ -4142,21 +4167,22 @@ the most reasonable values.
 .PP
 The
 .CW \.ls
-request will only affect the spacing between output lines of text.
+request only affects the spacing between output lines of text.
 It does not change the definition of
 .CW v
 or affect vertical spacing requests.
 .ix %end [.vs] request %key vs request
 .ix %end [troff] formatter, [.vs] request %key troff formatter, [.vs] request
 .ix %end baseline spacing
+.
 .Ah "A First Look at Macros"
 .ix [troff] formatter, defining macros %key troff formatter, defining macros
 .LP
 Although we won't go into all the details of macro design until we have
 discussed the existing macro packages in the next two chapters, we'll
 cover some of the basic concepts here.
-This will help you understand what the macro packages are doing and how
-they work.
+This helps you understand what the macro packages are doing
+and how they work.
 .PP
 To define a macro, you use the
 .CW \.de
@@ -4167,7 +4193,7 @@ when the macro is invoked.
 The macro definition is terminated by the request
 .CW \.\.
 (two dots).
-The name to be assigned to the macro is given as an argument to the
+The name assigned to the macro is the argument to the
 .CW \.de
 request.
 .PP
@@ -4177,12 +4203,21 @@ If you are not using one of the existing macro packages (which have
 already taken care of this kind of thing), paragraphing is a good
 example of the kind of formatting that lends itself to macros.
 .PP
-Although it is certainly adequate to separate paragraphs simply by a
-blank line, you might instead want to separate them with a blank line
-and a temporary indent.
-What's more, to prevent \(lqorphaned\(rq lines, you would like to be
-sure that at least two lines of each paragraph appear at the bottom of
-the page.
+Although you can separate paragraphs
+with a blank line,
+you might want to separate them with a blank line
+and a temporary indent.\**
+.FS
+Using
+.CW groff ,
+you can specify the
+.I "blank line macro"
+.CW \&.blm \fIname\fP) (
+to execute when the formatter encounters a blank line.
+.FE
+What's more, to prevent \(lqorphaned\(rq lines,
+you want to make sure that at least two lines of each paragraph
+appear at the bottom of the page.
 So you might define the following macro:
 .page 100
 .Ps
@@ -4202,8 +4237,10 @@ interesting and wonderful things.
 .PP
 We'll talk more about the enormous range of potential in macros in later
 chapters.
-For the moment, let's just consider one or two points that you will need
-to understand in order to use the existing macro packages.
+For the moment, let's just consider one or two points
+that you need to understand
+to use the existing macro packages.
+.
 .Bh "Macro Arguments"
 .ix [troff] formatter, macro~arguments %key troff formatter, macro arguments
 .LP
@@ -4238,14 +4275,15 @@ As you can see, it does no harm to quote a string argument that doesn't
 contain spaces (\c
 .CW \(dqPreface\(dq ),
 and it is probably a good habit to quote all strings.
+.
 .Bh "Number Registers"
 .ix %begin [troff] formatter, number~registers %key troff formatter, number registers
 .ix %begin number~registers
 .LP
-When you use a specific value in a macro definition, you are limited to
-that value when you use the macro. For example, in the paragraph macro
-definition shown previously, the space will always be 1, and the indent
-always
+When you use a specific value in a macro definition,
+you are limited to that value when you use the macro.
+For example, in the paragraph macro definition shown previously,
+the space is always 1, and the indent is always
 .CW 5n .
 .PP
 However,
@@ -4262,7 +4300,7 @@ the size of the top and bottom margins is not specified with an absolute
 value, but with a number register.
 .ix number~registers, in~[ms] %key number registers, in~ms
 As a result, you don't need to change the macro definition to change
-these margins; you simply reset the value of the appropriate number
+these margins; just reset the value of the appropriate number
 register.
 Just as importantly, the contents of number registers can be used as
 .I flags
@@ -4333,7 +4371,7 @@ For example:
 .Ps
 $ \f[CB]nroff -mm -rN1\fP \f[I]file\fP
 .Pe
-will format
+formats
 .I file
 using the
 .CW mm
@@ -4341,18 +4379,19 @@ macros, with number register
 .CW N
 set to the value
 .CW 1 .
-We will talk more about using number registers later, when we describe
-how to write your own macros.
+We talk more about using number registers later,
+when we describe how to write your own macros.
 For the moment, all you need to know is how to put new values into
 existing registers.
-The next two chapters will describe the particular number registers that
-you may find useful with the
+The next two chapters describe the particular number registers
+that you may find useful with the
 .CW mm
 and
 .CW ms
 macro packages.
 .ix %end [troff] formatter, number~registers %key troff formatter, number registers
 .ix %end number~registers
+.
 .Bh "Predefined Strings"
 .ix strings, in [troff] %key strings, in troff
 .LP
@@ -4383,8 +4422,9 @@ For example:
 The string should
 .I not
 be quoted.
-It can optionally begin with a quotation mark, but it should not end
-with one, or the concluding quotation mark will appear in the output.
+It can optionally begin with a quotation mark,
+but it should not end with one,
+or the concluding quotation mark appears in the output.
 If you want to
 .I start
 a string with one or more blank spaces, though, you
@@ -4401,10 +4441,11 @@ For example:
 \&.ds LS This is a very long string that goes over \e
 more than one line.
 .Pe
-When the string is interpolated, it will be subject to filling (unless
-no-fill mode is in effect) and may not be broken into lines at the same
+When the string is interpolated, it is subject to filling
+(unless no-fill mode is in effect)
+and may not be broken into lines at the same
 points as you've specified in the definition.
-To interpolate the string in the output, you use one of the following
+To interpolate the string in the output, use one of the following
 escape sequences:
 .ix strings, interpolating
 .Ps
@@ -4466,15 +4507,17 @@ is
 For example, if you wanted a form letter to contain the date that it was
 formatted and printed rather than the date it was written, you could
 interpolate this string.
+.
 .Bh "Just What Is a Macro Package?"
 .LP
 Before leaving the topic of macros, we ought to take a moment to treat a
 subject we have skirted up to this point: just what is a macro package?
 .PP
-As the name suggests, a macro package is simply a collection of macro
+As the name suggests, a macro package is a collection of macro
 definitions.
-The fact that there are command-line options for using the existing
-packages may seem to give them a special status, but they are text files
+Although the command-line options for using the existing
+packages may seem to give them a special status,
+they are text files
 that you can read and modify (assuming that your system has the UNIX
 file permissions set up so you can do so).
 .page 103
@@ -4501,11 +4544,18 @@ called
 .CW tmac\.s
 or
 .CW tmac\.m
-(depending on which package you have on your system).
+(depending on which package you have on your system).\**
+.FS
+.CW Groff
+recognizes macro package file names
+of the form \f[I]x\fP\c
+.CW .tmac ,
+but recognizes the older form as well.
+.FE
 It also means that you can invoke a macro package of your own from the
-command line simply by storing the macro definitions in a file with the
+command line by storing the macro definitions in a file with the
 appropriate pathname.
-This file will be added to any other files in the formatting run.
+This file is added to any other files in the formatting run.
 This means that if you are using the
 .CW ms
 macros you could achieve the same result by including the line:

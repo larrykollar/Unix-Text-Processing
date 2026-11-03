@@ -150,7 +150,7 @@ to represent the filenames.
 .ix files, metacharacters
 For instance,
 .CW "ls -l ch*"
-will display information about all files that have
+displays information about all files that have
 names beginning with
 .CW ch .
 .PP
@@ -286,7 +286,7 @@ The shell normally sends both types of output
 to the screen, with no distinction between them.
 They can be manipulated separately\c
 \(em\c
-a feature we will later put to good use.
+a feature we later put to good use.
 .PP
 Let's look at some examples.
 The
@@ -929,7 +929,7 @@ to finish before returning a shell prompt.
 When a program takes a significant amount of processing time,
 you can run it in the background
 so you can do other work in the meantime.
-We will demonstrate background processing in
+We demonstrate background processing in
 Chapter 4 when we look at the
 .CW nroff/troff
 text formatter.

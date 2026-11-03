@@ -3,7 +3,7 @@ Ralph Corderoy's $Revision: 1.1 $.
 
 	TROFF source proof read
 	by
-	Andreas Kähäri <andreas.kahari@unix.net>
+	Andreas Kï¿½hï¿½ri <andreas.kahari@unix.net>
 ..
 .so utp.mac
 .utp
@@ -22,10 +22,12 @@ Ralph Corderoy's $Revision: 1.1 $.
 This section describes the syntax of the Bourne Shell.
 It lists special characters, variables, and built-in programming
 commands used by the shell.
-.Ch "Special Files
+.
+.Ch "Special Files"
 .IP "\f(CW$HOME/.profile\fP" \n(iN
 Executed at shell startup.
-.Ch "Special Characters for Filename Generation
+.
+.Ch "Special Characters for Filename Generation"
 .\" .Rn "Markup problem: how to indent these lists.
 .\" Problem fixed by using number register .iN ?
 .\" /Andreas 2002-10-02
@@ -35,9 +37,10 @@ Match any string of characters.
 Match any single character.
 .IP "\f(CW[\fP . . . \f(CW]\fP" \n(iN
 Match any of the enclosed characters.
-A pair of characters separated by a minus will match any character
+A pair of characters separated by a minus matches any character
 lexically between the pair.
-.Ch "Special Characters For Control Flow
+.
+.Ch "Special Characters For Control Flow"
 .\" .Rn "Book errata: inconsistent over use of italics for file.
 .\" Problem fixed by making filenames italic (first item only).
 .\" /Andreas 2002-10-02
@@ -121,7 +124,7 @@ Close standard input.
 .IP "\f(CW>&-" \n(iN
 Close standard output.
 .
-.Ch "Variable Substitution
+.Ch "Variable Substitution"
 .\" .Rn "Book errata: I think are missing braces in the left hand column.
 .\" We are indeed missing braces in the labels.  Fixing them.
 .\" Bug in UTP.  /Andreas 2002-10-02
@@ -146,7 +149,7 @@ if set;  otherwise set to
 .I value .
 For example:
 .CW TERM=${1:-$TERM)
-will set the
+sets the
 .CW TERM
 variable to the value of the first argument to a shell script, if given,
 or else to the existing (default) value of
@@ -172,14 +175,14 @@ variable
 is set; otherwise nothing.
 .IP "\f(CW${\fIvariable\fR[\f(CW:\fR]\f(CW+\fIvalue\fP}" \n(iN
 .LP
-If the colon
+If you include the colon
 .CW : ) (
-is included in these expressions, a test is performed to see if the
+in these expressions, the shell tests to see if the
 variable is non-null as well as set.
 .
 .page 630
 .
-.Ch "Shell Parameters Set by the Shell under Execution
+.Ch "Shell Parameters Set by the Shell under Execution"
 .ix Bourne shell, shell functions
 .ix Bourne shell, variables set~by [.profile] %key Bourne shell, variables set by .profile
 .ix Bourne shell, variables~set~by~shell~under execution
@@ -196,7 +199,7 @@ Return process number of current process.
 .IP "\f(CW$!" \n(iN
 Return process number of last background command.
 .
-.Ch "Shell Variables Initially Set By \f(CBprofile
+.Ch "Shell Variables Initially Set By \f(CBprofile"
 .IP \f(CW$HOME \n(iN
 Default (home directory) value for the
 .CW cd
@@ -216,14 +219,14 @@ Second prompt string; default is
 .IP \f(CW$TERM \n(iN
 Specifies the type of terminal.
 .
-.Ch "Shell Functions
+.Ch "Shell Functions"
 .IP "\fIname\f(CW()\fP \fP{\fIcommand1\f(CW;\fP ...\f(CW;\fP commandn\f(CW}" \n(iN
 Create a function called
 .I name
 that consists of the commands enclosed in braces.
 The function can be invoked by name within the current script.
 .
-.Ch "Built-in Commands
+.Ch "Built-in Commands"
 .IP \fIfile \n(iN
 .I file
 .br
@@ -335,7 +338,7 @@ to environment.
 .br
 Do \fIcommands\fP for each \fIvariable\fP taken from the
 optional \fIlist\fP (if \fIlist\fP is not explicitly given, it
-will be made up from the command line arguments).
+is made up from the command line arguments).
 .IP \f(CWif \n(iN
 .CW if
 .I condition
@@ -451,17 +454,17 @@ Put keywords in an environment for a command.
 Read but do not execute commands.
 .br
 .IP \f(CW-t\fP \n(iN
-Exit after one command is executed.
+Exit after executing one command.
 .br
 .IP \f(CW-u\fP \n(iN
 Treat unset variables as an error.
 .br
 .IP \f(CW-v\fP \n(iN
-Print commands as they are executed.
+Print each executed command.
 .br
 .IP \f(CW-x\fP \n(iN
 Turn on \f(CWtrace\fP
-mode in current shell (echo commands in scripts as they are executed).
+mode in current shell (echo commands in scripts as they execute).
 .br
 .IP "\fIarg\fP \f(CW...\fP" \n(iN
 Assigned in order to
@@ -491,7 +494,7 @@ An alternate form of the command uses
 .CW "[ ]
 rather than the word
 .I test .
-The following primitives are used to construct
+The following primitives construct
 .I expression .
 .RS
 .IP "\f(CW-b\fP \fIfile\fP" \n(iN
@@ -601,9 +604,8 @@ Print accumulated process times.
 .br
 Execute
 .I cmd
-if signal
-.I n
-is received.
+upon receiving signal
+.I n .
 Useful signals include:
 .RS
 .IP 0 \n(iN
@@ -613,7 +615,7 @@ Hangup of terminal line.
 .IP 2 \n(iN
 Interrupt.
 .IP 15 \n(iN
-Process is killed.
+Process killed.
 .RE
 .IP \f(CWtype \n(iN
 .CW type

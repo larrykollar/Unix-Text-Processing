@@ -137,7 +137,7 @@ copies the buffer into a permanent file,
 overwriting the contents of
 the old file.
 .
-.Ah "Opening a File
+.Ah "Opening a File"
 .ix %begin [vi] editor, opening~a file %key vi editor, opening a file
 .LP
 The syntax for the
@@ -305,7 +305,7 @@ environment variable with the following command:
 TERM=xterm-256color; export TERM
 .Pe
 .
-.Bh "\f(CBvi\fP Commands
+.Bh "\f(CBvi\fP Commands"
 .LP
 The
 .CW vi
@@ -431,7 +431,7 @@ does not respond as you expect, press
 .I ESC .
 If you hear a beep, you are in command mode.
 .
-.Bh "Saving a File
+.Bh "Saving a File"
 .ix [vi] editor, saving~a file %key vi editor, saving a file
 .LP
 You can quit working on a file at any time,
@@ -614,7 +614,7 @@ keys with numeric arguments and other
 .CW vi
 commands.
 .
-.Bh "Numeric Arguments
+.Bh "Numeric Arguments"
 .ix [vi] editor, numeric arguments~to commands %key vi editor, numeric arguments to commands
 .LP 0
 You can precede movement commands with numbers.
@@ -657,7 +657,7 @@ gives you more options
 for each command.
 Keep it in mind as you are introduced to additional commands.
 .
-.Bh "Movement by Lines
+.Bh "Movement by Lines"
 .ix [vi] editor, screen~lines~vs.~logical~lines %key vi editor, screen lines~vs.~logical~lines
 .LP 0
 When you saved the file
@@ -743,7 +743,7 @@ in
 break lines with carriage returns
 to keep the lines of manageable length.
 .
-.Bh "Movement by Text Blocks
+.Bh "Movement by Text Blocks"
 .ix [vi] editor, moving cursor~by~text~blocks %key vi editor, moving cursor by~text~blocks
 .LP 0
 You can move the cursor by text elements
@@ -799,8 +799,8 @@ ignoring punctuation.
 Practice using the cursor movement commands,
 combining them with numeric multipliers.
 .
+.Ah "Simple Edits"
 .ix %begin [vi] editor, deleting single characters %key vi editor, deleting single characters
-.Ah "Simple Edits
 .ix [vi] editor, deleting text %key vi editor, deleting text
 .ix [vi] editor, inserting text %key vi editor, inserting text
 .ix [vi] editor, moving text %key vi editor, moving text
@@ -995,7 +995,7 @@ different strategies
 
 .X4
 .
-.Bh "Changing Text
+.Bh "Changing Text"
 .ix %begin [vi] editor, changing text %key vi editor, changing text
 .LP 0
 You can replace any text in your file with the change command,
@@ -1214,8 +1214,8 @@ command,
 you are automatically returned to command mode.
 .ix %end [vi] editor, changing text %key vi editor, changing text
 .
-.ix %begin [vi] editor, deleting text %key vi editor, deleting text
 .Bh "Deleting Text"
+.ix %begin [vi] editor, deleting text %key vi editor, deleting text
 .LP 0
 You can delete any text in your file with the delete command,
 .CW d .
@@ -1466,7 +1466,7 @@ chapter,
 you learn how to retrieve text from named
 and numbered buffers.
 .
-.Bh "Copying Text
+.Bh "Copying Text"
 .ix [vi] editor, copying text %key vi editor, copying text
 .LP
 Often, you can save editing time
@@ -1497,7 +1497,7 @@ or
 You may find that you use yank most frequently
 with a line (or more) of text,
 because to yank and put a word
-generally takes longer than simply inserting the word.
+generally takes longer than inserting the word.
 For example, to yank five lines of text:
 .sp .7v
 .ne 8
@@ -1701,8 +1701,8 @@ as long as the cursor remains on that line.
 After you move off a line, you can no longer use
 .CW U .
 .
-.ix [vi] editor, joining lines %key vi editor, joining lines
 .Bh "Joining Two Lines with J"
+.ix [vi] editor, joining lines %key vi editor, joining lines
 .LP 0
 Sometimes, when editing a file,
 you end up with a series of short lines
@@ -1733,8 +1733,8 @@ join lines
 .LP 0
 A numeric argument joins that number of consecutive lines.
 .
-.ix [vi] editor, quitting~without saving edits %key vi editor, quitting without saving edits
 .Bh "Quitting without Saving Edits"
+.ix [vi] editor, quitting~without saving edits %key vi editor, quitting without saving edits
 .LP
 When you are first learning
 .CW vi ,
@@ -1819,7 +1819,7 @@ lines.
 .Le
 .RE
 .
-.Ah "Movement by Screens
+.Ah "Movement by Screens"
 .LP
 When you read a book, you think of \(lqplaces\(rq in the book by page:
 the page where you stopped reading
@@ -1850,7 +1850,7 @@ This is called
 You can move through a file
 by scrolling the screen ahead or back to see any text in the file.
 .
-.Bh "Scrolling the Screen
+.Bh "Scrolling the Screen"
 .LP
 .CW Vi
 has commands to scroll forward and backward through the file
@@ -1924,8 +1924,8 @@ and down one line
 .ix %end [vi] editor, scrolling %key vi editor, scrolling
 .ix %end scrolling
 .
-.ix [vi] editor, cursor~movement within screen %key vi editor, cursor movement within screen
 .Bh "Movement within a Screen"
+.ix [vi] editor, cursor~movement within screen %key vi editor, cursor movement within screen
 .LP
 You can also keep your current screen or view of the file
 and move around within the screen using:
@@ -1982,7 +1982,7 @@ For example,
 .CW dH
 deletes to the top line shown on the screen.
 .
-.Bh "Movement within Lines
+.Bh "Movement within Lines"
 .ix [vi] editor, cursor~movement within lines %key vi editor, cursor movement within lines
 .LP
 .CW Vi
@@ -2034,7 +2034,7 @@ by contrast, moves to the first
 of the line,
 even if that position is blank).
 .
-.Ah "Movement by Text Blocks
+.Ah "Movement by Text Blocks"
 .ix [vi] editor, cursor~movement~by text~blocks %key vi editor, cursor movement~by text~blocks
 .LP
 Another way that you can think of moving through a
@@ -2344,8 +2344,8 @@ to searching for patterns.
 Chapter 7 teaches more about pattern matching
 and its use in making global changes to a file.
 .
-.ix [vi] editor, search~within current~line %key vi editor, search within current~line
 .Bh "Current Line Searches"
+.ix [vi] editor, search~within current~line %key vi editor, search within current~line
 .LP 0
 A miniature version of the search command
 operates within the current line.
@@ -2450,9 +2450,9 @@ Today, I'll s\zt_art
 .sp 1v
 .ix %end [vi] editor, search~for pattern %key vi editor, search for pattern
 .
+.Ah "Movement by Line Numbers"
 .ix [vi] editor, cursor~movement~by line~numbers %key vi editor, cursor movement~by line~numbers
 .ix line number, in [vi] %key line number, in vi
-.Ah "Movement by Line Numbers
 .LP 0
 A file contains sequentially numbered lines,
 and you can move through a file by specifying line numbers.
@@ -2546,7 +2546,7 @@ you could give an approximation of your destination with.
 .Pe
 Movement by line number can get you around quickly in a large file.
 .
-.Ah "Session 3:  Beyond the Basics"
+.Ah "Session 3: Beyond the Basics"
 .LP 0
 You were introduced to the basic
 .CW vi
@@ -2664,10 +2664,10 @@ all you have to remember is
 or
 .CW /HERE .
 .
+.Bh "Read-Only Mode"
 .ix [vi] editor, read-only mode %key vi editor, read-only mode
 .ix [vi] editor, view mode %key vi editor, view mode
 .ix [view] command %key view command
-.Bh "Read-Only Mode
 .LP 0
 When you want to look at a file,
 but you want to protect that file
@@ -2692,8 +2692,8 @@ or:
 $ \f(CBview letter\fP
 .Pe
 .
+.Bh "Recovering a Buffer"
 .ix [vi] editor, recovering~a buffer %key vi editor, recovering a buffer
-.Bh "Recovering a Buffer
 .LP 0
 Occasionally, you may suffer a system failure
 while you are editing a file.
@@ -2829,7 +2829,7 @@ uses the file it specified instead of
 .CW vi
 does not take commands from both.
 .
-.Bh "The \f[CB]set\fP Command
+.Bh "The \f[CB]set\fP Command"
 .ix [vi] editor, setting options %key vi editor, setting options
 .LP 0
 The
@@ -2928,8 +2928,8 @@ See
 .pdfhref L -D AppendixA -- Appendix A
 for a description of what these options mean.
 .
+.Bh "The \f(CB.exrc\fP File"
 .ix [.exrc] file %key exrc file
-.Bh "The \f(CB.exrc\fP File
 .LP 0
 The
 .CW \&.exrc
@@ -3082,7 +3082,7 @@ but you can use
 to change this value.
 A popular alternate value is 4,
 although some GUI-based editors use 2.
-You will find it convenient to use the same values for both
+It's convenient to use the same values for both
 .CW shiftwidth
 and
 .CW tabstop .
@@ -3157,8 +3157,8 @@ When you find how much time and effort you can save,
 combinations of change and movement keys no longer seem obscure,
 and readily come to mind.
 .
-.ix [vi] editor, alternative insert commands %key vi editor, alternative insert commands
 .Ah "More Ways to Insert Text"
+.ix [vi] editor, alternative insert commands %key vi editor, alternative insert commands
 .LP 0
 You have inserted text before the cursor with the sequence:
 .Ps
@@ -3223,7 +3223,7 @@ is useful for appending new text to the end of a word.
 to recognize such frequent combinations
 and invoke them without thinking).
 .
-.Ah "Using Buffers
+.Ah "Using Buffers"
 .LP 0
 You now know that your last deletion
 (\c
@@ -3270,7 +3270,7 @@ in a buffer.
 Your last command is available to repeat
 or undo with a single keystroke.
 .
-.Bh "Recovering Deletions
+.Bh "Recovering Deletions"
 .LP 0
 Being able to delete large blocks of text
 is all well and good,
@@ -3340,8 +3340,8 @@ For example, the sequence:
 .Pe
 shows you, in sequence, the contents of the last six numbered buffers.
 .
-.ix %begin [vi] editor, named buffers %key vi editor, named buffers
 .Bh "Yanking to Named Buffers"
+.ix %begin [vi] editor, named buffers %key vi editor, named buffers
 .LP 0
 With unnamed buffers,
 you have seen that you must put
@@ -3500,10 +3500,10 @@ fill in the blanks,
 then put the skeleton in again each time you need it.
 .ix %end [vi] editor, named buffers %key vi editor, named buffers
 .
+.Ah "Marking Your Place"
 .ix [vi] editor, marking place~in file %key vi editor, marking place in file
 .ix marking~a position, in [vi] %key marking a position, in vi
 .ix returning to~a marked position, in [vi] %key returning to a marked position, in vi
-.Ah "Marking Your Place"
 .LP 0
 During a
 .CW vi

@@ -25,7 +25,7 @@
 .page 569
 .chapter A "Editor Command Summary" Appendix 1
 .LP
-This section is divided into five major parts,
+This appendix has five major parts,
 describing the commands in the text editors
 .CW vi ,
 .CW ex ,
@@ -33,8 +33,8 @@ describing the commands in the text editors
 and
 .CW awk ,
 and the pattern-matching syntax common to all of them.
-
-.Ah "Pattern-Matching Syntax
+.
+.Ah "Pattern-Matching Syntax"
 .ix regular expressions
 .LP
 A number of UNIX text-processing programs,
@@ -45,12 +45,12 @@ including
 .CW sed ,
 and
 .CW grep ,
-allow you to perform searches,
+let you perform searches,
 and in some cases make changes,
 by searching for text patterns rather than fixed strings.
-These text patterns
+You can form these text patterns
 (also called regular expressions)
-are formed by combining normal characters
+by combining normal characters
 with a number of special characters.
 The special characters and their use are as follows:
 .RS
@@ -72,8 +72,8 @@ Matches any one of the characters enclosed between the brackets.
 For example,
 .CW [AB]
 matches either A or B.
-A range of consecutive characters
-can be specified by separating
+You can specify a range of consecutive characters
+by separating
 the first and last characters in the range with a hyphen.
 For example,
 .CW [A-Z]
@@ -84,8 +84,7 @@ matches any digit from 0 to 9.
 If a caret (\c
 .CW ^ )
 is the first character in the brackets,
-the comparison is inverted:
-the pattern will match any characters
+the pattern matches any characters
 .I except
 those enclosed in the brackets.
 .\"-----------------------------------------------------------------
@@ -95,7 +94,7 @@ those enclosed in the brackets.
 .\" this item.  UTP uses roman for the comma in \{n,m\}, and I'm
 .\" pretty sure some of the \{ and \} are roman too, but I think
 .\" they should be courier.  /Andreas 2002-10-21
-Matches a range of occurrences of the single character
+Matches a range of occurrences of a single character
 (including a character specified by a regular expression)
 that immediately precedes it.
 .I n
@@ -111,17 +110,16 @@ occurrences,
 matches at least \fIn\fP occurrences,
 and
 \f(CW\e{\fIn\fP,\fPm\fP\e}\fR
-matches any number of
-occurrences between
-\fIn\fP
-and
-\fIm\fP.
+matches any number of occurrences between
+\fIn\fP and \fIm\fP.
 For example,
 .CW A\e{2,3\e}
 matches either AA (as in AARDVARK) or AAA (as in AAA Travel Agency)
-but will not match the single letter A.
-This feature is not supported in all versions of
-.CW vi .
+but does not match the single letter A.
+Not all versions of
+.CW vi
+support this feature.
+.\" XXX test: does vim support it?
 .\"-----------------------------------------------------------------
 .IP "\f(CW^" 10
 Requires that the following regular expression
@@ -137,7 +135,9 @@ For example,
 .CW \e.
 stands for a period and
 .CW \e*
-for an asterisk.
+for an asterisk, rather than
+\[lq]match any character\[rq] and
+\[lq]match any number of the preceding.\[rq]
 .\"-----------------------------------------------------------------
 .IP "\f(CW\e( \e)" 10
 Saves the pattern enclosed between
@@ -145,15 +145,16 @@ Saves the pattern enclosed between
 and
 .CW \e)
 in a special holding space.
-Up to nine patterns can be saved in this way on a single line.
-They can be \(lqreplayed\(rq in substitutions by the escape sequences
+You can save
+up to nine patterns in this way on a single line,
+and \(lqreplay\(rq them in substitutions by the escape sequences
 .CW \e1
 to
 .CW \e9 .
-This feature is not used in
-.CW grep
+.CW Grep
 and
-.CW egrep .
+.CW egrep
+do not support this feature.
 .\"-----------------------------------------------------------------
 .IP "\f(CW\e\fIn" 10
 Matches the
@@ -164,12 +165,12 @@ and
 .CW \e) ,
 where
 .I n
-is a number from 0 to 9
-and previously saved patterns are counted from the left on the line.
-This feature is not used in
-.CW grep
+is a number from 0 to 9;
+counting previously saved patterns from the left on the line.
+.CW Grep
 and
-.CW egrep .
+.CW egrep
+do not support this feature.
 .RE
 .LP
 The
@@ -195,7 +196,7 @@ Regular expressions in
 .CW ex
 (\c
 .CW :
-commands from
+commands in
 .CW vi )
 offer some different extensions:
 .RS
@@ -226,8 +227,9 @@ Appended to the
 string of a substitute command,
 converts entire replacement string to lowercase.
 .RE
-
+.
 .Ah "The \f[CB]vi\fP Editor"
+.
 .Bh "Command-Line Syntax"
 .ix	[vi] editor, summary~of options %key vi editor, summary of options
 .LP
@@ -252,28 +254,29 @@ view \fR[\fIfile(s)\fP]
 .\" for example).  This is probably due to some personal habit
 .\" of one of the original authors and has no impact whatsoever on
 .\" this work.  Just a curiosity.  /Andreas 2002-10-21
-If a file is not named,
+If you do not specify a file,
 .CW vi
-will open a file that can be given a name with the
+opens a file that you can name with the
 .CW :f
-command or when it is saved using the
+command or when saving it using the
 .CW :w
 command.
-If more than one file is named,
-the first file is opened for editing and
+If you specify more than one file,
+.CW vi
+opens the first file for editing; use
 .CW :n
-is used to open the next file.
+to open the next file in the sequence.
 The
 .CW view
 command opens the first \fIfile\fP for read-only use;
-changes cannot be saved.
+you cannot save changes.
 .LP
 .I Options:
 .RS
 .TS
 lfCW l.
 -l	Open file for editing LISP programs
--r	Recover file
+-r	Recover file (\fCvim\fP's recovery file is \fIfile\fP.swp)
 -R	Open file in read-only mode; same as using \f(CWview
 -t\fItag	Start at \fItag\fP
 -x	Open encrypted file
@@ -282,10 +285,17 @@ lfCW l.
 +/\fIpattern	Open file at first occurrence of \fIpattern\fP
 -w\fIn	Set window to \fIn\fP lines
 .TE
+.LP
+For
+.CW vim ,
+see the
+.I vim (1)
+manual page for extended options.
 .RE
+.
 .Bh "Operating Modes"
 .LP
-After the file is opened, you are in command mode.
+After opening the file, you are in command mode.
 From command mode,
 you can invoke insert mode,
 issue editing commands,
@@ -306,8 +316,8 @@ While in insert mode, you can enter new text in the file.
 Press the
 .I ESCAPE
 key to exit insert mode and return to command mode.
-
-.Bh "Command Syntax
+.
+.Bh "Command Syntax"
 .ix	[vi] editor, command syntax %key vi editor, command syntax
 .LP
 The syntax for editing commands is:
@@ -334,16 +344,19 @@ then the operator is the same as the object:
 .CW dd ,
 .CW yy .
 .I n
-is the number of times the operation is performed
-or the number of objects the operation is performed on.
-If both
-.I n 's
-are specified, the effect is
+is the number of times
+.CW vi
+performs the operation,
+or the number of objects it performs the operation on.
+If you specify both
+.I n 's,
+the effect is
 .I n
 times
 .I n .
 .PP
-The following text objects are represented:
+.CW Vi
+supports the following text objects:
 .RS
 .IP "\fIword" 13
 Includes characters up to a space or punctuation mark.
@@ -374,12 +387,14 @@ d^	Delete back to the beginning of the line
 3dl	Delete three characters to the right of the cursor
 .TE
 .RE
-.Bh "Status Line Commands
+.
+.Bh "Status Line Commands"
 .ix	[vi] editor, status~line %key vi editor, status line
 .LP
-Most commands are not echoed on the screen as you input them.
-However, the status line at the bottom of the screen
-is used to echo input for the following commands:
+.CW Vi
+does not echoed most commands on the screen as you input them.
+However, it uses the status line at the bottom of the screen
+to echo input for the following commands:
 .RS
 .IP "\f[CW]/ ?"
 Start pattern-matching search forward (\c
@@ -393,14 +408,13 @@ Invoke a UNIX command that takes as its input an object in the
 buffer and replaces it with output from the command
 .RE
 .LP
-Commands that are input on the status line
-must be entered by pressing the
+Press the
 .I RETURN
-key.
-In addition, error messages and output from the ^G command
-are displayed on the status line.
-
-.Bh "Summary of \f[CB]vi\fP Commands
+key to enter commands on the status line.
+In addition, the status line displays
+error messages and output from the ^G command.
+.
+.Bh "Summary of \f[CB]vi\fP Commands"
 .ix	[vi] editor, command summary %key vi editor, command summary
 .LP
 .RS
@@ -496,11 +510,11 @@ T}
 ZZ	Exit the editor, saving changes.
 ^Z	Unused.
 .TE
-.Bh "Characters Not Used in Command Mode
+.
+.Bh "Characters Not Used in Command Mode"
 .ix	[vi] editor, characters~not~used~in command~mode %key vi editor, characters not~used~in command~mode
 .LP
-The following characters are unused in command mode
-and can be mapped as user-defined commands.
+You can use the following characters as user-defined commands.
 .RS
 .TS
 lfCW 6 lfCW 6 lfCW 6 lfCW.
@@ -511,7 +525,9 @@ lfCW 6 lfCW 6 lfCW 6 lfCW.
 lfCW lfCW lfCW s.
 \ *	\ \e	\ \_ (underscore)
 .TE
+.\" XXX test: true for vim?
 .RE
+.
 .Bh "\f[CB]vi set\fP Options"
 .ix	[vi] editor, setting options %key vi editor, setting options
 .LP
@@ -547,8 +563,8 @@ autoprint
 .br
 (ap)
 T}##ap##T{
-Changes are displayed after each editor command.
-(For global replacement, last replacement displayed.)
+Displays changes after each editor command.
+(For global replacement, displays last replacement.)
 T}
 .\"----------------------------------------------------
 T{
@@ -622,9 +638,9 @@ T}
 T{
 lisp
 T}##nolisp##T{
-Indents are inserted in appropriate LISP format.
-() {} [[ and ]] are modified to
-have meaning for
+Inserts indents in appropriate LISP format.
+Modifies
+() {} [[ and ]] to have meaning for
 .I lisp .
 T}
 .\"----------------------------------------------------
@@ -633,9 +649,8 @@ list
 .br
 (li)
 T}##nolist##T{
-Tabs print as
-^I;
-ends of lines are marked with $.
+Tabs print as ^I;
+ends of lines print as $.
 (Used to tell if end
 character is a tab or a space.)
 T}
@@ -716,7 +731,7 @@ readonly
 .br
 (ro)
 T}##noro##T{
-Any writes (saves) of a file will fail unless you use
+Any writes (saves) of a file fail unless you use
 .CW !
 after the write
 (works with
@@ -730,7 +745,7 @@ redraw
 .br
 (re)
 T}##noredraw##T{
-Terminal will redraw the screen whenever edits are made
+Terminal redraws the screen whenever edits are made
 (insert mode pushes over existing characters;
 deleted lines immediately close up).
 Default depends on line speed and terminal type.
@@ -752,7 +767,7 @@ T{
 report
 T}##=5##T{
 Size of a large edit (i.e., number of lines affected by a single edit)
-that will trigger a warning message on bottom line of screen.
+that trigger a warning message on bottom line of screen.
 T}
 .\"----------------------------------------------------
 T{
@@ -782,7 +797,7 @@ Pathname of shell used for shell escape (\c
 and shell command (\c
 .CW :sh ).
 Value
-is derived from shell environment.
+is from shell environment.
 .page 578
 T}
 .\"----------------------------------------------------
@@ -805,16 +820,15 @@ showmatch
 T}##nosm##T{
 In
 .CW vi ,
-when
+when you enter
 .CW )
 or
-.CW }
-is entered, cursor
-moves briefly to matching
+.CW } ,
+the cursor moves briefly to the matching
 .CW (
 or
-.CW {.
-(If match is not on the screen, rings the error message bell.)
+.CW { .
+If the match is not on the screen, it rings the error message bell.
 Very useful for programming.
 T}
 .\"----------------------------------------------------
@@ -826,9 +840,9 @@ T}##nosmd##T{
 (System V, Release 2
 .CW vi
 only).
-The string
+Prints the string
 .I "Input Mode"
-is printed on the command line whenever input mode is entered.
+on the command line whenever you enter input mode.
 T}
 .\"----------------------------------------------------
 T{
@@ -944,6 +958,7 @@ Allows saving to any file.
 T}
 .TE
 .RE
+.
 .Ah "The \f[CB]ex\fP Editor"
 .ix	%begin [ex] editor, command summary %key ex editor, command summary
 .LP
@@ -956,12 +971,14 @@ All
 commands work on the current line or a range of lines in a file.
 In
 .CW vi ,
+you precede
 .CW ex
-commands are preceded by a colon and entered by pressing
-.I RETURN .
+commands with a colon, and press
+.I RETURN
+to enter them.
 In
 .CW ex
-itself, the colon is supplied as the prompt at which you enter commands.
+itself, the colon is the prompt at which you enter commands.
 .PP
 .ix	[ex] editor, invoking %key ex editor, invoking
 The
@@ -1036,7 +1053,7 @@ Unlike
 \f(CWvi\fP
 commands, the
 .I count
-cannot precede the command as it will be taken for the
+cannot precede the command as it is taken for the
 .I address .
 .CW d3
 deletes three lines beginning with the current line;
@@ -1044,11 +1061,12 @@ deletes three lines beginning with the current line;
 deletes line 3.
 .page 580
 As you type the address and command,
-it is echoed on the status line.
+.CW ex
+echoes it on the status line.
 Enter the command by pressing the
 .I RETURN
 key.
-
+.
 .Bh Addresses
 .LP
 .ix	[ex] editor, line addressing~in %key ex editor, line addressing in
@@ -1079,7 +1097,7 @@ sets the current line to
 .I x
 before interpreting
 .I y
-(that is, the current position will be at
+(that is, the current position moves to
 .I x
 at the completion of the command).
 .CW 1,$
@@ -1121,6 +1139,7 @@ Previous context
 Ahead or back to line matching
 .I pat
 .RE
+.
 .Bh "\f[CB]ex Commands"
 .LP
 .\" The list below need larger space between items.
@@ -1138,11 +1157,11 @@ Define
 .I string
 when typed to be translated into
 .I text .
-If
+Omit
 .I string
 and
 .I text
-are not specified, list all current abbreviations.
+to list all current abbreviations.
 T}
 append#T{
 .CW [\c
@@ -1156,9 +1175,10 @@ append#T{
 .R
 Append
 .I text
-at specified
+at the specified
 .I address ,
-or at present address if none is specified.
+or at the present address without an
+.I address .
 With the
 .CW !
 flag, toggle the
@@ -1221,9 +1241,9 @@ delete#T{
 .R
 Delete the lines included in
 .I address.
-If
-.I buffer
-is specified, save or append the text to the named buffer.
+If you specify a
+.I buffer ,
+save or append the text to the named buffer.
 T}
 .\"-----------------------------------------------------------------------
 edit#T{
@@ -1235,13 +1255,13 @@ edit#T{
 .R
 Begin editing on
 .I file .
-If the
+If you use the
 .CW !
-flag is used,
+flag,
 do not warn if the present file has not been saved since the last change.
-If the +\c
+If you use the +\c
 .I n
-argument is used, begin editing on line
+argument, begin editing on line
 .I n .
 T}
 .\"-----------------------------------------------------------------------
@@ -1253,10 +1273,10 @@ file#T{
 .R
 Change the name of the current file to
 .I filename ,
-which is considered \(lqnot edited.\(rq
-If no
-.I filename
-is specified, print the current status of the file.
+and mark it \(lqnot edited.\(rq
+If you do not specify a
+.I filename ,
+print the current status of the file.
 T}
 .\"-----------------------------------------------------------------------
 global#T{
@@ -1273,12 +1293,12 @@ Execute
 .I commands
 on all lines that contain
 .I pattern .
-If
+Omit
 .I commands
-are not specified, print all such lines.
-If the
+to print all such lines.
+If you use the
 .CW !
-flag is used, execute
+flag, execute
 .I commands
 on all lines not containing
 .I pattern .
@@ -1298,7 +1318,7 @@ Insert
 .I text
 at line before the specified
 .I address ,
-or at present address if none is specified.
+or at present address if you do not specify an address.
 With the
 .CW !
 flag, toggle the
@@ -1404,14 +1424,14 @@ Edit the next file in the command-line argument list.
 Use
 .CW args
 for a listing of arguments.
-If
+If you provide a
 .I filelist
-is provided, replace the current argument list with
+replace the current argument list with
 .I filelist
 and begin editing on the first file;
-if
+if you give a
 .I command
-is given (containing no spaces), execute
+(containing no spaces), execute
 .I command
 after editing the first such file.
 T}
@@ -1483,26 +1503,25 @@ put#T{
 .CW ]
 .br
 .R
-Restore previously deleted or yanked lines
+Restores previously deleted or yanked lines
 from named buffer specified by
 .I char
 to the line specified by
 .I address ;
-if
+omit
 .I char
-is not specified,
-the last deleted or yanked text is restored.
+to restore the last deleted or yanked text.
 T}
 .\"-----------------------------------------------------------------------
 quit#T{
 .CW q[!]
 .br
 .R
-Terminate current editing session.
+Terminates current editing session.
 If the file was not saved since the last change,
 or if there are files in the argument list
-that have not yet be accessed,
-you will not be ab1e to quit without the
+that have not yet been accessed,
+you cannot quit without the
 .CW !
 flag.
 T}
@@ -1520,9 +1539,9 @@ Copy the text of
 .I file
 at the specified
 .I address .
-If
+Omit
 .I file
-is not specified, the current filename is used.
+to use the current filename.
 T}
 .\"-----------------------------------------------------------------------
 read#T{
@@ -1566,19 +1585,18 @@ set#T{
 .br
 .R
 Set a value to an option with each
+.I parameter .
+With no
 .I parameter ,
-or if no
+print all options that changed from their defaults.
+For Boolean-valued options, phrase each
 .I parameter
-is supplied, print all options that have been changed from their defaults.
-For Boolean-valued
-options, each
-.I parameter
-can be phrased as
+as
 .I option
 or
 .CW no\c
 \fIoption\fR;
-other options can be assigned with the syntax,
+you can assign other options with the syntax,
 .I option=value .
 T}
 .\"-----------------------------------------------------------------------
@@ -1587,7 +1605,7 @@ shell#T{
 .br
 .R
 Create a new shell.
-Resume editing when the shell is terminated.
+Resume editing when the shell terminates.
 T}
 .\"-----------------------------------------------------------------------
 source#T{
@@ -1617,12 +1635,12 @@ Replace each instance of
 .I pattern
 on the specified lines with
 .I repl .
-If
+If you do not specify
 .I pattern
 and
-.I repl
-are omitted, repeat last substitution.
-The following options are supported:
+.I repl ,
+repeat last substitution.
+You can specify the following options:
   \f[CW]g\fP   Substitute all instances of \fIpattern\fP
   \f[CW]c\fP   Prompt for confirmation before each change
 T}
@@ -1695,9 +1713,9 @@ Execute
 .I commands
 on all lines not containing
 .I pattern .
-If
+Omit
 .I commands
-are not specified, print all such lines.
+to print all such lines.
 T}
 .\"-----------------------------------------------------------------------
 version#T{
@@ -1750,16 +1768,16 @@ Write lines specified by
 to
 .I file ,
 or full contents of buffer if
-.I address
-is not specified.
-If
-.I file
-is also omitted, save the contents of the buffer to the current filename.
-If
+you do not specify an
+.I address .
+If you omit the
+.I file ,
+save the contents of the buffer to the current filename.
+If you use
 .CW >>\c
-.I file
+.I file ,
 .R
-is used, write contents to the end of the specified
+write contents to the end of the specified
 .I file .
 The
 .CW !
@@ -1808,9 +1826,9 @@ Place lines specified by
 .I address
 in named buffer indicated by
 .I char .
-If no
-.I char
-is specified, place in general buffer.
+If you do not specify a
+.I char ,
+place in general buffer.
 T}
 .\"-----------------------------------------------------------------------
 z#T{
@@ -1855,9 +1873,9 @@ T}
 Execute
 .I command
 in a shell.
-If
-.I address
-is specified, apply the lines contained in
+If you specify an
+.I address ,
+apply the lines contained in
 .I address
 as standard input to
 .I command ,
@@ -1893,8 +1911,9 @@ or
 Shift lines specified by
 .I address
 in specified direction.
-Only blanks and tabs are shifted in a left shift (\c
-.CW < ).
+A left shift (\c
+.CW < )
+shifts only blanks and tabs.
 T}
 .\"-----------------------------------------------------------------------
 \fIaddress#T{
@@ -1940,7 +1959,7 @@ command.
 T}
 .TE
 .ix	%end [ex] editor, command summary %key ex editor, command summary
-
+.
 .Ah "The \f[CB]sed\fP Editor"
 .ix	%begin [sed] editor %key sed editor
 .ix	[sed] editor, invoking %key sed editor, invoking
@@ -1949,7 +1968,7 @@ T}
 \f(CWsed\fP [\fIoptions\fP]\fP file(s)
 .RE
 .LP
-The following options are recognized:
+The options are:
 .RS
 .IP
 .IP "\f[CW]-n" 10
@@ -1980,17 +1999,20 @@ The
 editor copies each line of input into a pattern space.
 .CW sed
 instructions consist of addresses and editing commands.
-If the address of the command matches the line in the pattern space,
-then the command is applied to that line.
+If the address of the command matches the line
+in the pattern space, then
+.CW sed
+applies the command to that line.
 If a command has no address,
-then it is applied to each input line.
-It is important to note that a command affects the contents of the space;
+.CW sed
+applies it to each input line.
+Note that a command affects the contents of the space;
 subsequent command addresses
 attempt to match the line in the pattern space,
 not the original input line.
 .page 586
-
-.Bh "Pattern Addressing
+.
+.Bh "Pattern Addressing"
 .ix	[sed] editor, addressing %key sed editor, addressing
 .LP
 In a
@@ -2010,13 +2032,14 @@ can be used to match any newline in the pattern space
 .CW N
 command),
 but not the newline at the end of the pattern space.
-If no pattern is specified,
+If you do not specify a pattern,
 .I command
-will be applied to all lines.
-If only one address is specified,
-the command will be applied to all lines
+applies to all lines.
+If you specify only one address,
+or a range of addresses,
+the command applies to all lines
 between the first and second addresses, inclusively.
-Some commands can only accept one address.
+Some commands only accept one address.
 .PP
 The
 .CW !
@@ -2032,6 +2055,7 @@ command1
 command2
 \f[CW]}
 .DE
+.
 .Bh "Alphabetical List of Commands"
 .ix	%begin [sed] editor, command summary %key sed editor, command summary
 .\" Personally, I think that all the square brackets in the
@@ -2081,14 +2105,14 @@ following each line matched by
 .I address .
 If
 .I text
-goes over more than one line, newlines must be \(lqhidden\(rq
+goes over more than one line,
+hide newlines
 by preceding them with a backslash.
-The insertion will be terminated by the first newline
-that is not hidden in this way.
-The results of this command
-are read into the pattern space
+The first non-hidden newline terminates the insertion.
+This command reads the results
+into the pattern space
 (creating a multiline pattern space)
-and sent to standard output when the list of editing is finished
+and sends it to standard output when the editing list finishes
 or a command explicitly prints the pattern space.
 T}
 .\" -----------------------------------------------------------------------
@@ -2143,10 +2167,11 @@ d#T{
 .CW ]d
 .br
 .R
-Delete line in pattern space.
-Thus, line is not passed to standard output
-and a new line of input is read;
-editing resumes with first command in list.
+Deletes line in the pattern space.
+.CW Sed
+removes the line and reads
+a new line of input;
+editing resumes with the first command in list.
 T}
 .\"_ -----------------------------------------------------------------------
 D#T{
@@ -2191,7 +2216,7 @@ G#T{
 .CW ]G
 .br
 .R
-Append contents of hold space (see
+Appends the contents of hold space (see
 .CW h
 or
 .CW H
@@ -2206,8 +2231,8 @@ h#T{
 .CW ]h
 .br
 .R
-Copy pattern space into hold space, a special buffer.
-Previous contents of hold space are obliterated.
+Copies pattern space into hold space, a special buffer,
+overwriting the previous contents of the hold space.
 T}
 .\" -----------------------------------------------------------------------
 H#T{
@@ -2218,8 +2243,8 @@ H#T{
 .CW ]H
 .br
 .R
-Append pattern space to contents of the hold space.
-Previous and new contents are separated by a newline.
+Appends pattern space to contents of the hold space.
+A newline separates previous and new contents.
 T}
 .\" -----------------------------------------------------------------------
 i#T{
@@ -2230,7 +2255,7 @@ i#T{
 .I text
 .br
 .R
-Insert
+Inserts
 .I text
 before each line matched by
 .I address .
@@ -2248,8 +2273,9 @@ n#T{
 .CW ]n
 .br
 .R
-Read next line of input into pattern space.
-Current line is output but control passes to next editing command
+Reads the next line of input into pattern space.
+Prints the current line,
+and passes control to the next editing command
 instead of beginning at the top of the list.
 T}
 .\" -----------------------------------------------------------------------
@@ -2261,9 +2287,10 @@ N#T{
 .CW ]N
 .br
 .R
-Append next input line to contents of pattern space;
-the two lines are separated by an embedded newline.
-(This command is designed to allow pattern matches across two lines.)
+Appends the next input line to contents of pattern space;
+an embedded newline separates
+the two lines.
+(This command allows pattern matches across two lines.)
 T}
 .\" -----------------------------------------------------------------------
 p#T{
@@ -2275,10 +2302,10 @@ p#T{
 .br
 .R
 Print the addressed line(s).
-Unless the
+If you do not specify the
 .CW -n
-command-line option is used,
-this command will cause duplication of the line in the output.
+command-line option,
+this command duplicates the line in the output.
 Also used when commands change flow control
 (\c
 .CW d ,
@@ -2313,9 +2340,8 @@ q#T{
 .CW ]q
 .br
 .R
-Quit when
-.I address
-is encountered.
+Quits when encountering the specified
+.I address .
 The addressed line is first written to output,
 along with any text appended to it by previous
 .CW a
@@ -2353,16 +2379,16 @@ s#T{
 .CW ]
 .br
 .R
-Substitute
+Substitutes
 .I replacement
 for
 .I pattern
 on each addressed line.
-If pattern addresses are used,
+If using pattern addresses,
 the pattern
 .CW //
 represents the last pattern address specified.
-The following flags can be specified:
+You can specify the following flags:
 .\" set line length to column width
 .nr xyz \n[LL]
 .nr LL \n[.l]
@@ -2376,7 +2402,7 @@ on each addressed line, not just the first instance.
 Print the line if a successful substitution is done.
 .br
 If several successful substitutions are done,
-multiple copies of the line will be printed.
+it prints multiple copies of the line.
 .br
 .IP "\f[CW]w\fIfile" 6
 Write the line to a
@@ -2407,8 +2433,8 @@ and if so, branch to
 .CW b
 and
 .CW : .)
-If label is not specified,
-drop to bottom of list of editing commands.
+Omit the label to
+drop to the bottom of list of editing commands.
 T}
 .\" -----------------------------------------------------------------------
 w#T{
@@ -2420,10 +2446,10 @@ w#T{
 .I file
 .br
 .R
-Write contents of pattern space to
+Writes the contents of pattern space to
 .I file .
-This action occurs when the command is encountered
-rather than when the pattern space is output.
+This action occurs when encountering the command 
+rather than when outputting the pattern space.
 Exactly one space must separate the
 .CW w
 and the filename.
@@ -2443,7 +2469,7 @@ T}
 .TE
 .ix	%end [sed] editor %key sed editor
 .ix	%end [sed] editor, command summary %key sed editor, command summary
-.LP
+.
 .Ah awk
 .ix	[awk], command summary %key awk, command summary
 .LP
@@ -2464,26 +2490,30 @@ If
 .I pattern
 is missing,
 .CW {\fIprocedure\fP}
-will be applied to all lines.
+applies to all lines.
 If
 .CW {\fIprocedure\fP}
-is missing, the line will be passed unaffected to standard output
-(i.e., it will be printed as is).
+is missing,
+.CW awk
+passes the line unaffected to standard output
+(i.e., printed it verbatim).
 .PP
-Each input line, or record,
-is divided into fields by white space (blanks or tabs)
+.CW Awk
+divides each input line, or record,
+into fields by white space (blanks or tabs)
 or by some other user-definable record separator.
-Fields are referred to by the variables
+The variables
 .CW $1 ,
 .CW $2 ,...,
-.CW $\fIn .
+.CW $\fIn
+refer to fields.
 .CW $0
 refers to the entire record.
-
+.
 .Bh "Patterns"
 .ix	[awk], pattern~matching %key awk, pattern matching
 .LP
-Patterns can be specified using regular expressions
+You can specify patterns using regular expressions
 as described at the beginning of this appendix.
 .RS
 .LP
@@ -2497,12 +2527,13 @@ The following additional pattern rules can be used in
 The special pattern
 .CW BEGIN
 allows you to specify procedures
-that will take place before the first input line is processed.
+that take place before processing the first input line.
 (Generally, you set global variables here.)
 .IP \(bu
-Interrupt place after the last input line is processed.
-.\" The preceding doesn't make sense as it stands...
-.\" should it be describing the END pattern?? --LK
+The special pattern
+.CW END ,
+likewise, specifies procedures
+that take place after processing the last input line.
 .IP \(bu
 .CW ^
 and
@@ -2538,7 +2569,7 @@ For example,
 .CW "NF > 1"
 selects records with more than one field.
 .RE
-
+.
 .Bh "Special Variables"
 .ix	[awk], system variables %key awk, system variables
 .LP
@@ -2558,12 +2589,13 @@ $1, $2,..., $\fIn\fP	T{
 First, second, ...\c
 .I n th
 field in current record,
-where fields are separated by
+where
 .CW FS
+separates fields.
 T}
 .TE
 .RE
-
+.
 .Bh Procedures
 .ix	[awk], syntax~of procedures %key awk, syntax of procedures
 .LP
@@ -2578,7 +2610,7 @@ printing commands
 built-in functions
 .IP \(bu
 control flow commands
-.LP
+.
 .Bh "Variables and Array Assignments"
 .ix	[awk], variables %key awk, variables
 .LP
@@ -2597,17 +2629,17 @@ and
 (modulo) can be assigned to variables.
 .PP
 .ix	[awk], arrays %key awk, arrays
-Arrays can be created with the
+You can create arrays with the
 .CW split
 function (see following
 .CW awk
 commands)
-or can be simply named in an assignment statement.
+or name them in an assignment statement.
 .CW ++ ,
 .CW += ,
 and
 .CW -=
-are used to increment or decrement an array,
+increment or decrement an array,
 as in the C language.
 Array elements can be subscripted with numbers
 (\fIarray\fP[1], ..., \fParray\fP[\fPn\fP])
@@ -2621,7 +2653,7 @@ the number of occurrences of a pattern, you could use the following program:
 \f[CW]/\fIpattern\fP/ {\fIn\fP["/\fIpattern\fP/"]++}
 END {print \fIn\fP["/\fIpattern\fP/"]}
 .Pe
-
+.
 .Bh "\f[CB]awk\fP Commands"
 .ix	%begin [awk], command summary %key awk, command summary
 .LP
@@ -2710,11 +2742,10 @@ length#T{
 .R
 Return the length of
 .I arg .
-If
-.I arg
-is not supplied,
-.CW $0
-is assumed.
+Without an
+.I arg ,
+assume
+.CW $0 .
 T}
 .\" -----------------------------------------------------------------------
 log#T{
@@ -2736,14 +2767,13 @@ Print
 on output.
 .I args
 is usually one or more fields,
-but may also be one or more of the predefined variables.
-Literal strings must be surrounded by quotation marks.
-Fields are printed in the order they are listed.
-If separated by commas in the argument list,
-they are separated in the output by the character specified by
+but may also be one or more predefined variables.
+Surround literal strings with quotation marks.
+This command prints fields in the order listed.
+If commas separate the argument list,
+separate those fields in the output by the character specified by
 .CW OFS .
-If separated by spaces,
-they are concatenated in the output.
+Space separators concatenate fields.
 T}
 .\" -----------------------------------------------------------------------
 printf#T{
@@ -2817,7 +2847,7 @@ The program:
 \f[CW]{printf ("The sum of line %s is %d \en", NR, $1+$2)}
 .RE
 .R
-will produce:
+produces:
 .br
 .CW "     The sum of line 1 is 10"
 .br
@@ -2838,12 +2868,11 @@ into elements of array
 .I string
 is split at each occurrence of separator
 .I sep .
-If
+Omit
 .I sep
-is not specified,
-.CW FS
-is used.
-The number of array elements created is returned.
+to use
+.CW FS .
+Returns the number of array elements created.
 T}
 .\" -----------------------------------------------------------------------
 sprintf#T{
@@ -2880,9 +2909,9 @@ beginning at character position
 and consisting of the next
 .I n
 characters.
-If
+Omit
 .I n
-is omitted, include all characters to the end of
+to include all characters to the end of
 .I string .
 T}
 .\" -----------------------------------------------------------------------

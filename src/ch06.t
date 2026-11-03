@@ -115,7 +115,7 @@ with the operations of the
 formatter and the
 additional flexibility it offers to define new formats.
 If you have a basic understanding of how the formatter works,
-as described in Chapter 4, you will find it easier to learn
+as described in Chapter 4, you can learn
 the intricacies of a macro package.
 .
 .Bh "Invoking \f(CBnroff\fP/\f(CBtroff\fP with \f(CBmm\fP"
@@ -301,7 +301,7 @@ For example, the command:
 detects and prints syntax errors,
 unmatched macros, and structural issues.
 .
-.Bh "Default Formatting
+.Bh "Default Formatting"
 .ix [mm] macros, default formatting %key mm macros, default formatting
 .ix formatting defaults, [mm] %key formatting defaults, mm
 .LP
@@ -393,7 +393,7 @@ meeting with you towards the end of next week.
 .Fe "A Raw \f(CBmm\fP-formatted File
 .sp .8v
 .
-.Ah "Page Layout
+.Ah "Page Layout"
 .ix [mm] macros, page~layout %key mm macros, page layout
 .ix page~layout, in [mm] %key page layout, in mm
 .LP
@@ -423,7 +423,7 @@ in the input file
 a macro that places text in the header or footer.
 Let's look at both of these techniques.
 .
-.Bh "Setting Page Numbering Style
+.Bh "Setting Page Numbering Style"
 .ix [mm] macros, page~numbering styles %key mm macros, page numbering styles
 .ix %begin page number, in [mm] %key page number, in mm
 .LP
@@ -957,7 +957,7 @@ macro calls the
 macro, two or more consecutive paragraph
 macros have the same effect as one.
 .
-.Bh "The \f(CB.SP\fP Macro versus the \f(CB.sp\fP Request
+.Bh "The \f(CB.SP\fP Macro versus the \f(CB.sp\fP Request"
 .LP
 .page 137
 There are several differences between the
@@ -1053,7 +1053,7 @@ product demo and other materials that you sent me.
 .SE
 .sp .8v
 .
-.Ah "Word Hyphenation
+.Ah "Word Hyphenation"
 .ix [mm] macros, hyphenation %key mm macros, hyphenation
 .ix hyphenation, in [mm] %key hyphenation, in mm
 .LP
@@ -1377,7 +1377,7 @@ The art of
 \&.B
 calligraphy
 \&.R
-is, quite simply,
+is
 \&.I
 beautiful
 \&.R
@@ -1387,7 +1387,7 @@ handwriting;
 The previous example produces:
 .SS
 .Ps
-The art of \fBcalligraphy\fP is, quite simply,
+The art of \fBcalligraphy\fP is
 \fIbeautiful\fP handwriting;
 .sp
 .Pe
@@ -1552,7 +1552,7 @@ or absolute ones:
 .Pe
 .LP
 By default, if you don't specify vertical spacing, a relation
-of 2 points greater than the point size will be maintained.
+of 2 points greater than the point size is maintained.
 A null value ("") does not change the current setting.
 .PP
 The new point size and vertical spacing
@@ -1650,12 +1650,12 @@ The
 macro can be followed by one, two, or three strings.
 Only one argument is reduced; which one
 depends upon how many arguments are given.
-If you specify one
-or two arguments, the first argument will be reduced by 1 point:
+If you specify one or two arguments,
+the first argument is reduced by 1 point:
 .Ps
 using
 \&.SM UNIX ,
-you will find
+you find
 .Pe
 .LP
 The first and second argument print without spacing,
@@ -1664,7 +1664,7 @@ so that the comma immediately follows the word
 .sp .7v
 .SS
 .Ps
-\fRusing \s-1UNIX\s0, you will find\fP
+\fRusing \s-1UNIX\s0, you find\fP
 .sp
 .Pe
 .SE
@@ -1709,7 +1709,7 @@ or preprocessors such as
 .CW tbl
 or
 .CW eqn .
-You might simply have a block of text that
+You might have a block of text that
 deserves special treatment.
 .PP
 The display macros can be relied upon to provide
@@ -2012,7 +2012,7 @@ At the end of a section, as indicated by the section macros
 .CW \&.H
 and
 .CW \&.HU
-(which we will see shortly),
+(described shortly),
 or at the end of the input file,
 the formatter places
 any floating displays that remain in the queue.
@@ -2225,23 +2225,15 @@ But, as a consequence,
 won't make
 a very good attempt at keeping the table together on one page,
 and you may have to manually break the page.
-Therefore, use the display macros throughout a document,
-regardless of whether you can get the same effect another way,
-because if nothing else you will achieve consistency.
+Therefore, use the display macros throughout a document
+to achieve consistency,
+regardless of whether you can get the same effect another way.
 .
 .Ah "Forcing a Page Break"
 .LP
 Occasionally, you may want to force a page break,
 whether to ensure that
-a block of related material is kept together
-or to allow blank pages for material
-that will be manually pasted in, such as a figure.
-This is usually not an issue in modern times,
-as each version of
-.CW troff
-has ways to allow including graphics,
-but you may encounter this
-when working with older documents.
+a block of related material is kept together.
 The
 .CW \&.SK
 .ix [.SK] macro ([mm]) %key SK macro mm
@@ -2257,7 +2249,7 @@ it skips that number of pages
 before resuming text output.
 The \(lqblank\(rq pages have the normal header and footer.
 .Ps
-On the next page, you will find a sample page from an
+The next page shows a sample page from an
 Alcuin manuscript printed with a 16-color plotter.
 \&.SK 1
 .Pe
@@ -3133,7 +3125,7 @@ If you specify both a
 .I "text indent"
 and a
 .I "label indent" ,
-the indent for the text will be added to the
+the indent for the text is added to the
 .I "label indent" .
 .page 159
 .\" 		Figure 6-4 (moved)
@@ -3471,7 +3463,7 @@ all other levels have a single line of space.
 .in 5n
 .ps 9
 .sp
-Alcuin revitalizes an age-old tradition.  Calligraphy, quite simply, is the art of
+Alcuin revitalizes an age-old tradition.  Calligraphy is the art of
 beautiful handwriting.
 .sp
 .UTPED
@@ -3826,7 +3818,7 @@ That means entering codes to
 mark each level of heading and all the
 figures, tables, exhibits, and equations.
 Processing a table of contents
-is simply a matter of telling the formatter to
+is a matter of telling the formatter to
 collect the information that's already in the file.
 .PP
 There are only two simple codes to put in a file,
@@ -4074,10 +4066,10 @@ the start of the text.
 It is possible that a long footnote could
 run over to the next page.
 Hyphenation is turned off so that a
-word will not be broken at a page break.
-These specifications
-can be changed by giving a value between 0 and 11 as the first
-argument with
+word is not broken at a page break.
+You can change these specifications
+by giving a value between 0 and 11 as
+the first argument with
 .CW \&.FD ,
 as shown in Table 6-3.
 .Ts "\f[CB].FD\fP Argument Values"
@@ -4144,8 +4136,8 @@ macro indicates the start, and
 .ix %begin [mm] macros, [.RF] macro %key mm macros, RF macro
 the end, of the text for the reference.
 .Ps
-You will find information on this page description language
-in their reference manual, which has been published
+This page description language
+has a reference manual, which has been published
 as a book.\\*(Rf
 \&.RS
 Adobe Systems, Inc. PostScript Reference Manual.
@@ -4209,8 +4201,8 @@ macro anywhere in a document.
 \&.H 1 "Detailed Outline of User Guide"
 .Pe
 .LP
-It will print the list of references on a separate page and
-reset the reference counter to 0.
+It prints the list of references on a separate page
+and resets the reference counter to 0.
 You can supply a
 .I reset
 argument and a
@@ -4313,9 +4305,7 @@ or
 requests unless absolutely necessary, lest you interfere with
 the action of the macros.
 .PP
-Furthermore, as you will see if you print out the
-.CW mm
-macros, the internal code of
+Furthermore, the internal code of
 .CW mm
 is extraordinarily dense, and uses
 extremely un-mnemonic register names.\**
@@ -4615,8 +4605,8 @@ However, a complete list of user-settable
 .CW mm
 number registers is given in Appendix B.
 Study this list,
-along with the discussion of the relevant macros, and you will
-begin to get a picture of just how many facets of
+along with the discussion of the relevant macros,
+and you can get a picture of just how many facets of
 .CW mm
 you can
 modify by changing the values in number registers and strings.
@@ -4662,9 +4652,9 @@ own processing), and
 at the end.
 .PP
 By default, these macros are undefined.
-And, when
+And
 .CW troff
-encounters an undefined macro name, it simply ignores it.
+ignores an undefined macro name.
 These macros thus lie hidden in the code until you define them.
 By defining these macros, you can supplement the processing of
 headings without actually modifying the
